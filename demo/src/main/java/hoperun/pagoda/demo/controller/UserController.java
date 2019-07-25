@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import hoperun.pagoda.demo.entity.User;
 import hoperun.pagoda.demo.exception.UsernameIsExitedException;
 import hoperun.pagoda.demo.repository.UserRepository;
+import io.swagger.annotations.ApiOperation;
 
 /**
  * User Controller.
@@ -28,17 +31,24 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
-
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     /**
      * Get User List.
      *
      * @return
      */
-    @GetMapping("/users")
+    @ApiOperation(value = "get user list", notes = "get user list")
+    @GetMapping("/list")
     public Map<String, Object> userList() {
+        if (logger.isDebugEnabled()) {
+            logger.debug("method:{},message:{}", "userList", "get user list started");
+        }
         List<User> users = userRepository.findAll();
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("users", users);
+        map.put("user", users);
+        if (logger.isDebugEnabled()) {
+            logger.debug("method:{},message:{}", "userList", "get user list ended");
+        }
         return map;
     }
 
