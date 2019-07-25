@@ -59,7 +59,7 @@ public class UserController {
      */
     @PostMapping("/signup")
     public User signup(@RequestBody User user) {
-        User bizUser = userRepository.findByUsername(user.getUsername());
+        User bizUser = userRepository.findByUsername(user.getUsername()s);
         if (null != bizUser) {
             throw new UsernameIsExitedException("user already exist.");
         }
