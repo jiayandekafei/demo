@@ -12,11 +12,11 @@ public class GlobalExceptionHandler {
 	  private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 	 /**
      * system exception handler
-     * @param req
-     * @param resp
-     * @param e
-     * @return
-     * @throws Exception
+     * @param req request
+     * @param resp response
+     * @param e exception
+     * @return BaseResponse BaseResponse
+     * @throws Exception Exception
      */
     @ExceptionHandler(value = Exception.class)
     public BaseResponse<?> defaultErrorHandler( Exception e) throws Exception {
