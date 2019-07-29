@@ -1,61 +1,87 @@
 package hoperun.pagoda.demo.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.google.common.collect.ImmutableList;
 
-import hoperun.pagoda.demo.filter.JWTAuthenticationFilter;
-import hoperun.pagoda.demo.filter.JWTLoginFilter;
-import hoperun.pagoda.demo.service.impl.CustomAuthenticationProvider;
+import hoperun.pagoda.demo.filter.JwtAuthenticationEntryPoint;
+import hoperun.pagoda.demo.filter.JwtAuthenticationTokenFilter;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private UserDetailsService userDetailsService;
+    private final JwtAuthenticationEntryPoint unauthorizedHandler;
 
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final AccessDeniedHandler accessDeniedHandler;
+
+    private final UserDetailsService CustomUserDetailsService;
+
+    private final JwtAuthenticationTokenFilter authenticationTokenFilter;
+
+    @Autowired
+    public WebSecurityConfig(JwtAuthenticationEntryPoint unauthorizedHandler,
+            @Qualifier("RestAuthenticationAccessDeniedHandler") AccessDeniedHandler accessDeniedHandler,
+            @Qualifier("CustomUserDetailsService") UserDetailsService CustomUserDetailsService,
+            JwtAuthenticationTokenFilter authenticationTokenFilter) {
+        this.unauthorizedHandler = unauthorizedHandler;
+        this.accessDeniedHandler = accessDeniedHandler;
+        this.CustomUserDetailsService = CustomUserDetailsService;
+        this.authenticationTokenFilter = authenticationTokenFilter;
+    }
+
+    @Autowired
+    public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+        authenticationManagerBuilder.userDetailsService(this.CustomUserDetailsService).passwordEncoder(passwordEncoder());
+    }
 
     /**
-     *
-     * configure(WebSecurity) 通过重载，配置Spring Security的Filter链 configure(HttpSecurity) 通过重载，配置如何通过拦截器保护请求 configure(AuthenticationManagerBuilder)
-     * 通过重载，配置user-detail服务
+     * 装载BCrypt密码编码器
+     * 
+     * @return
      */
-
-    public WebSecurityConfig(UserDetailsService userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.userDetailsService = userDetailsService;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/user/signup").permitAll()
-                // skip swagger
-                .antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security", "/swagger-ui.html", "/webjars/**",
-                        "/swagger-resources/configuration/ui", "/swagge‌​r-ui.html")
-                .permitAll().anyRequest().authenticated().and().addFilter(new JWTLoginFilter(authenticationManager()))
-                .addFilter(new JWTAuthenticationFilter(authenticationManager()));
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.cors().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler).and().csrf().disable().exceptionHandling()
+                .authenticationEntryPoint(unauthorizedHandler).and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .authorizeRequests().antMatchers("/login", "/sign", "/error/**").permitAll().anyRequest().authenticated();
+
+        httpSecurity.headers().cacheControl();
+
+        httpSecurity.addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // 使用自定义身份验证组件
-        auth.authenticationProvider(new CustomAuthenticationProvider(userDetailsService, bCryptPasswordEncoder));
+    public void configure(WebSecurity web) {
+        web.ignoring().antMatchers("swagger-ui.html", "**/swagger-ui.html", "/favicon.ico", "/**/*.css", "/**/*.js", "/**/*.png", "/**/*.gif",
+                "/swagger-resources/**", "/v2/**", "/**/*.ttf");
+        web.ignoring().antMatchers("/v2/api-docs", "/swagger-resources/configuration/ui", "/swagger-resources",
+                "/swagger-resources/configuration/security", "/swagger-ui.html");
     }
 
     @Bean
@@ -64,9 +90,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         configuration.setAllowedOrigins(ImmutableList.of("*"));
         configuration.setAllowedMethods(ImmutableList.of("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH"));
         configuration.setAllowCredentials(true);
-        configuration.setAllowedHeaders(ImmutableList.of("Authorization"));
+        configuration.setAllowedHeaders(ImmutableList.of("*"));
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 }

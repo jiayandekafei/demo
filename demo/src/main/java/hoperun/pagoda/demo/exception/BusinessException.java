@@ -1,19 +1,19 @@
 package hoperun.pagoda.demo.exception;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import hoperun.pagoda.demo.bean.BaseResponse;
+import lombok.Getter;
 
 /**
  * Business exception
+ * 
  * @author zhangxiqin
  *
  */
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
+@Getter
 public class BusinessException extends RuntimeException {
-	private static final long serialVersionUID = -5148603229935097596L;
-	private  String errorCode;
-	private  String errorMsg;
+    private BaseResponse response;
+
+    public BusinessException(BaseResponse response) {
+        this.response = response;
+    }
 }

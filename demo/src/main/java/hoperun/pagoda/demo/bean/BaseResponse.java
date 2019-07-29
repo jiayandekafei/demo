@@ -1,11 +1,14 @@
 package hoperun.pagoda.demo.bean;
 
+import java.io.Serializable;
+
+import hoperun.pagoda.demo.exception.ResultCode;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- *coomon response bean 
+ * coomon response bean
  *
  * @author zhangxiqin
  * @param <T>
@@ -13,30 +16,40 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @Data
-public class BaseResponse<T> {
-	protected  Integer status=1;
-	private  String errorCode;
-	private  String errorMsg;
-	private  T data;
-	
-	public BaseResponse(Integer status, T data) {
-		this.status = status;
-		this.data = data;
-	}
-	
-	public BaseResponse(Integer status, String errorCode, String errorMsg) {
-		super();
-		this.status = status;
-		this.errorCode = errorCode;
-		this.errorMsg = errorMsg;
-	}
-	
-	public static <T>BaseResponse<T> success(T data) {
-	   return new BaseResponse<T>(0,data);
-	}
-	
-	public static <T>BaseResponse<T> fail(String errorCode,String errorMsg) {
-		return new BaseResponse<T>(1,errorCode,errorMsg);
-	}
+public class BaseResponse<T> implements Serializable {
+    private static final long serialVersionUID = -8130068200180072992L;
+    protected Integer status = 1;
+    private int code;
+    private String msg;
+    private T data;
 
+    public static BaseResponse ok() {
+        return ok("");
+    }
+
+    public static BaseResponse ok(Object o) {
+        return new BaseResponse(ResultCode.SUCCESS, o);
+    }
+
+    public static BaseResponse failure(ResultCode code) {
+        return failure(code, "");
+    }
+
+    public static BaseResponse failure(ResultCode code, Object o) {
+        return new BaseResponse(code, o);
+    }
+
+    public BaseResponse(ResultCode resultCode) {
+        setResultCode(resultCode);
+    }
+
+    public BaseResponse(ResultCode resultCode, T data) {
+        setResultCode(resultCode);
+        this.data = data;
+    }
+
+    public void setResultCode(ResultCode resultCode) {
+        this.code = resultCode.getCode();
+        this.msg = resultCode.getMsg();
+    }
 }

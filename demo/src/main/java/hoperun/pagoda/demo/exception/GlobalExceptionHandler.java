@@ -9,30 +9,49 @@ import hoperun.pagoda.demo.bean.BaseResponse;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-	  private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
-	 /**
+    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+    /**
      * system exception handler
-     * @param req request
-     * @param resp response
-     * @param e exception
+     * 
+     * @param req
+     *            request
+     * @param resp
+     *            response
+     * @param e
+     *            exception
      * @return BaseResponse BaseResponse
-     * @throws Exception Exception
+     * @throws Exception
+     *             Exception
      */
     @ExceptionHandler(value = Exception.class)
-    public BaseResponse<?> defaultErrorHandler( Exception e) throws Exception {
+    public BaseResponse<?> defaultErrorHandler(Exception e) throws Exception {
         logger.error("", e);
-        @SuppressWarnings("rawtypes")
-		BaseResponse<?> response = new BaseResponse();
-        response.setErrorMsg(e.getMessage());;
         if (e instanceof org.springframework.web.servlet.NoHandlerFoundException) {
-        	response.setErrorCode("404");
+            throw new BusinessException(BaseResponse.failure(ResultCode.BAD_REQUEST, "User aready exist!"));
         } else {
-        	response.setErrorCode("500");
-        response.setData(null);
-        response.setStatus(0);
-    }
-        return response;
+            throw new BusinessException(BaseResponse.failure(ResultCode.BAD_REQUEST, "User aready exist!"));
+        }
 
-}
-    
+    }
+
+    /**
+     * system exception handler
+     * 
+     * @param req
+     *            request
+     * @param resp
+     *            response
+     * @param e
+     *            exception
+     * @return BaseResponse BaseResponse
+     * @throws Exception
+     *             Exception
+     */
+    @ExceptionHandler(value = BusinessException.class)
+    public BaseResponse<?> businessException(BusinessException e) throws Exception {
+        logger.error(e.getResponse().getMsg().toString());
+        return e.getResponse();
+
+    }
+
 }

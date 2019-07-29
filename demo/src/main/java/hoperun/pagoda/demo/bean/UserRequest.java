@@ -1,6 +1,5 @@
 package hoperun.pagoda.demo.bean;
 
-import hoperun.pagoda.demo.entity.UserDetail;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +17,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class UserResponse {
-    private String token;
-    private UserDetail userDetail;
+public class UserRequest {
+    private String username;
+    private String password;
 }
