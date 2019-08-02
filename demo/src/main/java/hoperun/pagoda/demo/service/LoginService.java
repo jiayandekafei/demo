@@ -1,16 +1,8 @@
 package hoperun.pagoda.demo.service;
 
 import hoperun.pagoda.demo.bean.UserResponse;
-import hoperun.pagoda.demo.entity.User;
 
 public interface LoginService {
-    /**
-     * sign up
-     * 
-     * @param userDetail
-     * @return
-     */
-    User register(User userDetail);
 
     /**
      * sign in

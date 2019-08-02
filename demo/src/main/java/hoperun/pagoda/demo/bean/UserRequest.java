@@ -1,23 +1,27 @@
 package hoperun.pagoda.demo.bean;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 /**
- * User response.
+ * sinup request.
  * 
  * @author zhangxiqin
  *
  */
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class UserRequest {
+    @ApiModelProperty(value = "username", required = true)
+    @Size(min = 6, max = 30)
     private String username;
+    @ApiModelProperty(value = "password", required = true)
+    @Pattern(regexp = "/^[\\\\w_-]{6,16}$/")
     private String password;
 }

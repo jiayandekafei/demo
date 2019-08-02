@@ -18,7 +18,6 @@ import lombok.ToString;
 @Data
 public class BaseResponse<T> implements Serializable {
     private static final long serialVersionUID = -8130068200180072992L;
-    protected Integer status = 1;
     private int code;
     private String msg;
     private T data;

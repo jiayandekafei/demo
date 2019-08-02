@@ -14,6 +14,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import com.alibaba.fastjson.JSONArray;
+
+import hoperun.pagoda.demo.entity.Role;
 import hoperun.pagoda.demo.entity.UserDetail;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.CompressionCodecs;
@@ -47,7 +50,9 @@ public class JwtUtils {
             final Claims claims = getClaimsFromToken(token);
             long userId = getUserIdFromToken(token);
             String username = claims.getSubject();
-            userDetail = new UserDetail(userId, username, "");
+            String roleName = claims.get(CLAIM_KEY_AUTHORITIES).toString();
+            Role role = Role.builder().role(roleName).build();
+            userDetail = new UserDetail(userId, username, "", role);
         } catch (Exception e) {
             userDetail = null;
         }
@@ -89,7 +94,7 @@ public class JwtUtils {
 
     public String generateAccessToken(UserDetail userDetail) {
         Map<String, Object> claims = generateClaims(userDetail);
-        // claims.put(CLAIM_KEY_AUTHORITIES, authoritiesToArray(userDetail.getAuthorities()).get(0));
+        claims.put(CLAIM_KEY_AUTHORITIES, authoritiesToArray(userDetail.getAuthorities()).get(0));
         return generateAccessToken(userDetail.getUsername(), claims);
     }
 
@@ -134,7 +139,8 @@ public class JwtUtils {
         Map<String, Object> claims = generateClaims(userDetail);
         //
         String roles[] = new String[]{JwtUtils.ROLE_REFRESH_TOKEN};
-        // claims.put(CLAIM_KEY_AUTHORITIES, JSONUtil.toJSON(roles));
+        JSONArray jsonArray = (JSONArray) JSONArray.parse(roles.toString());
+        claims.put(CLAIM_KEY_AUTHORITIES, jsonArray.toJSONString());
         return generateRefreshToken(userDetail.getUsername(), claims);
     }
 

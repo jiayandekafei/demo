@@ -13,9 +13,8 @@ import lombok.Data;
  */
 @Data
 @Builder
-public class User implements Serializable {
+public class Role implements Serializable {
     private static final long serialVersionUID = 1L;
     private long id;
-    private String username;
-    private String password;
+    private String role;
 }

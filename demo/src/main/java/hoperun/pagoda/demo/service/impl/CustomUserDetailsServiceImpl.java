@@ -5,22 +5,23 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import hoperun.pagoda.demo.entity.User;
+import hoperun.pagoda.demo.entity.Role;
 import hoperun.pagoda.demo.entity.UserDetail;
-import hoperun.pagoda.demo.repository.UserRepository;
+import hoperun.pagoda.demo.mapper.UserMapper;
 
 @Component(value = "CustomUserDetailsService")
 public class CustomUserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private UserRepository userRepository;
-
+    private UserMapper userMapper;
     @Override
     public UserDetail loadUserByUsername(String name) throws UsernameNotFoundException {
-        User userDetail = userRepository.findByUsername(name);
+        UserDetail userDetail = userMapper.findByUsername(name);
         if (userDetail == null) {
             throw new UsernameNotFoundException(String.format("No userDetail found with username '%s'.", name));
         }
-        return new UserDetail(userDetail.getUsername(), userDetail.getPassword());
+        Role role = userMapper.findRoleByUserId(userDetail.getId());
+        userDetail.setRole(role);
+        return userDetail;
     }
 }

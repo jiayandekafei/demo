@@ -1,15 +1,26 @@
 package hoperun.pagoda.demo.controller;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import hoperun.pagoda.demo.bean.BaseResponse;
+import hoperun.pagoda.demo.bean.UserListResponse;
+import hoperun.pagoda.demo.bean.UserRequest;
+import hoperun.pagoda.demo.bean.UserResponse;
+import hoperun.pagoda.demo.entity.Role;
 import hoperun.pagoda.demo.entity.User;
+import hoperun.pagoda.demo.entity.UserDetail;
+import hoperun.pagoda.demo.service.UserService;
 import io.swagger.annotations.ApiOperation;
 
 /**
@@ -23,26 +34,44 @@ import io.swagger.annotations.ApiOperation;
 public class UserController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
+    @Autowired
+    private UserService userService;
+
     /**
      * Get User List.
      *
      * @return
      */
-    @ApiOperation(value = "get user list", notes = "get user list")
+    @ApiOperation(value = "retrieve user list")
     @GetMapping("/list")
-    public Map<String, Object> userList() {
+    public BaseResponse<UserListResponse> userList() {
         if (logger.isDebugEnabled()) {
             logger.debug("method:{},message:{}", "userList", "get user list started");
         }
-        User user = new User();
-        user.setUsername("admin");
-        user.setPassword("*********");
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("user", user);
+
+        List<User> users = userService.findAllUser();
+        UserListResponse response = new UserListResponse(users);
+
         if (logger.isDebugEnabled()) {
             logger.debug("method:{},message:{}", "userList", "get user list ended");
         }
-        return map;
+
+        return BaseResponse.ok(response);
     }
 
+    @PostMapping(value = "/sign")
+    @ApiOperation(value = "sign up")
+    public BaseResponse<UserResponse> sign(@Valid @RequestBody UserRequest userRequest) {
+        if (logger.isDebugEnabled()) {
+            logger.debug("method:{},message:{}", "sign", "register user started");
+        }
+
+        if (logger.isDebugEnabled()) {
+            logger.debug("method:{},message:{}", "sign", "register user ended");
+        }
+        UserDetail userDetail = new UserDetail(userRequest.getUsername(), userRequest.getPassword(), Role.builder().id(1l).build());
+
+        return BaseResponse.ok(userService.register(userDetail));
+    }
 }

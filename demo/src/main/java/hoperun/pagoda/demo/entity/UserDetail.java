@@ -1,15 +1,31 @@
 package hoperun.pagoda.demo.entity;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class UserDetail implements UserDetails {
     private static final long serialVersionUID = 1L;
     private long id;
     private String username;
     private String password;
+    private Role role;
+
+    public UserDetail(long id, String username, String password, Role role) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
 
     public UserDetail(long id, String username, String password) {
         this.id = id;
@@ -17,23 +33,12 @@ public class UserDetail implements UserDetails {
         this.password = password;
     }
 
-    public UserDetail(String username, String password) {
+    public UserDetail(String username, String password, Role role) {
         this.username = username;
         this.password = password;
+        this.role = role;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-    @Override
-    public String getUsername() {
-        return username;
-    }
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -53,6 +58,8 @@ public class UserDetail implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(role.getRole()));
+        return authorities;
     }
 }

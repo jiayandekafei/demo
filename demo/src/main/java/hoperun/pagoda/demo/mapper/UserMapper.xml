@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hoperun.pagoda.demo.mapper.UserMapper">
+    <select id="findByUsername" resultType="hoperun.pagoda.demo.entity.UserDetail">
+        SELECT id, username, password from tb_user where username = #{username};
+    </select>
+
+    <insert id="insert" parameterType="hoperun.pagoda.demo.entity.UserDetail" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_user (username, password) VALUES (#{username}, #{password});
+    </insert>
+
+    <insert id="insertRole">
+        insert into tb_user_role (user_id, role_id) VALUES (#{userId}, #{roleId});
+    </insert>
+
+    <select id="findRoleById" resultType="hoperun.pagoda.demo.entity.Role">
+      select id, role from tb_role where id = #{roleId}
+    </select>
+
+    <select id="findRoleByUserId" resultType="hoperun.pagoda.demo.entity.Role">
+        select * from tb_role where id in (SELECT role_id from tb_user_role where user_id = #{userId});
+    </select>
+    
+    <select id="findAllUser" resultType="hoperun.pagoda.demo.entity.User">
+        select * from tb_user;
+    </select>
+</mapper>

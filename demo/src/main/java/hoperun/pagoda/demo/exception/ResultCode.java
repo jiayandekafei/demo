@@ -2,7 +2,7 @@ package hoperun.pagoda.demo.exception;
 
 public enum ResultCode {
 
-    SUCCESS(200, "成功"),
+    SUCCESS(200, "successful"),
 
     BAD_REQUEST(400, "Bad request parameter"), UNAUTHORIZED(401, "Authentication failed"), LOGIN_ERROR(401,
             "invalid user name or password"), FORBIDDEN(403,

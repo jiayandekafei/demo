@@ -27,9 +27,9 @@ public class GlobalExceptionHandler {
     public BaseResponse<?> defaultErrorHandler(Exception e) throws Exception {
         logger.error("", e);
         if (e instanceof org.springframework.web.servlet.NoHandlerFoundException) {
-            throw new BusinessException(BaseResponse.failure(ResultCode.BAD_REQUEST, "User aready exist!"));
+            return BaseResponse.failure(ResultCode.NOT_FOUND, "");
         } else {
-            throw new BusinessException(BaseResponse.failure(ResultCode.BAD_REQUEST, "User aready exist!"));
+            return BaseResponse.failure(ResultCode.SERVER_ERROR, e.getMessage());
         }
 
     }
