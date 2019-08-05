@@ -15,7 +15,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -23,29 +22,18 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.google.common.collect.ImmutableList;
 
-import hoperun.pagoda.demo.filter.JwtAuthenticationEntryPoint;
 import hoperun.pagoda.demo.filter.JwtAuthenticationTokenFilter;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-    private final JwtAuthenticationEntryPoint unauthorizedHandler;
-
-    private final AccessDeniedHandler accessDeniedHandler;
-
     private final UserDetailsService CustomUserDetailsService;
-
     private final JwtAuthenticationTokenFilter authenticationTokenFilter;
 
     @Autowired
-    public WebSecurityConfig(JwtAuthenticationEntryPoint unauthorizedHandler,
-            @Qualifier("RestAuthenticationAccessDeniedHandler") AccessDeniedHandler accessDeniedHandler,
-            @Qualifier("CustomUserDetailsService") UserDetailsService CustomUserDetailsService,
+    public WebSecurityConfig(@Qualifier("CustomUserDetailsService") UserDetailsService CustomUserDetailsService,
             JwtAuthenticationTokenFilter authenticationTokenFilter) {
-        this.unauthorizedHandler = unauthorizedHandler;
-        this.accessDeniedHandler = accessDeniedHandler;
         this.CustomUserDetailsService = CustomUserDetailsService;
         this.authenticationTokenFilter = authenticationTokenFilter;
     }
@@ -66,12 +54,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.cors().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler).and().csrf().disable().exceptionHandling()
-                .authenticationEntryPoint(unauthorizedHandler).and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+        httpSecurity.cors().and().csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/login", "/sign", "/error/**").permitAll().anyRequest().authenticated();
-
         httpSecurity.headers().cacheControl();
-
         httpSecurity.addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
