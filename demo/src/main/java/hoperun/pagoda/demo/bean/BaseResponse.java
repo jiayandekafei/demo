@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * coomon response bean
+ * common response bean
  *
  * @author zhangxiqin
  * @param <T>

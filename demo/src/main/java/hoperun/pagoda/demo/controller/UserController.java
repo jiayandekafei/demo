@@ -60,9 +60,24 @@ public class UserController {
         return BaseResponse.ok(response);
     }
 
-    @PostMapping(value = "/sign")
+    @GetMapping(value = "/sign")
     @ApiOperation(value = "sign up")
     public BaseResponse<UserResponse> sign(@Valid @RequestBody UserRequest userRequest) {
+        if (logger.isDebugEnabled()) {
+            logger.debug("method:{},message:{}", "sign", "register user started");
+        }
+
+        if (logger.isDebugEnabled()) {
+            logger.debug("method:{},message:{}", "sign", "register user ended");
+        }
+        UserDetail userDetail = new UserDetail(userRequest.getUsername(), userRequest.getPassword(), Role.builder().id(1l).build());
+
+        return BaseResponse.ok(userService.register(userDetail));
+    }
+
+    @PostMapping(value = "/sign")
+    @ApiOperation(value = "sign up")
+    public BaseResponse<UserResponse> getUserByName(@Valid @RequestBody UserRequest userRequest) {
         if (logger.isDebugEnabled()) {
             logger.debug("method:{},message:{}", "sign", "register user started");
         }

@@ -36,7 +36,7 @@ public class LoginServiceImpl implements LoginService {
         // gengerate token
         final UserDetail userDetail = (UserDetail) authentication.getPrincipal();
         final String token = jwtTokenUtil.generateAccessToken(userDetail);
-        // settoken
+        // set token
         jwtTokenUtil.putToken(username, token);
         return new UserResponse(token, userDetail);
     }
@@ -55,7 +55,6 @@ public class LoginServiceImpl implements LoginService {
 
     private Authentication authenticate(String username, String password) {
         try {
-            //
             return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         } catch (Exception e) {
             throw new BusinessException(BaseResponse.failure(ResultCode.LOGIN_ERROR, e.getMessage()));

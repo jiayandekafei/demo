@@ -1,11 +1,10 @@
-package hoperun.pagoda.demo.controller;
+package hoperun.pagoda.demo.service;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +18,10 @@ import hoperun.pagoda.demo.service.impl.LoginServiceImpl;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class LoginControllerTest {
+public class LoginServiceTest {
 
     @Autowired
     @InjectMocks
-    private LoginController controller;
-
-    @Mock
     private LoginServiceImpl loginService;
 
     private UserResponse user = new UserResponse();
@@ -39,7 +35,7 @@ public class LoginControllerTest {
 
     @Test
     public void LoginTest() throws Exception {
-        BaseResponse<UserResponse> user1 = controller.login(new UserRequest("testuser", "123456"));
+        BaseResponse<UserResponse> user1 = loginService.login(new UserRequest("testuser", "123456"));
         Assert.assertEquals(this.user.getToken(), user1.getData().getToken());
 
     }
