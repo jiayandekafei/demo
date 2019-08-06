@@ -12,7 +12,7 @@ import hoperun.pagoda.demo.bean.BaseResponse;
 import hoperun.pagoda.demo.exception.ResultCode;
 
 @RestController
-public class WebErrorController implements ErrorController {
+public class AuthErrorController implements ErrorController {
 
     @RequestMapping("/error")
     public Object error(HttpServletRequest request, HttpServletResponse response) {
