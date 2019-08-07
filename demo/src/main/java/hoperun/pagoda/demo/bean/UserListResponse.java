@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * User list response.
- * 
+ *
  * @author zhangxiqin
  *
  */
@@ -19,5 +19,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserListResponse implements Serializable {
     private static final long serialVersionUID = 1L;
+    /**
+     * user list
+     */
     private List<User> users;
 }

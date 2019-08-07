@@ -17,6 +17,8 @@ import hoperun.pagoda.demo.service.impl.LoginServiceImpl;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 /**
  * Login Controller.
@@ -35,6 +37,7 @@ public class LoginController {
 
     @PostMapping(value = "/login")
     @ApiOperation(value = "login")
+    @ApiResponses({@ApiResponse(code = 500, message = "", response = BaseResponse.class)})
     public BaseResponse<UserResponse> login(@RequestBody UserRequest user) {
         final UserResponse response = loginService.login(user.getUsername(), user.getPassword());
         return BaseResponse.ok(response);

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * sinup request.
- * 
+ *
  * @author zhangxiqin
  *
  */
@@ -18,9 +18,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserRequest {
+    /**
+     * user name.
+     */
     @ApiModelProperty(value = "username", required = true)
     @Size(min = 6, max = 30)
     private String username;
+    /**
+     * password.
+     */
     @ApiModelProperty(value = "password", required = true)
     @Pattern(regexp = "/^[\\\\w_-]{6,16}$/")
     private String password;

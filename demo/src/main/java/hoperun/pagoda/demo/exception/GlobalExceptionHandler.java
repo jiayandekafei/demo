@@ -23,14 +23,11 @@ public class GlobalExceptionHandler {
      * @throws Exception
      *             Exception
      */
+
     @ExceptionHandler(value = Exception.class)
     public BaseResponse<?> defaultErrorHandler(Exception e) throws Exception {
         logger.error("", e);
-        if (e instanceof org.springframework.web.servlet.NoHandlerFoundException) {
-            return BaseResponse.failure(ResultCode.NOT_FOUND, "");
-        } else {
-            return BaseResponse.failure(ResultCode.SERVER_ERROR, e.getMessage());
-        }
+        return BaseResponse.failure(ResultCode.SERVER_ERROR, e.getMessage());
 
     }
 

@@ -21,4 +21,12 @@ public interface UserService {
      * @return
      */
     List<User> findAllUser();
+
+    /**
+     * get user by name.
+     * 
+     * @param userId
+     * @return
+     */
+    UserDetail findUserByName(final String username);
 }

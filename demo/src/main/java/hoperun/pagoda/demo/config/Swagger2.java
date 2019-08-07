@@ -17,6 +17,12 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * swagger config.
+ *
+ * @author zhangxiqin
+ *
+ */
 @Configuration
 @EnableSwagger2
 public class Swagger2 {
@@ -25,12 +31,17 @@ public class Swagger2 {
     public Docket createRestApi() {
         ParameterBuilder tokenPar = new ParameterBuilder();
         List<Parameter> pars = new ArrayList<Parameter>();
-        tokenPar.name("x-access-token").description("token").modelRef(new ModelRef("string")).parameterType("header").required(false).build();
+        tokenPar.name("Authentication").description("token").modelRef(new ModelRef("string")).parameterType("header").required(false).build();
         pars.add(tokenPar.build());
         return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select()
                 .apis(RequestHandlerSelectors.basePackage("hoperun.pagoda.demo.controller")).paths(PathSelectors.any()).build();
     }
 
+    /**
+     * Api info.
+     *
+     * @return
+     */
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder().title("Pagoda APIS").description("the apis for pagoda").version("1.0").build();
     }

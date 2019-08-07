@@ -9,7 +9,7 @@ import lombok.ToString;
 
 /**
  * User response.
- * 
+ *
  * @author zhangxiqin
  *
  */
@@ -19,6 +19,12 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class UserResponse {
+    /**
+     * token.
+     */
     private String token;
+    /**
+     * user details.
+     */
     private UserDetail userDetail;
 }

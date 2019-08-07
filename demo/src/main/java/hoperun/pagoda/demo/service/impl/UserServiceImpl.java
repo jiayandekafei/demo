@@ -45,8 +45,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAllUser() {
-
         return userMapper.findAllUser();
+    }
+
+    @Override
+    public UserDetail findUserByName(final String username) {
+        UserDetail user = userMapper.findByUsername(username);
+        if (null == user) {
+            throw new BusinessException(BaseResponse.failure(ResultCode.BAD_REQUEST, "User dose not exist!"));
+        }
+        return userMapper.findByUsername(username);
     }
 
 }

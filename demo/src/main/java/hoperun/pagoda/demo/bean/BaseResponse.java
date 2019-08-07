@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * common response bean
+ * common response bean.
  *
  * @author zhangxiqin
  * @param <T>
@@ -18,36 +18,96 @@ import lombok.ToString;
 @Data
 public class BaseResponse<T> implements Serializable {
     private static final long serialVersionUID = -8130068200180072992L;
+    /**
+     * code.
+     */
     private int code;
+    /**
+     * message.
+     */
     private String msg;
+    /**
+     * reponse data, if error occured(except code=200),indicate the reason of error.
+     */
     private T data;
 
+    /**
+     * successful response without any body.
+     * 
+     * @return BaseResponse
+     */
+    @SuppressWarnings("rawtypes")
     public static BaseResponse ok() {
         return ok("");
     }
 
-    public static BaseResponse ok(Object o) {
+    /**
+     * successful response with body.
+     * 
+     * @param Object
+     *            o
+     * @return BaseResponse reponse
+     */
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    public static BaseResponse ok(final Object o) {
         return new BaseResponse(ResultCode.SUCCESS, o);
     }
 
-    public static BaseResponse failure(ResultCode code) {
+    /**
+     * failure response.
+     * 
+     * @param code
+     *            error code
+     * @return BaseResponse reponse
+     */
+
+    @SuppressWarnings("rawtypes")
+    public static BaseResponse failure(final ResultCode code) {
         return failure(code, "");
     }
 
+    /**
+     * 
+     * @param code
+     *            error code
+     * @param o
+     *            error reason
+     * @return BaseResponse reponse
+     */
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public static BaseResponse failure(ResultCode code, Object o) {
         return new BaseResponse(code, o);
     }
 
-    public BaseResponse(ResultCode resultCode) {
+    /**
+     * Constructor.
+     * 
+     * @param resultCode
+     *            result code.
+     */
+    public BaseResponse(final ResultCode resultCode) {
         setResultCode(resultCode);
     }
 
-    public BaseResponse(ResultCode resultCode, T data) {
+    /**
+     * Constructor.
+     * 
+     * @param resultCode
+     *            result code
+     * @param data
+     *            reponse data
+     */
+    public BaseResponse(final ResultCode resultCode, T data) {
         setResultCode(resultCode);
         this.data = data;
     }
 
-    public void setResultCode(ResultCode resultCode) {
+    /**
+     * set result code.
+     * 
+     * @param resultCode
+     */
+    public void setResultCode(final ResultCode resultCode) {
         this.code = resultCode.getCode();
         this.msg = resultCode.getMsg();
     }
