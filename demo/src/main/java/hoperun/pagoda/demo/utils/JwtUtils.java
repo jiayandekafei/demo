@@ -23,6 +23,12 @@ import io.jsonwebtoken.CompressionCodecs;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+/**
+ * Generate token.
+ *
+ * @author zhangxiqin
+ *
+ */
 @Component
 public class JwtUtils {
 
@@ -44,7 +50,14 @@ public class JwtUtils {
 
     private final SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS256;
 
-    public UserDetail getUserFromToken(String token) {
+    /**
+     * Get user info from the token.
+     *
+     * @param token
+     *            token
+     * @return UserDetail userdetail
+     */
+    public UserDetail getUserFromToken(final String token) {
         UserDetail userDetail;
         try {
             final Claims claims = getClaimsFromToken(token);
@@ -70,7 +83,14 @@ public class JwtUtils {
         return userId;
     }
 
-    public String getUsernameFromToken(String token) {
+    /**
+     * Get user name from token.
+     *
+     * @param token
+     *            token
+     * @return String username
+     */
+    public final String getUsernameFromToken(final String token) {
         String username;
         try {
             final Claims claims = getClaimsFromToken(token);
@@ -92,7 +112,14 @@ public class JwtUtils {
         return created;
     }
 
-    public String generateAccessToken(UserDetail userDetail) {
+    /**
+     * Generate access token.
+     *
+     * @param userDetail
+     *            userDetail
+     * @return token token
+     */
+    public String generateAccessToken(final UserDetail userDetail) {
         Map<String, Object> claims = generateClaims(userDetail);
         claims.put(CLAIM_KEY_AUTHORITIES, authoritiesToArray(userDetail.getAuthorities()).get(0));
         return generateAccessToken(userDetail.getUsername(), claims);
@@ -152,12 +179,27 @@ public class JwtUtils {
         tokenMap.remove(userName);
     }
 
-    public boolean containToken(String userName, String token) {
+    /**
+     * Determine if the username is included in the token.
+     * 
+     * @param userName
+     *            user name
+     * @param token
+     *            token
+     * @return true: if included otherwise false
+     */
+    public boolean containToken(final String userName, final String token) {
         if (userName != null && tokenMap.containsKey(userName) && tokenMap.get(userName).equals(token)) {
             return true;
         }
         return false;
     }
+
+    /**
+     *
+     * @param token
+     * @return
+     */
     private Claims getClaimsFromToken(String token) {
         Claims claims;
         try {
@@ -181,12 +223,26 @@ public class JwtUtils {
         return (lastPasswordReset != null && created.before(lastPasswordReset));
     }
 
-    private Map<String, Object> generateClaims(UserDetail userDetail) {
-        Map<String, Object> claims = new HashMap<>(16);
+    /**
+     * Generater claims.
+     *
+     * @param userDetail
+     *            userDetail.
+     * @return claims
+     */
+    private Map<String, Object> generateClaims(final UserDetail userDetail) {
+        Map<String, Object> claims = new HashMap<>();
         claims.put(CLAIM_KEY_USER_ID, userDetail.getId());
         return claims;
     }
 
+    /**
+     * Generate access token.
+     *
+     * @param subject
+     * @param claims
+     * @return
+     */
     private String generateAccessToken(String subject, Map<String, Object> claims) {
         return generateToken(subject, claims, access_token_expiration);
     }
@@ -203,6 +259,14 @@ public class JwtUtils {
         return generateToken(subject, claims, refresh_token_expiration);
     }
 
+    /**
+     * Generate token.
+     *
+     * @param subject
+     * @param claims
+     * @param expiration
+     * @return
+     */
     private String generateToken(String subject, Map<String, Object> claims, long expiration) {
         return Jwts.builder().setClaims(claims).setSubject(subject).setId(UUID.randomUUID().toString()).setIssuedAt(new Date())
                 .setExpiration(generateExpirationDate(expiration)).compressWith(CompressionCodecs.DEFLATE).signWith(SIGNATURE_ALGORITHM, secret)

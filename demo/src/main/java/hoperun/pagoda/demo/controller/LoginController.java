@@ -14,8 +14,6 @@ import hoperun.pagoda.demo.bean.UserRequest;
 import hoperun.pagoda.demo.bean.UserResponse;
 import hoperun.pagoda.demo.exception.ResultCode;
 import hoperun.pagoda.demo.service.impl.LoginServiceImpl;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -35,6 +33,7 @@ public class LoginController {
     @Autowired
     private LoginServiceImpl loginService;
 
+    @SuppressWarnings("unchecked")
     @PostMapping(value = "/login")
     @ApiOperation(value = "login")
     @ApiResponses({@ApiResponse(code = 500, message = "", response = BaseResponse.class)})
@@ -46,8 +45,6 @@ public class LoginController {
     @SuppressWarnings("unchecked")
     @GetMapping(value = "/logout")
     @ApiOperation(value = "logout", notes = "logout")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "Authorization", value = "Authorization token", required = true, dataType = "string", paramType = "header")})
     public BaseResponse<UserResponse> logout(HttpServletRequest request) {
         String token = request.getHeader(tokenHeader);
         if (token == null) {

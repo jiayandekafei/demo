@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -102,7 +103,7 @@ public class UserController {
      * @return UserResponse user response
      */
     @SuppressWarnings("unchecked")
-    @GetMapping(value = "/sign")
+    @PostMapping(value = "/sign")
     @ApiOperation(value = "sign up")
     public BaseResponse<UserResponse> register(@Valid @RequestBody final UserRequest userRequest) {
         final String method = "register";
@@ -110,7 +111,7 @@ public class UserController {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "register user started");
         }
 
-        UserDetail userDetail = new UserDetail(userRequest.getUsername(), userRequest.getPassword(), Role.builder().id(1l).build());
+        UserDetail userDetail = new UserDetail(userRequest.getUsername(), userRequest.getPassword(), Role.builder().id(1L).build());
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "register user ended");

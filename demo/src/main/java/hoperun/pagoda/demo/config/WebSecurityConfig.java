@@ -55,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.cors().and().csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/login", "/sign", "/error/**").permitAll().anyRequest().authenticated();
+                .authorizeRequests().antMatchers("/login", "/user/sign", "/error/**").permitAll().anyRequest().authenticated();
         httpSecurity.headers().cacheControl();
         httpSecurity.addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }

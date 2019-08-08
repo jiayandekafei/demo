@@ -46,7 +46,6 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = BusinessException.class)
     public BaseResponse<?> businessException(BusinessException e) throws Exception {
-        logger.error(e.getResponse().getMsg().toString());
         return e.getResponse();
 
     }
