@@ -72,6 +72,12 @@ public class JwtUtils {
         return userDetail;
     }
 
+    /**
+     * Get user id from token.
+     *
+     * @param token
+     * @return long user id.
+     */
     public long getUserIdFromToken(String token) {
         long userId;
         try {
@@ -101,6 +107,12 @@ public class JwtUtils {
         return username;
     }
 
+    /**
+     * Get created date from token
+     * 
+     * @param token
+     * @return
+     */
     public Date getCreatedDateFromToken(String token) {
         Date created;
         try {
@@ -125,6 +137,13 @@ public class JwtUtils {
         return generateAccessToken(userDetail.getUsername(), claims);
     }
 
+    /**
+     * Get expiration date from token.
+     *
+     * @param token
+     *            token
+     * @return Date expiration date
+     */
     public Date getExpirationDateFromToken(String token) {
         Date expiration;
         try {
@@ -152,6 +171,15 @@ public class JwtUtils {
         return refreshedToken;
     }
 
+    /**
+     * validate token
+     * 
+     * @param token
+     *            token
+     * @param userDetails
+     *            userDetails
+     * @return
+     */
     public Boolean validateToken(String token, UserDetails userDetails) {
         UserDetail userDetail = (UserDetail) userDetails;
         final long userId = getUserIdFromToken(token);
@@ -171,10 +199,23 @@ public class JwtUtils {
         return generateRefreshToken(userDetail.getUsername(), claims);
     }
 
+    /**
+     * Put token.
+     *
+     * @param userName
+     *            userName
+     * @param token
+     *            token
+     */
     public void putToken(String userName, String token) {
         tokenMap.put(userName, token);
     }
 
+    /**
+     * Delete token.
+     *
+     * @param userName
+     */
     public void deleteToken(String userName) {
         tokenMap.remove(userName);
     }
@@ -196,9 +237,11 @@ public class JwtUtils {
     }
 
     /**
+     * Get Claims from Token.
      *
      * @param token
-     * @return
+     *            token
+     * @return Cliams cliams
      */
     private Claims getClaimsFromToken(String token) {
         Claims claims;
@@ -210,15 +253,35 @@ public class JwtUtils {
         return claims;
     }
 
+    /**
+     * Generate expiration date.
+     *
+     * @param expiration
+     *            expiration time
+     * @return Date expiration date
+     */
     private Date generateExpirationDate(long expiration) {
         return new Date(System.currentTimeMillis() + expiration * 1000);
     }
 
+    /**
+     * Jugle if the token expired.
+     *
+     * @param token
+     *            token
+     * @return true if expired othwise false.
+     */
     private Boolean isTokenExpired(String token) {
         final Date expiration = getExpirationDateFromToken(token);
         return expiration.before(new Date());
     }
 
+    /**
+     * 
+     * @param created
+     * @param lastPasswordReset
+     * @return
+     */
     private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {
         return (lastPasswordReset != null && created.before(lastPasswordReset));
     }
