@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import hoperun.pagoda.demo.bean.BaseResponse;
+import hoperun.pagoda.demo.bean.LoginResponse;
 import hoperun.pagoda.demo.bean.UserRequest;
 import hoperun.pagoda.demo.bean.UserResponse;
 import hoperun.pagoda.demo.exception.ResultCode;
@@ -37,8 +38,8 @@ public class LoginController {
     @PostMapping(value = "/login")
     @ApiOperation(value = "login")
     @ApiResponses({@ApiResponse(code = 500, message = "", response = BaseResponse.class)})
-    public BaseResponse<UserResponse> login(@RequestBody UserRequest user) {
-        final UserResponse response = loginService.login(user.getUsername(), user.getPassword());
+    public BaseResponse<LoginResponse> login(@RequestBody UserRequest user) {
+        final LoginResponse response = loginService.login(user.getUsername(), user.getPassword());
         return BaseResponse.ok(response);
     }
 

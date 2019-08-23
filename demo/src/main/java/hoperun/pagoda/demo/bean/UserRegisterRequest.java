@@ -6,15 +6,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * sinup request.
- *
+ * user register request.
+ * 
  * @author zhangxiqin
  *
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserRequest {
+public class UserRegisterRequest {
     /**
      * user name.
      */
@@ -27,4 +27,17 @@ public class UserRequest {
     @ApiModelProperty(value = "password", required = true)
     // @Pattern(regexp = "/^[\\\\w_-]{6,16}$/")
     private String password;
+    /**
+     * email.
+     */
+    @ApiModelProperty(value = "eamil", required = true)
+    // @Pattern(regexp = "/^[\\\\w_-]{6,16}$/")
+    private String eamil;
+    /**
+     * job title.
+     */
+    @ApiModelProperty(value = "job title")
+    private String jobTitle;
+    @ApiModelProperty(value = "group id")
+    private String groupId;
 }

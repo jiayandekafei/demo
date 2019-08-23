@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import hoperun.pagoda.demo.bean.BaseResponse;
-import hoperun.pagoda.demo.entity.Role;
+import hoperun.pagoda.demo.bean.UserRegisterRequest;
 import hoperun.pagoda.demo.entity.User;
 import hoperun.pagoda.demo.entity.UserDetail;
 import hoperun.pagoda.demo.exception.BusinessException;
@@ -28,19 +28,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UserDetail register(UserDetail userDetail) {
+    public UserDetail register(UserRegisterRequest userDetail) {
         UserDetail bizUser = userMapper.findByUsername(userDetail.getUsername());
         if (null != bizUser) {
             throw new BusinessException(BaseResponse.failure(ResultCode.BAD_REQUEST, "User aready exist!"));
         }
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         userDetail.setPassword(encoder.encode(userDetail.getPassword()));
+        // insert user bace info
         userMapper.insert(userDetail);
-        long roleId = userDetail.getRole().getId();
-        Role role = userMapper.findRoleById(roleId);
-        userDetail.setRole(role);
-        userMapper.insertRole(userDetail.getId(), roleId);
-        return userDetail;
+        // update user group role table
+        String groupID = userDetail.getGroupId();
+        /*
+         * userDetail.setRole(role); userMapper.insertRole(userDetail.getId(), roleId);
+         */
+        return new UserDetail(1, "", "");
     }
 
     @Override

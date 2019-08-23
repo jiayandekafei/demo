@@ -2,6 +2,7 @@ package hoperun.pagoda.demo.service;
 
 import java.util.List;
 
+import hoperun.pagoda.demo.bean.UserRegisterRequest;
 import hoperun.pagoda.demo.entity.User;
 import hoperun.pagoda.demo.entity.UserDetail;
 
@@ -12,7 +13,7 @@ public interface UserService {
      * @param userDetail
      * @return
      */
-    UserDetail register(UserDetail userDetail);
+    UserDetail register(UserRegisterRequest userDetail);
 
     /**
      * retrieve user list.

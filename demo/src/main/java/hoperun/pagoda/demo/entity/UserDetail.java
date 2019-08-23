@@ -15,20 +15,20 @@ import lombok.Setter;
 @Getter
 public class UserDetail implements UserDetails {
     private static final long serialVersionUID = 1L;
-    private long id;
+    private long user_id;
     private String username;
     private String password;
     private Role role;
 
     public UserDetail(long id, String username, String password, Role role) {
-        this.id = id;
+        this.user_id = id;
         this.username = username;
         this.password = password;
         this.role = role;
     }
 
     public UserDetail(long id, String username, String password) {
-        this.id = id;
+        this.user_id = id;
         this.username = username;
         this.password = password;
     }

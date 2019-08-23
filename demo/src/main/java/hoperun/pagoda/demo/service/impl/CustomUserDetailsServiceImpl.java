@@ -20,7 +20,7 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
         if (userDetail == null) {
             throw new UsernameNotFoundException(String.format("No userDetail found with username '%s'.", name));
         }
-        Role role = userMapper.findRoleByUserId(userDetail.getId());
+        Role role = userMapper.findRoleByUserId(userDetail.getUser_id());
         userDetail.setRole(role);
         return userDetail;
     }

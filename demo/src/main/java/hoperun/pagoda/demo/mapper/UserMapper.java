@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import hoperun.pagoda.demo.bean.UserRegisterRequest;
 import hoperun.pagoda.demo.entity.Role;
 import hoperun.pagoda.demo.entity.User;
 import hoperun.pagoda.demo.entity.UserDetail;
@@ -24,7 +25,7 @@ public interface UserMapper {
      * 
      * @param userDetail
      */
-    void insert(UserDetail userDetail);
+    void insert(UserRegisterRequest userDetail);
 
     /**
      * create user role
@@ -34,6 +35,15 @@ public interface UserMapper {
      * @return
      */
     int insertRole(@Param("userId") long userId, @Param("roleId") long roleId);
+
+    /**
+     * create user role
+     * 
+     * @param userId
+     * @param roleId
+     * @return
+     */
+    int insertUserGroup(@Param("userId") long userId, @Param("roleId") long roleId);
 
     /**
      * select role by role id.

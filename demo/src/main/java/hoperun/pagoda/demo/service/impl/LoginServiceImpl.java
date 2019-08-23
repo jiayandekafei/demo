@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import hoperun.pagoda.demo.bean.BaseResponse;
+import hoperun.pagoda.demo.bean.LoginResponse;
 import hoperun.pagoda.demo.bean.UserResponse;
 import hoperun.pagoda.demo.entity.UserDetail;
 import hoperun.pagoda.demo.exception.BusinessException;
@@ -28,7 +29,7 @@ public class LoginServiceImpl implements LoginService {
     private String tokenHead;
 
     @Override
-    public UserResponse login(String username, String password) {
+    public LoginResponse login(String username, String password) {
         // User Authentication
         final Authentication authentication = authenticate(username, password);
         // set authentication
@@ -38,7 +39,7 @@ public class LoginServiceImpl implements LoginService {
         final String token = jwtTokenUtil.generateAccessToken(userDetail);
         // set token
         jwtTokenUtil.putToken(username, token);
-        return new UserResponse(token, userDetail);
+        return new LoginResponse(token, userDetail.getUsername(), "w");
     }
 
     @Override

@@ -17,7 +17,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class UserResponse {
+public class LoginResponse {
     /**
      * token.
      */
@@ -25,7 +25,7 @@ public class UserResponse {
     /**
      * userId.
      */
-    private String userId;
+    private String username;
     /**
      * status.
      */

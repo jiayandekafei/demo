@@ -185,7 +185,7 @@ public class JwtUtils {
         final long userId = getUserIdFromToken(token);
         final String username = getUsernameFromToken(token);
         // final Date created = getCreatedDateFromToken(token);
-        return (userId == userDetail.getId() && username.equals(userDetail.getUsername()) && !isTokenExpired(token)
+        return (userId == userDetail.getUser_id() && username.equals(userDetail.getUsername()) && !isTokenExpired(token)
         // && !isCreatedBeforeLastPasswordReset(created, userDetail.getLastPasswordResetDate())
         );
     }
@@ -295,7 +295,7 @@ public class JwtUtils {
      */
     private Map<String, Object> generateClaims(final UserDetail userDetail) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put(CLAIM_KEY_USER_ID, userDetail.getId());
+        claims.put(CLAIM_KEY_USER_ID, userDetail.getUser_id());
         return claims;
     }
 

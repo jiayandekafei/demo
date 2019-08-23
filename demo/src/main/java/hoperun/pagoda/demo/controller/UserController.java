@@ -16,10 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import hoperun.pagoda.demo.bean.BaseResponse;
 import hoperun.pagoda.demo.bean.UserListResponse;
-import hoperun.pagoda.demo.bean.UserRequest;
+import hoperun.pagoda.demo.bean.UserRegisterRequest;
 import hoperun.pagoda.demo.bean.UserResponse;
 import hoperun.pagoda.demo.constant.Constant;
-import hoperun.pagoda.demo.entity.Role;
 import hoperun.pagoda.demo.entity.User;
 import hoperun.pagoda.demo.entity.UserDetail;
 import hoperun.pagoda.demo.service.UserService;
@@ -103,21 +102,21 @@ public class UserController {
      * @return UserResponse user response
      */
     @SuppressWarnings("unchecked")
-    @PostMapping(value = "/sign")
-    @ApiOperation(value = "sign up")
-    public BaseResponse<UserResponse> register(@Valid @RequestBody final UserRequest userRequest) {
+    @PostMapping(value = "/register")
+    @ApiOperation(value = "register")
+    public BaseResponse<UserResponse> register(@Valid @RequestBody final UserRegisterRequest userRequest) {
         final String method = "register";
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "register user started");
         }
 
-        UserDetail userDetail = new UserDetail(userRequest.getUsername(), userRequest.getPassword(), Role.builder().id(1L).build());
-
+        // UserDetail userDetail = new UserDetail(userRequest.getUsername(), userRequest.getPassword(), Role.builder().id(1L).build());
+        userService.register(userRequest);
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "register user ended");
         }
 
-        return BaseResponse.ok(userService.register(userDetail));
+        return BaseResponse.ok("successful");
     }
 
 }

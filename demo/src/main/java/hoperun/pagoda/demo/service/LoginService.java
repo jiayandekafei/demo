@@ -1,5 +1,6 @@
 package hoperun.pagoda.demo.service;
 
+import hoperun.pagoda.demo.bean.LoginResponse;
 import hoperun.pagoda.demo.bean.UserResponse;
 
 public interface LoginService {
@@ -11,7 +12,7 @@ public interface LoginService {
      * @param password
      * @return
      */
-    UserResponse login(String username, String password);
+    LoginResponse login(String username, String password);
 
     /**
      * logout

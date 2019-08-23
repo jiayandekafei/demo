@@ -13,8 +13,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import hoperun.pagoda.demo.bean.BaseResponse;
+import hoperun.pagoda.demo.bean.LoginResponse;
 import hoperun.pagoda.demo.bean.UserRequest;
-import hoperun.pagoda.demo.bean.UserResponse;
 import hoperun.pagoda.demo.service.impl.LoginServiceImpl;
 
 @RunWith(SpringRunner.class)
@@ -28,7 +28,7 @@ public class LoginControllerTest {
     @Mock
     private LoginServiceImpl loginService;
 
-    private UserResponse user = new UserResponse();
+    private LoginResponse user = new LoginResponse();
 
     @Before
     public void setUp() throws Exception {
@@ -39,7 +39,7 @@ public class LoginControllerTest {
 
     @Test
     public void LoginTest() throws Exception {
-        BaseResponse<UserResponse> user1 = controller.login(new UserRequest("testuser", "123456"));
+        BaseResponse<LoginResponse> user1 = controller.login(new UserRequest("testuser", "123456"));
         Assert.assertEquals(this.user.getToken(), user1.getData().getToken());
 
     }
