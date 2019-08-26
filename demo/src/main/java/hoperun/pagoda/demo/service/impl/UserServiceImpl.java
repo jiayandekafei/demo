@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import hoperun.pagoda.demo.bean.BaseResponse;
 import hoperun.pagoda.demo.bean.UserRegisterRequest;
@@ -28,21 +29,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UserDetail register(UserRegisterRequest userDetail) {
-        UserDetail bizUser = userMapper.findByUsername(userDetail.getUsername());
+    public UserDetail register(UserRegisterRequest request) {
+        UserDetail bizUser = userMapper.findByUsername(request.getUsername());
         if (null != bizUser) {
             throw new BusinessException(BaseResponse.failure(ResultCode.BAD_REQUEST, "User aready exist!"));
         }
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        userDetail.setPassword(encoder.encode(userDetail.getPassword()));
+        UserDetail userDetail = new UserDetail(request.getUsername(), encoder.encode(request.getPassword()), request.getEamil(),
+                request.getJobTitle(), request.getGroupId(), "");
         // insert user bace info
         userMapper.insert(userDetail);
         // update user group role table
-        String groupID = userDetail.getGroupId();
-        /*
-         * userDetail.setRole(role); userMapper.insertRole(userDetail.getId(), roleId);
-         */
-        return new UserDetail(1, "", "");
+        if (!StringUtils.isEmpty(request.getGroupId())) {
+
+            userMapper.insertUserRole(userDetail.getUser_id(), request.getGroupId(), 0);
+        }
+
+        return userDetail;
     }
 
     @Override

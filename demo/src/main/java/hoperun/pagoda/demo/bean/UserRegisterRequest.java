@@ -38,6 +38,9 @@ public class UserRegisterRequest {
      */
     @ApiModelProperty(value = "job title")
     private String jobTitle;
+    /**
+     * group id.
+     */
     @ApiModelProperty(value = "group id")
-    private String groupId;
+    private Long groupId;
 }
