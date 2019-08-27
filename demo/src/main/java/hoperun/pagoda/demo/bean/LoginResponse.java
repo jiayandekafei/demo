@@ -25,10 +25,10 @@ public class LoginResponse {
     /**
      * userId.
      */
-    private String username;
+    private int userId;
     /**
-     * status.
+     * username.
      */
-    private String status;
+    private String username;
 
 }

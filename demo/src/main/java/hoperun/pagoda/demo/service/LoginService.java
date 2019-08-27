@@ -1,7 +1,7 @@
 package hoperun.pagoda.demo.service;
 
 import hoperun.pagoda.demo.bean.LoginResponse;
-import hoperun.pagoda.demo.bean.UserResponse;
+import hoperun.pagoda.demo.bean.UserDetailResponse;
 
 public interface LoginService {
 
@@ -27,5 +27,5 @@ public interface LoginService {
      * @param oldToken
      * @return
      */
-    UserResponse refresh(String oldToken);
+    UserDetailResponse refresh(String oldToken);
 }

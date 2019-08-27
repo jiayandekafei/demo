@@ -41,10 +41,9 @@ public class GroupRequest {
     @ApiModelProperty(value = "notes server password")
     private String notes_server_password;
     /**
-     * job title.
+     * description.
      */
-    @ApiModelProperty(value = "job title")
-    private String jobTitle;
-    @ApiModelProperty(value = "group id")
-    private String groupId;
+    @ApiModelProperty(value = "description")
+    private String description;
+
 }

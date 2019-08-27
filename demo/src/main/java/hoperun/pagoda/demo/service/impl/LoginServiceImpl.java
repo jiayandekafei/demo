@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import hoperun.pagoda.demo.bean.BaseResponse;
 import hoperun.pagoda.demo.bean.LoginResponse;
-import hoperun.pagoda.demo.bean.UserResponse;
+import hoperun.pagoda.demo.bean.UserDetailResponse;
 import hoperun.pagoda.demo.entity.UserDetail;
 import hoperun.pagoda.demo.exception.BusinessException;
 import hoperun.pagoda.demo.exception.ResultCode;
@@ -39,7 +39,7 @@ public class LoginServiceImpl implements LoginService {
         final String token = jwtTokenUtil.generateAccessToken(userDetail);
         // set token
         jwtTokenUtil.putToken(username, token);
-        return new LoginResponse(token, userDetail.getUsername(), "w");
+        return new LoginResponse(token, userDetail.getUser_id(), userDetail.getUsername());
     }
 
     @Override
@@ -49,7 +49,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public UserResponse refresh(String oldToken) {
+    public UserDetailResponse refresh(String oldToken) {
         // TODO Auto-generated method stub
         return null;
     }

@@ -10,9 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import hoperun.pagoda.demo.bean.BaseResponse;
+import hoperun.pagoda.demo.bean.UserDetailResponse;
 import hoperun.pagoda.demo.bean.UserRegisterRequest;
 import hoperun.pagoda.demo.entity.User;
 import hoperun.pagoda.demo.entity.UserDetail;
+import hoperun.pagoda.demo.entity.UserGroup;
 import hoperun.pagoda.demo.exception.BusinessException;
 import hoperun.pagoda.demo.exception.ResultCode;
 import hoperun.pagoda.demo.mapper.UserMapper;
@@ -60,6 +62,20 @@ public class UserServiceImpl implements UserService {
             throw new BusinessException(BaseResponse.failure(ResultCode.BAD_REQUEST, "User dose not exist!"));
         }
         return userMapper.findByUsername(username);
+    }
+
+    @Override
+    public UserDetailResponse findUserByID(String userId) {
+        UserDetailResponse userDetail;
+        UserDetail user = userMapper.findByUserId(userId);
+        if (null != user) {
+            List<UserGroup> groups = userMapper.findUserGroups(user.getUser_id());
+            userDetail = new UserDetailResponse(user.getUser_id(), user.getUsername(), user.getStatus(), user.getEamil(), user.getJobTitle(),
+                    user.getSuperuser(), user.getPhoto(), groups);
+        } else {
+            throw new BusinessException(BaseResponse.failure(ResultCode.BAD_REQUEST, "User dose not exist!"));
+        }
+        return userDetail;
     }
 
 }

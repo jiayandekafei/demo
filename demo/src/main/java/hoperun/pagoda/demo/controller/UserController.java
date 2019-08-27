@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import hoperun.pagoda.demo.bean.BaseResponse;
+import hoperun.pagoda.demo.bean.UserDetailResponse;
 import hoperun.pagoda.demo.bean.UserListResponse;
 import hoperun.pagoda.demo.constant.Constant;
 import hoperun.pagoda.demo.entity.User;
-import hoperun.pagoda.demo.entity.UserDetail;
 import hoperun.pagoda.demo.service.UserService;
 import io.swagger.annotations.ApiOperation;
 
@@ -70,19 +70,19 @@ public class UserController {
      * @return BaseResponse<UserDetail> user reponse
      */
     @SuppressWarnings("unchecked")
-    @ApiOperation(value = "get user by name")
-    @GetMapping("/{username}")
-    public BaseResponse<UserDetail> getUserByName(@PathVariable final String username) {
+    @ApiOperation(value = "get user by user id")
+    @GetMapping("/{userId}")
+    public BaseResponse<UserDetailResponse> getUserByName(@PathVariable final String userId) {
         final String method = "getUserByName";
 
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug(Constant.LOG_PATTERLN, method, "get user by name started");
+            LOGGER.debug(Constant.LOG_PATTERLN, method, "get user by id started");
         }
 
-        UserDetail userDetail = userService.findUserByName(username);
+        UserDetailResponse userDetail = userService.findUserByID(userId);
 
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug(Constant.LOG_PATTERLN, method, "get user by name ended");
+            LOGGER.debug(Constant.LOG_PATTERLN, method, "get user by id ended");
         }
 
         return BaseResponse.ok(userDetail);

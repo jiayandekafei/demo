@@ -16,7 +16,7 @@ import hoperun.pagoda.demo.bean.BaseResponse;
 import hoperun.pagoda.demo.bean.LoginResponse;
 import hoperun.pagoda.demo.bean.UserRegisterRequest;
 import hoperun.pagoda.demo.bean.UserRequest;
-import hoperun.pagoda.demo.bean.UserResponse;
+import hoperun.pagoda.demo.bean.UserDetailResponse;
 import hoperun.pagoda.demo.constant.Constant;
 import hoperun.pagoda.demo.exception.ResultCode;
 import hoperun.pagoda.demo.service.UserService;
@@ -61,7 +61,7 @@ public class LoginController {
     @SuppressWarnings("unchecked")
     @PostMapping(value = "/register")
     @ApiOperation(value = "register")
-    public BaseResponse<UserResponse> register(@Valid @RequestBody final UserRegisterRequest request) {
+    public BaseResponse<UserDetailResponse> register(@Valid @RequestBody final UserRegisterRequest request) {
         final String method = "register";
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "register user started");
@@ -87,7 +87,7 @@ public class LoginController {
     @SuppressWarnings("unchecked")
     @GetMapping(value = "/logout")
     @ApiOperation(value = "logout", notes = "logout")
-    public BaseResponse<UserResponse> logout(HttpServletRequest request) {
+    public BaseResponse<UserDetailResponse> logout(HttpServletRequest request) {
         String token = request.getHeader(tokenHeader);
         if (token == null) {
             return BaseResponse.failure(ResultCode.UNAUTHORIZED);

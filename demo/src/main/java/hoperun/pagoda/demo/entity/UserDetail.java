@@ -5,11 +5,15 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDetail implements UserDetails {
     private static final long serialVersionUID = 1L;
     private int user_id;
@@ -31,6 +35,14 @@ public class UserDetail implements UserDetails {
      * photo adress.
      */
     private String photo;
+    /**
+     * is super user.
+     */
+    private String superuser;
+    /**
+     * status.
+     */
+    private String status;
     public UserDetail(int id, String username, String password) {
         this.user_id = id;
         this.username = username;
@@ -71,5 +83,6 @@ public class UserDetail implements UserDetails {
         this.jobTitle = jobTitle;
         this.groupId = groupId;
         this.photo = photo;
+
     }
 }

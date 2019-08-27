@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import hoperun.pagoda.demo.entity.Role;
 import hoperun.pagoda.demo.entity.User;
 import hoperun.pagoda.demo.entity.UserDetail;
+import hoperun.pagoda.demo.entity.UserGroup;
 
 @Mapper
 public interface UserMapper {
@@ -18,6 +19,14 @@ public interface UserMapper {
      * @return
      */
     UserDetail findByUsername(@Param("username") String username);
+
+    /**
+     * select user by name
+     * 
+     * @param name
+     * @return
+     */
+    UserDetail findByUserId(@Param("userId") String userId);
 
     /**
      * insert.
@@ -58,4 +67,12 @@ public interface UserMapper {
      * @return
      */
     List<User> findAllUser();
+
+    /**
+     * select role by user id.
+     * 
+     * @param userId
+     * @return
+     */
+    List<UserGroup> findUserGroups(@Param("userId") long userId);
 }
