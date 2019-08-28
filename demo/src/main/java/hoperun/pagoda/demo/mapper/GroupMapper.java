@@ -10,14 +10,14 @@ import hoperun.pagoda.demo.entity.Group;
 @Mapper
 public interface GroupMapper {
     /**
-     * create user role
+     * create group
      * 
      * @param userId
      * @param groupId
      * @param roleId
      * @return
      */
-    int insert(@Param("userId") long userId, @Param("groupId") long groupId, @Param("roleId") long roleId);
+    int insert(Group group);
 
     /**
      * retrieve all group.

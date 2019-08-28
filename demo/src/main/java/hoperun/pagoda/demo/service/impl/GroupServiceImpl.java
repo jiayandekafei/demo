@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import hoperun.pagoda.demo.bean.GroupRequest;
 import hoperun.pagoda.demo.entity.Group;
+import hoperun.pagoda.demo.mapper.GroupMapper;
 import hoperun.pagoda.demo.service.GroupService;
 
 @Service
