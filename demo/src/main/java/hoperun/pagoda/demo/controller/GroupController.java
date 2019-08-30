@@ -1,7 +1,5 @@
 package hoperun.pagoda.demo.controller;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import hoperun.pagoda.demo.bean.BaseResponse;
-import hoperun.pagoda.demo.bean.UserListResponse;
+import hoperun.pagoda.demo.bean.GroupListResponse;
 import hoperun.pagoda.demo.constant.Constant;
-import hoperun.pagoda.demo.entity.User;
-import hoperun.pagoda.demo.service.UserService;
+import hoperun.pagoda.demo.service.GroupService;
 import io.swagger.annotations.ApiOperation;
 
 /**
@@ -35,7 +32,7 @@ public class GroupController {
      * User service.
      */
     @Autowired
-    private UserService userService;
+    private GroupService groupService;
 
     /**
      * Get User List.
@@ -45,15 +42,14 @@ public class GroupController {
     @SuppressWarnings("unchecked")
     @GetMapping("/list")
     @ApiOperation(value = "retrieve group list")
-    public BaseResponse<UserListResponse> retrieveGroupList() {
+    public BaseResponse<GroupListResponse> retrieveGroupList() {
         final String method = "retrieveGroupList";
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "get group list started");
         }
 
-        List<User> users = userService.findAllUser();
-        UserListResponse response = new UserListResponse(users);
+        GroupListResponse response = new GroupListResponse(groupService.findAllGroup());
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "get group list end");

@@ -2,8 +2,8 @@ package hoperun.pagoda.demo.entity;
 
 import java.io.Serializable;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Role.
@@ -12,7 +12,7 @@ import lombok.Data;
  *
  */
 @Data
-@Builder
+@NoArgsConstructor
 public class Role implements Serializable {
     private static final long serialVersionUID = 1L;
     private long id;

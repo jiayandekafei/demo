@@ -14,12 +14,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserGroup {
+
+    /**
+     * user id
+     */
+    private int userId;
     /**
      * group id
      */
-    private String groupId;
+    private int groupId;
     /**
      * role id
      */
-    private String roleId;
+    private int roleId;
 }

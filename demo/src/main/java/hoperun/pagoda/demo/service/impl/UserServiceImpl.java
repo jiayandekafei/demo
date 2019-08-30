@@ -1,5 +1,6 @@
 package hoperun.pagoda.demo.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,8 @@ import org.springframework.util.StringUtils;
 
 import hoperun.pagoda.demo.bean.BaseResponse;
 import hoperun.pagoda.demo.bean.UserDetailResponse;
+import hoperun.pagoda.demo.bean.UserListResponse;
 import hoperun.pagoda.demo.bean.UserRegisterRequest;
-import hoperun.pagoda.demo.entity.User;
 import hoperun.pagoda.demo.entity.UserDetail;
 import hoperun.pagoda.demo.entity.UserGroup;
 import hoperun.pagoda.demo.exception.BusinessException;
@@ -51,8 +52,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAllUser() {
-        return userMapper.findAllUser();
+    public UserListResponse findAllUser(final int userId, final String superuser) {
+        List<UserDetailResponse> userDetailList = new ArrayList<>();
+        List<UserDetail> users = new ArrayList<>();
+        // if super user ,return all users
+        if ("Y".equals(superuser)) {
+            users = userMapper.findAllUser();
+        } else {
+            List<UserGroup> groups = userMapper.findUserGroups(userId);
+            for (UserGroup group : groups) {
+                userMapper.findUsersByGroupId(group.getGroupId());
+            }
+        }
+
+        // set users
+        for (UserDetail user : users) {
+            List<UserGroup> groups = userMapper.findUserGroups(user.getUser_id());
+            UserDetailResponse userDetail = new UserDetailResponse(user.getUser_id(), user.getUsername(), user.getStatus(), user.getEamil(),
+                    user.getJobTitle(), user.getSuperuser(), user.getPhoto(), groups);
+            userDetailList.add(userDetail);
+        }
+
+        return new UserListResponse(userDetailList);
     }
 
     @Override

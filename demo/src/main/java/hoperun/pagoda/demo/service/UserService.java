@@ -1,10 +1,8 @@
 package hoperun.pagoda.demo.service;
 
-import java.util.List;
-
 import hoperun.pagoda.demo.bean.UserDetailResponse;
+import hoperun.pagoda.demo.bean.UserListResponse;
 import hoperun.pagoda.demo.bean.UserRegisterRequest;
-import hoperun.pagoda.demo.entity.User;
 import hoperun.pagoda.demo.entity.UserDetail;
 
 public interface UserService {
@@ -22,7 +20,7 @@ public interface UserService {
      * @param userId
      * @return
      */
-    List<User> findAllUser();
+    UserListResponse findAllUser(int userId, String superuser);
 
     /**
      * get user by name.
@@ -39,4 +37,5 @@ public interface UserService {
      * @return
      */
     UserDetailResponse findUserByID(final String userID);
+
 }
