@@ -1,13 +1,17 @@
 package hoperun.pagoda.demo.service;
 
+import java.util.List;
+
 import hoperun.pagoda.demo.bean.UserDetailResponse;
 import hoperun.pagoda.demo.bean.UserListResponse;
 import hoperun.pagoda.demo.bean.UserRegisterRequest;
+import hoperun.pagoda.demo.bean.UserRequest;
 import hoperun.pagoda.demo.entity.UserDetail;
+import hoperun.pagoda.demo.entity.UserGroupTree;
 
 public interface UserService {
     /**
-     * sign up
+     * register
      * 
      * @param userDetail
      * @return
@@ -29,6 +33,7 @@ public interface UserService {
      * @return UserDetail
      */
     UserDetail findUserByName(final String username);
+
     /**
      * get user by id.
      * 
@@ -38,4 +43,53 @@ public interface UserService {
      */
     UserDetailResponse findUserByID(final String userID);
 
+    /**
+     * update user by name.
+     * 
+     * @param UserRequest
+     *            userRequest
+     */
+    void update(final UserRequest request, final int userId);
+
+    /**
+     * get user by id.
+     * 
+     * @param userId
+     *            user id
+     * @return
+     */
+    boolean isUserExist(final String username);
+
+    /**
+     * get group tree.
+     * 
+     * @param UserRequest
+     *            userRequest
+     * @return UserGroupsResponse
+     */
+    List<UserGroupTree> getGroupTree(final int userId);
+
+    /**
+     * get group tree.
+     * 
+     * @param UserRequest
+     *            userRequest
+     */
+    String delete(final int userId);
+
+    /**
+     * get group tree.
+     * 
+     * @param UserRequest
+     *            userRequest
+     */
+    String insert(final UserRequest user);
+
+    /**
+     * get group tree.
+     * 
+     * @param UserRequest
+     *            userRequest
+     */
+    String deleteMulti(String[] users);
 }

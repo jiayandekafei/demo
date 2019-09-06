@@ -18,8 +18,7 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public List<Group> findAllGroup() {
-        // TODO Auto-generated method stub
-        return null;
+        return groupMapper.findAllGroup();
     }
 
     @Override

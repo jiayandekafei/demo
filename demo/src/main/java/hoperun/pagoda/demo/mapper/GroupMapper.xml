@@ -3,6 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="hoperun.pagoda.demo.mapper.GroupMapper">
+     <select id="findAllGroup" resultType="hoperun.pagoda.demo.entity.Group">
+        SELECT * from tb_group;
+    </select>
     <select id="findByGroupname" resultType="hoperun.pagoda.demo.entity.Group">
         SELECT * from tb_user where username = #{username};
     </select>

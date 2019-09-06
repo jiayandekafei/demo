@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import hoperun.pagoda.demo.bean.BaseResponse;
+import hoperun.pagoda.demo.bean.LoginRequest;
 import hoperun.pagoda.demo.bean.LoginResponse;
-import hoperun.pagoda.demo.bean.UserRegisterRequest;
-import hoperun.pagoda.demo.bean.UserRequest;
 import hoperun.pagoda.demo.bean.UserDetailResponse;
+import hoperun.pagoda.demo.bean.UserRegisterRequest;
 import hoperun.pagoda.demo.constant.Constant;
 import hoperun.pagoda.demo.exception.ResultCode;
 import hoperun.pagoda.demo.service.UserService;
@@ -79,15 +79,15 @@ public class LoginController {
     @PostMapping(value = "/login")
     @ApiOperation(value = "login")
     @ApiResponses({@ApiResponse(code = 500, message = "", response = BaseResponse.class)})
-    public BaseResponse<LoginResponse> login(@RequestBody UserRequest user) {
+    public BaseResponse<LoginResponse> login(@RequestBody LoginRequest user) {
         final LoginResponse response = loginService.login(user.getUsername(), user.getPassword());
         return BaseResponse.ok(response);
     }
 
     @SuppressWarnings("unchecked")
-    @GetMapping(value = "/logout")
+    @GetMapping(value = "/signout")
     @ApiOperation(value = "logout", notes = "logout")
-    public BaseResponse<UserDetailResponse> logout(HttpServletRequest request) {
+    public BaseResponse<?> logout(HttpServletRequest request) {
         String token = request.getHeader(tokenHeader);
         if (token == null) {
             return BaseResponse.failure(ResultCode.UNAUTHORIZED);

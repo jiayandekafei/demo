@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import hoperun.pagoda.demo.entity.Role;
+import hoperun.pagoda.demo.bean.UserRequest;
 import hoperun.pagoda.demo.entity.UserDetail;
 import hoperun.pagoda.demo.entity.UserGroup;
 
@@ -35,29 +35,11 @@ public interface UserMapper {
     void insert(UserDetail userDetail);
 
     /**
-     * create user role
+     * update.
      * 
-     * @param userId
-     * @param groupId
-     * @param roleId
-     * @return
+     * @param userDetail
      */
-    int insertUserRole(@Param("userId") long userId, @Param("groupId") long groupId, @Param("roleId") long roleId);
-    /**
-     * select role by role id.
-     * 
-     * @param roleId
-     * @return
-     */
-    Role findRoleById(@Param("roleId") long roleId);
-
-    /**
-     * select role by user id.
-     * 
-     * @param userId
-     * @return
-     */
-    Role findRoleByUserId(@Param("userId") long userId);
+    void update(UserRequest userRequest);
 
     /**
      * select role by user id.
@@ -82,4 +64,32 @@ public interface UserMapper {
      * @return
      */
     List<UserGroup> findUsersByGroupId(@Param("groupId") long groupId);
+
+    /**
+     * retrieve users under groups.
+     * 
+     * @param userId
+     * @return
+     */
+    UserGroup findUserGroupByGroupId(@Param("userId") int userId, @Param("groupId") int groupId);
+
+    /**
+     * create user role
+     * 
+     * @param userId
+     * @param groupId
+     * @param roleId
+     * @return
+     */
+    int insertUserRole(@Param("userId") long userId, @Param("groupId") long groupId, @Param("roleId") long roleId);
+
+    /**
+     * update user group
+     * 
+     * @param userId
+     * @param groupId
+     * @param roleId
+     * @return
+     */
+    int updateUserRole(@Param("userId") long userId, @Param("groupId") long groupId, @Param("roleId") long roleId);
 }

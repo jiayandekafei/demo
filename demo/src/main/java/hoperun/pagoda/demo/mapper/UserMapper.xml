@@ -3,35 +3,50 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="hoperun.pagoda.demo.mapper.UserMapper">
+
+    <select id="findAllUser" resultType="hoperun.pagoda.demo.entity.UserDetail">
+        select * from tb_user;
+    </select>
     <select id="findByUsername" resultType="hoperun.pagoda.demo.entity.UserDetail">
         SELECT * from tb_user where username = #{username};
     </select>
     <select id="findByUserId" resultType="hoperun.pagoda.demo.entity.UserDetail">
         SELECT * from tb_user where user_id = #{userId};
     </select>
-
     <insert id="insert" parameterType="hoperun.pagoda.demo.entity.UserDetail" useGeneratedKeys="true" keyProperty="user_id">
         insert into tb_user (username, password,email,job_title,status,photo,superuser) VALUES 
-        (#{username}, #{password}, #{eamil}, #{jobTitle},"W",#{photo},"N");
+        (#{username}, #{password}, #{email}, #{job_title},"W",#{photo},"N");
     </insert>
-
-    <insert id="insertRole">
-        insert into tb_user_role (user_id, group_id,role_id) VALUES (#{userId}, #{group_id},  #{roleId});
-    </insert>
-
-    <select id="findRoleById" resultType="hoperun.pagoda.demo.entity.Role">
-      select id, role from tb_role where id = #{roleId}
-    </select>
     
-     <select id="findAllUser" resultType="hoperun.pagoda.demo.entity.UserDetail">
-        select * from tb_user;
-    </select>
+     <insert id="update" parameterType="hoperun.pagoda.demo.bean.UserRequest">
+        update  tb_user set email=#{email}, job_title=#{job_title} where username=#{username};
+    </insert>
 
+   <!--  <delete id="deleteUsers" parameterType="String[]">
+        delete from tb_user where username in
+        <foreach collection="array" item="arr" index="no" open="("
+            separator="," close=")">
+            #{arr}
+        </foreach>
+    </delete> -->
+    
+    <delete id="deleteUser">
+         delete from tb_user where username =#{username}
+    </delete>
+    
+    <insert id="insertUserRole">
+        insert into tb_user_role (user_id, group_id,role_id) VALUES (#{userId}, #{groupId}, #{roleId});
+    </insert>
+    <update id="updateUserRole">
+        update  tb_user_role set role_id =#{roleId} where user_id= #{userId} and group_id = #{group_id};
+    </update>
     <select id="findUserGroups" resultType="hoperun.pagoda.demo.entity.UserGroup">
         select group_id,role_id from tb_user_role where user_id = #{userId} ;
     </select>
-    
-     <select id="findUsersByGroupId" resultType="hoperun.pagoda.demo.entity.UserGroup">
+    <select id="findUsersByGroupId" resultType="hoperun.pagoda.demo.entity.UserGroup">
         select * from tb_user_role where group_id = #{groupId} ;
+    </select>
+    <select id="findUserGroupByGroupId" resultType="hoperun.pagoda.demo.entity.UserGroup">
+        select * from tb_user_role where user_id=#{userId} and group_id = #{groupId} ;
     </select>
 </mapper>

@@ -22,11 +22,11 @@ public class UserDetail implements UserDetails {
     /**
      * email.
      */
-    private String eamil;
+    private String email;
     /**
      * job title.
      */
-    private String jobTitle;
+    private String job_title;
     /**
      * group id.
      */
@@ -76,13 +76,11 @@ public class UserDetail implements UserDetails {
         return null;
     }
 
-    public UserDetail(String username, String password, String eamil, String jobTitle, Long groupId, String photo) {
+    public UserDetail(String username, String password, String eamil, String jobTitle) {
         this.username = username;
         this.password = password;
-        this.eamil = eamil;
-        this.jobTitle = jobTitle;
-        this.groupId = groupId;
-        this.photo = photo;
+        this.email = eamil;
+        this.job_title = jobTitle;
 
     }
 }

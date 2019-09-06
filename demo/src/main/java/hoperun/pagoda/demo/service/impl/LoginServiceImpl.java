@@ -44,7 +44,9 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public void logout(String token) {
-        // TODO Auto-generated method stub
+        token = token.substring(tokenHead.length() - 1);
+        String userName = jwtTokenUtil.getUsernameFromToken(token);
+        jwtTokenUtil.deleteToken(userName);
 
     }
 

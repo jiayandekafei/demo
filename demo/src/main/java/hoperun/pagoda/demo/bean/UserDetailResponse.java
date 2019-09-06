@@ -36,7 +36,7 @@ public class UserDetailResponse {
     /**
      * email.
      */
-    private String eamil;
+    private String email;
     /**
      * job title.
      */

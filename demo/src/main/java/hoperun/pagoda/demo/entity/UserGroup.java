@@ -18,13 +18,14 @@ public class UserGroup {
     /**
      * user id
      */
-    private int userId;
+
+    private int user_id;
     /**
      * group id
      */
-    private int groupId;
+    private int group_id;
     /**
      * role id
      */
-    private int roleId;
+    private int role_id;
 }
