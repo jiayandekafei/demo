@@ -98,7 +98,7 @@ public class UserController {
      */
     @SuppressWarnings("unchecked")
     @ApiOperation(value = "update user by user id")
-    @PutMapping("/user")
+    @PutMapping("/{userId}")
     public BaseResponse<String> updateUserById(@PathVariable final int userId, @RequestBody UserRequest request) {
         final String method = "getUserById";
 

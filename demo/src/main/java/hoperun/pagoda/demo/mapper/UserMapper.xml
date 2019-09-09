@@ -34,19 +34,35 @@
          delete from tb_user where username =#{username}
     </delete>
     
-    <insert id="insertUserRole">
-        insert into tb_user_role (user_id, group_id,role_id) VALUES (#{userId}, #{groupId}, #{roleId});
+    <insert id="insertUserGroup">
+        insert into tb_user_role (user_id, group_id,role_id) VALUES (#{userId}, #{group_id}, #{role_id});
     </insert>
-    <update id="updateUserRole">
-        update  tb_user_role set role_id =#{roleId} where user_id= #{userId} and group_id = #{group_id};
+    <update id="updateUserGroup">
+        update  tb_user_role set role_id =#{role_id} where user_id= #{userId} and group_id = #{group_id};
     </update>
+    <delete id="deleteUserGroup">
+        delete from tb_user_role where user_id= #{userId} 
+        <if test="groups!=null and groups.length>0">
+            and group_id in
+            <foreach collection="groups" item="group_id" index="index" open="(" close=")" separator=",">
+              group_id != #{group_id};
+            </foreach>
+        </if>
+     </delete>
     <select id="findUserGroups" resultType="hoperun.pagoda.demo.entity.UserGroup">
         select group_id,role_id from tb_user_role where user_id = #{userId} ;
     </select>
     <select id="findUsersByGroupId" resultType="hoperun.pagoda.demo.entity.UserGroup">
-        select * from tb_user_role where group_id = #{groupId} ;
+        select * from tb_user_role where group_id = #{group_id} ;
     </select>
     <select id="findUserGroupByGroupId" resultType="hoperun.pagoda.demo.entity.UserGroup">
-        select * from tb_user_role where user_id=#{userId} and group_id = #{groupId} ;
+        select * from tb_user_role where user_id=#{userId} and group_id = #{group_id} ;
+    </select>
+    <select id="findUserGroupByGroupIds" resultType="Integer">
+        select group_id from tb_user_role where user_id=#{userId} and group_id not in
+        <foreach collection="groupIds" item="group_id" index="index"
+            open="(" close=")" separator=",">
+            #{group_id}
+        </foreach>
     </select>
 </mapper>

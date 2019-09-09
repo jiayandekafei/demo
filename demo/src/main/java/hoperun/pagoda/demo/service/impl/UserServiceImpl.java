@@ -122,19 +122,24 @@ public class UserServiceImpl implements UserService {
     public void update(final UserRequest request, final int userId) {
         userMapper.update(request);
         List<UserGroup> groups = request.getGroups();
+        List<Integer> groupIds = new ArrayList<>();
         // update user group role table
-        if (!Collections.isEmpty(groups))
+        if (!Collections.isEmpty(groups)) {
             for (UserGroup userGroup : groups) {
                 // check weather the group exist
                 UserGroup group = userMapper.findUserGroupByGroupId(userId, userGroup.getGroup_id());
                 if (null == group) {
-                    userMapper.insertUserRole(userId, userGroup.getGroup_id(), userGroup.getRole_id());
+                    userMapper.insertUserGroup(userId, userGroup.getGroup_id(), userGroup.getRole_id());
                 } else {
-                    userMapper.updateUserRole(userId, userGroup.getGroup_id(), userGroup.getRole_id());
+                    userMapper.updateUserGroup(userId, userGroup.getGroup_id(), userGroup.getRole_id());
                 }
-
+                groupIds.add(userGroup.getGroup_id());
             }
-
+            // check if has other groups
+            List<Integer> tempGroups = userMapper.findUserGroupByGroupIds(userId, groupIds);
+            // delete group
+            userMapper.deleteUserGroup(userId, tempGroups);
+        }
     }
 
     @Override

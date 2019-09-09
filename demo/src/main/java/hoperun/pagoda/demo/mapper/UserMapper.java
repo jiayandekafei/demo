@@ -63,7 +63,7 @@ public interface UserMapper {
      * @param userId
      * @return
      */
-    List<UserGroup> findUsersByGroupId(@Param("groupId") long groupId);
+    List<UserGroup> findUsersByGroupId(@Param("group_id") long group_id);
 
     /**
      * retrieve users under groups.
@@ -71,7 +71,14 @@ public interface UserMapper {
      * @param userId
      * @return
      */
-    UserGroup findUserGroupByGroupId(@Param("userId") int userId, @Param("groupId") int groupId);
+    UserGroup findUserGroupByGroupId(@Param("userId") int userId, @Param("group_id") int group_id);
+    /**
+     * retrieve users under groups.
+     * 
+     * @param userId
+     * @return
+     */
+    List<Integer> findUserGroupByGroupIds(@Param("userId") int userId, @Param("groupIds") List<Integer> groupIds);
 
     /**
      * create user role
@@ -81,7 +88,7 @@ public interface UserMapper {
      * @param roleId
      * @return
      */
-    int insertUserRole(@Param("userId") long userId, @Param("groupId") long groupId, @Param("roleId") long roleId);
+    int insertUserGroup(@Param("userId") long userId, @Param("group_id") long group_id, @Param("role_id") long role_id);
 
     /**
      * update user group
@@ -91,5 +98,15 @@ public interface UserMapper {
      * @param roleId
      * @return
      */
-    int updateUserRole(@Param("userId") long userId, @Param("groupId") long groupId, @Param("roleId") long roleId);
+    int updateUserGroup(@Param("userId") long userId, @Param("group_id") long group_id, @Param("role_id") long role_id);
+
+    /**
+     * delete user role
+     * 
+     * @param userId
+     * @param int
+     *            []Group ID
+     * @return
+     */
+    int deleteUserGroup(@Param("userId") int userId, @Param("tempGroups") List<Integer> groups);
 }
