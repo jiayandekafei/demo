@@ -6,4 +6,8 @@
     <select id="findAllRole" resultType="hoperun.pagoda.demo.entity.Role">
         SELECT * from tb_role ;
     </select>
+    
+    <select id="findRoleNameById" resultType="String" >
+       SELECT role from tb_role where role_id=#{roleId};
+   </select>
 </mapper>

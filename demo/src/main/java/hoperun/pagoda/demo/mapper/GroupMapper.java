@@ -33,4 +33,13 @@ public interface GroupMapper {
      * @return Group
      */
     Group findByGroupId(@Param("groupId") long groupId);
+
+    /**
+     * select group by id.
+     * 
+     * @param groupId
+     * @return Group
+     */
+    String findGroupNameById(@Param("groupId") long groupId);
+
 }

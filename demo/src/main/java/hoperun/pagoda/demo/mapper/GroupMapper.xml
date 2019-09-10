@@ -6,11 +6,8 @@
      <select id="findAllGroup" resultType="hoperun.pagoda.demo.entity.Group">
         SELECT * from tb_group;
     </select>
-    <select id="findByGroupname" resultType="hoperun.pagoda.demo.entity.Group">
-        SELECT * from tb_user where username = #{username};
-    </select>
-    <select id="findByUserId" resultType="hoperun.pagoda.demo.entity.Group">
-        SELECT * from tb_user where user_id = #{userId};
+     <select id="findGroupNameById" resultType="String">
+        SELECT groupname from tb_group where group_id =#{groupId};
     </select>
     <insert id="insert" parameterType="hoperun.pagoda.demo.entity.Group" useGeneratedKeys="true" keyProperty="group_id">
         insert into tb_group (groupname, customer_id,notes_server,notes_server_user,notes_server_pasword,description) VALUES 

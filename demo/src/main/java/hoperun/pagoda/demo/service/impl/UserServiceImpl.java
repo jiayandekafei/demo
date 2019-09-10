@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,9 +23,12 @@ import hoperun.pagoda.demo.entity.Role;
 import hoperun.pagoda.demo.entity.RoleNode;
 import hoperun.pagoda.demo.entity.UserDetail;
 import hoperun.pagoda.demo.entity.UserGroup;
+import hoperun.pagoda.demo.entity.UserGroupBean;
 import hoperun.pagoda.demo.entity.UserGroupTree;
 import hoperun.pagoda.demo.exception.BusinessException;
 import hoperun.pagoda.demo.exception.ResultCode;
+import hoperun.pagoda.demo.mapper.GroupMapper;
+import hoperun.pagoda.demo.mapper.RoleMapper;
 import hoperun.pagoda.demo.mapper.UserMapper;
 import hoperun.pagoda.demo.service.GroupService;
 import hoperun.pagoda.demo.service.RoleService;
@@ -36,6 +40,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private GroupMapper groupMapper;
+
+    @Autowired
+    private RoleMapper roleMapper;
 
     @Autowired
     private GroupService groupService;
@@ -67,24 +77,37 @@ public class UserServiceImpl implements UserService {
         List<UserDetailResponse> userDetailList = new ArrayList<>();
         List<UserDetail> users = new ArrayList<>();
         // if super user ,return all users
-        if ("Y".equals(superuser)) {
-            users = userMapper.findAllUser();
-        } else {
+        users = userMapper.findAllUser();
+        if ("N".equals(superuser)) {
             List<UserGroup> groups = userMapper.findUserGroups(userId);
             for (UserGroup group : groups) {
-                userMapper.findUsersByGroupId(group.getGroup_id());
+                // userIds = userMapper.findUsersByGroupId(group.getGroup_id());
+                users.stream().filter(user -> userMapper.findUsersByGroupId(group.getGroup_id()).contains(user.getUser_id()))
+                        .collect(Collectors.toList());
             }
         }
 
         // set users
         for (UserDetail user : users) {
-            List<UserGroup> groups = userMapper.findUserGroups(user.getUser_id());
             UserDetailResponse userDetail = new UserDetailResponse(user.getUser_id(), user.getUsername(), user.getStatus(), user.getEmail(),
-                    user.getJob_title(), user.getSuperuser(), user.getPhoto(), groups);
+                    user.getJob_title(), user.getSuperuser(), user.getPhoto(), this.getUserGroups(user.getUser_id()));
             userDetailList.add(userDetail);
         }
 
         return new UserListResponse(userDetailList);
+    }
+
+    public List<UserGroupBean> getUserGroups(final int userId) {
+        List<UserGroupBean> userGroups = new ArrayList<UserGroupBean>();
+        List<UserGroup> group = userMapper.findUserGroups(userId);
+        for (UserGroup userGroup : group) {
+            String groupName = groupMapper.findGroupNameById(userGroup.getGroup_id());
+            String roleName = roleMapper.findRoleNameById(userGroup.getRole_id());
+            userGroups.add(new UserGroupBean(userGroup.getGroup_id(), groupName, userGroup.getRole_id(), roleName));
+        }
+
+        return userGroups;
+
     }
 
     @Override
@@ -101,9 +124,8 @@ public class UserServiceImpl implements UserService {
         UserDetailResponse userDetail;
         UserDetail user = userMapper.findByUserId(userId);
         if (null != user) {
-            List<UserGroup> groups = userMapper.findUserGroups(user.getUser_id());
             userDetail = new UserDetailResponse(user.getUser_id(), user.getUsername(), user.getStatus(), user.getEmail(), user.getJob_title(),
-                    user.getSuperuser(), user.getPhoto(), groups);
+                    user.getSuperuser(), user.getPhoto(), this.getUserGroups(user.getUser_id()));
         } else {
             throw new BusinessException(BaseResponse.failure(ResultCode.BAD_REQUEST, "User dose not exist!"));
         }

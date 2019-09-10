@@ -2,7 +2,7 @@ package hoperun.pagoda.demo.bean;
 
 import java.util.List;
 
-import hoperun.pagoda.demo.entity.UserGroup;
+import hoperun.pagoda.demo.entity.UserGroupBean;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -52,6 +52,6 @@ public class UserDetailResponse {
     /**
      * groups.
      */
-    private List<UserGroup> groups;
+    private List<UserGroupBean> groups;
 
 }

@@ -63,7 +63,7 @@ public interface UserMapper {
      * @param userId
      * @return
      */
-    List<UserGroup> findUsersByGroupId(@Param("group_id") long group_id);
+    List<Integer> findUsersByGroupId(@Param("group_id") long group_id);
 
     /**
      * retrieve users under groups.
