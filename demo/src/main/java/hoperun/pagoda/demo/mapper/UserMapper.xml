@@ -52,7 +52,7 @@
     <select id="findUserGroups" resultType="hoperun.pagoda.demo.entity.UserGroup">
         select group_id,role_id from tb_user_role where user_id = #{userId} ;
     </select>
-    <select id="findUsersByGroupId" >
+    <select id="findUsersByGroupId" resultType="Integer">
         select user_id from tb_user_role where group_id = #{group_id} ;
     </select>
     <select id="findUserGroupByGroupId" resultType="hoperun.pagoda.demo.entity.UserGroup">

@@ -76,13 +76,13 @@ public class UserServiceImpl implements UserService {
     public UserListResponse findAllUser(final int userId, final String superuser) {
         List<UserDetailResponse> userDetailList = new ArrayList<>();
         List<UserDetail> users = new ArrayList<>();
-        // if super user ,return all users
+        // if super user ,return all users,otherwise fliter by group id.
         users = userMapper.findAllUser();
         if ("N".equals(superuser)) {
             List<UserGroup> groups = userMapper.findUserGroups(userId);
             for (UserGroup group : groups) {
                 // userIds = userMapper.findUsersByGroupId(group.getGroup_id());
-                users.stream().filter(user -> userMapper.findUsersByGroupId(group.getGroup_id()).contains(user.getUser_id()))
+                users = users.stream().filter(user -> userMapper.findUsersByGroupId(group.getGroup_id()).contains(user.getUser_id()))
                         .collect(Collectors.toList());
             }
         }
