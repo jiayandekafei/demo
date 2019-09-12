@@ -18,6 +18,7 @@ import hoperun.pagoda.demo.bean.UserDetailResponse;
 import hoperun.pagoda.demo.bean.UserGroupsResponse;
 import hoperun.pagoda.demo.bean.UserListResponse;
 import hoperun.pagoda.demo.bean.UserRequest;
+import hoperun.pagoda.demo.bean.UserStatusRequest;
 import hoperun.pagoda.demo.constant.Constant;
 import hoperun.pagoda.demo.service.UserService;
 import io.swagger.annotations.ApiOperation;
@@ -162,4 +163,16 @@ public class UserController {
         return BaseResponse.ok(userService.getGroupTree(userId));
     }
 
+    @SuppressWarnings("unchecked")
+    @ApiOperation(value = "update user status")
+    @PostMapping("/status")
+    public BaseResponse<UserGroupsResponse> updateUserStatus(@RequestBody UserStatusRequest req) {
+        final String method = "updateUserStatus";
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug(Constant.LOG_PATTERLN, method, "update user status started");
+        }
+
+        return BaseResponse.ok(userService.updateUserStatus(req.getStatus(), req.getUserId()));
+    }
 }

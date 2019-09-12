@@ -3,66 +3,95 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="hoperun.pagoda.demo.mapper.UserMapper">
+	<!-- *******************user table start********************************** -->
+	<select id="findAllUser"
+		resultType="hoperun.pagoda.demo.entity.UserDetail">
+		select * from tb_user;
+	</select>
+	<select id="findByUsername"
+		resultType="hoperun.pagoda.demo.entity.UserDetail">
+		SELECT * from tb_user where username = #{username};
+	</select>
+	<select id="findByUserId"
+		resultType="hoperun.pagoda.demo.entity.UserDetail">
+		SELECT * from tb_user where user_id = #{userId};
+	</select>
+	<insert id="insert"
+		parameterType="hoperun.pagoda.demo.entity.UserDetail"
+		useGeneratedKeys="true" keyProperty="user_id">
+		insert into tb_user (username,
+		password,email,job_title,status,photo,superuser) VALUES
+		(#{username}, #{password}, #{email}, #{job_title},"W",#{photo},"N");
+	</insert>
 
-    <select id="findAllUser" resultType="hoperun.pagoda.demo.entity.UserDetail">
-        select * from tb_user;
-    </select>
-    <select id="findByUsername" resultType="hoperun.pagoda.demo.entity.UserDetail">
-        SELECT * from tb_user where username = #{username};
-    </select>
-    <select id="findByUserId" resultType="hoperun.pagoda.demo.entity.UserDetail">
-        SELECT * from tb_user where user_id = #{userId};
-    </select>
-    <insert id="insert" parameterType="hoperun.pagoda.demo.entity.UserDetail" useGeneratedKeys="true" keyProperty="user_id">
-        insert into tb_user (username, password,email,job_title,status,photo,superuser) VALUES 
-        (#{username}, #{password}, #{email}, #{job_title},"W",#{photo},"N");
-    </insert>
-    
-     <insert id="update" parameterType="hoperun.pagoda.demo.bean.UserRequest">
-        update  tb_user set email=#{email}, job_title=#{job_title} where username=#{username};
-    </insert>
+	<insert id="update"
+		parameterType="hoperun.pagoda.demo.bean.UserRequest">
+		update tb_user set email=#{email}, job_title=#{job_title} where
+		username=#{username};
+	</insert>
 
-   <!--  <delete id="deleteUsers" parameterType="String[]">
-        delete from tb_user where username in
-        <foreach collection="array" item="arr" index="no" open="("
-            separator="," close=")">
-            #{arr}
-        </foreach>
-    </delete> -->
-    
-    <delete id="deleteUser">
-         delete from tb_user where username =#{username}
-    </delete>
-    
-    <insert id="insertUserGroup">
-        insert into tb_user_role (user_id, group_id,role_id) VALUES (#{userId}, #{group_id}, #{role_id});
-    </insert>
-    <update id="updateUserGroup">
-        update  tb_user_role set role_id =#{role_id} where user_id= #{userId} and group_id = #{group_id};
-    </update>
-    <delete id="deleteUserGroup">
-        delete from tb_user_role where user_id= #{userId} 
-        <if test="groups!=null and groups.length>0">
-            and group_id in
-            <foreach collection="groups" item="group_id" index="index" open="(" close=")" separator=",">
-              group_id != #{group_id};
-            </foreach>
-        </if>
-     </delete>
-    <select id="findUserGroups" resultType="hoperun.pagoda.demo.entity.UserGroup">
-        select group_id,role_id from tb_user_role where user_id = #{userId} ;
-    </select>
-    <select id="findUsersByGroupId" resultType="Integer">
-        select user_id from tb_user_role where group_id = #{group_id} ;
-    </select>
-    <select id="findUserGroupByGroupId" resultType="hoperun.pagoda.demo.entity.UserGroup">
-        select * from tb_user_role where user_id=#{userId} and group_id = #{group_id} ;
-    </select>
-    <select id="findUserGroupByGroupIds" resultType="Integer">
-        select group_id from tb_user_role where user_id=#{userId} and group_id not in
-        <foreach collection="groupIds" item="group_id" index="index"
-            open="(" close=")" separator=",">
-            #{group_id}
-        </foreach>
-    </select>
+	<delete id="delete">
+		delete from tb_user where user_id =#{userId}
+	</delete>
+
+	<delete id="deleteUsers">
+		delete from tb_user where 1=2
+		<if test="users!=null and users.length>0">
+			and user_id in
+			<foreach collection="users" item="user_id" index="index"
+				open="(" close=")" separator=",">
+				user_id = #{user_id};
+			</foreach>
+		</if>
+	</delete>
+
+	<update id="updateUserStatus">
+		update tb_user set status =#{status} where user_id= #{userId};
+	</update>
+	<!-- *******************user table end********************************** -->
+	
+	<!-- *******************user_role table start*************************** -->
+	<insert id="insertUserGroup">
+		insert into tb_user_role (user_id, group_id,role_id) VALUES (#{userId},
+		#{group_id}, #{role_id});
+	</insert>
+	<update id="updateUserGroup">
+		update tb_user_role set role_id =#{role_id} where user_id= #{userId} and
+		group_id = #{group_id};
+	</update>
+	<delete id="deleteUserGroupByUserIdAndGroups">
+		delete from tb_user_role where user_id= #{userId}
+		<if test="groups!=null and groups.length>0">
+			and group_id in
+			<foreach collection="groups" item="group_id" index="index"
+				open="(" close=")" separator=",">
+				group_id != #{group_id};
+			</foreach>
+		</if>
+	</delete>
+	<delete id="deleteUserGroupByUserId">
+		delete from tb_user_role where user_id= #{userId}
+	</delete>
+	<select id="findUserGroups"
+		resultType="hoperun.pagoda.demo.entity.UserGroup">
+		select group_id,role_id from tb_user_role where user_id = #{userId} ;
+	</select>
+	<select id="findUsersByGroupId" resultType="Integer">
+		select user_id from tb_user_role where group_id = #{group_id} ;
+	</select>
+	<select id="findUserGroupByGroupId"
+		resultType="hoperun.pagoda.demo.entity.UserGroup">
+		select * from tb_user_role where user_id=#{userId} and group_id =
+		#{group_id} ;
+	</select>
+	<select id="findUserGroupByGroupIds" resultType="Integer">
+		select group_id from tb_user_role where user_id=#{userId} and group_id
+		not in
+		<foreach collection="groupIds" item="group_id" index="index"
+			open="(" close=")" separator=",">
+			#{group_id}
+		</foreach>
+	</select>
+	<!-- *******************user_role table end*************************** -->
+	
 </mapper>

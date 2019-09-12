@@ -42,6 +42,20 @@ public interface UserMapper {
     void update(UserRequest userRequest);
 
     /**
+     * delete.
+     * 
+     * @param userId
+     */
+    void deleteUsers(int[] users);
+
+    /**
+     * delete.
+     * 
+     * @param userId
+     */
+    void delete(int userId);
+
+    /**
      * select role by user id.
      * 
      * @param userId
@@ -81,8 +95,8 @@ public interface UserMapper {
     List<Integer> findUserGroupByGroupIds(@Param("userId") int userId, @Param("groupIds") List<Integer> groupIds);
 
     /**
-     * create user role
-     * 
+     * create user role.
+     *
      * @param userId
      * @param groupId
      * @param roleId
@@ -91,8 +105,8 @@ public interface UserMapper {
     int insertUserGroup(@Param("userId") long userId, @Param("group_id") long group_id, @Param("role_id") long role_id);
 
     /**
-     * update user group
-     * 
+     * update user group.
+     *
      * @param userId
      * @param groupId
      * @param roleId
@@ -101,12 +115,32 @@ public interface UserMapper {
     int updateUserGroup(@Param("userId") long userId, @Param("group_id") long group_id, @Param("role_id") long role_id);
 
     /**
-     * delete user role
-     * 
+     * delete user role.
+     *
      * @param userId
      * @param int
      *            []Group ID
      * @return
      */
-    int deleteUserGroup(@Param("userId") int userId, @Param("tempGroups") List<Integer> groups);
+    int deleteUserGroupByUserIdAndGroups(@Param("userId") int userId, @Param("tempGroups") List<Integer> groups);
+
+    /**
+     * delete user role.
+     *
+     * @param userId
+     * @return
+     */
+    int deleteUserGroupByUserId(@Param("userId") int userId);
+
+    /**
+     * update user status.
+     *
+     * @param status
+     *            status
+     * @param userId
+     *            userId
+     * 
+     * @return
+     */
+    int updateUserStatus(@Param("status") String status, @Param("userId") int userId);
 }

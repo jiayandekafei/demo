@@ -22,4 +22,5 @@ public class UserListResponse implements Serializable {
      * user list
      */
     private List<UserDetailResponse> users;
+    private int total;
 }

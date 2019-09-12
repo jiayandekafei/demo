@@ -86,10 +86,14 @@ public interface UserService {
     String insert(final UserRequest user);
 
     /**
-     * get group tree.
+     * update user status.
      * 
-     * @param UserRequest
-     *            userRequest
+     * @param status
+     *            status
+     * @param userId
+     *            userId
      */
-    String deleteMulti(String[] users);
+    String updateUserStatus(final String status, final int userId);
+
+    String deleteMultiUser(int[] users);
 }

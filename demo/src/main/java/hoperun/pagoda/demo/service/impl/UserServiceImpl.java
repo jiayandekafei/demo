@@ -17,6 +17,7 @@ import hoperun.pagoda.demo.bean.UserDetailResponse;
 import hoperun.pagoda.demo.bean.UserListResponse;
 import hoperun.pagoda.demo.bean.UserRegisterRequest;
 import hoperun.pagoda.demo.bean.UserRequest;
+import hoperun.pagoda.demo.constant.StatusCode;
 import hoperun.pagoda.demo.entity.Group;
 import hoperun.pagoda.demo.entity.GroupNode;
 import hoperun.pagoda.demo.entity.Role;
@@ -89,12 +90,12 @@ public class UserServiceImpl implements UserService {
 
         // set users
         for (UserDetail user : users) {
-            UserDetailResponse userDetail = new UserDetailResponse(user.getUser_id(), user.getUsername(), user.getStatus(), user.getEmail(),
+            UserDetailResponse userDetail = new UserDetailResponse(user.getUser_id(), user.getUsername(), StatusCode.W.getMsg(), user.getEmail(),
                     user.getJob_title(), user.getSuperuser(), user.getPhoto(), this.getUserGroups(user.getUser_id()));
             userDetailList.add(userDetail);
         }
 
-        return new UserListResponse(userDetailList);
+        return new UserListResponse(userDetailList, userDetailList.size());
     }
 
     public List<UserGroupBean> getUserGroups(final int userId) {
@@ -160,7 +161,7 @@ public class UserServiceImpl implements UserService {
             // check if has other groups
             List<Integer> tempGroups = userMapper.findUserGroupByGroupIds(userId, groupIds);
             // delete group
-            userMapper.deleteUserGroup(userId, tempGroups);
+            userMapper.deleteUserGroupByUserIdAndGroups(userId, tempGroups);
         }
     }
 
@@ -220,9 +221,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String delete(int userId) {
-        // TODO Auto-generated method stub
-        return null;
+    @Transactional
+    public String delete(final int userId) {
+        userMapper.delete(userId);
+        userMapper.deleteUserGroupByUserId(userId);
+        return "successfully!";
     }
 
     @Override
@@ -232,9 +235,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String deleteMulti(String[] users) {
-        // TODO Auto-generated method stub
-        return null;
+    public String deleteMultiUser(int[] users) {
+        userMapper.deleteUsers(users);
+        return "successfully!";
+    }
+
+    @Override
+    public String updateUserStatus(String status, int userId) {
+        userMapper.updateUserStatus(status, userId);
+        return "successfully!";
     }
 
 }
