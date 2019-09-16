@@ -90,8 +90,10 @@ public class UserServiceImpl implements UserService {
 
         // set users
         for (UserDetail user : users) {
+
+            List<UserGroupTree> group = this.getGroupTree(user.getUser_id());
             UserDetailResponse userDetail = new UserDetailResponse(user.getUser_id(), user.getUsername(), StatusCode.W.getMsg(), user.getEmail(),
-                    user.getJob_title(), user.getSuperuser(), user.getPhoto(), this.getUserGroups(user.getUser_id()));
+                    user.getJob_title(), user.getSuperuser(), user.getPhoto(), this.getUserGroups(user.getUser_id()), group);
             userDetailList.add(userDetail);
         }
 
@@ -125,8 +127,9 @@ public class UserServiceImpl implements UserService {
         UserDetailResponse userDetail;
         UserDetail user = userMapper.findByUserId(userId);
         if (null != user) {
+            List<UserGroupTree> group = this.getGroupTree(user.getUser_id());
             userDetail = new UserDetailResponse(user.getUser_id(), user.getUsername(), user.getStatus(), user.getEmail(), user.getJob_title(),
-                    user.getSuperuser(), user.getPhoto(), this.getUserGroups(user.getUser_id()));
+                    user.getSuperuser(), user.getPhoto(), this.getUserGroups(user.getUser_id()), group);
         } else {
             throw new BusinessException(BaseResponse.failure(ResultCode.BAD_REQUEST, "User dose not exist!"));
         }
@@ -235,7 +238,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String deleteMultiUser(int[] users) {
+    public String deleteMultiUser(List<Integer> users) {
         userMapper.deleteUsers(users);
         return "successfully!";
     }

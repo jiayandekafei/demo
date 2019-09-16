@@ -46,7 +46,7 @@ public interface UserMapper {
      * 
      * @param userId
      */
-    void deleteUsers(int[] users);
+    void deleteUsers(List<Integer> users);
 
     /**
      * delete.

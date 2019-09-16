@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import hoperun.pagoda.demo.bean.BaseResponse;
+import hoperun.pagoda.demo.bean.DeleteUserRequest;
 import hoperun.pagoda.demo.bean.UserDetailResponse;
 import hoperun.pagoda.demo.bean.UserGroupsResponse;
 import hoperun.pagoda.demo.bean.UserListResponse;
@@ -116,6 +117,40 @@ public class UserController {
         return BaseResponse.ok("successful!");
     }
 
+    @SuppressWarnings("unchecked")
+    @PostMapping("")
+    public BaseResponse<String> addUser(UserRequest user) {
+
+        return BaseResponse.ok(userService.insert(user));
+    }
+
+    @SuppressWarnings("unchecked")
+    @DeleteMapping("/{userId}")
+    public BaseResponse<String> deleteUser(@PathVariable("userId") Integer userId) {
+
+        return BaseResponse.ok(userService.delete(userId));
+    }
+
+    @SuppressWarnings("unchecked")
+    @PostMapping("/deleteBatch")
+    public BaseResponse<String> batchDeleteUser(@RequestBody DeleteUserRequest request) {
+
+        return BaseResponse.ok(userService.deleteMultiUser(request.getUserIds()));
+    }
+
+    @SuppressWarnings("unchecked")
+    @ApiOperation(value = "get group tree")
+    @GetMapping("/grouptree/{userId}")
+    public BaseResponse<UserGroupsResponse> getGroupTree(@PathVariable("userId") Integer userId) {
+        final String method = "getGroupTree";
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug(Constant.LOG_PATTERLN, method, "get user group tree started");
+        }
+
+        return BaseResponse.ok(userService.getGroupTree(userId));
+    }
+
     /**
      * Get User List.
      *
@@ -138,29 +173,6 @@ public class UserController {
         }
 
         return BaseResponse.ok(exist);
-    }
-
-    @PostMapping("")
-    public String addUser(UserRequest user) {
-        return userService.insert(user);
-    }
-
-    @DeleteMapping("/{userId}")
-    public String deleteUser(@PathVariable("userId") Integer userId) {
-        return userService.delete(userId);
-    }
-
-    @SuppressWarnings("unchecked")
-    @ApiOperation(value = "get group tree")
-    @GetMapping("/grouptree/{userId}")
-    public BaseResponse<UserGroupsResponse> getGroupTree(@PathVariable("userId") Integer userId) {
-        final String method = "getGroupTree";
-
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug(Constant.LOG_PATTERLN, method, "get user group tree started");
-        }
-
-        return BaseResponse.ok(userService.getGroupTree(userId));
     }
 
     @SuppressWarnings("unchecked")

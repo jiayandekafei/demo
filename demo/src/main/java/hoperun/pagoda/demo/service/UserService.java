@@ -95,5 +95,5 @@ public interface UserService {
      */
     String updateUserStatus(final String status, final int userId);
 
-    String deleteMultiUser(int[] users);
+    String deleteMultiUser(List<Integer> users);
 }
