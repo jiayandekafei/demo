@@ -34,13 +34,13 @@
 		delete from tb_user where user_id =#{userId}
 	</delete>
 
-	<delete id="deleteUsers">
+	<delete id="deleteUsers" parameterType="java.util.List">
 		delete from tb_user where 1=2
 		<if test="users!=null and users.size()>0">
 			and user_id in
 			<foreach collection="users" item="user_id" index="index"
 				open="(" close=")" separator=",">
-				user_id = #{user_id};
+				 #{user_id};
 			</foreach>
 		</if>
 	</delete>

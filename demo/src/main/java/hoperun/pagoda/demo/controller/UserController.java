@@ -1,5 +1,8 @@
 package hoperun.pagoda.demo.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -134,8 +137,13 @@ public class UserController {
     @SuppressWarnings("unchecked")
     @PostMapping("/deleteBatch")
     public BaseResponse<String> batchDeleteUser(@RequestBody DeleteUserRequest request) {
+        String[] ids = request.getUserIds().split(",");
+        List<Integer> users = new ArrayList<>();
+        for (int i = 0; i < ids.length; i++) {
+            users.add(Integer.parseInt(ids[i]));
 
-        return BaseResponse.ok(userService.deleteMultiUser(request.getUserIds()));
+        }
+        return BaseResponse.ok(userService.deleteMultiUser(users));
     }
 
     @SuppressWarnings("unchecked")
