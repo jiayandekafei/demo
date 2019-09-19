@@ -39,7 +39,7 @@ public class LoginServiceImpl implements LoginService {
         final String token = jwtTokenUtil.generateAccessToken(userDetail);
         // set token
         jwtTokenUtil.putToken(username, token);
-        return new LoginResponse(token, userDetail.getUser_id(), userDetail.getUsername());
+        return new LoginResponse(token, userDetail.getUser_id(), userDetail.getUsername(), userDetail.getSuperuser());
     }
 
     @Override

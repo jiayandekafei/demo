@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import hoperun.pagoda.demo.bean.BaseResponse;
 import hoperun.pagoda.demo.bean.UserDetailResponse;
@@ -74,11 +75,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserListResponse findAllUser(final int userId, final String superuser) {
+    public UserListResponse findAllUser(final int userId, final String superuser, int pageNo, int limit, String name) {
         List<UserDetailResponse> userDetailList = new ArrayList<>();
-        List<UserDetail> users = new ArrayList<>();
+        List<UserDetail> users = userMapper.findAllUser();
         // if super user ,return all users,otherwise fliter by group id.
-        users = userMapper.findAllUser();
         if ("N".equals(superuser)) {
             List<UserGroup> groups = userMapper.findUserGroups(userId);
             for (UserGroup group : groups) {
@@ -87,17 +87,22 @@ public class UserServiceImpl implements UserService {
                         .collect(Collectors.toList());
             }
         }
-
+        // filter by name
+        if (!StringUtils.isEmpty(name)) {
+            users = users.stream().filter(user -> name.equals(user.getUsername())).collect(Collectors.toList());
+        }
+        int size = users.size();
+        // filter by pageNo and limit
+        users = users.stream().skip((pageNo - 1) * limit).limit(limit).collect(Collectors.toList());
         // set users
         for (UserDetail user : users) {
-
             List<UserGroupTree> group = this.getGroupTree(user.getUser_id());
             UserDetailResponse userDetail = new UserDetailResponse(user.getUser_id(), user.getUsername(), StatusCode.W.getMsg(), user.getEmail(),
                     user.getJob_title(), user.getSuperuser(), user.getPhoto(), this.getUserGroups(user.getUser_id()), group);
             userDetailList.add(userDetail);
         }
 
-        return new UserListResponse(userDetailList, userDetailList.size());
+        return new UserListResponse(userDetailList, size);
     }
 
     public List<UserGroupBean> getUserGroups(final int userId) {
@@ -227,7 +232,9 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public String delete(final int userId) {
         userMapper.delete(userId);
-        userMapper.deleteUserGroupByUserId(userId);
+        List<Integer> users = new ArrayList<>();
+        users.add(userId);
+        userMapper.deleteUserGroupByUserIds(users);
         return "successfully!";
     }
 
@@ -238,8 +245,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public String deleteMultiUser(List<Integer> users) {
         userMapper.deleteUsers(users);
+        userMapper.deleteUserGroupByUserIds(users);
         return "successfully!";
     }
 

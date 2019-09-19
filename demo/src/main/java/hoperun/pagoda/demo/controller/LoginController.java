@@ -84,7 +84,6 @@ public class LoginController {
         return BaseResponse.ok(response);
     }
 
-    @SuppressWarnings("unchecked")
     @GetMapping(value = "/signout")
     @ApiOperation(value = "logout", notes = "logout")
     public BaseResponse<?> logout(HttpServletRequest request) {

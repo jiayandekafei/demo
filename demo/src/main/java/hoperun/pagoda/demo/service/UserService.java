@@ -24,7 +24,7 @@ public interface UserService {
      * @param userId
      * @return
      */
-    UserListResponse findAllUser(int userId, String superuser);
+    UserListResponse findAllUser(int userId, String superuser, int pagaNo, int limit, String name);
 
     /**
      * get user by name.

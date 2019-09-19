@@ -30,5 +30,9 @@ public class LoginResponse {
      * username.
      */
     private String username;
+    /**
+     * username.
+     */
+    private String superuser;
 
 }

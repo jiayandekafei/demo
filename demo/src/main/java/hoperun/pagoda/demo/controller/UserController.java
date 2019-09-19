@@ -56,14 +56,15 @@ public class UserController {
     @SuppressWarnings("unchecked")
     @GetMapping("/list")
     @ApiOperation(value = "retrieve user list")
-    public BaseResponse<UserListResponse> retrieveUserList(@RequestParam int userId, @RequestParam String superuser) {
+    public BaseResponse<UserListResponse> retrieveUserList(@RequestParam int userId, @RequestParam String superuser, @RequestParam int pageNo,
+            @RequestParam int limit, @RequestParam String name) {
         final String method = "retrieveUserList";
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "get user list started");
         }
 
-        UserListResponse response = userService.findAllUser(userId, superuser);
+        UserListResponse response = userService.findAllUser(userId, superuser, pageNo, limit, name);
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "get user list end");

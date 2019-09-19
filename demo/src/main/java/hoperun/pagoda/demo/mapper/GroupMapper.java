@@ -9,15 +9,6 @@ import hoperun.pagoda.demo.entity.Group;
 
 @Mapper
 public interface GroupMapper {
-    /**
-     * create group
-     * 
-     * @param userId
-     * @param groupId
-     * @param roleId
-     * @return
-     */
-    int insert(Group group);
 
     /**
      * retrieve all group.
@@ -35,11 +26,37 @@ public interface GroupMapper {
     Group findByGroupId(@Param("groupId") long groupId);
 
     /**
+     * create group
+     * 
+     * @param userId
+     * @param groupId
+     * @param roleId
+     * @return
+     */
+    int insert(Group group);
+
+    /**
      * select group by id.
      * 
      * @param groupId
      * @return Group
      */
     String findGroupNameById(@Param("groupId") long groupId);
+
+    /**
+     * find customer by group id.
+     * 
+     * @param groupId
+     * @return customer id
+     */
+    int findCustomersByGroupId(@Param("groupId") long groupId);
+
+    /**
+     * update group customer by group id.
+     * 
+     * @param customers
+     * @return
+     */
+    int updateGroupCustomer(@Param("customers") List<Integer> customers);
 
 }

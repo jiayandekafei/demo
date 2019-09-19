@@ -37,10 +37,10 @@
 	<delete id="deleteUsers" parameterType="java.util.List">
 		delete from tb_user where 1=2
 		<if test="users!=null and users.size()>0">
-			and user_id in
+			or user_id in
 			<foreach collection="users" item="user_id" index="index"
 				open="(" close=")" separator=",">
-				 #{user_id};
+				 #{user_id}
 			</foreach>
 		</if>
 	</delete>
@@ -65,12 +65,19 @@
 			and group_id in
 			<foreach collection="groups" item="group_id" index="index"
 				open="(" close=")" separator=",">
-				group_id != #{group_id};
+				#{group_id}
 			</foreach>
 		</if>
 	</delete>
-	<delete id="deleteUserGroupByUserId">
-		delete from tb_user_role where user_id= #{userId}
+	<delete id="deleteUserGroupByUserIds" parameterType="java.util.List">
+		delete from tb_user_role where 1=2
+		<if test="users!=null and users.size()>0">
+            or user_id in
+            <foreach collection="users" item="user_id" index="index"
+                open="(" close=")" separator=",">
+                 #{user_id}
+            </foreach>
+        </if>
 	</delete>
 	<select id="findUserGroups"
 		resultType="hoperun.pagoda.demo.entity.UserGroup">

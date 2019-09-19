@@ -13,4 +13,19 @@
         insert into tb_group (groupname, customer_id,notes_server,notes_server_user,notes_server_pasword,description) VALUES 
         (#{groupname}, #{customer_id}, #{notes_server}, #{notes_server_user}, #{notes_server_pasword}, #{description});
     </insert>
+    
+    <select id="findCustomersByGroupId" resultType="int">
+        SELECT customer_id from tb_group where group_id =#{groupId};
+    </select>
+    
+   <update id="updateGroupCustomer" parameterType="java.util.List">
+        update tb_group set customer_id=null where 1=2
+        <if test="customers!=null and customers.size()>0">
+            or customer_id in
+            <foreach collection="customers" item="customer_id" index="index"
+                open="(" close=")" separator=",">
+                 #{customer_id}
+            </foreach>
+        </if>
+   </update>
 </mapper>

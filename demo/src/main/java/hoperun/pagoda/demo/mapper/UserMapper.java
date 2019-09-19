@@ -130,7 +130,7 @@ public interface UserMapper {
      * @param userId
      * @return
      */
-    int deleteUserGroupByUserId(@Param("userId") int userId);
+    int deleteUserGroupByUserIds(@Param("users") List<Integer> users);
 
     /**
      * update user status.
