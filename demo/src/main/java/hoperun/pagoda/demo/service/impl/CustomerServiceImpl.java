@@ -28,8 +28,11 @@ public class CustomerServiceImpl implements CustomerService {
     private GroupMapper groupMapper;
 
     @Override
-    public CustomerListResponse findAll(final int userId, final String superuser, int pageNo, int limit, String name) {
+    public CustomerListResponse findAll(final int userId, final String superuser, int pageNo, int limit, String name, boolean isSelect) {
         List<Customer> customers = customerMapper.findAll();
+        if (isSelect) {
+            return new CustomerListResponse(customers, customers.size());
+        }
         // if super user ,return all customers,otherwise fliter by group id.
         if ("N".equals(superuser)) {
             List<UserGroup> groups = userMapper.findUserGroups(userId);
@@ -56,7 +59,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer findById(String id) {
+    public Customer findById(int id) {
         return customerMapper.findById(id);
     }
 

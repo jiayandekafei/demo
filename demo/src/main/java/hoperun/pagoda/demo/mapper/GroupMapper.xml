@@ -6,13 +6,36 @@
      <select id="findAllGroup" resultType="hoperun.pagoda.demo.entity.Group">
         SELECT * from tb_group;
     </select>
-     <select id="findGroupNameById" resultType="String">
-        SELECT groupname from tb_group where group_id =#{groupId};
+    <select id="findByName" resultType="hoperun.pagoda.demo.entity.Group">
+        SELECT * from tb_group where groupname =#{name};
+    </select>
+     <select id="findById" resultType="hoperun.pagoda.demo.entity.Group">
+        SELECT * from tb_group where group_id =#{groupId};
     </select>
     <insert id="insert" parameterType="hoperun.pagoda.demo.entity.Group" useGeneratedKeys="true" keyProperty="group_id">
         insert into tb_group (groupname, customer_id,notes_server,notes_server_user,notes_server_pasword,description) VALUES 
         (#{groupname}, #{customer_id}, #{notes_server}, #{notes_server_user}, #{notes_server_pasword}, #{description});
     </insert>
+     <update id="update" parameterType="hoperun.pagoda.demo.entity.Group">
+        update tb_group 
+        set customer_id=#{customer_id}, notes_server=#{notes_server}, notes_server_user=#{notes_server_user}, notes_server_pasword=#{notes_server_pasword}, description=#{description}
+        where group_id =#{groupId};
+    </update>
+    
+    <delete id="delete">
+        delete from tb_group where group_id =#{id}
+    </delete>
+
+    <delete id="batchDelete" parameterType="java.util.List">
+        delete from tb_customer where 1=2
+        <if test="groups!=null and groups.size()>0">
+            or customer_id in
+            <foreach collection="groups" item="group_id" index="index"
+                open="(" close=")" separator=",">
+                 #{group_id}
+            </foreach>
+        </if>
+    </delete>
     
     <select id="findCustomersByGroupId" resultType="int">
         SELECT customer_id from tb_group where group_id =#{groupId};

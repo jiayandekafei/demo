@@ -109,7 +109,7 @@ public class UserServiceImpl implements UserService {
         List<UserGroupBean> userGroups = new ArrayList<UserGroupBean>();
         List<UserGroup> group = userMapper.findUserGroups(userId);
         for (UserGroup userGroup : group) {
-            String groupName = groupMapper.findGroupNameById(userGroup.getGroup_id());
+            String groupName = groupMapper.findById(userGroup.getGroup_id()).getGroupname();
             String roleName = roleMapper.findRoleNameById(userGroup.getRole_id());
             userGroups.add(new UserGroupBean(userGroup.getGroup_id(), groupName, userGroup.getRole_id(), roleName));
         }
@@ -175,7 +175,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserGroupTree> getGroupTree(final int userId) {
-        List<Group> groups = groupService.findAllGroup();
+        List<Group> groups = groupService.findAllGroup(userId, null, 0, 0, null, true).getGroups();
         List<UserGroupTree> rsp = new ArrayList<>();
         List<GroupNode> children = new ArrayList<>();
         if (!Collections.isEmpty(groups)) {

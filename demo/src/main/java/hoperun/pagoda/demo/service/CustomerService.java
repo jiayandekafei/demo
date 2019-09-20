@@ -19,7 +19,7 @@ public interface CustomerService {
      * @param userId
      * @return
      */
-    CustomerListResponse findAll(final int userId, final String superuser, int pageNo, int limit, String name);
+    CustomerListResponse findAll(final int userId, final String superuser, int pageNo, int limit, String name, boolean isSelect);
 
     /**
      * retrieve CustomerInfo.
@@ -35,7 +35,7 @@ public interface CustomerService {
      * @param CustomerId
      * @return
      */
-    Customer findById(final String id);
+    Customer findById(final int id);
 
     /**
      * create new Customer.
@@ -59,7 +59,7 @@ public interface CustomerService {
      * @param CustomerId
      * @return
      */
-    void delete(final int CustomerId);
+    void delete(final int customerId);
 
     /**
      * batch.

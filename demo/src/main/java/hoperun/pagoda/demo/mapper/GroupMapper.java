@@ -18,12 +18,20 @@ public interface GroupMapper {
     List<Group> findAllGroup();
 
     /**
+     * select customer by name
+     * 
+     * @param name
+     * @return
+     */
+    Group findByName(@Param("name") String name);
+
+    /**
      * select group by id.
      * 
      * @param groupId
      * @return Group
      */
-    Group findByGroupId(@Param("groupId") long groupId);
+    Group findById(@Param("groupId") int groupId);
 
     /**
      * create group
@@ -36,12 +44,28 @@ public interface GroupMapper {
     int insert(Group group);
 
     /**
-     * select group by id.
+     * create group
      * 
+     * @param userId
      * @param groupId
-     * @return Group
+     * @param roleId
+     * @return
      */
-    String findGroupNameById(@Param("groupId") long groupId);
+    int update(Group group);
+
+    /**
+     * delete.
+     * 
+     * @param userId
+     */
+    void delete(int id);
+
+    /**
+     * batch delete.
+     * 
+     * @param userId
+     */
+    void batchDelete(@Param("groups") List<Integer> groups);
 
     /**
      * find customer by group id.

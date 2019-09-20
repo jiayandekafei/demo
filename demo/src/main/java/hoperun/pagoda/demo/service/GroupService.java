@@ -2,7 +2,7 @@ package hoperun.pagoda.demo.service;
 
 import java.util.List;
 
-import hoperun.pagoda.demo.bean.GroupRequest;
+import hoperun.pagoda.demo.bean.GroupListResponse;
 import hoperun.pagoda.demo.entity.Group;
 
 /**
@@ -19,7 +19,7 @@ public interface GroupService {
      * @param userId
      * @return
      */
-    List<Group> findAllGroup();
+    GroupListResponse findAllGroup(final int userId, final String superuser, int pageNo, int limit, String name, boolean isGroupTree);
 
     /**
      * retrieve groupInfo.
@@ -27,23 +27,24 @@ public interface GroupService {
      * @param groupId
      * @return
      */
-    Group findByGrupId(final String groupId);
+    Group findByGrupId(final int groupId);
 
     /**
      * create new group.
      * 
-     * @param groupId
+     * @param request
+     *            group
      * @return
      */
-    Group create(final GroupRequest request);
+    String create(Group request);
 
     /**
      * create new group.
      * 
-     * @param groupId
+     * @param request
      * @return
      */
-    Group update(final GroupRequest request);
+    String update(Group request);
 
     /**
      * delete by group id.
@@ -51,6 +52,23 @@ public interface GroupService {
      * @param groupId
      * @return
      */
-    void delete(final String groupId);
+    void delete(final int groupId);
+
+    /**
+     * batch.
+     * 
+     * @param groups
+     * @return
+     */
+    void batchDelete(List<Integer> groups);
+
+    /**
+     * check if the group already exist.
+     * 
+     * @param grouprname
+     *            grouprname
+     * @return is group exit
+     */
+    boolean isGroupExist(final String grouprname);
 
 }

@@ -23,4 +23,5 @@ public class GroupListResponse implements Serializable {
      * user list
      */
     private List<Group> groups;
+    private int total;
 }

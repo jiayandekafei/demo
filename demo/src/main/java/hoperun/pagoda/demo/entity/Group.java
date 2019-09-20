@@ -22,4 +22,5 @@ public class Group implements Serializable {
     private String notes_server_user;
     private String notes_server_pasword;
     private String description;
+    private String customername;
 }

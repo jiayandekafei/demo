@@ -5,16 +5,14 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import hoperun.pagoda.demo.bean.UserRequest;
 import hoperun.pagoda.demo.entity.Customer;
 
 @Mapper
 public interface CustomerMapper {
 
     /**
-     * select role by user id.
+     * find all customers.
      * 
-     * @param userId
      * @return
      */
     List<Customer> findAll();
@@ -33,21 +31,21 @@ public interface CustomerMapper {
      * @param name
      * @return
      */
-    Customer findById(@Param("id") String id);
+    Customer findById(@Param("id") int id);
 
     /**
      * insert.
      * 
      * @param Customer
      */
-    void insert(Customer Customer);
+    void insert(Customer customer);
 
     /**
      * update.
      * 
      * @param Customer
      */
-    void update(UserRequest userRequest);
+    void update(Customer customer);
 
     /**
      * delete.

@@ -54,14 +54,14 @@ public class CustomerController {
     @GetMapping("/list")
     @ApiOperation(value = "retrieve customer list")
     public BaseResponse<CustomerListResponse> retrieveCustomerList(@RequestParam int userId, @RequestParam String superuser, @RequestParam int pageNo,
-            @RequestParam int limit, @RequestParam String name) {
+            @RequestParam int limit, @RequestParam String name, @RequestParam boolean isSelect) {
         final String method = "retrieveCustomerList";
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "get Customer list started");
         }
 
-        CustomerListResponse response = customerService.findAll(userId, superuser, pageNo, limit, name);
+        CustomerListResponse response = customerService.findAll(userId, superuser, pageNo, limit, name, isSelect);
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "get Customer list end");
@@ -78,7 +78,7 @@ public class CustomerController {
     @SuppressWarnings("unchecked")
     @ApiOperation(value = "get Customer by Customer id")
     @GetMapping("/{CustomerId}")
-    public BaseResponse<Customer> getCustomerById(@PathVariable final String CustomerId) {
+    public BaseResponse<Customer> getCustomerById(@PathVariable final int CustomerId) {
         final String method = "getCustomerById";
 
         if (LOGGER.isDebugEnabled()) {
@@ -114,9 +114,9 @@ public class CustomerController {
     }
 
     @SuppressWarnings("unchecked")
-    @DeleteMapping("/{CustomerId}")
-    public BaseResponse<String> deleteCustomer(@PathVariable("CustomerId") Integer CustomerId) {
-
+    @DeleteMapping("/{customerId}")
+    public BaseResponse<String> deleteCustomer(@PathVariable("customerId") Integer customerId) {
+        customerService.delete(customerId);
         return BaseResponse.ok("successfully!");
     }
 

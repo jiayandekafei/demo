@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import hoperun.pagoda.demo.bean.BaseResponse;
@@ -42,14 +43,15 @@ public class GroupController {
     @SuppressWarnings("unchecked")
     @GetMapping("/list")
     @ApiOperation(value = "retrieve group list")
-    public BaseResponse<GroupListResponse> retrieveGroupList() {
+    public BaseResponse<GroupListResponse> retrieveGroupList(@RequestParam int userId, @RequestParam String superuser, @RequestParam int pageNo,
+            @RequestParam int limit, @RequestParam String name) {
         final String method = "retrieveGroupList";
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "get group list started");
         }
 
-        GroupListResponse response = new GroupListResponse(groupService.findAllGroup());
+        GroupListResponse response = groupService.findAllGroup(userId, superuser, pageNo, limit, name, false);
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "get group list end");
