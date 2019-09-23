@@ -67,11 +67,55 @@ public class UserServiceImpl implements UserService {
         }
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         UserDetail userDetail = new UserDetail(request.getUsername(), encoder.encode(request.getPassword()), request.getEmail(),
-                request.getJob_title());
+                request.getJob_title(), "N", "W");
         // insert user bace info
         userMapper.insert(userDetail);
 
         return userDetail;
+    }
+
+    @Override
+    @Transactional
+    public String insert(UserRequest user) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        UserDetail userDetail = new UserDetail(user.getUsername(), encoder.encode("000000"), user.getEmail(), user.getJob_title(), "N", "W");
+        // insert user bace info
+        userMapper.insert(userDetail);
+        // add user group and role under the group
+        List<UserGroup> groups = user.getGroups();
+        if (!Collections.isEmpty(groups)) {
+            for (UserGroup userGroup : groups) {
+                userMapper.insertUserGroup(userDetail.getUser_id(), userGroup.getGroup_id(), userGroup.getRole_id());
+            }
+        }
+
+        return "successfully!";
+
+    }
+
+    @Override
+    @Transactional
+    public void update(final UserRequest request) {
+        userMapper.update(request);
+        List<UserGroup> userGroups = request.getGroups();
+        List<Integer> groupIds = new ArrayList<>();
+        // update user group role table
+        if (!Collections.isEmpty(userGroups)) {
+            for (UserGroup userGroup : userGroups) {
+                // check weather the group exist
+                UserGroup group = userMapper.findUserGroupByGroupId(request.getUserId(), userGroup.getGroup_id());
+                if (null == group) {
+                    userMapper.insertUserGroup(request.getUserId(), userGroup.getGroup_id(), userGroup.getRole_id());
+                } else {
+                    userMapper.updateUserGroup(request.getUserId(), userGroup.getGroup_id(), userGroup.getRole_id());
+                }
+                groupIds.add(userGroup.getGroup_id());
+            }
+            // check if has other groups
+            List<Integer> groups = userMapper.findUserGroupByGroupIds(request.getUserId(), groupIds);
+            // delete group
+            userMapper.deleteUserGroupByUserIdAndGroups(request.getUserId(), groups);
+        }
     }
 
     @Override
@@ -149,31 +193,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
-    public void update(final UserRequest request, final int userId) {
-        userMapper.update(request);
-        List<UserGroup> groups = request.getGroups();
-        List<Integer> groupIds = new ArrayList<>();
-        // update user group role table
-        if (!Collections.isEmpty(groups)) {
-            for (UserGroup userGroup : groups) {
-                // check weather the group exist
-                UserGroup group = userMapper.findUserGroupByGroupId(userId, userGroup.getGroup_id());
-                if (null == group) {
-                    userMapper.insertUserGroup(userId, userGroup.getGroup_id(), userGroup.getRole_id());
-                } else {
-                    userMapper.updateUserGroup(userId, userGroup.getGroup_id(), userGroup.getRole_id());
-                }
-                groupIds.add(userGroup.getGroup_id());
-            }
-            // check if has other groups
-            List<Integer> tempGroups = userMapper.findUserGroupByGroupIds(userId, groupIds);
-            // delete group
-            userMapper.deleteUserGroupByUserIdAndGroups(userId, tempGroups);
-        }
-    }
-
-    @Override
     public List<UserGroupTree> getGroupTree(final int userId) {
         List<Group> groups = groupService.findAllGroup(userId, null, 0, 0, null, true).getGroups();
         List<UserGroupTree> rsp = new ArrayList<>();
@@ -236,12 +255,6 @@ public class UserServiceImpl implements UserService {
         users.add(userId);
         userMapper.deleteUserGroupByUserIds(users);
         return "successfully!";
-    }
-
-    @Override
-    public String insert(UserRequest user) {
-        // TODO Auto-generated method stub
-        return null;
     }
 
     @Override

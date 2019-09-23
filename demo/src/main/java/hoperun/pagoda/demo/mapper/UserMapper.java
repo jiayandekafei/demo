@@ -122,7 +122,7 @@ public interface UserMapper {
      *            []Group ID
      * @return
      */
-    int deleteUserGroupByUserIdAndGroups(@Param("userId") int userId, @Param("tempGroups") List<Integer> groups);
+    int deleteUserGroupByUserIdAndGroups(@Param("userId") int userId, @Param("groups") List<Integer> groups);
 
     /**
      * delete user role.

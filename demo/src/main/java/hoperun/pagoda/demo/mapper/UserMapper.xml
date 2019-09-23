@@ -17,18 +17,18 @@
 		SELECT * from tb_user where user_id = #{userId};
 	</select>
 	<insert id="insert"
-		parameterType="hoperun.pagoda.demo.entity.UserDetail"
-		useGeneratedKeys="true" keyProperty="user_id">
+		 parameterType="hoperun.pagoda.demo.entity.UserDetail"
+		 useGeneratedKeys="true" keyProperty="user_id">
 		insert into tb_user (username,
 		password,email,job_title,status,photo,superuser) VALUES
-		(#{username}, #{password}, #{email}, #{job_title},"W",#{photo},"N");
+		(#{username}, #{password}, #{email}, #{job_title},#{status},#{photo},#{superuser});
 	</insert>
 
-	<insert id="update"
+	<update id="update"
 		parameterType="hoperun.pagoda.demo.bean.UserRequest">
 		update tb_user set email=#{email}, job_title=#{job_title} where
 		username=#{username};
-	</insert>
+	</update>
 
 	<delete id="delete">
 		delete from tb_user where user_id =#{userId}

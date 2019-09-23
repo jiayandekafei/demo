@@ -21,6 +21,13 @@ public class UserRequest {
     /**
      * user name.
      */
+    @ApiModelProperty(value = "user id", required = true)
+    // @Size(min = 6, max = 30)
+    private int userId;
+
+    /**
+     * user name.
+     */
     @ApiModelProperty(value = "username", required = true)
     // @Size(min = 6, max = 30)
     private String username;

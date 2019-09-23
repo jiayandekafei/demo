@@ -27,10 +27,7 @@ public class UserDetail implements UserDetails {
      * job title.
      */
     private String job_title;
-    /**
-     * group id.
-     */
-    private Long groupId;
+
     /**
      * photo adress.
      */
@@ -76,11 +73,13 @@ public class UserDetail implements UserDetails {
         return null;
     }
 
-    public UserDetail(String username, String password, String eamil, String jobTitle) {
+    public UserDetail(String username, String password, String eamil, String jobTitle, String superuser, String status) {
         this.username = username;
         this.password = password;
         this.email = eamil;
         this.job_title = jobTitle;
+        this.superuser = superuser;
+        this.status = status;
 
     }
 }

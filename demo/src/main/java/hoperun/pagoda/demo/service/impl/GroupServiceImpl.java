@@ -30,7 +30,11 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public GroupListResponse findAllGroup(final int userId, final String superuser, int pageNo, int limit, String name, boolean isGroupTree) {
+
         List<Group> groups = groupMapper.findAllGroup();
+        if (isGroupTree) {
+            return new GroupListResponse(groups, groups.size());
+        }
         // if super user ,return all groups,otherwise fliter by group id.
         if ("N".equals(superuser)) {
             List<UserGroup> userGroups = userMapper.findUserGroups(userId);
@@ -102,7 +106,7 @@ public class GroupServiceImpl implements GroupService {
      */
     private void setGroupName(List<Group> groups) {
         for (Group group : groups) {
-            group.setGroupname(GroupMapper.findById(group.getGroup_id()).getCustomername());
+            // group.setGroupname(GroupMapper.findById(group.getGroup_id()).getCustomername());
         }
     }
 }

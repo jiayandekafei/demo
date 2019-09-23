@@ -77,15 +77,15 @@ public class CustomerController {
      */
     @SuppressWarnings("unchecked")
     @ApiOperation(value = "get Customer by Customer id")
-    @GetMapping("/{CustomerId}")
-    public BaseResponse<Customer> getCustomerById(@PathVariable final int CustomerId) {
+    @GetMapping("/{customerId}")
+    public BaseResponse<Customer> getCustomerById(@PathVariable final int customerId) {
         final String method = "getCustomerById";
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "get Customer by id started");
         }
 
-        return BaseResponse.ok(customerService.findById(CustomerId));
+        return BaseResponse.ok(customerService.findById(customerId));
     }
 
     /**
@@ -141,7 +141,7 @@ public class CustomerController {
     @ApiOperation(value = "get Customer by Customer id")
     @GetMapping("/checkCustomer/{customername}")
     public BaseResponse<String> isCustomerExist(@PathVariable final String customername) {
-        final String method = "getCustomerByName";
+        final String method = "isCustomerExist";
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "get Customer by id started");

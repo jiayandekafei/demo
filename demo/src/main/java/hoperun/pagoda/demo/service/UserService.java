@@ -49,7 +49,7 @@ public interface UserService {
      * @param UserRequest
      *            userRequest
      */
-    void update(final UserRequest request, final int userId);
+    void update(final UserRequest request);
 
     /**
      * get user by id.

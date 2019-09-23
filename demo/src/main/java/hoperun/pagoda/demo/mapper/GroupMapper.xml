@@ -27,9 +27,9 @@
     </delete>
 
     <delete id="batchDelete" parameterType="java.util.List">
-        delete from tb_customer where 1=2
+        delete from tb_group where 1=2
         <if test="groups!=null and groups.size()>0">
-            or customer_id in
+            or group_id in
             <foreach collection="groups" item="group_id" index="index"
                 open="(" close=")" separator=",">
                  #{group_id}

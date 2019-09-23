@@ -104,15 +104,15 @@ public class UserController {
      */
     @SuppressWarnings("unchecked")
     @ApiOperation(value = "update user by user id")
-    @PutMapping("/{userId}")
-    public BaseResponse<String> updateUserById(@PathVariable final int userId, @RequestBody UserRequest request) {
-        final String method = "getUserById";
+    @PutMapping("")
+    public BaseResponse<String> updateUserById(@RequestBody UserRequest request) {
+        final String method = "updateUserById";
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "update user by id started");
         }
 
-        userService.update(request, userId);
+        userService.update(request);
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "update user by id ended");
@@ -123,7 +123,7 @@ public class UserController {
 
     @SuppressWarnings("unchecked")
     @PostMapping("")
-    public BaseResponse<String> addUser(UserRequest user) {
+    public BaseResponse<String> addUser(@RequestBody UserRequest user) {
 
         return BaseResponse.ok(userService.insert(user));
     }
