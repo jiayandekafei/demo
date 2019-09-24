@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import hoperun.pagoda.demo.bean.BaseResponse;
 import hoperun.pagoda.demo.bean.DeleteUserRequest;
+import hoperun.pagoda.demo.bean.PasswordRequest;
 import hoperun.pagoda.demo.bean.UserDetailResponse;
 import hoperun.pagoda.demo.bean.UserGroupsResponse;
 import hoperun.pagoda.demo.bean.UserListResponse;
@@ -81,7 +82,7 @@ public class UserController {
     @SuppressWarnings("unchecked")
     @ApiOperation(value = "get user by user id")
     @GetMapping("/{userId}")
-    public BaseResponse<UserDetailResponse> getUserById(@PathVariable final String userId) {
+    public BaseResponse<UserDetailResponse> getUserById(@PathVariable final int userId) {
         final String method = "getUserById";
 
         if (LOGGER.isDebugEnabled()) {
@@ -167,7 +168,7 @@ public class UserController {
      */
     @SuppressWarnings("unchecked")
     @ApiOperation(value = "get user by user id")
-    @GetMapping("/checkUser/{username}")
+    @GetMapping("/check/{username}")
     public BaseResponse<String> isUserExist(@PathVariable final String username) {
         final String method = "getUserByName";
 
@@ -195,5 +196,31 @@ public class UserController {
         }
 
         return BaseResponse.ok(userService.updateUserStatus(req.getStatus(), req.getUserId()));
+    }
+
+    @SuppressWarnings("unchecked")
+    @ApiOperation(value = "update user status")
+    @PostMapping("/password")
+    public BaseResponse<UserGroupsResponse> updateUserPassword(@RequestBody PasswordRequest req) {
+        final String method = "updateUserStatus";
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug(Constant.LOG_PATTERLN, method, "update user password started");
+        }
+
+        return BaseResponse.ok(userService.updateUserPassword(req.getUserId(), req.getPassword()));
+    }
+
+    @SuppressWarnings("unchecked")
+    @ApiOperation(value = "update user status")
+    @GetMapping("/password")
+    public BaseResponse<UserGroupsResponse> checkUserPassword(@RequestParam int userId, @RequestParam String password) {
+        final String method = "updateUserStatus";
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug(Constant.LOG_PATTERLN, method, "check user password started");
+        }
+
+        return BaseResponse.ok(userService.isPasswordSame(userId, password));
     }
 }

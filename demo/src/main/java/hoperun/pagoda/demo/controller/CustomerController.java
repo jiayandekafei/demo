@@ -108,7 +108,7 @@ public class CustomerController {
 
     @SuppressWarnings("unchecked")
     @PostMapping("")
-    public BaseResponse<String> addCustomer(Customer request) {
+    public BaseResponse<String> addCustomer(@RequestBody Customer request) {
 
         return BaseResponse.ok(customerService.create(request));
     }

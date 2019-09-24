@@ -48,6 +48,9 @@
 	<update id="updateUserStatus">
 		update tb_user set status =#{status} where user_id= #{userId};
 	</update>
+	<update id="updateUserPassword">
+		update tb_user set password =#{password} where user_id= #{userId};
+	</update>
 	<!-- *******************user table end********************************** -->
 	
 	<!-- *******************user_role table start*************************** -->
@@ -61,9 +64,9 @@
 	</update>
 	<delete id="deleteUserGroupByUserIdAndGroups">
 		delete from tb_user_role where user_id= #{userId}
-		<if test="groups!=null and groups.length>0">
+		<if test="deleteGroup!=null and deleteGroup.size()>0">
 			and group_id in
-			<foreach collection="groups" item="group_id" index="index"
+			<foreach collection="deleteGroup" item="group_id" index="index"
 				open="(" close=")" separator=",">
 				#{group_id}
 			</foreach>
@@ -92,12 +95,14 @@
 		#{group_id} ;
 	</select>
 	<select id="findUserGroupByGroupIds" resultType="Integer">
-		select group_id from tb_user_role where user_id=#{userId} and group_id
-		not in
-		<foreach collection="groupIds" item="group_id" index="index"
-			open="(" close=")" separator=",">
-			#{group_id}
-		</foreach>
+		select group_id from tb_user_role where user_id=#{userId}
+		<if test="groupIds!=null and groupIds.size()>0">
+			 and group_id not in
+			<foreach collection="groupIds" item="group_id" index="index"
+				open="(" close=")" separator=",">
+				#{group_id}
+			</foreach>
+	   </if>
 	</select>
 	<!-- *******************user_role table end*************************** -->
 	

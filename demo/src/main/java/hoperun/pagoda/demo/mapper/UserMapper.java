@@ -25,7 +25,7 @@ public interface UserMapper {
      * @param name
      * @return
      */
-    UserDetail findByUserId(@Param("userId") String userId);
+    UserDetail findByUserId(@Param("userId") int userId);
 
     /**
      * insert.
@@ -122,7 +122,7 @@ public interface UserMapper {
      *            []Group ID
      * @return
      */
-    int deleteUserGroupByUserIdAndGroups(@Param("userId") int userId, @Param("groups") List<Integer> groups);
+    int deleteUserGroupByUserIdAndGroups(@Param("deleteGroup") List<Integer> deleteGroup, @Param("userId") int userId);
 
     /**
      * delete user role.
@@ -143,4 +143,16 @@ public interface UserMapper {
      * @return
      */
     int updateUserStatus(@Param("status") String status, @Param("userId") int userId);
+
+    /**
+     * update user password.
+     *
+     * @param userId
+     *            userId
+     * @param password
+     *            password
+     * 
+     * @return
+     */
+    int updateUserPassword(@Param("userId") int userId, @Param("password") String password);
 }

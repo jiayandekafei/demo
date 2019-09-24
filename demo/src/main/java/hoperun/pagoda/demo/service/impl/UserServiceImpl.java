@@ -114,7 +114,7 @@ public class UserServiceImpl implements UserService {
             // check if has other groups
             List<Integer> groups = userMapper.findUserGroupByGroupIds(request.getUserId(), groupIds);
             // delete group
-            userMapper.deleteUserGroupByUserIdAndGroups(request.getUserId(), groups);
+            userMapper.deleteUserGroupByUserIdAndGroups(groups, request.getUserId());
         }
     }
 
@@ -172,7 +172,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDetailResponse findUserByID(String userId) {
+    public UserDetailResponse findUserByID(int userId) {
         UserDetailResponse userDetail;
         UserDetail user = userMapper.findByUserId(userId);
         if (null != user) {
@@ -268,6 +268,23 @@ public class UserServiceImpl implements UserService {
     @Override
     public String updateUserStatus(String status, int userId) {
         userMapper.updateUserStatus(status, userId);
+        return "successfully!";
+    }
+
+    @Override
+    public boolean isPasswordSame(final int userId, final String passWord) {
+        BCryptPasswordEncoder encode = new BCryptPasswordEncoder();
+        UserDetail user = userMapper.findByUserId(userId);
+        if (null != user) {
+            return encode.matches(passWord, user.getPassword());
+        }
+        return false;
+    }
+
+    @Override
+    public String updateUserPassword(int userId, String password) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        userMapper.updateUserPassword(userId, encoder.encode(password));
         return "successfully!";
     }
 

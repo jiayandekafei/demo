@@ -108,7 +108,7 @@ public class GroupController {
 
     @SuppressWarnings("unchecked")
     @PostMapping("")
-    public BaseResponse<String> addGroup(Group request) {
+    public BaseResponse<String> addGroup(@RequestBody Group request) {
 
         return BaseResponse.ok(groupService.create(request));
     }

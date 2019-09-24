@@ -73,16 +73,16 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional
     public String update(Customer request) {
-        customerMapper.insert(request);
+        customerMapper.update(request);
         return "successfully!";
     }
 
     @Override
     @Transactional
-    public void delete(int CustomerId) {
-        customerMapper.delete(CustomerId);
+    public void delete(int customerId) {
+        customerMapper.delete(customerId);
         List<Integer> customers = new ArrayList<Integer>();
-        customers.add(CustomerId);
+        customers.add(customerId);
         // update group
         groupMapper.updateGroupCustomer(customers);
 

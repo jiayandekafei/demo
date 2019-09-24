@@ -41,7 +41,7 @@ public interface UserService {
      *            user id
      * @return
      */
-    UserDetailResponse findUserByID(final String userID);
+    UserDetailResponse findUserByID(final int userID);
 
     /**
      * update user by name.
@@ -96,4 +96,24 @@ public interface UserService {
     String updateUserStatus(final String status, final int userId);
 
     String deleteMultiUser(List<Integer> users);
+
+    /**
+     * check password
+     * 
+     * @param password
+     *            password
+     * @return
+     */
+    boolean isPasswordSame(final int userId, final String passWord);
+
+    /**
+     * update user status.
+     * 
+     * @param status
+     *            status
+     * @param userId
+     *            userId
+     */
+    String updateUserPassword(final int userId, final String password);
+
 }
