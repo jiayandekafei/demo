@@ -64,13 +64,11 @@
 	</update>
 	<delete id="deleteUserGroupByUserIdAndGroups">
 		delete from tb_user_role where user_id= #{userId}
-		<if test="deleteGroup!=null and deleteGroup.size()>0">
 			and group_id in
 			<foreach collection="deleteGroup" item="group_id" index="index"
 				open="(" close=")" separator=",">
 				#{group_id}
 			</foreach>
-		</if>
 	</delete>
 	<delete id="deleteUserGroupByUserIds" parameterType="java.util.List">
 		delete from tb_user_role where 1=2

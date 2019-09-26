@@ -18,7 +18,6 @@ import hoperun.pagoda.demo.bean.UserDetailResponse;
 import hoperun.pagoda.demo.bean.UserListResponse;
 import hoperun.pagoda.demo.bean.UserRegisterRequest;
 import hoperun.pagoda.demo.bean.UserRequest;
-import hoperun.pagoda.demo.constant.StatusCode;
 import hoperun.pagoda.demo.entity.Group;
 import hoperun.pagoda.demo.entity.GroupNode;
 import hoperun.pagoda.demo.entity.Role;
@@ -78,7 +77,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public String insert(UserRequest user) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        UserDetail userDetail = new UserDetail(user.getUsername(), encoder.encode("000000"), user.getEmail(), user.getJob_title(), "N", "W");
+        UserDetail userDetail = new UserDetail(user.getUsername(), encoder.encode("000000"), user.getEmail(), user.getJob_title(), "N", "A");
         // insert user bace info
         userMapper.insert(userDetail);
         // add user group and role under the group
@@ -114,7 +113,9 @@ public class UserServiceImpl implements UserService {
             // check if has other groups
             List<Integer> groups = userMapper.findUserGroupByGroupIds(request.getUserId(), groupIds);
             // delete group
-            userMapper.deleteUserGroupByUserIdAndGroups(groups, request.getUserId());
+            if (!Collections.isEmpty(groups)) {
+                userMapper.deleteUserGroupByUserIdAndGroups(groups, request.getUserId());
+            }
         }
     }
 
@@ -141,7 +142,7 @@ public class UserServiceImpl implements UserService {
         // set users
         for (UserDetail user : users) {
             List<UserGroupTree> group = this.getGroupTree(user.getUser_id());
-            UserDetailResponse userDetail = new UserDetailResponse(user.getUser_id(), user.getUsername(), StatusCode.W.getMsg(), user.getEmail(),
+            UserDetailResponse userDetail = new UserDetailResponse(user.getUser_id(), user.getUsername(), user.getStatus(), user.getEmail(),
                     user.getJob_title(), user.getSuperuser(), user.getPhoto(), this.getUserGroups(user.getUser_id()), group);
             userDetailList.add(userDetail);
         }

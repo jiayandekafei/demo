@@ -215,7 +215,7 @@ public class UserController {
     @ApiOperation(value = "update user status")
     @GetMapping("/password")
     public BaseResponse<UserGroupsResponse> checkUserPassword(@RequestParam int userId, @RequestParam String password) {
-        final String method = "updateUserStatus";
+        final String method = "checkUserPassword";
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "check user password started");
