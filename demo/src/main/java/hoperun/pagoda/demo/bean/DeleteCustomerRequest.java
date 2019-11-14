@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class DeleteCustomerRequest {
     /**
-     * customer ids
+     * customer ids.
      */
     private String customerIds;
 }

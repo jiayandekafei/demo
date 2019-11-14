@@ -29,7 +29,7 @@ public class BaseResponse<T> implements Serializable {
     /**
      * reponse data, if error occured(except code=200),indicate the reason of error.
      */
-    private T data;
+    private transient T data;
 
     /**
      * successful response without any body.
@@ -44,8 +44,7 @@ public class BaseResponse<T> implements Serializable {
     /**
      * successful response with body.
      * 
-     * @param Object
-     *            o
+     * @param o object
      * @return BaseResponse reponse
      */
     @SuppressWarnings({"rawtypes", "unchecked"})
@@ -75,7 +74,7 @@ public class BaseResponse<T> implements Serializable {
      * @return BaseResponse reponse
      */
     @SuppressWarnings({"rawtypes", "unchecked"})
-    public static BaseResponse failure(ResultCode code, Object o) {
+    public static BaseResponse failure(final ResultCode code, final Object o) {
         return new BaseResponse(code, o);
     }
 
@@ -94,18 +93,18 @@ public class BaseResponse<T> implements Serializable {
      * 
      * @param resultCode
      *            result code
-     * @param data
+     * @param mdata
      *            reponse data
      */
-    public BaseResponse(final ResultCode resultCode, T data) {
+    public BaseResponse(final ResultCode resultCode, final T mdata) {
         setResultCode(resultCode);
-        this.data = data;
+        this.data = mdata;
     }
 
     /**
      * set result code.
      * 
-     * @param resultCode
+     * @param resultCode resultCode
      */
     public void setResultCode(final ResultCode resultCode) {
         this.code = resultCode.getCode();

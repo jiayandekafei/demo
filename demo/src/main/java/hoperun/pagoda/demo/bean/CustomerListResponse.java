@@ -20,8 +20,11 @@ import lombok.NoArgsConstructor;
 public class CustomerListResponse implements Serializable {
     private static final long serialVersionUID = 1L;
     /**
-     * customer list
+     * customer list.
      */
     private List<Customer> customers;
+    /**
+     * total customer.
+     */
     private int total;
 }

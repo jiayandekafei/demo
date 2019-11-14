@@ -24,27 +24,48 @@ import com.google.common.collect.ImmutableList;
 
 import hoperun.pagoda.demo.filter.JwtAuthenticationTokenFilter;
 
+/**
+ * Web Security Config.
+ * @author zhangxiqin
+ *
+ */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    private final UserDetailsService CustomUserDetailsService;
+    /**
+     * user detail service.
+     */
+    private final UserDetailsService customUserDetailsService;
+    /**
+     * token authentication filter.
+     */
     private final JwtAuthenticationTokenFilter authenticationTokenFilter;
 
+    /**
+     * Constructor with parameter.
+     * @param customUserDetailsService customUserDetailsService
+     * @param authenticationTokenFilter authenticationTokenFilter
+     */
     @Autowired
-    public WebSecurityConfig(@Qualifier("CustomUserDetailsService") UserDetailsService CustomUserDetailsService,
-            JwtAuthenticationTokenFilter authenticationTokenFilter) {
-        this.CustomUserDetailsService = CustomUserDetailsService;
+    public WebSecurityConfig(@Qualifier("CustomUserDetailsService") final UserDetailsService customUserDetailsService,
+            final JwtAuthenticationTokenFilter authenticationTokenFilter) {
+        this.customUserDetailsService = customUserDetailsService;
         this.authenticationTokenFilter = authenticationTokenFilter;
     }
 
+    /**
+     * Config authentication.
+     * @param authenticationManagerBuilder authenticationManagerBuilder
+     * @throws Exception Exception
+     */
     @Autowired
-    public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder.userDetailsService(this.CustomUserDetailsService).passwordEncoder(passwordEncoder());
+    public void configureAuthentication(final AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+        authenticationManagerBuilder.userDetailsService(this.customUserDetailsService).passwordEncoder(passwordEncoder());
     }
 
     /**
-     * 
+     * Password encoder.
      * @return
      */
     @Bean

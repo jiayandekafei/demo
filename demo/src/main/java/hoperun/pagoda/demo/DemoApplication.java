@@ -4,11 +4,20 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/**
+ * start class.
+ * @author zhangxiqin
+ *
+ */
 @SpringBootApplication
 @EnableTransactionManagement(proxyTargetClass = true)
 public class DemoApplication {
 
-    public static void main(String[] args) {
+    /**
+     * start method.
+     * @param args parameters
+     */
+    public static void main(final String[] args) {
         SpringApplication.run(DemoApplication.class, args);
     }
 }

@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class DeleteGroupRequest {
     /**
-     * groups ids
+     * groups ids.
      */
     private String groupIds;
 }

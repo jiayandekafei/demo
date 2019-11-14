@@ -54,7 +54,9 @@ public class UserDetailResponse {
      * groups.
      */
     private List<UserGroupBean> groups;
-
-    List<UserGroupTree> group;
+    /**
+     * user group tree.
+     */
+    private List<UserGroupTree> group;
 
 }

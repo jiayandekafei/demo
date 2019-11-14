@@ -7,9 +7,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ *User Groups response. 
+ * @author zhangxiqin
+ *
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserGroupsResponse {
-    List<UserGroupTree> groups;
+
+    /**
+     * user groups.
+     */
+    private List<UserGroupTree> groups;
 }

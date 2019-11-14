@@ -5,6 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Change user status request.
+ * @author zhangxiqin
+ *
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

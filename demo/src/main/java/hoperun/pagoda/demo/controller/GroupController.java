@@ -144,7 +144,7 @@ public class GroupController {
         final String method = "isGroupExist";
 
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug(Constant.LOG_PATTERLN, method, "get Group by id started");
+            LOGGER.debug(Constant.LOG_PATTERLN, method, "get group by id started");
         }
 
         return BaseResponse.ok(groupService.isGroupExist(groupname));

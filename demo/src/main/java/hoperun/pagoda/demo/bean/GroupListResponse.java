@@ -20,8 +20,11 @@ import lombok.NoArgsConstructor;
 public class GroupListResponse implements Serializable {
     private static final long serialVersionUID = 1L;
     /**
-     * user list
+     * group list.
      */
     private List<Group> groups;
+    /**
+     * total group.
+     */
     private int total;
 }

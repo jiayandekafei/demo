@@ -8,6 +8,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Change password request.
+ * @author zhangxiqin
+ *
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

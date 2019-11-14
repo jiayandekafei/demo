@@ -29,17 +29,17 @@ public class GroupRequest {
      * notes_server.
      */
     @ApiModelProperty(value = "notes server address")
-    private String notes_server;
+    private String notesServer;
     /**
      * notes server user.
      */
     @ApiModelProperty(value = "notes server user")
-    private String notes_server_user;
+    private String notesServerUser;
     /**
      * notes server password.
      */
     @ApiModelProperty(value = "notes server password")
-    private String notes_server_password;
+    private String notesServerPassword;
     /**
      * description.
      */

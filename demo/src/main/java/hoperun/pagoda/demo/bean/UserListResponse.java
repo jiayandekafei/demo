@@ -19,8 +19,11 @@ import lombok.NoArgsConstructor;
 public class UserListResponse implements Serializable {
     private static final long serialVersionUID = 1L;
     /**
-     * user list
+     * user list.
      */
-    private List<UserDetailResponse> users;
+    private transient List<UserDetailResponse> users;
+    /**
+     * user total.
+     */
     private int total;
 }

@@ -47,10 +47,10 @@ public class UserRequest {
      * job title.
      */
     @ApiModelProperty(value = "job title")
-    private String job_title;
+    private String jobTitle;
 
     /**
-     * groups
+     * groups.
      */
     private List<UserGroup> groups;
 }
