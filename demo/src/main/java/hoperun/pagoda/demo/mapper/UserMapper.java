@@ -9,35 +9,40 @@ import hoperun.pagoda.demo.bean.UserRequest;
 import hoperun.pagoda.demo.entity.UserDetail;
 import hoperun.pagoda.demo.entity.UserGroup;
 
+/**
+ * user mapper.
+ * @author zhangxiqin
+ *
+ */
 @Mapper
 public interface UserMapper {
     /**
-     * select user by name
+     * select user by name.
      * 
-     * @param name
-     * @return
+     * @param username username 
+     * @return UserDetail user info
      */
     UserDetail findByUsername(@Param("username") String username);
 
     /**
-     * select user by name
+     * select user by id.
      * 
-     * @param name
-     * @return
+     * @param userId user id 
+     * @return UserDetail user info
      */
     UserDetail findByUserId(@Param("userId") int userId);
 
     /**
      * insert.
      * 
-     * @param userDetail
+     * @param userDetail userDetail
      */
     void insert(UserDetail userDetail);
 
     /**
      * update.
      * 
-     * @param userDetail
+     * @param userRequest userRequest
      */
     void update(UserRequest userRequest);
 
@@ -56,63 +61,64 @@ public interface UserMapper {
     void delete(int userId);
 
     /**
-     * select role by user id.
+     * retrieve all users.
      * 
-     * @param userId
-     * @return
+     * @return user list
      */
     List<UserDetail> findAllUser();
 
     /**
-     * select role by user id.
+     * retrieve user group.
      * 
-     * @param userId
-     * @return
+     * @param userId user id
+     * @return user group list
      */
     List<UserGroup> findUserGroups(@Param("userId") long userId);
 
     /**
-     * retrieve users under groups.
+     * retrieve users under current group.
      * 
-     * @param userId
-     * @return
+     * @param groupId group id.
+     * @return user id list
      */
-    List<Integer> findUsersByGroupId(@Param("group_id") long group_id);
+    List<Integer> findUsersByGroupId(@Param("groupId") long groupId);
 
     /**
-     * retrieve users under groups.
+     * retrieve user's group info.
      * 
-     * @param userId
-     * @return
+     * @param userId user id
+     * @param groupId group id
+     * @return user Group
      */
-    UserGroup findUserGroupByGroupId(@Param("userId") int userId, @Param("group_id") int group_id);
+    UserGroup findUserGroupByUserIdAndGroupId(@Param("userId") int userId, @Param("groupId") int groupId);
     /**
-     * retrieve users under groups.
+     * retrieve user's other group .
      * 
-     * @param userId
-     * @return
+     * @param userId userId
+     * @param groupIds group id
+     * @return group id list
      */
     List<Integer> findUserGroupByGroupIds(@Param("userId") int userId, @Param("groupIds") List<Integer> groupIds);
 
     /**
-     * create user role.
+     * create user group .
      *
-     * @param userId
-     * @param groupId
-     * @param roleId
-     * @return
+     * @param userId userId
+     * @param groupId groupId
+     * @param roleId roleId
+     * @return 1 if created successful otherwise 0
      */
-    int insertUserGroup(@Param("userId") long userId, @Param("group_id") long group_id, @Param("role_id") long role_id);
+    int insertUserGroup(@Param("userId") long userId, @Param("groupId") long groupId, @Param("roleId") long roleId);
 
     /**
      * update user group.
      *
-     * @param userId
-     * @param groupId
-     * @param roleId
-     * @return
+     * @param userId userId
+     * @param groupId groupId
+     * @param roleId roleId
+     * @return  1 if updated successful otherwise 0
      */
-    int updateUserGroup(@Param("userId") long userId, @Param("group_id") long group_id, @Param("role_id") long role_id);
+    int updateUserGroup(@Param("userId") long userId, @Param("groupId") long groupId, @Param("roleId") long roleId);
 
     /**
      * delete user role.
@@ -140,7 +146,7 @@ public interface UserMapper {
      * @param userId
      *            userId
      * 
-     * @return
+     * @return 1 if updated successful otherwise 0
      */
     int updateUserStatus(@Param("status") String status, @Param("userId") int userId);
 
@@ -152,7 +158,7 @@ public interface UserMapper {
      * @param password
      *            password
      * 
-     * @return
+     * @return 1 if updated successful otherwise 0
      */
     int updateUserPassword(@Param("userId") int userId, @Param("password") String password);
 }

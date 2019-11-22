@@ -5,7 +5,11 @@
 <mapper namespace="hoperun.pagoda.demo.mapper.MessageMapper">
 
     <select id="findByUserId" resultType="hoperun.pagoda.demo.entity.Message">
-        select * from tb_message where user_id=#{user_id};
+        select * from tb_message where userId=#{userId};
     </select>
+    
+    <insert id="insert" parameterType="hoperun.pagoda.demo.entity.Message" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_message (userId, description) VALUES  (#{userId} , #{description});
+    </insert>
     
 </mapper>

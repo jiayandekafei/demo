@@ -16,16 +16,15 @@ import lombok.NoArgsConstructor;
 public class UserGroup {
 
     /**
-     * user id
+     * user id.
      */
-
-    private int user_id;
+    private int userId;
     /**
-     * group id
+     * group id.
      */
-    private int group_id;
+    private int groupId;
     /**
-     * role id
+     * role id.
      */
-    private int role_id;
+    private int roleId;
 }

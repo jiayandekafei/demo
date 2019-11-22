@@ -7,6 +7,11 @@ import org.apache.ibatis.annotations.Param;
 
 import hoperun.pagoda.demo.entity.Group;
 
+/**
+ * group mapper.
+ * @author zhangxiqin
+ *
+ */
 @Mapper
 public interface GroupMapper {
 
@@ -18,45 +23,41 @@ public interface GroupMapper {
     List<Group> findAllGroup();
 
     /**
-     * select customer by name
+     * select group by name.
      * 
-     * @param name
-     * @return
+     * @param name group name
+     * @return group
      */
     Group findByName(@Param("name") String name);
 
     /**
      * select group by id.
      * 
-     * @param groupId
+     * @param groupId groupId
      * @return Group
      */
     Group findById(@Param("groupId") int groupId);
 
     /**
-     * create group
+     * create group.
      * 
-     * @param userId
-     * @param groupId
-     * @param roleId
-     * @return
+     * @param group group
+     * @return 1 if success otherwise 0
      */
     int insert(Group group);
 
     /**
-     * create group
+     * update group.
      * 
-     * @param userId
-     * @param groupId
-     * @param roleId
-     * @return
+     * @param group group
+     * @return 1 if success otherwise 0
      */
     int update(Group group);
 
     /**
      * delete.
      * 
-     * @param userId
+     * @param id id
      */
     void delete(int id);
 
@@ -70,16 +71,16 @@ public interface GroupMapper {
     /**
      * find customer by group id.
      * 
-     * @param groupId
-     * @return customer id
+     * @param groupId groupId
+     * @return 1 if success otherwise 0
      */
     int findCustomersByGroupId(@Param("groupId") long groupId);
 
     /**
      * update group customer by group id.
      * 
-     * @param customers
-     * @return
+     * @param customers  customers
+     * @return 1 if success otherwise 0
      */
     int updateGroupCustomer(@Param("customers") List<Integer> customers);
 

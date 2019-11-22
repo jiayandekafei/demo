@@ -37,8 +37,8 @@ public class CustomerServiceImpl implements CustomerService {
         if ("N".equals(superuser)) {
             List<UserGroup> groups = userMapper.findUserGroups(userId);
             for (UserGroup group : groups) {
-                int customerId = groupMapper.findCustomersByGroupId(group.getGroup_id());
-                customers = customers.stream().filter(customer -> customer.getCustomer_id() == customerId).collect(Collectors.toList());
+                int customerId = groupMapper.findCustomersByGroupId(group.getGroupId());
+                customers = customers.stream().filter(customer -> customer.getCustomerId() == customerId).collect(Collectors.toList());
             }
         }
         // filter by name
@@ -47,7 +47,7 @@ public class CustomerServiceImpl implements CustomerService {
         }
         int size = customers.size();
         // filter by pageNo and limit
-        customers = customers.stream().skip((pageNo - 1) * limit).limit(limit).collect(Collectors.toList());
+        customers = customers.stream().skip((pageNo - 1) * (long) limit).limit(limit).collect(Collectors.toList());
 
         return new CustomerListResponse(customers, size);
     }
@@ -81,7 +81,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional
     public void delete(int customerId) {
         customerMapper.delete(customerId);
-        List<Integer> customers = new ArrayList<Integer>();
+        List<Integer> customers = new ArrayList<>();
         customers.add(customerId);
         // update group
         groupMapper.updateGroupCustomer(customers);
@@ -98,7 +98,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public boolean isCustomerExist(String customername) {
-        return null == customerMapper.findByName(customername) ? false : true;
+        return null != customerMapper.findByName(customername);
     }
 
 }

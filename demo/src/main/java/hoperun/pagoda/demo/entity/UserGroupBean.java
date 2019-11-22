@@ -15,19 +15,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserGroupBean {
     /**
-     * group id
+     * group id.
      */
     private int groupId;
     /**
-     * group name
+     * group name.
      */
     private String groupName;
     /**
-     * role id
+     * role id.
      */
     private int roleId;
     /**
-     * role id
+     * role id.
      */
     private String roleName;
 }

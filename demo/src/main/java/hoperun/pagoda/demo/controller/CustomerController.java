@@ -53,8 +53,8 @@ public class CustomerController {
     @SuppressWarnings("unchecked")
     @GetMapping("/list")
     @ApiOperation(value = "retrieve customer list")
-    public BaseResponse<CustomerListResponse> retrieveCustomerList(@RequestParam int userId, @RequestParam String superuser, @RequestParam int pageNo,
-            @RequestParam int limit, @RequestParam String name, @RequestParam boolean isSelect) {
+    public BaseResponse<CustomerListResponse> retrieveCustomerList(@RequestParam final int userId, @RequestParam final String superuser,
+            @RequestParam final int pageNo, @RequestParam final int limit, @RequestParam String name, @RequestParam final boolean isSelect) {
         final String method = "retrieveCustomerList";
 
         if (LOGGER.isDebugEnabled()) {
@@ -72,7 +72,7 @@ public class CustomerController {
 
     /**
      * Get Customer List.
-     *
+     * @param customerId customer id
      * @return BaseResponse<CustomerDetail> Customer reponse
      */
     @SuppressWarnings("unchecked")
@@ -90,13 +90,13 @@ public class CustomerController {
 
     /**
      * update Customer List.
-     *
+     * @param request customer info
      * @return BaseResponse<CustomerDetail> Customer reponse
      */
     @SuppressWarnings("unchecked")
     @ApiOperation(value = "update Customer by Customer id")
     @PutMapping("")
-    public BaseResponse<String> updateCustomerById(@RequestBody Customer request) {
+    public BaseResponse<String> updateCustomerById(@RequestBody final Customer request) {
         final String method = "updateCustomerById";
 
         if (LOGGER.isDebugEnabled()) {
@@ -106,6 +106,11 @@ public class CustomerController {
         return BaseResponse.ok(customerService.update(request));
     }
 
+    /**
+     * Add customer.
+     * @param request customer info
+     * @return customer response
+     */
     @SuppressWarnings("unchecked")
     @PostMapping("")
     public BaseResponse<String> addCustomer(@RequestBody Customer request) {
@@ -113,6 +118,11 @@ public class CustomerController {
         return BaseResponse.ok(customerService.create(request));
     }
 
+    /**
+     * delete customer.
+     * @param customerId customer id
+     * @return customer response
+     */
     @SuppressWarnings("unchecked")
     @DeleteMapping("/{customerId}")
     public BaseResponse<String> deleteCustomer(@PathVariable("customerId") Integer customerId) {

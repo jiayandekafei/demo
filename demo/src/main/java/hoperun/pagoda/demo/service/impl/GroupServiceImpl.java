@@ -16,18 +16,28 @@ import hoperun.pagoda.demo.mapper.GroupMapper;
 import hoperun.pagoda.demo.mapper.UserMapper;
 import hoperun.pagoda.demo.service.GroupService;
 
+/**
+ * group service.
+ * @author zhangxiqin
+ *
+ */
 @Service
 public class GroupServiceImpl implements GroupService {
 
+    /**
+     * group mapper.
+     */
     @Autowired
     private GroupMapper groupMapper;
-
+    /**
+     * user mapper.
+     */
     @Autowired
     private UserMapper userMapper;
 
-    @Autowired
-    private GroupMapper GroupMapper;
-
+    /**
+     * retrieve all group for List page.
+     */
     @Override
     public GroupListResponse findAllGroup(final int userId, final String superuser, int pageNo, int limit, String name, boolean isGroupTree) {
 
@@ -39,7 +49,7 @@ public class GroupServiceImpl implements GroupService {
         if ("N".equals(superuser)) {
             List<UserGroup> userGroups = userMapper.findUserGroups(userId);
             for (UserGroup userGroup : userGroups) {
-                groups = groups.stream().filter(group -> group.getGroup_id() == userGroup.getGroup_id()).collect(Collectors.toList());
+                groups = groups.stream().filter(group -> group.getGroupId() == userGroup.getGroupId()).collect(Collectors.toList());
             }
         }
         // filter by name
@@ -48,7 +58,7 @@ public class GroupServiceImpl implements GroupService {
         }
         int size = groups.size();
         // filter by pageNo and limit
-        groups = groups.stream().skip((pageNo - 1) * limit).limit(limit).collect(Collectors.toList());
+        groups = groups.stream().skip((pageNo - 1) * (long) limit).limit(limit).collect(Collectors.toList());
         setGroupName(groups);
         return new GroupListResponse(groups, size);
 
@@ -88,7 +98,7 @@ public class GroupServiceImpl implements GroupService {
     @Override
     @Transactional
     public void batchDelete(List<Integer> groups) {
-        GroupMapper.batchDelete(groups);
+        groupMapper.batchDelete(groups);
         // update group
         // groupMapper.updateUserGroup(groups);
     }
@@ -106,7 +116,8 @@ public class GroupServiceImpl implements GroupService {
      */
     private void setGroupName(List<Group> groups) {
         for (Group group : groups) {
-            // group.setGroupname(GroupMapper.findById(group.getGroup_id()).getCustomername());
+            // group.setGroupname(GroupMapper.findById(group.getGroupId()).getCustomername());
         }
     }
+
 }

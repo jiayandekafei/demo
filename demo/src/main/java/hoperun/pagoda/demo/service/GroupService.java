@@ -6,7 +6,7 @@ import hoperun.pagoda.demo.bean.GroupListResponse;
 import hoperun.pagoda.demo.entity.Group;
 
 /**
- * group service
+ * group service.
  * 
  * @author zhangxiqin
  *
@@ -16,18 +16,23 @@ public interface GroupService {
     /**
      * retrieve group list.
      * 
-     * @param userId
-     * @return
+     * @param userId user id
+     * @param superuser is super user
+     * @param pageNo pageNo 
+     * @param limit the number of each page
+     * @param name group name
+     * @param isGroupTree whether get for group tree
+     * @return group list
      */
-    GroupListResponse findAllGroup(final int userId, final String superuser, int pageNo, int limit, String name, boolean isGroupTree);
+    GroupListResponse findAllGroup(int userId, String superuser, int pageNo, int limit, String name, boolean isGroupTree);
 
     /**
      * retrieve groupInfo.
      * 
      * @param groupId
-     * @return
+     * @return group
      */
-    Group findByGrupId(final int groupId);
+    Group findByGrupId(int groupId);
 
     /**
      * create new group.
@@ -52,7 +57,7 @@ public interface GroupService {
      * @param groupId
      * @return
      */
-    void delete(final int groupId);
+    void delete(int groupId);
 
     /**
      * batch.
@@ -69,6 +74,6 @@ public interface GroupService {
      *            grouprname
      * @return is group exit
      */
-    boolean isGroupExist(final String grouprname);
+    boolean isGroupExist(String grouprname);
 
 }

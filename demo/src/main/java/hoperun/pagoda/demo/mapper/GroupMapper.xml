@@ -10,44 +10,44 @@
         SELECT * from tb_group where groupname =#{name};
     </select>
      <select id="findById" resultType="hoperun.pagoda.demo.entity.Group">
-        SELECT * from tb_group where group_id =#{groupId};
+        SELECT * from tb_group where groupId =#{groupId};
     </select>
-    <insert id="insert" parameterType="hoperun.pagoda.demo.entity.Group" useGeneratedKeys="true" keyProperty="group_id">
-        insert into tb_group (groupname, customer_id,notes_server,notes_server_user,notes_server_pasword,description) VALUES 
-        (#{groupname}, #{customer_id}, #{notes_server}, #{notes_server_user}, #{notes_server_pasword}, #{description});
+    <insert id="insert" parameterType="hoperun.pagoda.demo.entity.Group" useGeneratedKeys="true" keyProperty="groupId">
+        insert into tb_group (groupname, customerId,server,serverUser,serverPasword,description) VALUES 
+        (#{groupname}, #{customerId}, #{server}, #{serverUser}, #{serverPasword}, #{description});
     </insert>
      <update id="update" parameterType="hoperun.pagoda.demo.entity.Group">
         update tb_group 
-        set customer_id=#{customer_id}, notes_server=#{notes_server}, notes_server_user=#{notes_server_user}, notes_server_pasword=#{notes_server_pasword}, description=#{description}
-        where group_id =#{groupId};
+        set customerId=#{customerId}, server=#{server}, serverUser=#{serverUser}, serverPasword=#{serverPasword}, description=#{description}
+        where groupId =#{groupId};
     </update>
     
     <delete id="delete">
-        delete from tb_group where group_id =#{id}
+        delete from tb_group where groupId =#{id}
     </delete>
 
     <delete id="batchDelete" parameterType="java.util.List">
         delete from tb_group where 1=2
         <if test="groups!=null and groups.size()>0">
-            or group_id in
-            <foreach collection="groups" item="group_id" index="index"
+            or groupId in
+            <foreach collection="groups" item="groupId" index="index"
                 open="(" close=")" separator=",">
-                 #{group_id}
+                 #{groupId}
             </foreach>
         </if>
     </delete>
     
     <select id="findCustomersByGroupId" resultType="int">
-        SELECT customer_id from tb_group where group_id =#{groupId};
+        SELECT customerId from tb_group where groupId =#{groupId};
     </select>
     
    <update id="updateGroupCustomer" parameterType="java.util.List">
-        update tb_group set customer_id=null where 1=2
+        update tb_group set customerId=null where 1=2
         <if test="customers!=null and customers.size()>0">
-            or customer_id in
-            <foreach collection="customers" item="customer_id" index="index"
+            or customerId in
+            <foreach collection="customers" item="customerId" index="index"
                 open="(" close=")" separator=",">
-                 #{customer_id}
+                 #{customerId}
             </foreach>
         </if>
    </update>

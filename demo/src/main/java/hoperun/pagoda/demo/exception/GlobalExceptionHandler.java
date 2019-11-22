@@ -12,49 +12,52 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import hoperun.pagoda.demo.bean.BaseResponse;
 
+/**
+ * global exception hanlder.
+ * @author zhangxiqin
+ *
+ */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+    /**
+     * logger.
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+    /**
+     * http response.
+     */
     @Autowired
     HttpServletResponse response;
     /**
-     * system exception handler
+     * system exception handler.
+     * @param <T> <T>
      * 
-     * @param req
-     *            request
-     * @param resp
-     *            response
      * @param e
      *            exception
      * @return BaseResponse BaseResponse
-     * @throws Exception
-     *             Exception
      */
 
+    @SuppressWarnings("unchecked")
     @ExceptionHandler(value = Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public BaseResponse<?> defaultErrorHandler(Exception e) throws Exception {
-        logger.error("", e);
+    public <T> BaseResponse<T> defaultErrorHandler(final Exception e) {
+        LOGGER.error("", e);
         return BaseResponse.failure(ResultCode.SERVER_ERROR, e.getMessage());
 
     }
 
     /**
-     * system exception handler
+     * system exception handler.
      * 
-     * @param req
-     *            request
-     * @param resp
-     *            response
+     * @param <T> <T>
      * @param e
-     *            exception
+     *            BusinessException
      * @return BaseResponse BaseResponse
-     * @throws Exception
-     *             Exception
      */
+    @SuppressWarnings("unchecked")
     @ExceptionHandler(value = BusinessException.class)
-    public BaseResponse<?> businessException(BusinessException e) throws Exception {
+    public <T> BaseResponse<T> businessException(final BusinessException e) {
         response.setStatus(e.getResponse().getCode());
-        return e.getResponse();
+        return (BaseResponse<T>) e.getResponse();
     }
 }

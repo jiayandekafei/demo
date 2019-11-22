@@ -43,6 +43,7 @@ public class UserRequest {
     @ApiModelProperty(value = "email", required = true)
     // @Pattern(regexp = "/^[\\\\w_-]{6,16}$/")
     private String email;
+
     /**
      * job title.
      */

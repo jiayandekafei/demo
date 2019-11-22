@@ -4,16 +4,27 @@ import hoperun.pagoda.demo.bean.BaseResponse;
 import lombok.Getter;
 
 /**
- * Business exception
+ * Business exception.
  * 
  * @author zhangxiqin
  *
  */
 @Getter
 public class BusinessException extends RuntimeException {
-    private BaseResponse response;
+    /**
+     * serial id.
+     */
+    private static final long serialVersionUID = 1L;
+    /**
+     * common response.
+     */
+    private final BaseResponse<?> response;
 
-    public BusinessException(BaseResponse response) {
-        this.response = response;
+    /**
+     * business exception.
+     * @param mResponse common response.
+     */
+    public BusinessException(final BaseResponse<?> mResponse) {
+        this.response = mResponse;
     }
 }

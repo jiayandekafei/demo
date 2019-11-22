@@ -3,7 +3,6 @@ package hoperun.pagoda.demo.entity;
 import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,17 +13,37 @@ import lombok.NoArgsConstructor;
  *
  */
 @Data
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Group implements Serializable {
     private static final long serialVersionUID = 1L;
-    private int group_id;
+    /**
+     * group id.
+     */
+    private int groupId;
+    /**
+     * group name.
+     */
     private String groupname;
-    private int customer_id;
-    private String notes_server;
-    private String notes_server_user;
-    private String notes_server_pasword;
+    /**
+     * group customer id.
+     */
+    private int customerId;
+    /**
+     * notes server.
+     */
+    private String server;
+    /**
+     * notes server user.
+     */
+    private String serverUser;
+    /**
+     * notes server password.
+     */
+    private String serverPasword;
+    /**
+     * group descriptions.
+     */
     private String description;
     // private String customername;
 }

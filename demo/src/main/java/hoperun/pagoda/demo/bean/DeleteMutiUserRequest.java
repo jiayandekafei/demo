@@ -1,29 +1,23 @@
 package hoperun.pagoda.demo.bean;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- *  user delete info.
+ * delete user request.
+ *
  * @author zhangxiqin
  *
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DeleteUserRequest {
-
+public class DeleteMutiUserRequest {
     /**
-     * user id.
+     * user ids.
      */
-    private int userId;
-    /**
-     * group id.
-     */
-    private int groupId;
-    /**
-     * group length.
-     */
-    private int groupLength;
+    private List<DeleteUserRequest> users;
 }

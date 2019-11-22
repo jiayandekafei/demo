@@ -22,6 +22,11 @@ import hoperun.pagoda.demo.constant.Constant;
 import hoperun.pagoda.demo.entity.UserDetail;
 import hoperun.pagoda.demo.utils.JwtUtils;
 
+/**
+ * token authenticate.
+ * @author zhangxiqin
+ *
+ */
 @Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
@@ -29,35 +34,43 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
      * Logger.
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtAuthenticationTokenFilter.class);
-
+    /**
+     * token header.
+     */
     @Value("${jwt.header}")
-    private String token_header;
+    private String tokenHeader;
 
+    /**
+     * jwtUtils.
+     */
     @Resource
     private JwtUtils jwtUtils;
 
+    /**
+     * token verify.
+     */
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+    protected void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response, final FilterChain chain)
             throws ServletException, IOException {
         String method = "doFilterInternal";
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "do filter started");
         }
-
-        String auth_token = request.getHeader(this.token_header);
-        final String auth_token_start = Constant.TOKEN_TYPE;
-        if (!StringUtils.isEmpty(auth_token) && auth_token.startsWith(auth_token_start)) {
-            auth_token = auth_token.substring(auth_token_start.length());
+        // get token
+        String authToken = request.getHeader(this.tokenHeader);
+        final String preToken = Constant.TOKEN_TYPE;
+        if (!StringUtils.isEmpty(authToken) && authToken.startsWith(preToken)) {
+            authToken = authToken.substring(preToken.length());
         } else {
-            auth_token = null;
+            authToken = null;
         }
-
         // get user name from token
-        String username = jwtUtils.getUsernameFromToken(auth_token);
-        LOGGER.info(Constant.LOG_PATTERLN, method, String.format("Checking authentication for userDetail %s.", username));
-        if (jwtUtils.containToken(username, auth_token) && username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetail userDetail = jwtUtils.getUserFromToken(auth_token);
-            if (jwtUtils.validateToken(auth_token, userDetail)) {
+        String username = jwtUtils.getUsernameFromToken(authToken);
+        LOGGER.info(Constant.LOG_PATTERLN, method, "Checking authentication for username.");
+        if (jwtUtils.containToken(username, authToken) && username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            UserDetail userDetail = jwtUtils.getUserFromToken(authToken);
+            boolean validated = jwtUtils.validateToken(authToken, userDetail);
+            if (Boolean.TRUE.equals(validated)) {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetail, null,
                         userDetail.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

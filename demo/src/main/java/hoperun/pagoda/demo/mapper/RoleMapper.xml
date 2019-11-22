@@ -8,6 +8,6 @@
     </select>
     
     <select id="findRoleNameById" resultType="String" >
-       SELECT role from tb_role where role_id=#{roleId};
+       SELECT roleName from tb_role where roleId=#{roleId};
    </select>
 </mapper>

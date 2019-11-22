@@ -19,13 +19,27 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Customer implements Serializable {
     private static final long serialVersionUID = 1L;
-    private int customer_id;
+    /**
+     * customer id.
+     */
+    private int customerId;
+    /**
+     * customer name.
+     */
     private String customername;
+    /**
+     * customer description.
+     */
     private String description;
 
-    public Customer(String customername, String description) {
-        this.customername = customername;
-        this.description = description;
+    /**
+     * Constructor.
+     * @param mCustomername customername
+     * @param mDescription description
+     */
+    public Customer(final String mCustomername, final String mDescription) {
+        this.customername = mCustomername;
+        this.description = mDescription;
     }
 
 }

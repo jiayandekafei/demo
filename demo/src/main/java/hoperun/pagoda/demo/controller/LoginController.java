@@ -19,11 +19,8 @@ import hoperun.pagoda.demo.bean.UserDetailResponse;
 import hoperun.pagoda.demo.bean.UserRegisterRequest;
 import hoperun.pagoda.demo.constant.Constant;
 import hoperun.pagoda.demo.exception.ResultCode;
-import hoperun.pagoda.demo.service.UserService;
-import hoperun.pagoda.demo.service.impl.LoginServiceImpl;
+import hoperun.pagoda.demo.service.LoginService;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 
 /**
  * Login Controller.
@@ -39,23 +36,23 @@ public class LoginController {
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 
+    /**
+     * token header.
+     */
     @Value("${jwt.header}")
     private String tokenHeader;
 
-    @Autowired
-    private LoginServiceImpl loginService;
-
     /**
-     * User service.
+     * login service.
      */
     @Autowired
-    private UserService userService;
+    private LoginService loginService;
 
     /**
      * register user.
      *
-     * @param userRequest
-     *            user request
+     * @param request
+     *            register request
      * @return UserResponse user response
      */
     @SuppressWarnings("unchecked")
@@ -67,7 +64,7 @@ public class LoginController {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "register user started");
         }
 
-        userService.register(request);
+        loginService.register(request);
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "register user ended");
         }
@@ -75,18 +72,27 @@ public class LoginController {
         return BaseResponse.ok("successful");
     }
 
+    /**
+     * login.
+     * @param user login request.
+     * @return BaseResponse<LoginResponse> login response.
+     */
     @SuppressWarnings("unchecked")
     @PostMapping(value = "/login")
     @ApiOperation(value = "login")
-    @ApiResponses({@ApiResponse(code = 500, message = "", response = BaseResponse.class)})
-    public BaseResponse<LoginResponse> login(@RequestBody LoginRequest user) {
+    public BaseResponse<LoginResponse> login(@RequestBody final LoginRequest user) {
         final LoginResponse response = loginService.login(user.getUsername(), user.getPassword());
         return BaseResponse.ok(response);
     }
 
+    /**
+     * log out.
+     * @param request log out request.
+     * @return BaseResponse<LoginResponse> login response.
+     */
     @GetMapping(value = "/signout")
     @ApiOperation(value = "logout", notes = "logout")
-    public BaseResponse<?> logout(HttpServletRequest request) {
+    public BaseResponse<?> logout(final HttpServletRequest request) {
         String token = request.getHeader(tokenHeader);
         if (token == null) {
             return BaseResponse.failure(ResultCode.UNAUTHORIZED);

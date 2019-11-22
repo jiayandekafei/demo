@@ -4,116 +4,125 @@ import java.util.List;
 
 import hoperun.pagoda.demo.bean.UserDetailResponse;
 import hoperun.pagoda.demo.bean.UserListResponse;
-import hoperun.pagoda.demo.bean.UserRegisterRequest;
 import hoperun.pagoda.demo.bean.UserRequest;
+import hoperun.pagoda.demo.entity.Message;
 import hoperun.pagoda.demo.entity.UserDetail;
 import hoperun.pagoda.demo.entity.UserGroupTree;
 
+/**
+ * User service interface.
+ * @author zhangxiqin
+ *
+ */
 public interface UserService {
-    /**
-     * register
-     * 
-     * @param userDetail
-     * @return
-     */
-    UserDetail register(UserRegisterRequest userDetail);
 
     /**
      * retrieve user list.
-     * 
-     * @param userId
-     * @return
+     * @param userId user id
+     * @param superuser is super user
+     * @param pageNo pageNo 
+     * @param limit the number of each page
+     * @param name user name
+     * @return UserListResponse user List
      */
-    UserListResponse findAllUser(int userId, String superuser, int pagaNo, int limit, String name);
+    UserListResponse findAllUser(int userId, String superuser, int pageNo, int limit, String name);
 
     /**
      * get user by name.
      * 
-     * @param userName
+     * @param username user name
      * @return UserDetail
      */
-    UserDetail findUserByName(final String username);
+    UserDetail findUserByName(String username);
 
     /**
      * get user by id.
      * 
      * @param userId
      *            user id
-     * @return
+     * @return UserDetailResponse user detail
      */
-    UserDetailResponse findUserByID(final int userID);
+    UserDetailResponse findUserByID(int userId);
 
     /**
-     * update user by name.
+     * juge wether user exist.
      * 
-     * @param UserRequest
-     *            userRequest
+     * @param username
+     *            user name
+     * @return true if user exist otherwise false
      */
-    void update(final UserRequest request);
-
-    /**
-     * get user by id.
-     * 
-     * @param userId
-     *            user id
-     * @return
-     */
-    boolean isUserExist(final String username);
+    boolean isUserExist(String username);
 
     /**
      * get group tree.
      * 
-     * @param UserRequest
-     *            userRequest
+     * @param userId
+     *            user id
      * @return UserGroupsResponse
      */
-    List<UserGroupTree> getGroupTree(final int userId);
+    List<UserGroupTree> getGroupTree(int userId);
 
     /**
-     * get group tree.
+     * add user.
      * 
-     * @param UserRequest
+     * @param user
      *            userRequest
      */
-    String delete(final int userId);
+    void insert(UserRequest user);
 
     /**
-     * get group tree.
+     * update user.
      * 
-     * @param UserRequest
+     * @param request
      *            userRequest
      */
-    String insert(final UserRequest user);
+    void update(UserRequest request);
 
     /**
-     * update user status.
+     * approve user.
      * 
-     * @param status
-     *            status
+     * @param req
+     *            user request
+     */
+    void approveUser(UserRequest req);
+
+    /**
+     * reject user.
+     * 
+     * @param msg
+     *            reject message
+     */
+    void rejectUser(Message msg);
+
+    /**
+     * delete user.
+     * @param userId user id
+     * @param groupId group id
+     * @param groupLength group length
+     * @return delete message
+     */
+    String delete(int userId, int groupId, int groupLength);
+
+    /**
+     * check password.
+     * 
      * @param userId
      *            userId
-     */
-    String updateUserStatus(final String status, final int userId);
-
-    String deleteMultiUser(List<Integer> users);
-
-    /**
-     * check password
-     * 
-     * @param password
+     * @param passWord
      *            password
-     * @return
+     * @return true if same otherwise false
      */
-    boolean isPasswordSame(final int userId, final String passWord);
+    boolean isPasswordSame(int userId, String passWord);
 
     /**
-     * update user status.
+     * update user password.
      * 
-     * @param status
-     *            status
      * @param userId
      *            userId
+     * @param passWord
+     *            password
+     * @return update message
      */
-    String updateUserPassword(final int userId, final String password);
+    String updateUserPassword(int userId, String passWord);
 
 }

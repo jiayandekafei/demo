@@ -46,15 +46,15 @@ public class GroupController {
     private GroupService groupService;
 
     /**
-     * Get User List.
+     * Get group List.
      *
      * @return BaseResponse<UserListResponse> user list
      */
     @SuppressWarnings("unchecked")
     @GetMapping("/list")
     @ApiOperation(value = "retrieve group list")
-    public BaseResponse<GroupListResponse> retrieveGroupList(@RequestParam int userId, @RequestParam String superuser, @RequestParam int pageNo,
-            @RequestParam int limit, @RequestParam String name) {
+    public BaseResponse<GroupListResponse> retrieveGroupList(@RequestParam final int userId, @RequestParam final String superuser,
+            @RequestParam final int pageNo, @RequestParam final int limit, @RequestParam final String name) {
         final String method = "retrieveGroupList";
 
         if (LOGGER.isDebugEnabled()) {
@@ -70,6 +70,28 @@ public class GroupController {
         return BaseResponse.ok(response);
     }
 
+    /**
+     * Get group filter List.
+     *
+     * @return BaseResponse<UserListResponse> user list
+     */
+    @SuppressWarnings("unchecked")
+    @GetMapping("/filterList")
+    @ApiOperation(value = "retrieve group list")
+    public BaseResponse<GroupListResponse> retrieveGroupFilterList() {
+        final String method = "retrieveGroupFilterList";
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug(Constant.LOG_PATTERLN, method, "get group filter list started");
+        }
+
+        GroupListResponse response = groupService.findAllGroup(0, "", 0, 0, "", true);
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug(Constant.LOG_PATTERLN, method, "get group list end");
+        }
+        return BaseResponse.ok(response);
+    }
     /**
      * Get Group List.
      *

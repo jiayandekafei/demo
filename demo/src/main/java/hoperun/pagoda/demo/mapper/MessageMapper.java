@@ -22,6 +22,29 @@ public interface MessageMapper {
      *            userId
      * @return message list
      */
-    List<Message> findByUserId(final @Param("userId") long userId);
+    List<Message> findByUserId(@Param("userId") long userId);
+
+    /**
+     * add one message.
+     * 
+     * @param msg msg
+     * @return 1 if success otherwise 0
+     */
+    int insert(Message msg);
+
+    /**
+     * update group.
+     * 
+     * @param msg msg
+     * @return 1 if success otherwise 0
+     */
+    int update(Message msg);
+
+    /**
+     * delete.
+     * 
+     * @param id id
+     */
+    void delete(int id);
 
 }

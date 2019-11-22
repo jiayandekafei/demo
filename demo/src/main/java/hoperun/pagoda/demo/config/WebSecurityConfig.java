@@ -44,14 +44,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * Constructor with parameter.
-     * @param customUserDetailsService customUserDetailsService
-     * @param authenticationTokenFilter authenticationTokenFilter
+     * @param mCustomUserDetailsService customUserDetailsService
+     * @param mAuthenticationTokenFilter authenticationTokenFilter
      */
     @Autowired
-    public WebSecurityConfig(@Qualifier("CustomUserDetailsService") final UserDetailsService customUserDetailsService,
-            final JwtAuthenticationTokenFilter authenticationTokenFilter) {
-        this.customUserDetailsService = customUserDetailsService;
-        this.authenticationTokenFilter = authenticationTokenFilter;
+    public WebSecurityConfig(@Qualifier("CustomUserDetailsService") final UserDetailsService mCustomUserDetailsService,
+            final JwtAuthenticationTokenFilter mAuthenticationTokenFilter) {
+        this.customUserDetailsService = mCustomUserDetailsService;
+        this.authenticationTokenFilter = mAuthenticationTokenFilter;
     }
 
     /**
@@ -66,29 +66,39 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * Password encoder.
-     * @return
+     * @return encoded password.
      */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * http security config.
+     */
     @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
+    protected void configure(final HttpSecurity httpSecurity) throws Exception {
         httpSecurity.cors().and().csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/login", "/register", "/user/checkUser/*", "/error/**").permitAll().anyRequest().authenticated();
+                .authorizeRequests().antMatchers("/login", "/register", "/user/check/*", "/error/**").permitAll().anyRequest().authenticated();
         httpSecurity.headers().cacheControl();
         httpSecurity.addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
+    /**
+     * web security config.
+     */
     @Override
-    public void configure(WebSecurity web) {
+    public void configure(final WebSecurity web) {
         web.ignoring().antMatchers("swagger-ui.html", "**/swagger-ui.html", "/favicon.ico", "/**/*.css", "/**/*.js", "/**/*.png", "/**/*.gif",
                 "/swagger-resources/**", "/v2/**", "/**/*.ttf");
         web.ignoring().antMatchers("/v2/api-docs", "/swagger-resources/configuration/ui", "/swagger-resources",
                 "/swagger-resources/configuration/security", "/swagger-ui.html");
     }
 
+    /**
+     * cors security config.
+     * @return  CorsConfigurationSource
+     */
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         final CorsConfiguration configuration = new CorsConfiguration();
@@ -101,6 +111,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return source;
     }
 
+    /**
+     * authenticationManagerBean.
+     */
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {

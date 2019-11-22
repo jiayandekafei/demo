@@ -14,91 +14,90 @@
 	</select>
 	<select id="findByUserId"
 		resultType="hoperun.pagoda.demo.entity.UserDetail">
-		SELECT * from tb_user where user_id = #{userId};
+		SELECT * from tb_user where userId = #{userId};
 	</select>
 	<insert id="insert"
 		 parameterType="hoperun.pagoda.demo.entity.UserDetail"
-		 useGeneratedKeys="true" keyProperty="user_id">
+		 useGeneratedKeys="true" keyProperty="userId">
 		insert into tb_user (username,
-		password,email,job_title,status,photo,superuser) VALUES
-		(#{username}, #{password}, #{email}, #{job_title},#{status},#{photo},#{superuser});
+		password,email,jobTitle,status,photo,superuser) VALUES
+		(#{username}, #{password}, #{email}, #{jobTitle},#{status},#{photo},#{superuser});
 	</insert>
 
 	<update id="update"
 		parameterType="hoperun.pagoda.demo.bean.UserRequest">
-		update tb_user set email=#{email}, job_title=#{job_title} where
+		update tb_user set email=#{email}, jobTitle=#{jobTitle} where
 		username=#{username};
 	</update>
 
 	<delete id="delete">
-		delete from tb_user where user_id =#{userId}
+		delete from tb_user where userId =#{userId}
 	</delete>
 
 	<delete id="deleteUsers" parameterType="java.util.List">
 		delete from tb_user where 1=2
 		<if test="users!=null and users.size()>0">
-			or user_id in
-			<foreach collection="users" item="user_id" index="index"
+			or userId in
+			<foreach collection="users" item="userId" index="index"
 				open="(" close=")" separator=",">
-				 #{user_id}
+				 #{userId}
 			</foreach>
 		</if>
 	</delete>
 
 	<update id="updateUserStatus">
-		update tb_user set status =#{status} where user_id= #{userId};
+		update tb_user set status =#{status} where userId= #{userId};
 	</update>
 	<update id="updateUserPassword">
-		update tb_user set password =#{password} where user_id= #{userId};
+		update tb_user set password =#{password} where userId= #{userId};
 	</update>
 	<!-- *******************user table end********************************** -->
 	
 	<!-- *******************user_role table start*************************** -->
 	<insert id="insertUserGroup">
-		insert into tb_user_role (user_id, group_id,role_id) VALUES (#{userId},
-		#{group_id}, #{role_id});
+		insert into tb_user_role (userId, groupId,roleId) VALUES (#{userId},
+		#{groupId}, #{roleId});
 	</insert>
 	<update id="updateUserGroup">
-		update tb_user_role set role_id =#{role_id} where user_id= #{userId} and
-		group_id = #{group_id};
+		update tb_user_role set roleId =#{roleId} where userId= #{userId} and
+		groupId = #{groupId};
 	</update>
 	<delete id="deleteUserGroupByUserIdAndGroups">
-		delete from tb_user_role where user_id= #{userId}
-			and group_id in
-			<foreach collection="deleteGroup" item="group_id" index="index"
+		delete from tb_user_role where userId= #{userId} and groupId in
+			<foreach collection="deleteGroup" item="groupId" index="index"
 				open="(" close=")" separator=",">
-				#{group_id}
+				#{groupId}
 			</foreach>
 	</delete>
 	<delete id="deleteUserGroupByUserIds" parameterType="java.util.List">
 		delete from tb_user_role where 1=2
 		<if test="users!=null and users.size()>0">
-            or user_id in
-            <foreach collection="users" item="user_id" index="index"
+            or userId in
+            <foreach collection="users" item="userId" index="index"
                 open="(" close=")" separator=",">
-                 #{user_id}
+                 #{userId}
             </foreach>
         </if>
 	</delete>
 	<select id="findUserGroups"
 		resultType="hoperun.pagoda.demo.entity.UserGroup">
-		select group_id,role_id from tb_user_role where user_id = #{userId} ;
+		select groupId,roleId from tb_user_role where userId = #{userId} ;
 	</select>
 	<select id="findUsersByGroupId" resultType="Integer">
-		select user_id from tb_user_role where group_id = #{group_id} ;
+		select userId from tb_user_role where groupId = #{groupId} ;
 	</select>
-	<select id="findUserGroupByGroupId"
+	<select id="findUserGroupByUserIdAndGroupId"
 		resultType="hoperun.pagoda.demo.entity.UserGroup">
-		select * from tb_user_role where user_id=#{userId} and group_id =
-		#{group_id} ;
+		select * from tb_user_role where userId=#{userId} and groupId =
+		#{groupId} ;
 	</select>
 	<select id="findUserGroupByGroupIds" resultType="Integer">
-		select group_id from tb_user_role where user_id=#{userId}
+		select groupId from tb_user_role where userId=#{userId}
 		<if test="groupIds!=null and groupIds.size()>0">
-			 and group_id not in
-			<foreach collection="groupIds" item="group_id" index="index"
+			 and groupId not in
+			<foreach collection="groupIds" item="groupId" index="index"
 				open="(" close=")" separator=",">
-				#{group_id}
+				#{groupId}
 			</foreach>
 	   </if>
 	</select>

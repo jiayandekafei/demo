@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,10 +15,11 @@ import org.springframework.util.StringUtils;
 import hoperun.pagoda.demo.bean.BaseResponse;
 import hoperun.pagoda.demo.bean.UserDetailResponse;
 import hoperun.pagoda.demo.bean.UserListResponse;
-import hoperun.pagoda.demo.bean.UserRegisterRequest;
 import hoperun.pagoda.demo.bean.UserRequest;
+import hoperun.pagoda.demo.constant.Constant;
 import hoperun.pagoda.demo.entity.Group;
 import hoperun.pagoda.demo.entity.GroupNode;
+import hoperun.pagoda.demo.entity.Message;
 import hoperun.pagoda.demo.entity.Role;
 import hoperun.pagoda.demo.entity.RoleNode;
 import hoperun.pagoda.demo.entity.UserDetail;
@@ -29,6 +29,7 @@ import hoperun.pagoda.demo.entity.UserGroupTree;
 import hoperun.pagoda.demo.exception.BusinessException;
 import hoperun.pagoda.demo.exception.ResultCode;
 import hoperun.pagoda.demo.mapper.GroupMapper;
+import hoperun.pagoda.demo.mapper.MessageMapper;
 import hoperun.pagoda.demo.mapper.RoleMapper;
 import hoperun.pagoda.demo.mapper.UserMapper;
 import hoperun.pagoda.demo.service.GroupService;
@@ -36,62 +37,68 @@ import hoperun.pagoda.demo.service.RoleService;
 import hoperun.pagoda.demo.service.UserService;
 import io.jsonwebtoken.lang.Collections;
 
+/**
+ * user  service.
+ * @author zhangxiqin
+ *
+ */
 @Service
 public class UserServiceImpl implements UserService {
 
+    /**
+     * userMapper.
+     */
     @Autowired
     private UserMapper userMapper;
-
+    /**
+     * groupMapper.
+     */
     @Autowired
     private GroupMapper groupMapper;
-
+    /**
+     * roleMapper.
+     */
     @Autowired
     private RoleMapper roleMapper;
 
+    /**
+     * messge Mapper.
+     */
+    @Autowired
+    private MessageMapper messageMapper;
+    /**
+     * groupService.
+     */
     @Autowired
     private GroupService groupService;
-
+    /**
+     * roleService.
+     */
     @Autowired
     private RoleService roleService;
 
-    @Value("${jwt.tokenHead}")
-    private String tokenHead;
-
+    /**
+     * add user.
+     */
     @Override
     @Transactional
-    public UserDetail register(UserRegisterRequest request) {
-        UserDetail bizUser = userMapper.findByUsername(request.getUsername());
-        if (null != bizUser) {
-            throw new BusinessException(BaseResponse.failure(ResultCode.BAD_REQUEST, "User aready exist!"));
-        }
+    public void insert(final UserRequest user) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        UserDetail userDetail = new UserDetail(request.getUsername(), encoder.encode(request.getPassword()), request.getEmail(),
-                request.getJob_title(), "N", "W");
-        // insert user bace info
-        userMapper.insert(userDetail);
-
-        return userDetail;
-    }
-
-    @Override
-    @Transactional
-    public String insert(UserRequest user) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        UserDetail userDetail = new UserDetail(user.getUsername(), encoder.encode("000000"), user.getEmail(), user.getJob_title(), "N", "A");
+        UserDetail userDetail = new UserDetail(user.getUsername(), encoder.encode("000000"), user.getEmail(), user.getJobTitle(), "N", "A");
         // insert user bace info
         userMapper.insert(userDetail);
         // add user group and role under the group
         List<UserGroup> groups = user.getGroups();
         if (!Collections.isEmpty(groups)) {
             for (UserGroup userGroup : groups) {
-                userMapper.insertUserGroup(userDetail.getUser_id(), userGroup.getGroup_id(), userGroup.getRole_id());
+                userMapper.insertUserGroup(userDetail.getUserId(), userGroup.getGroupId(), userGroup.getRoleId());
             }
         }
-
-        return "successfully!";
-
     }
 
+    /**
+     * update user.
+     */
     @Override
     @Transactional
     public void update(final UserRequest request) {
@@ -102,13 +109,13 @@ public class UserServiceImpl implements UserService {
         if (!Collections.isEmpty(userGroups)) {
             for (UserGroup userGroup : userGroups) {
                 // check weather the group exist
-                UserGroup group = userMapper.findUserGroupByGroupId(request.getUserId(), userGroup.getGroup_id());
+                UserGroup group = userMapper.findUserGroupByUserIdAndGroupId(request.getUserId(), userGroup.getGroupId());
                 if (null == group) {
-                    userMapper.insertUserGroup(request.getUserId(), userGroup.getGroup_id(), userGroup.getRole_id());
+                    userMapper.insertUserGroup(request.getUserId(), userGroup.getGroupId(), userGroup.getRoleId());
                 } else {
-                    userMapper.updateUserGroup(request.getUserId(), userGroup.getGroup_id(), userGroup.getRole_id());
+                    userMapper.updateUserGroup(request.getUserId(), userGroup.getGroupId(), userGroup.getRoleId());
                 }
-                groupIds.add(userGroup.getGroup_id());
+                groupIds.add(userGroup.getGroupId());
             }
             // check if has other groups
             List<Integer> groups = userMapper.findUserGroupByGroupIds(request.getUserId(), groupIds);
@@ -119,16 +126,18 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * retrieve all user.
+     */
     @Override
-    public UserListResponse findAllUser(final int userId, final String superuser, int pageNo, int limit, String name) {
+    public UserListResponse findAllUser(final int userId, final String superuser, final int pageNo, final int limit, final String name) {
         List<UserDetailResponse> userDetailList = new ArrayList<>();
         List<UserDetail> users = userMapper.findAllUser();
         // if super user ,return all users,otherwise fliter by group id.
         if ("N".equals(superuser)) {
             List<UserGroup> groups = userMapper.findUserGroups(userId);
             for (UserGroup group : groups) {
-                // userIds = userMapper.findUsersByGroupId(group.getGroup_id());
-                users = users.stream().filter(user -> userMapper.findUsersByGroupId(group.getGroup_id()).contains(user.getUser_id()))
+                users = users.stream().filter(user -> userMapper.findUsersByGroupId(group.getGroupId()).contains(user.getUserId()))
                         .collect(Collectors.toList());
             }
         }
@@ -138,31 +147,37 @@ public class UserServiceImpl implements UserService {
         }
         int size = users.size();
         // filter by pageNo and limit
-        users = users.stream().skip((pageNo - 1) * limit).limit(limit).collect(Collectors.toList());
+        users = users.stream().skip((pageNo - 1) * (long) limit).limit(limit).collect(Collectors.toList());
         // set users
         for (UserDetail user : users) {
-            List<UserGroupTree> group = this.getGroupTree(user.getUser_id());
-            UserDetailResponse userDetail = new UserDetailResponse(user.getUser_id(), user.getUsername(), user.getStatus(), user.getEmail(),
-                    user.getJob_title(), user.getSuperuser(), user.getPhoto(), this.getUserGroups(user.getUser_id()), group);
+            List<UserGroupTree> group = this.getGroupTree(user.getUserId());
+            UserDetailResponse userDetail = new UserDetailResponse(user.getUserId(), user.getUsername(), user.getStatus(), user.getEmail(),
+                    user.getJobTitle(), user.getSuperuser(), user.getPhoto(), this.getUserGroups(user.getUserId()), group);
             userDetailList.add(userDetail);
         }
 
         return new UserListResponse(userDetailList, size);
     }
 
+    /**
+     * get user group.
+     * @param userId user id
+     * @return  user group list
+     */
     public List<UserGroupBean> getUserGroups(final int userId) {
-        List<UserGroupBean> userGroups = new ArrayList<UserGroupBean>();
+        List<UserGroupBean> userGroups = new ArrayList<>();
         List<UserGroup> group = userMapper.findUserGroups(userId);
         for (UserGroup userGroup : group) {
-            String groupName = groupMapper.findById(userGroup.getGroup_id()).getGroupname();
-            String roleName = roleMapper.findRoleNameById(userGroup.getRole_id());
-            userGroups.add(new UserGroupBean(userGroup.getGroup_id(), groupName, userGroup.getRole_id(), roleName));
+            String groupName = groupMapper.findById(userGroup.getGroupId()).getGroupname();
+            String roleName = roleMapper.findRoleNameById(userGroup.getRoleId());
+            userGroups.add(new UserGroupBean(userGroup.getGroupId(), groupName, userGroup.getRoleId(), roleName));
         }
-
         return userGroups;
-
     }
 
+    /**
+     * retrieve user info by name.
+     */
     @Override
     public UserDetail findUserByName(final String username) {
         UserDetail user = userMapper.findByUsername(username);
@@ -172,27 +187,36 @@ public class UserServiceImpl implements UserService {
         return userMapper.findByUsername(username);
     }
 
+    /**
+     * retrieve user info by id.
+     */
     @Override
-    public UserDetailResponse findUserByID(int userId) {
+    public UserDetailResponse findUserByID(final int userId) {
         UserDetailResponse userDetail;
         UserDetail user = userMapper.findByUserId(userId);
         if (null != user) {
-            List<UserGroupTree> group = this.getGroupTree(user.getUser_id());
-            userDetail = new UserDetailResponse(user.getUser_id(), user.getUsername(), user.getStatus(), user.getEmail(), user.getJob_title(),
-                    user.getSuperuser(), user.getPhoto(), this.getUserGroups(user.getUser_id()), group);
+            List<UserGroupTree> group = this.getGroupTree(user.getUserId());
+            userDetail = new UserDetailResponse(user.getUserId(), user.getUsername(), user.getStatus(), user.getEmail(), user.getJobTitle(),
+                    user.getSuperuser(), user.getPhoto(), this.getUserGroups(user.getUserId()), group);
         } else {
             throw new BusinessException(BaseResponse.failure(ResultCode.BAD_REQUEST, "User dose not exist!"));
         }
         return userDetail;
     }
 
+    /**
+     * juge wether user exist.
+     */
     @Override
-    public boolean isUserExist(String username) {
+    public boolean isUserExist(final String username) {
         UserDetail user = userMapper.findByUsername(username);
 
-        return null == user ? false : true;
+        return null != user;
     }
 
+    /**
+     * retrieve uer group trees.
+     */
     @Override
     public List<UserGroupTree> getGroupTree(final int userId) {
         List<Group> groups = groupService.findAllGroup(userId, null, 0, 0, null, true).getGroups();
@@ -200,7 +224,7 @@ public class UserServiceImpl implements UserService {
         List<GroupNode> children = new ArrayList<>();
         if (!Collections.isEmpty(groups)) {
             for (Group group : groups) {
-                GroupNode groupNode = new GroupNode(String.valueOf(group.getGroup_id()), group.getGroupname(), this.getRoleNodes(), "", false);
+                GroupNode groupNode = new GroupNode(String.valueOf(group.getGroupId()), group.getGroupname(), this.getRoleNodes(), "", false);
                 setGroupRole(userId, groupNode);
                 children.add(groupNode);
             }
@@ -210,16 +234,16 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 
-     * @param userId
-     * @param groupNode
+     * set group role.
+     * @param userId user id
+     * @param groupNode group 
      */
     public void setGroupRole(final int userId, final GroupNode groupNode) {
         List<UserGroup> userGroups = userMapper.findUserGroups(userId);
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         if (!Collections.isEmpty(userGroups)) {
             for (UserGroup group : userGroups) {
-                map.put(String.valueOf(userId) + String.valueOf(group.getGroup_id()), String.valueOf(group.getRole_id()));
+                map.put(String.valueOf(userId) + String.valueOf(group.getGroupId()), String.valueOf(group.getRoleId()));
 
             }
         }
@@ -240,38 +264,65 @@ public class UserServiceImpl implements UserService {
         List<Role> roles = roleService.findAllRole();
         if (!Collections.isEmpty(roles)) {
             for (Role role : roles) {
-                RoleNode roleNode = new RoleNode(String.valueOf(role.getRole_id()), role.getRole());
+                RoleNode roleNode = new RoleNode(String.valueOf(role.getRoleId()), role.getRoleName());
                 roleNodes.add(roleNode);
             }
-
         }
         return roleNodes;
     }
 
+    /**
+     * approve user.
+     */
     @Override
     @Transactional
-    public String delete(final int userId) {
-        userMapper.delete(userId);
-        List<Integer> users = new ArrayList<>();
-        users.add(userId);
-        userMapper.deleteUserGroupByUserIds(users);
-        return "successfully!";
+    public void approveUser(final UserRequest req) {
+        // update status
+        userMapper.updateUserStatus("A", req.getUserId());
+        // update group and role
+        List<UserGroup> groups = req.getGroups();
+        for (UserGroup userGroup : groups) {
+            UserGroup group = userMapper.findUserGroupByUserIdAndGroupId(userGroup.getUserId(), userGroup.getGroupId());
+            if (null != group) {
+                userMapper.updateUserGroup(userGroup.getUserId(), userGroup.getGroupId(), userGroup.getRoleId());
+            } else {
+                userMapper.insertUserGroup(userGroup.getUserId(), userGroup.getGroupId(), userGroup.getRoleId());
+            }
+        }
     }
 
+    /**
+     * reject user.
+     */
+    @Override
+    public void rejectUser(final Message msg) {
+        // add one message
+        messageMapper.insert(msg);
+    }
+    /**
+     * delete user.
+     */
     @Override
     @Transactional
-    public String deleteMultiUser(List<Integer> users) {
-        userMapper.deleteUsers(users);
-        userMapper.deleteUserGroupByUserIds(users);
-        return "successfully!";
+    public String delete(final int userId, final int groupId, final int groupLength) {
+        // delete user group
+        if (0 != groupId) {
+            List<Integer> deleteGroup = new ArrayList<>();
+            deleteGroup.add(groupId);
+            userMapper.deleteUserGroupByUserIdAndGroups(deleteGroup, userId);
+        }
+        // delete user
+        if (1 == groupLength || 0 == groupLength) {
+            List<Integer> users = new ArrayList<>();
+            users.add(userId);
+            userMapper.deleteUsers(users);
+        }
+        return Constant.SUCCESS_MESSAGE;
     }
 
-    @Override
-    public String updateUserStatus(String status, int userId) {
-        userMapper.updateUserStatus(status, userId);
-        return "successfully!";
-    }
-
+    /**
+     * juge wether password correct .
+     */
     @Override
     public boolean isPasswordSame(final int userId, final String passWord) {
         BCryptPasswordEncoder encode = new BCryptPasswordEncoder();
@@ -282,11 +333,14 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
+    /**
+     * update password.
+     */
     @Override
-    public String updateUserPassword(int userId, String password) {
+    public String updateUserPassword(final int userId, final String password) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         userMapper.updateUserPassword(userId, encoder.encode(password));
-        return "successfully!";
+        return Constant.SUCCESS_MESSAGE;
     }
 
 }

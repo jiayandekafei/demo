@@ -13,11 +13,11 @@
 	</select>
 	<select id="findById"
 		resultType="hoperun.pagoda.demo.entity.Customer">
-		SELECT * from tb_customer where customer_id = #{id};
+		SELECT * from tb_customer where customerId = #{id};
 	</select>
 	<insert id="insert"
 		parameterType="hoperun.pagoda.demo.entity.Customer"
-		useGeneratedKeys="true" keyProperty="customer_id">
+		useGeneratedKeys="true" keyProperty="customerId">
 		insert into tb_customer (customername,description) VALUES
 		(#{customername}, #{description});
 	</insert>
@@ -29,16 +29,16 @@
 	</update>
 
 	<delete id="delete">
-		delete from tb_customer where customer_id =#{id}
+		delete from tb_customer where customerId =#{id}
 	</delete>
 
 	<delete id="batchDelete" parameterType="java.util.List">
 		delete from tb_customer where 1=2
 		<if test="customers!=null and customers.size()>0">
-			or customer_id in
-			<foreach collection="customers" item="customer_id" index="index"
+			or customerId in
+			<foreach collection="customers" item="customerId" index="index"
 				open="(" close=")" separator=",">
-				 #{customer_id}
+				 #{customerId}
 			</foreach>
 		</if>
 	</delete>

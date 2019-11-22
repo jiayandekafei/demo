@@ -14,6 +14,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import hoperun.pagoda.demo.constant.Constant;
 import hoperun.pagoda.demo.entity.UserDetail;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.CompressionCodecs;
@@ -29,23 +30,43 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Component
 public class JwtUtils {
 
+    /**
+     * 
+     */
     public static final String ROLE_REFRESH_TOKEN = "ROLE_REFRESH_TOKEN";
 
-    private static final String CLAIM_KEY_USER_ID = "user_id";
-    private static final String CLAIM_KEY_AUTHORITIES = "scope";
+    /**
+     * user id.
+     */
+    private static final String CLAIM_KEY_USER_ID = "userId";
 
-    private Map<String, String> tokenMap = new ConcurrentHashMap<>(32);
+    /**
+     * token map.
+     */
+    private Map<String, String> tokenMap = new ConcurrentHashMap<>(Constant.NUMBER_32);
 
+    /**
+     * token generate key.
+     */
     @Value("${jwt.secret}")
     private String secret;
 
+    /**
+     * token access expiration.
+     */
     @Value("${jwt.expiration}")
-    private Long access_token_expiration;
+    private Long accessTokenExpiration;
 
+    /**
+     * token refresh expiration.
+     */
     @Value("${jwt.expiration}")
-    private Long refresh_token_expiration;
+    private Long refreshTokenExpiration;
 
-    private final SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS256;
+    /**
+     * signature algorithm.
+     */
+    private static final SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS256;
 
     /**
      * Get user info from the token.
@@ -59,7 +80,10 @@ public class JwtUtils {
         try {
             final Claims claims = getClaimsFromToken(token);
             int userId = getUserIdFromToken(token);
-            String username = claims.getSubject();
+            String username = "";
+            if (null != claims) {
+                username = claims.getSubject();
+            }
             userDetail = new UserDetail(userId, username, "");
         } catch (Exception e) {
             userDetail = null;
@@ -70,53 +94,34 @@ public class JwtUtils {
     /**
      * Get user id from token.
      *
-     * @param token
+     * @param token token
      * @return long user id.
      */
-    public int getUserIdFromToken(String token) {
-        int userId;
-        try {
-            final Claims claims = getClaimsFromToken(token);
-            userId = Integer.parseInt(String.valueOf(claims.get(CLAIM_KEY_USER_ID)));
-        } catch (Exception e) {
-            userId = 0;
-        }
-        return userId;
+    public int getUserIdFromToken(final String token) {
+        final Claims claims = getClaimsFromToken(token);
+        return null != claims ? Integer.parseInt(String.valueOf(claims.get(CLAIM_KEY_USER_ID))) : 0;
     }
 
     /**
      * Get user name from token.
      *
-     * @param token
-     *            token
+     * @param token token
      * @return String username
      */
     public final String getUsernameFromToken(final String token) {
-        String username;
-        try {
-            final Claims claims = getClaimsFromToken(token);
-            username = claims.getSubject();
-        } catch (Exception e) {
-            username = null;
-        }
-        return username;
+        final Claims claims = getClaimsFromToken(token);
+        return null != claims ? claims.getSubject() : "";
     }
 
     /**
-     * Get created date from token
+     * Get created date from token.
      * 
-     * @param token
-     * @return
+     * @param token token
+     * @return token generated date
      */
-    public Date getCreatedDateFromToken(String token) {
-        Date created;
-        try {
-            final Claims claims = getClaimsFromToken(token);
-            created = claims.getIssuedAt();
-        } catch (Exception e) {
-            created = null;
-        }
-        return created;
+    public Date getCreatedDateFromToken(final String token) {
+        final Claims claims = getClaimsFromToken(token);
+        return null != claims ? claims.getIssuedAt() : null;
     }
 
     /**
@@ -128,7 +133,6 @@ public class JwtUtils {
      */
     public String generateAccessToken(final UserDetail userDetail) {
         Map<String, Object> claims = generateClaims(userDetail);
-        // claims.put(CLAIM_KEY_AUTHORITIES, authoritiesToArray(userDetail.getAuthorities()).get(0));
         return generateAccessToken(userDetail.getUsername(), claims);
     }
 
@@ -139,58 +143,57 @@ public class JwtUtils {
      *            token
      * @return Date expiration date
      */
-    public Date getExpirationDateFromToken(String token) {
-        Date expiration;
-        try {
-            final Claims claims = getClaimsFromToken(token);
-            expiration = claims.getExpiration();
-        } catch (Exception e) {
-            expiration = null;
-        }
-        return expiration;
+    public Date getExpirationDateFromToken(final String token) {
+        final Claims claims = getClaimsFromToken(token);
+        return null != claims ? claims.getExpiration() : null;
+
     }
 
-    public Boolean canTokenBeRefreshed(String token, Date lastPasswordReset) {
+    /**
+     * juge if can refresh token.
+     * @param token token
+     * @param lastPasswordReset last password reset date
+     * @return true if token is not expired and is created before password reset
+     */
+    public Boolean canTokenBeRefreshed(final String token, final Date lastPasswordReset) {
         final Date created = getCreatedDateFromToken(token);
         return !isCreatedBeforeLastPasswordReset(created, lastPasswordReset) && (!isTokenExpired(token));
     }
 
-    public String refreshToken(String token) {
-        String refreshedToken;
-        try {
-            final Claims claims = getClaimsFromToken(token);
-            refreshedToken = generateAccessToken(claims.getSubject(), claims);
-        } catch (Exception e) {
-            refreshedToken = null;
-        }
-        return refreshedToken;
+    /**
+     * get refresh token.
+     * @param token token
+     * @return token
+     */
+    public String refreshToken(final String token) {
+        final Claims claims = getClaimsFromToken(token);
+        return null != claims ? generateAccessToken(claims.getSubject(), claims) : "";
+
     }
 
     /**
-     * validate token
+     * validate token.
      * 
      * @param token
      *            token
      * @param userDetails
      *            userDetails
-     * @return
+     * @return true id token is valida otherwise false.
      */
-    public Boolean validateToken(String token, UserDetails userDetails) {
+    public Boolean validateToken(final String token, final UserDetails userDetails) {
         UserDetail userDetail = (UserDetail) userDetails;
         final long userId = getUserIdFromToken(token);
         final String username = getUsernameFromToken(token);
-        // final Date created = getCreatedDateFromToken(token);
-        return (userId == userDetail.getUser_id() && username.equals(userDetail.getUsername()) && !isTokenExpired(token)
-        // && !isCreatedBeforeLastPasswordReset(created, userDetail.getLastPasswordResetDate())
-        );
+        return (userId == userDetail.getUserId() && username.equals(userDetail.getUsername()) && !isTokenExpired(token));
     }
 
-    public String generateRefreshToken(UserDetail userDetail) {
+    /**
+     * generate refresh token.
+     * @param userDetail userDetail
+     * @return refresh token
+     */
+    public String generateRefreshToken(final UserDetail userDetail) {
         Map<String, Object> claims = generateClaims(userDetail);
-        //
-        // String roles[] = new String[]{JwtUtils.ROLE_REFRESH_TOKEN};
-        // JSONArray jsonArray = (JSONArray) JSONArray.parse(roles.toString());
-        // claims.put(CLAIM_KEY_AUTHORITIES, jsonArray.toJSONString());
         return generateRefreshToken(userDetail.getUsername(), claims);
     }
 
@@ -202,16 +205,16 @@ public class JwtUtils {
      * @param token
      *            token
      */
-    public void putToken(String userName, String token) {
+    public void putToken(final String userName, final String token) {
         tokenMap.put(userName, token);
     }
 
     /**
      * Delete token.
      *
-     * @param userName
+     * @param userName userName
      */
-    public void deleteToken(String userName) {
+    public void deleteToken(final String userName) {
         tokenMap.remove(userName);
     }
 
@@ -225,10 +228,8 @@ public class JwtUtils {
      * @return true: if included otherwise false
      */
     public boolean containToken(final String userName, final String token) {
-        if (userName != null && tokenMap.containsKey(userName) && tokenMap.get(userName).equals(token)) {
-            return true;
-        }
-        return false;
+        return userName != null && tokenMap.containsKey(userName) && tokenMap.get(userName).equals(token);
+
     }
 
     /**
@@ -238,8 +239,8 @@ public class JwtUtils {
      *            token
      * @return Cliams cliams
      */
-    private Claims getClaimsFromToken(String token) {
-        Claims claims;
+    private Claims getClaimsFromToken(final String token) {
+        Claims claims = null;
         try {
             claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
         } catch (Exception e) {
@@ -255,8 +256,8 @@ public class JwtUtils {
      *            expiration time
      * @return Date expiration date
      */
-    private Date generateExpirationDate(long expiration) {
-        return new Date(System.currentTimeMillis() + expiration * 1000);
+    private Date generateExpirationDate(final long expiration) {
+        return new Date(System.currentTimeMillis() + expiration * Constant.NUMBER_1000);
     }
 
     /**
@@ -266,19 +267,18 @@ public class JwtUtils {
      *            token
      * @return true if expired othwise false.
      */
-    private Boolean isTokenExpired(String token) {
-        final Date expiration = getExpirationDateFromToken(token);
-        return expiration.before(new Date());
+    private Boolean isTokenExpired(final String token) {
+        return getExpirationDateFromToken(token).before(new Date());
     }
 
     /**
-     * 
-     * @param created
-     * @param lastPasswordReset
-     * @return
+     * juge if token created before password reset.
+     * @param created create date,last password reset date.
+     * @param lastPasswordReset lastPasswordReset
+     * @return true if created before last word set before.
      */
-    private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {
-        return (lastPasswordReset != null && created.before(lastPasswordReset));
+    private Boolean isCreatedBeforeLastPasswordReset(final Date created, final Date lastPasswordReset) {
+        return lastPasswordReset != null && created.before(lastPasswordReset);
     }
 
     /**
@@ -290,22 +290,28 @@ public class JwtUtils {
      */
     private Map<String, Object> generateClaims(final UserDetail userDetail) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put(CLAIM_KEY_USER_ID, userDetail.getUser_id());
+        claims.put(CLAIM_KEY_USER_ID, userDetail.getUserId());
         return claims;
     }
 
     /**
      * Generate access token.
      *
-     * @param subject
-     * @param claims
-     * @return
+     * @param subject subject
+     * @param claims claims
+     * @return access token
      */
-    private String generateAccessToken(String subject, Map<String, Object> claims) {
-        return generateToken(subject, claims, access_token_expiration);
+    private String generateAccessToken(final String subject, final Map<String, Object> claims) {
+        return generateToken(subject, claims, accessTokenExpiration);
     }
 
-    private List<String> authoritiesToArray(Collection<? extends GrantedAuthority> authorities) {
+    /**
+     * parse authorities.
+     * @param authorities authorities
+     * @return authorities
+     */
+    @SuppressWarnings("unused")
+    private List<String> authoritiesToArray(final Collection<? extends GrantedAuthority> authorities) {
         List<String> list = new ArrayList<>();
         for (GrantedAuthority ga : authorities) {
             list.add(ga.getAuthority());
@@ -313,19 +319,25 @@ public class JwtUtils {
         return list;
     }
 
-    private String generateRefreshToken(String subject, Map<String, Object> claims) {
-        return generateToken(subject, claims, refresh_token_expiration);
+    /**
+     * generate refresh token.
+     * @param subject subject
+     * @param claims claims
+     * @return refresh token
+     */
+    private String generateRefreshToken(final String subject, final Map<String, Object> claims) {
+        return generateToken(subject, claims, refreshTokenExpiration);
     }
 
     /**
      * Generate token.
      *
-     * @param subject
-     * @param claims
-     * @param expiration
-     * @return
+     * @param subject subject
+     * @param claims claims
+     * @param expiration expiration
+     * @return token
      */
-    private String generateToken(String subject, Map<String, Object> claims, long expiration) {
+    private String generateToken(final String subject, final Map<String, Object> claims, final long expiration) {
         return Jwts.builder().setClaims(claims).setSubject(subject).setId(UUID.randomUUID().toString()).setIssuedAt(new Date())
                 .setExpiration(generateExpirationDate(expiration)).compressWith(CompressionCodecs.DEFLATE).signWith(SIGNATURE_ALGORITHM, secret)
                 .compact();
