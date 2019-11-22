@@ -49,16 +49,9 @@ public interface UserMapper {
     /**
      * delete.
      * 
-     * @param userId
+     * @param users users
      */
     void deleteUsers(@Param("users") List<Integer> users);
-
-    /**
-     * delete.
-     * 
-     * @param userId
-     */
-    void delete(int userId);
 
     /**
      * retrieve all users.
@@ -123,18 +116,17 @@ public interface UserMapper {
     /**
      * delete user role.
      *
-     * @param userId
-     * @param int
-     *            []Group ID
-     * @return
+     * @param deleteGroup group list
+     * @param userId userId
+     * @return  1 if updated successful otherwise 0
      */
     int deleteUserGroupByUserIdAndGroups(@Param("deleteGroup") List<Integer> deleteGroup, @Param("userId") int userId);
 
     /**
      * delete user role.
      *
-     * @param userId
-     * @return
+     * @param users users
+     * @return 1 if updated successful otherwise 0
      */
     int deleteUserGroupByUserIds(@Param("users") List<Integer> users);
 

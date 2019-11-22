@@ -29,6 +29,6 @@ public interface RoleMapper {
      *            roleId
      * @return rolename
      */
-    String findRoleNameById(final @Param("roleId") long roleId);
+    String findRoleNameById(@Param("roleId") long roleId);
 
 }
