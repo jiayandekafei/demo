@@ -58,8 +58,10 @@ public class GroupController {
     @SuppressWarnings("unchecked")
     @GetMapping("/list")
     @ApiOperation(value = "retrieve group list")
-    public BaseResponse<GroupListResponse> retrieveGroupList(@RequestParam final String superuser, @RequestParam final int pageNo,
-            @RequestParam final int limit, @RequestParam final String name, @RequestParam final String groups) {
+    public BaseResponse<GroupListResponse> retrieveGroupList(@RequestParam final String superuser,
+            @RequestParam(required = false, defaultValue = "1") final int pageNo,
+            @RequestParam(required = false, defaultValue = "99999999") final int limit, @RequestParam(required = false) final String name,
+            @RequestParam final String groups) {
         final String method = "retrieveGroupList";
 
         if (LOGGER.isDebugEnabled()) {

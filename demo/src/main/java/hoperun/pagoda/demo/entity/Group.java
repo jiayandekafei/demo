@@ -49,4 +49,12 @@ public class Group implements Serializable {
      * customerName.
      */
     private String customername;
+    /**
+     * notes DB path.
+     */
+    private String notesDBPath;
+    /**
+     * notes DB export result path.
+     */
+    private String exportResultPath;
 }
