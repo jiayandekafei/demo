@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="hoperun.pagoda.demo.mapper.GroupMapper">
      <select id="findAllGroup" resultType="hoperun.pagoda.demo.entity.Group">
-        SELECT * from tb_group;
+        SELECT groupId,groupname,customerId,server,serverUser,serverPassword,description from tb_group;
     </select>
     <select id="findByName" resultType="hoperun.pagoda.demo.entity.Group">
         SELECT * from tb_group where groupname =#{name};
@@ -13,12 +13,12 @@
         SELECT * from tb_group where groupId =#{groupId};
     </select>
     <insert id="insert" parameterType="hoperun.pagoda.demo.entity.Group" useGeneratedKeys="true" keyProperty="groupId">
-        insert into tb_group (groupname, customerId,server,serverUser,serverPasword,description) VALUES 
-        (#{groupname}, #{customerId}, #{server}, #{serverUser}, #{serverPasword}, #{description});
+        insert into tb_group (groupname, customerId,server,serverUser,serverPassword,description) VALUES 
+        (#{groupname}, #{customerId}, #{server}, #{serverUser}, #{serverPassword}, #{description});
     </insert>
      <update id="update" parameterType="hoperun.pagoda.demo.entity.Group">
         update tb_group 
-        set customerId=#{customerId}, server=#{server}, serverUser=#{serverUser}, serverPasword=#{serverPasword}, description=#{description}
+        set customerId=#{customerId}, server=#{server}, serverUser=#{serverUser}, serverPassword=#{serverPassword}, description=#{description}
         where groupId =#{groupId};
     </update>
     
@@ -39,6 +39,17 @@
     
     <select id="findCustomersByGroupId" resultType="int">
         SELECT customerId from tb_group where groupId =#{groupId};
+    </select>
+    
+     <select id="findCustomersByGroupIds" parameterType="java.util.List">
+        select customerId from demo.tb_group where 1=2
+        <if test="groups!=null and groupIds.size()>0">
+            or groupId in
+            <foreach collection="groupIds" item="groupId" index="index"
+                open="(" close=")" separator=",">
+                 #{groupId}
+            </foreach>
+        </if>
     </select>
     
    <update id="updateGroupCustomer" parameterType="java.util.List">

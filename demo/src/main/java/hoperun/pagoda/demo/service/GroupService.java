@@ -1,6 +1,7 @@
 package hoperun.pagoda.demo.service;
 
 import java.util.List;
+import java.util.Map;
 
 import hoperun.pagoda.demo.bean.GroupListResponse;
 import hoperun.pagoda.demo.entity.Group;
@@ -16,20 +17,25 @@ public interface GroupService {
     /**
      * retrieve group list.
      * 
-     * @param userId user id
      * @param superuser is super user
      * @param pageNo pageNo 
      * @param limit the number of each page
      * @param name group name
-     * @param isGroupTree whether get for group tree
+     * @param currentGroup currentGroup
      * @return group list
      */
-    GroupListResponse findAllGroup(int userId, String superuser, int pageNo, int limit, String name, boolean isGroupTree);
+    GroupListResponse findAllGroup(String superuser, int pageNo, int limit, String name, List<Integer> currentGroup);
+
+    /**
+     * get group map.
+     * @return group map
+     */
+    Map<Integer, String> getGroupMap();
 
     /**
      * retrieve groupInfo.
      * 
-     * @param groupId
+     * @param groupId groupId
      * @return group
      */
     Group findByGrupId(int groupId);
@@ -39,31 +45,29 @@ public interface GroupService {
      * 
      * @param request
      *            group
-     * @return
+     * @return message
      */
     String create(Group request);
 
     /**
      * create new group.
      * 
-     * @param request
-     * @return
+     * @param request request
+     * @return message
      */
     String update(Group request);
 
     /**
      * delete by group id.
      * 
-     * @param groupId
-     * @return
+     * @param groupId group id
      */
     void delete(int groupId);
 
     /**
      * batch.
      * 
-     * @param groups
-     * @return
+     * @param groups groups 
      */
     void batchDelete(List<Integer> groups);
 

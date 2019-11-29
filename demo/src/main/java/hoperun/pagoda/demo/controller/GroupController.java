@@ -22,6 +22,7 @@ import hoperun.pagoda.demo.bean.GroupListResponse;
 import hoperun.pagoda.demo.constant.Constant;
 import hoperun.pagoda.demo.entity.Group;
 import hoperun.pagoda.demo.service.GroupService;
+import hoperun.pagoda.demo.utils.StringUtils;
 import io.swagger.annotations.ApiOperation;
 
 /**
@@ -47,21 +48,25 @@ public class GroupController {
 
     /**
      * Get group List.
-     *
-     * @return BaseResponse<UserListResponse> user list
+     * @param superuser superuser
+     * @param pageNo pageNo
+     * @param limit limit
+     * @param name name
+     * @param groups groups.
+     * @return BaseResponse<GroupListResponse> group list
      */
     @SuppressWarnings("unchecked")
     @GetMapping("/list")
     @ApiOperation(value = "retrieve group list")
-    public BaseResponse<GroupListResponse> retrieveGroupList(@RequestParam final int userId, @RequestParam final String superuser,
-            @RequestParam final int pageNo, @RequestParam final int limit, @RequestParam final String name) {
+    public BaseResponse<GroupListResponse> retrieveGroupList(@RequestParam final String superuser, @RequestParam final int pageNo,
+            @RequestParam final int limit, @RequestParam final String name, @RequestParam final String groups) {
         final String method = "retrieveGroupList";
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "get group list started");
         }
 
-        GroupListResponse response = groupService.findAllGroup(userId, superuser, pageNo, limit, name, false);
+        GroupListResponse response = groupService.findAllGroup(superuser, pageNo, limit, name, StringUtils.convertStringIntList(groups));
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "get group list end");
@@ -70,31 +75,9 @@ public class GroupController {
         return BaseResponse.ok(response);
     }
 
-    /**
-     * Get group filter List.
-     *
-     * @return BaseResponse<UserListResponse> user list
-     */
-    @SuppressWarnings("unchecked")
-    @GetMapping("/filterList")
-    @ApiOperation(value = "retrieve group list")
-    public BaseResponse<GroupListResponse> retrieveGroupFilterList() {
-        final String method = "retrieveGroupFilterList";
-
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug(Constant.LOG_PATTERLN, method, "get group filter list started");
-        }
-
-        GroupListResponse response = groupService.findAllGroup(0, "", 0, 0, "", true);
-
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug(Constant.LOG_PATTERLN, method, "get group list end");
-        }
-        return BaseResponse.ok(response);
-    }
     /**
      * Get Group List.
-     *
+     * @param groupId group id
      * @return BaseResponse<GroupDetail> Group reponse
      */
     @SuppressWarnings("unchecked")
@@ -112,13 +95,13 @@ public class GroupController {
 
     /**
      * update Group List.
-     *
+     * @param request request
      * @return BaseResponse<group> Group reponse
      */
     @SuppressWarnings("unchecked")
     @ApiOperation(value = "update Group by Group id")
     @PutMapping("")
-    public BaseResponse<String> updateGroupById(@RequestBody Group request) {
+    public BaseResponse<String> updateGroupById(@RequestBody final Group request) {
         final String method = "updateGroupById";
 
         if (LOGGER.isDebugEnabled()) {
@@ -128,35 +111,50 @@ public class GroupController {
         return BaseResponse.ok(groupService.update(request));
     }
 
+    /**
+     * add group .
+     * @param request request.
+     * @return message.
+     */
     @SuppressWarnings("unchecked")
     @PostMapping("")
-    public BaseResponse<String> addGroup(@RequestBody Group request) {
+    public BaseResponse<String> addGroup(@RequestBody final Group request) {
 
         return BaseResponse.ok(groupService.create(request));
     }
 
+    /**
+     * delete group. 
+     * @param groupId group id
+     * @return message.
+     */
     @SuppressWarnings("unchecked")
     @DeleteMapping("/{groupId}")
-    public BaseResponse<String> deleteGroup(@PathVariable("groupId") Integer groupId) {
+    public BaseResponse<String> deleteGroup(@PathVariable("groupId") final Integer groupId) {
         groupService.delete(groupId);
-        return BaseResponse.ok("successfully!");
+        return BaseResponse.ok(Constant.SUCCESS_MESSAGE);
     }
 
+    /**
+     * delte mutil group.
+     * @param request request.
+     * @return message.
+     */
     @SuppressWarnings("unchecked")
     @PostMapping("/deleteBatch")
-    public BaseResponse<String> batchDeleteGroup(@RequestBody DeleteGroupRequest request) {
+    public BaseResponse<String> batchDeleteGroup(@RequestBody final DeleteGroupRequest request) {
         String[] ids = request.getGroupIds().split(",");
         List<Integer> groups = new ArrayList<>();
         for (int i = 0; i < ids.length; i++) {
             groups.add(Integer.parseInt(ids[i]));
         }
         groupService.batchDelete(groups);
-        return BaseResponse.ok("successfully!");
+        return BaseResponse.ok(Constant.SUCCESS_MESSAGE);
     }
 
     /**
      * check .
-     *
+     *@param  groupname group name
      * @return BaseResponse<GroupDetail> Group reponse
      */
     @SuppressWarnings("unchecked")

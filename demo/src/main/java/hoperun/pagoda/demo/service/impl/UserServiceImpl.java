@@ -1,9 +1,9 @@
 package hoperun.pagoda.demo.service.impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +17,8 @@ import hoperun.pagoda.demo.bean.UserDetailResponse;
 import hoperun.pagoda.demo.bean.UserListResponse;
 import hoperun.pagoda.demo.bean.UserRequest;
 import hoperun.pagoda.demo.constant.Constant;
-import hoperun.pagoda.demo.entity.Group;
 import hoperun.pagoda.demo.entity.GroupNode;
 import hoperun.pagoda.demo.entity.Message;
-import hoperun.pagoda.demo.entity.Role;
 import hoperun.pagoda.demo.entity.RoleNode;
 import hoperun.pagoda.demo.entity.UserDetail;
 import hoperun.pagoda.demo.entity.UserGroup;
@@ -28,9 +26,7 @@ import hoperun.pagoda.demo.entity.UserGroupBean;
 import hoperun.pagoda.demo.entity.UserGroupTree;
 import hoperun.pagoda.demo.exception.BusinessException;
 import hoperun.pagoda.demo.exception.ResultCode;
-import hoperun.pagoda.demo.mapper.GroupMapper;
 import hoperun.pagoda.demo.mapper.MessageMapper;
-import hoperun.pagoda.demo.mapper.RoleMapper;
 import hoperun.pagoda.demo.mapper.UserMapper;
 import hoperun.pagoda.demo.service.GroupService;
 import hoperun.pagoda.demo.service.RoleService;
@@ -50,17 +46,6 @@ public class UserServiceImpl implements UserService {
      */
     @Autowired
     private UserMapper userMapper;
-    /**
-     * groupMapper.
-     */
-    @Autowired
-    private GroupMapper groupMapper;
-    /**
-     * roleMapper.
-     */
-    @Autowired
-    private RoleMapper roleMapper;
-
     /**
      * messge Mapper.
      */
@@ -106,23 +91,21 @@ public class UserServiceImpl implements UserService {
         List<UserGroup> userGroups = request.getGroups();
         List<Integer> groupIds = new ArrayList<>();
         // update user group role table
-        if (!Collections.isEmpty(userGroups)) {
-            for (UserGroup userGroup : userGroups) {
-                // check weather the group exist
-                UserGroup group = userMapper.findUserGroupByUserIdAndGroupId(request.getUserId(), userGroup.getGroupId());
-                if (null == group) {
-                    userMapper.insertUserGroup(request.getUserId(), userGroup.getGroupId(), userGroup.getRoleId());
-                } else {
-                    userMapper.updateUserGroup(request.getUserId(), userGroup.getGroupId(), userGroup.getRoleId());
-                }
-                groupIds.add(userGroup.getGroupId());
+        for (UserGroup userGroup : userGroups) {
+            // check weather the group exist
+            UserGroup group = userMapper.findUserGroupByUserIdAndGroupId(request.getUserId(), userGroup.getGroupId());
+            if (null == group) {
+                userMapper.insertUserGroup(request.getUserId(), userGroup.getGroupId(), userGroup.getRoleId());
+            } else {
+                userMapper.updateUserGroup(request.getUserId(), userGroup.getGroupId(), userGroup.getRoleId());
             }
-            // check if has other groups
-            List<Integer> groups = userMapper.findUserGroupByGroupIds(request.getUserId(), groupIds);
-            // delete group
-            if (!Collections.isEmpty(groups)) {
-                userMapper.deleteUserGroupByUserIdAndGroups(groups, request.getUserId());
-            }
+            groupIds.add(userGroup.getGroupId());
+        }
+        // check if has other groups
+        List<Integer> groups = userMapper.findUserGroupByGroupIds(request.getUserId(), groupIds);
+        // delete group
+        if (!Collections.isEmpty(groups)) {
+            userMapper.deleteUserGroupByUserIdAndGroups(groups, request.getUserId());
         }
     }
 
@@ -130,49 +113,68 @@ public class UserServiceImpl implements UserService {
      * retrieve all user.
      */
     @Override
-    public UserListResponse findAllUser(final int userId, final String superuser, final int pageNo, final int limit, final String name) {
+    public UserListResponse findAllUser(final int userId, final String superuser, final int pageNo, final int limit, final String name,
+            final List<Integer> currentGroups) {
         List<UserDetailResponse> userDetailList = new ArrayList<>();
         List<UserDetail> users = userMapper.findAllUser();
-        // if super user ,return all users,otherwise fliter by group id.
-        if ("N".equals(superuser)) {
-            List<UserGroup> groups = userMapper.findUserGroups(userId);
-            for (UserGroup group : groups) {
-                users = users.stream().filter(user -> userMapper.findUsersByGroupId(group.getGroupId()).contains(user.getUserId()))
-                        .collect(Collectors.toList());
-            }
-        }
+        // filter by group
+        filterUserByGroup(superuser, currentGroups, userDetailList, users);
         // filter by name
         if (!StringUtils.isEmpty(name)) {
-            users = users.stream().filter(user -> name.equals(user.getUsername())).collect(Collectors.toList());
+            userDetailList = userDetailList.stream().filter(user -> user.getUsername().contains(name)).collect(Collectors.toList());
         }
-        int size = users.size();
+        int size = userDetailList.size();
         // filter by pageNo and limit
-        users = users.stream().skip((pageNo - 1) * (long) limit).limit(limit).collect(Collectors.toList());
-        // set users
-        for (UserDetail user : users) {
-            List<UserGroupTree> group = this.getGroupTree(user.getUserId());
-            UserDetailResponse userDetail = new UserDetailResponse(user.getUserId(), user.getUsername(), user.getStatus(), user.getEmail(),
-                    user.getJobTitle(), user.getSuperuser(), user.getPhoto(), this.getUserGroups(user.getUserId()), group);
-            userDetailList.add(userDetail);
-        }
+        userDetailList = userDetailList.stream().skip((pageNo - 1) * (long) limit).limit(limit).collect(Collectors.toList());
 
         return new UserListResponse(userDetailList, size);
     }
 
     /**
-     * get user group.
-     * @param userId user id
-     * @return  user group list
+     * filter user by group.
+     * @param superuser if super user 
+     * @param currentGroups currentGroups
+     * @param userDetailList userDetailList
+     * @param users users
      */
-    public List<UserGroupBean> getUserGroups(final int userId) {
-        List<UserGroupBean> userGroups = new ArrayList<>();
-        List<UserGroup> group = userMapper.findUserGroups(userId);
-        for (UserGroup userGroup : group) {
-            String groupName = groupMapper.findById(userGroup.getGroupId()).getGroupname();
-            String roleName = roleMapper.findRoleNameById(userGroup.getRoleId());
-            userGroups.add(new UserGroupBean(userGroup.getGroupId(), groupName, userGroup.getRoleId(), roleName));
+    private void filterUserByGroup(final String superuser, final List<Integer> currentGroups, final List<UserDetailResponse> userDetailList,
+            final List<UserDetail> users) {
+        // groupMap
+        Map<Integer, String> groupMap = groupService.getGroupMap();
+        // roleMap
+        Map<Integer, String> roleMap = roleService.getRoleMap();
+        // if super user ,return all users,otherwise fliter by group id.
+        for (UserDetail user : users) {
+            List<UserGroup> groups = userMapper.findUserGroups(user.getUserId());
+            if (!groups.isEmpty()) {
+                for (UserGroup userGroup : groups) {
+                    if ("Y".equals(superuser) || currentGroups.contains(userGroup.getGroupId())) {
+                        UserDetailResponse userDetail = new UserDetailResponse(user.getUserId(), user.getUsername(), user.getStatus(),
+                                user.getEmail(), user.getJobTitle(), user.getSuperuser(), user.getPhoto(),
+                                getGroupList(userGroup, groupMap.get(userGroup.getGroupId()), roleMap.get(userGroup.getRoleId())), groups.size());
+                        userDetailList.add(userDetail);
+                    }
+                }
+            } else {
+                UserDetailResponse userDetail = new UserDetailResponse(user.getUserId(), user.getUsername(), user.getStatus(), user.getEmail(),
+                        user.getJobTitle(), user.getSuperuser(), user.getPhoto(), new ArrayList<>(), 0);
+                userDetailList.add(userDetail);
+            }
         }
-        return userGroups;
+    }
+
+    /**
+     * Get Group.
+     * @param userGroup userGroup 
+     * @param groupName groupName 
+     * @param roleName roleName 
+     * @return group list
+     */
+    private List<UserGroupBean> getGroupList(final UserGroup userGroup, final String groupName, final String roleName) {
+        List<UserGroupBean> groupList = new ArrayList<>();
+        UserGroupBean group = new UserGroupBean(userGroup.getGroupId(), groupName, userGroup.getRoleId(), roleName);
+        groupList.add(group);
+        return groupList;
     }
 
     /**
@@ -195,9 +197,17 @@ public class UserServiceImpl implements UserService {
         UserDetailResponse userDetail;
         UserDetail user = userMapper.findByUserId(userId);
         if (null != user) {
-            List<UserGroupTree> group = this.getGroupTree(user.getUserId());
+            // groupMap
+            Map<Integer, String> groupMap = groupService.getGroupMap();
+            // roleMap
+            Map<Integer, String> roleMap = roleService.getRoleMap();
+            List<UserGroup> groups = userMapper.findUserGroups(user.getUserId());
+            List<UserGroupBean> groupList = new ArrayList<>();
+            for (UserGroup group : groups) {
+                groupList.addAll(getGroupList(group, groupMap.get(group.getGroupId()), roleMap.get(group.getRoleId())));
+            }
             userDetail = new UserDetailResponse(user.getUserId(), user.getUsername(), user.getStatus(), user.getEmail(), user.getJobTitle(),
-                    user.getSuperuser(), user.getPhoto(), this.getUserGroups(user.getUserId()), group);
+                    user.getSuperuser(), user.getPhoto(), groupList, groupList.size());
         } else {
             throw new BusinessException(BaseResponse.failure(ResultCode.BAD_REQUEST, "User dose not exist!"));
         }
@@ -218,55 +228,92 @@ public class UserServiceImpl implements UserService {
      * retrieve uer group trees.
      */
     @Override
-    public List<UserGroupTree> getGroupTree(final int userId) {
-        List<Group> groups = groupService.findAllGroup(userId, null, 0, 0, null, true).getGroups();
+    public List<UserGroupTree> getGroupTree(final List<Integer> currentGroup, final String superuser, final int type, final int groupId,
+            final int roleId) {
+        // groupMap
+        Map<Integer, String> groupMap = groupService.getGroupMap();
+        // roleMap
+        Map<Integer, String> roleMap = roleService.getRoleMap();
+        if ("Y".equals(superuser)) {
+            return getSuperUserGroupTree(groupMap, roleMap, type, groupId, roleId);
+        } else {
+            return getGroupTree(groupMap, roleMap, currentGroup, type, groupId, roleId);
+        }
+    }
+
+    /**
+     * retrieve group tree for super user.  
+     * @param groupMap groupMap
+     * @param roleMap roleMap
+     * @param type type
+     * @param groupId groupId
+     * @param roleId roleId
+     * @return group tree.
+     */
+    private List<UserGroupTree> getSuperUserGroupTree(final Map<Integer, String> groupMap, final Map<Integer, String> roleMap, final int type,
+            final int groupId, final int roleId) {
         List<UserGroupTree> rsp = new ArrayList<>();
         List<GroupNode> children = new ArrayList<>();
-        if (!Collections.isEmpty(groups)) {
-            for (Group group : groups) {
-                GroupNode groupNode = new GroupNode(String.valueOf(group.getGroupId()), group.getGroupname(), this.getRoleNodes(), "", false);
-                setGroupRole(userId, groupNode);
-                children.add(groupNode);
-            }
+        for (Entry<Integer, String> entry : groupMap.entrySet()) {
+            GroupNode groupNode = getGroupNode(groupMap, roleMap, type, groupId, roleId, entry.getKey());
+            children.add(groupNode);
         }
         rsp.add(new UserGroupTree("", children));
         return rsp;
     }
 
     /**
-     * set group role.
-     * @param userId user id
-     * @param groupNode group 
+     * get group tree.
+     * @param groupMap groupMap
+     * @param roleMap roleMap
+     * @param currentGroup currentGroup
+     * @param type type
+     * @param groupId groupId
+     * @param roleId roleId
+     * @return group tree list.
      */
-    public void setGroupRole(final int userId, final GroupNode groupNode) {
-        List<UserGroup> userGroups = userMapper.findUserGroups(userId);
-        Map<String, String> map = new HashMap<>();
-        if (!Collections.isEmpty(userGroups)) {
-            for (UserGroup group : userGroups) {
-                map.put(String.valueOf(userId) + String.valueOf(group.getGroupId()), String.valueOf(group.getRoleId()));
+    private List<UserGroupTree> getGroupTree(final Map<Integer, String> groupMap, final Map<Integer, String> roleMap,
+            final List<Integer> currentGroup, final int type, final int groupId, final int roleId) {
+        List<UserGroupTree> rsp = new ArrayList<>();
+        List<GroupNode> children = new ArrayList<>();
+        for (Integer currGroupId : currentGroup) {
+            GroupNode groupNode = getGroupNode(groupMap, roleMap, type, groupId, roleId, currGroupId);
+            children.add(groupNode);
+        }
+        rsp.add(new UserGroupTree("", children));
+        return rsp;
+    }
 
-            }
-        }
-        String key = String.valueOf(userId) + groupNode.getId();
-        if (map.containsKey(key)) {
+    /**
+     * get group node.
+     * @param groupMap groupMap
+     * @param roleMap role map
+     * @param type type
+     * @param groupId groupId
+     * @param roleId  roleId
+     * @param currGroupId current group id
+     * @return group node
+     */
+    private GroupNode getGroupNode(final Map<Integer, String> groupMap, final Map<Integer, String> roleMap, final int type, final int groupId,
+            final int roleId, final int currGroupId) {
+        GroupNode groupNode = new GroupNode(String.valueOf(currGroupId), groupMap.get(currGroupId), this.getRoleNodes(roleMap), "", false);
+        if (2 == type && currGroupId == groupId) {
             groupNode.setChecked(true);
-            groupNode.setRadio(map.get(key));
+            groupNode.setRadio(String.valueOf(roleId));
         }
+        return groupNode;
     }
 
     /**
      * get role tree.
-     * 
+     * @param roleMap roleMap
      * @return List<RoleNode>
      */
-    public List<RoleNode> getRoleNodes() {
+    public List<RoleNode> getRoleNodes(final Map<Integer, String> roleMap) {
         List<RoleNode> roleNodes = new ArrayList<>();
-        List<Role> roles = roleService.findAllRole();
-        if (!Collections.isEmpty(roles)) {
-            for (Role role : roles) {
-                RoleNode roleNode = new RoleNode(String.valueOf(role.getRoleId()), role.getRoleName());
-                roleNodes.add(roleNode);
-            }
+        for (Entry<Integer, String> entry : roleMap.entrySet()) {
+            RoleNode roleNode = new RoleNode(String.valueOf(entry.getKey()), entry.getValue());
+            roleNodes.add(roleNode);
         }
         return roleNodes;
     }
@@ -294,10 +341,13 @@ public class UserServiceImpl implements UserService {
     /**
      * reject user.
      */
+    @Transactional
     @Override
     public void rejectUser(final Message msg) {
         // add one message
         messageMapper.insert(msg);
+        // update user status
+        userMapper.updateUserStatus("R", msg.getUserId());
     }
     /**
      * delete user.
@@ -321,7 +371,7 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * juge wether password correct .
+     * juge whether password correct .
      */
     @Override
     public boolean isPasswordSame(final int userId, final String passWord) {

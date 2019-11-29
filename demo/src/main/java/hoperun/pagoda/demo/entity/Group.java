@@ -40,10 +40,13 @@ public class Group implements Serializable {
     /**
      * notes server password.
      */
-    private String serverPasword;
+    private String serverPassword;
     /**
      * group descriptions.
      */
     private String description;
-    // private String customername;
+    /**
+     * customerName.
+     */
+    private String customername;
 }

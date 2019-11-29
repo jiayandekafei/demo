@@ -8,20 +8,28 @@ import org.springframework.stereotype.Component;
 import hoperun.pagoda.demo.entity.UserDetail;
 import hoperun.pagoda.demo.mapper.UserMapper;
 
+/**
+ * user detail service.
+ * @author zhangxiqin
+ *
+ */
 @Component(value = "CustomUserDetailsService")
 public class CustomUserDetailsServiceImpl implements UserDetailsService {
 
+    /**
+     * user mapper.
+     */
     @Autowired
     private UserMapper userMapper;
+    /**
+     * retrieve user info by username.
+     */
     @Override
-    public UserDetail loadUserByUsername(String name) throws UsernameNotFoundException {
+    public UserDetail loadUserByUsername(final String name) {
         UserDetail userDetail = userMapper.findByUsername(name);
         if (userDetail == null) {
             throw new UsernameNotFoundException(String.format("No userDetail found with username '%s'.", name));
         }
-        /*
-         * Role role = userMapper.findRoleByUserId(userDetail.getUser_id()); userDetail.setRole(role);
-         */
         return userDetail;
     }
 }

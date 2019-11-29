@@ -23,9 +23,10 @@ public interface UserService {
      * @param pageNo pageNo 
      * @param limit the number of each page
      * @param name user name
+     * @param groups current user groups
      * @return UserListResponse user List
      */
-    UserListResponse findAllUser(int userId, String superuser, int pageNo, int limit, String name);
+    UserListResponse findAllUser(int userId, String superuser, int pageNo, int limit, String name, List<Integer> groups);
 
     /**
      * get user by name.
@@ -56,11 +57,14 @@ public interface UserService {
     /**
      * get group tree.
      * 
-     * @param userId
-     *            user id
+     * @param currentGroup the groups of current user
+     * @param superuser is super user
+     * @param type type
+     * @param groupId groupId
+     * @param roleId roleId
      * @return UserGroupsResponse
      */
-    List<UserGroupTree> getGroupTree(int userId);
+    List<UserGroupTree> getGroupTree(List<Integer> currentGroup, String superuser, int type, int groupId, int roleId);
 
     /**
      * add user.

@@ -1,12 +1,13 @@
 package hoperun.pagoda.demo.service;
 
 import java.util.List;
+import java.util.Map;
 
 import hoperun.pagoda.demo.bean.CustomerListResponse;
 import hoperun.pagoda.demo.entity.Customer;
 
 /**
- * Customer service
+ * Customer service.
  * 
  * @author zhangxiqin
  *
@@ -14,58 +15,60 @@ import hoperun.pagoda.demo.entity.Customer;
 public interface CustomerService {
 
     /**
-     * retrieve Customer list.
-     * 
-     * @param userId
-     * @return
+     * retrieve customer info.
+     * @param superuser if superuser .
+     * @param pageNo pageNo
+     * @param limit display number for each page.
+     * @param name customer name .
+     * @param isSelect if for group add page.
+     * @param currentGroup current groups
+     * @return customer list.
      */
-    CustomerListResponse findAll(final int userId, final String superuser, int pageNo, int limit, String name, boolean isSelect);
+    CustomerListResponse findAll(String superuser, int pageNo, int limit, String name, boolean isSelect, List<Integer> currentGroup);
 
     /**
-     * retrieve CustomerInfo.
+     * retrieve CustomerInfo by name.
      * 
-     * @param CustomerId
-     * @return
+     * @param name  custoemr name 
+     * @return customer info
      */
-    Customer findByName(final String name);
+    Customer findByName(String name);
 
     /**
-     * retrieve CustomerInfo.
+     * retrieve CustomerInfo by id.
      * 
-     * @param CustomerId
-     * @return
+     * @param id CustomerId
+     * @return customerd info
      */
-    Customer findById(final int id);
-
-    /**
-     * create new Customer.
-     * 
-     * @param CustomerId
-     * @return
-     */
-    String create(final Customer request);
+    Customer findById(int id);
 
     /**
      * create new Customer.
      * 
-     * @param CustomerId
-     * @return
+     * @param request  request
+     * @return message
      */
-    String update(final Customer request);
+    String create(Customer request);
+
+    /**
+     * create new Customer.
+     * 
+     * @param request request
+     * @return message
+     */
+    String update(Customer request);
 
     /**
      * delete by Customer id.
      * 
-     * @param CustomerId
-     * @return
+     * @param customerId  customerId
      */
-    void delete(final int customerId);
+    void delete(int customerId);
 
     /**
      * batch.
      * 
-     * @param CustomerId
-     * @return
+     * @param customers CustomerId
      */
     void batchDelete(List<Integer> customers);
 
@@ -76,6 +79,12 @@ public interface CustomerService {
      *            customername
      * @return is customer exit
      */
-    boolean isCustomerExist(final String customername);
+    boolean isCustomerExist(String customername);
+
+    /**
+     * get custoemr service.
+     * @return customer service map.
+     */
+    Map<Integer, String> getCustomerMap();
 
 }

@@ -20,7 +20,7 @@ public class Role implements Serializable {
     /**
      * roleid.
      */
-    private long roleId;
+    private int roleId;
     /**
      * role name.
      */

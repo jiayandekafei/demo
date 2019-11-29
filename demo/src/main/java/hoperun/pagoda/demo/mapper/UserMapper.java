@@ -123,12 +123,19 @@ public interface UserMapper {
     int deleteUserGroupByUserIdAndGroups(@Param("deleteGroup") List<Integer> deleteGroup, @Param("userId") int userId);
 
     /**
-     * delete user role.
+     * delete user role by users.
      *
      * @param users users
      * @return 1 if updated successful otherwise 0
      */
     int deleteUserGroupByUserIds(@Param("users") List<Integer> users);
+    /**
+     * delete user group and role by groups .
+     *
+     * @param groups groups
+     * @return 1 if updated successful otherwise 0
+     */
+    int deleteUserGroupByGroupIds(@Param("groups") List<Integer> groups);
 
     /**
      * update user status.

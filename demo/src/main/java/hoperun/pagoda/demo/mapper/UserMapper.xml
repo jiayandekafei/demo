@@ -101,6 +101,17 @@
 			</foreach>
 	   </if>
 	</select>
+	
+	   <delete id="deleteUserGroupByGroupIds" parameterType="java.util.List">
+        delete from tb_user_role where 1=2
+        <if test="groups!=null and groups.size()>0">
+            or groupId in
+            <foreach collection="groups" item="groupId" index="index"
+                open="(" close=")" separator=",">
+                 #{groupId}
+            </foreach>
+        </if>
+    </delete>
 	<!-- *******************user_role table end*************************** -->
 	
 </mapper>

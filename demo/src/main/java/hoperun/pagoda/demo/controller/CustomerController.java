@@ -22,6 +22,7 @@ import hoperun.pagoda.demo.bean.DeleteCustomerRequest;
 import hoperun.pagoda.demo.constant.Constant;
 import hoperun.pagoda.demo.entity.Customer;
 import hoperun.pagoda.demo.service.CustomerService;
+import hoperun.pagoda.demo.utils.StringUtils;
 import io.swagger.annotations.ApiOperation;
 
 /**
@@ -47,21 +48,28 @@ public class CustomerController {
 
     /**
      * Get Customer List.
-     *
+     * @param superuser  superuser
+     * @param pageNo pageNo
+     * @param limit  limit
+     * @param name name
+     * @param isSelect isSelect
+     * @param groups groups
      * @return BaseResponse<CustomerListResponse> customer list
      */
     @SuppressWarnings("unchecked")
     @GetMapping("/list")
     @ApiOperation(value = "retrieve customer list")
-    public BaseResponse<CustomerListResponse> retrieveCustomerList(@RequestParam final int userId, @RequestParam final String superuser,
-            @RequestParam final int pageNo, @RequestParam final int limit, @RequestParam String name, @RequestParam final boolean isSelect) {
+    public BaseResponse<CustomerListResponse> retrieveCustomerList(@RequestParam(required = false) final String superuser,
+            @RequestParam(required = false) final int pageNo, @RequestParam(required = false) final int limit,
+            @RequestParam(required = false) final String name, @RequestParam final boolean isSelect,
+            @RequestParam(required = false) final String groups) {
         final String method = "retrieveCustomerList";
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "get Customer list started");
         }
 
-        CustomerListResponse response = customerService.findAll(userId, superuser, pageNo, limit, name, isSelect);
+        CustomerListResponse response = customerService.findAll(superuser, pageNo, limit, name, isSelect, StringUtils.convertStringIntList(groups));
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "get Customer list end");
@@ -113,7 +121,7 @@ public class CustomerController {
      */
     @SuppressWarnings("unchecked")
     @PostMapping("")
-    public BaseResponse<String> addCustomer(@RequestBody Customer request) {
+    public BaseResponse<String> addCustomer(@RequestBody final Customer request) {
 
         return BaseResponse.ok(customerService.create(request));
     }
@@ -125,26 +133,32 @@ public class CustomerController {
      */
     @SuppressWarnings("unchecked")
     @DeleteMapping("/{customerId}")
-    public BaseResponse<String> deleteCustomer(@PathVariable("customerId") Integer customerId) {
+    public BaseResponse<String> deleteCustomer(@PathVariable("customerId") final Integer customerId) {
         customerService.delete(customerId);
-        return BaseResponse.ok("successfully!");
+        return BaseResponse.ok(Constant.SUCCESS_MESSAGE);
     }
 
+    /**
+     * delte mutil customer.
+     * @param request request.
+     * @return message
+     */
     @SuppressWarnings("unchecked")
     @PostMapping("/deleteBatch")
-    public BaseResponse<String> batchDeleteCustomer(@RequestBody DeleteCustomerRequest request) {
+    public BaseResponse<String> batchDeleteCustomer(@RequestBody final DeleteCustomerRequest request) {
         String[] ids = request.getCustomerIds().split(",");
         List<Integer> customers = new ArrayList<>();
         for (int i = 0; i < ids.length; i++) {
             customers.add(Integer.parseInt(ids[i]));
         }
         customerService.batchDelete(customers);
-        return BaseResponse.ok("successfully!");
+        return BaseResponse.ok(Constant.SUCCESS_MESSAGE);
     }
 
     /**
      * check .
-     *
+     * 
+     * @param customername customername
      * @return BaseResponse<CustomerDetail> Customer reponse
      */
     @SuppressWarnings("unchecked")

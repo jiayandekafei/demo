@@ -2,6 +2,7 @@ package hoperun.pagoda.demo.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import hoperun.pagoda.demo.bean.GroupListResponse;
+import hoperun.pagoda.demo.constant.Constant;
 import hoperun.pagoda.demo.entity.Group;
-import hoperun.pagoda.demo.entity.UserGroup;
 import hoperun.pagoda.demo.mapper.GroupMapper;
 import hoperun.pagoda.demo.mapper.UserMapper;
+import hoperun.pagoda.demo.service.CustomerService;
 import hoperun.pagoda.demo.service.GroupService;
 
 /**
@@ -34,90 +36,107 @@ public class GroupServiceImpl implements GroupService {
      */
     @Autowired
     private UserMapper userMapper;
+    /**
+     * user mapper.
+     */
+    @Autowired
+    private CustomerService customerService;
 
     /**
      * retrieve all group for List page.
      */
     @Override
-    public GroupListResponse findAllGroup(final int userId, final String superuser, int pageNo, int limit, String name, boolean isGroupTree) {
+    public GroupListResponse findAllGroup(final String superuser, final int pageNo, final int limit, final String name,
+            final List<Integer> currentGroup) {
 
         List<Group> groups = groupMapper.findAllGroup();
-        if (isGroupTree) {
-            return new GroupListResponse(groups, groups.size());
-        }
+        Map<Integer, String> customerMap = customerService.getCustomerMap();
+
         // if super user ,return all groups,otherwise fliter by group id.
         if ("N".equals(superuser)) {
-            List<UserGroup> userGroups = userMapper.findUserGroups(userId);
-            for (UserGroup userGroup : userGroups) {
-                groups = groups.stream().filter(group -> group.getGroupId() == userGroup.getGroupId()).collect(Collectors.toList());
-            }
+            groups = groups.stream().filter(group -> currentGroup.contains(group.getGroupId())).collect(Collectors.toList());
         }
         // filter by name
         if (!StringUtils.isEmpty(name)) {
-            groups = groups.stream().filter(group -> name.equals(group.getGroupname())).collect(Collectors.toList());
+            groups = groups.stream().filter(group -> group.getGroupname().contains(name)).collect(Collectors.toList());
         }
         int size = groups.size();
         // filter by pageNo and limit
         groups = groups.stream().skip((pageNo - 1) * (long) limit).limit(limit).collect(Collectors.toList());
-        setGroupName(groups);
+        // set customer name
+        groups.forEach(group -> group.setCustomername(customerMap.get(group.getCustomerId())));
         return new GroupListResponse(groups, size);
 
     }
 
+    /**
+     * find group by id. 
+     */
     @Override
-    public Group findByGrupId(int groupId) {
+    public Group findByGrupId(final int groupId) {
 
         return groupMapper.findById(groupId);
     }
 
+    /**
+     * add group.
+     */
     @Override
     @Transactional
-    public String create(Group request) {
+    public String create(final Group request) {
         groupMapper.insert(request);
-        return "successfully!";
-    }
-
-    @Override
-    @Transactional
-    public String update(Group request) {
-        groupMapper.insert(request);
-        return "successfully!";
-    }
-
-    @Override
-    @Transactional
-    public void delete(int groupId) {
-        groupMapper.delete(groupId);
-        List<Integer> Groups = new ArrayList<Integer>();
-        Groups.add(groupId);
-        // update group
-        // userMapper.updateUserGroup(groups);
-
-    }
-
-    @Override
-    @Transactional
-    public void batchDelete(List<Integer> groups) {
-        groupMapper.batchDelete(groups);
-        // update group
-        // groupMapper.updateUserGroup(groups);
-    }
-
-    @Override
-    public boolean isGroupExist(String groupname) {
-        return null == groupMapper.findByName(groupname) ? false : true;
+        return Constant.SUCCESS_MESSAGE;
     }
 
     /**
-     * set Group name.
-     *
-     * @param groups
-     *            groups
+     * update group.
      */
-    private void setGroupName(List<Group> groups) {
-        for (Group group : groups) {
-            // group.setGroupname(GroupMapper.findById(group.getGroupId()).getCustomername());
-        }
+    @Override
+    @Transactional
+    public String update(final Group request) {
+        groupMapper.update(request);
+        return Constant.SUCCESS_MESSAGE;
+    }
+
+    /**
+     * delete group.
+     */
+    @Override
+    @Transactional
+    public void delete(final int groupId) {
+        groupMapper.delete(groupId);
+        List<Integer> groups = new ArrayList<>();
+        groups.add(groupId);
+        // update user group role
+        userMapper.deleteUserGroupByGroupIds(groups);
+
+    }
+
+    /**
+     * delete mutil group.
+     */
+    @Override
+    @Transactional
+    public void batchDelete(final List<Integer> groups) {
+        groupMapper.batchDelete(groups);
+        // update group
+        userMapper.deleteUserGroupByGroupIds(groups);
+    }
+
+    /**
+     * juge if group exist.
+     */
+    @Override
+    public boolean isGroupExist(final String groupname) {
+        return null != groupMapper.findByName(groupname);
+    }
+
+    /**
+     * get group map.
+     */
+    @Override
+    public Map<Integer, String> getGroupMap() {
+        return groupMapper.findAllGroup().stream().collect(Collectors.toMap(Group::getGroupId, Group::getGroupname));
     }
 
 }

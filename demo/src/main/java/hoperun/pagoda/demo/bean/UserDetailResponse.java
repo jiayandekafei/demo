@@ -3,7 +3,6 @@ package hoperun.pagoda.demo.bean;
 import java.util.List;
 
 import hoperun.pagoda.demo.entity.UserGroupBean;
-import hoperun.pagoda.demo.entity.UserGroupTree;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +24,7 @@ public class UserDetailResponse {
     /**
      * userId.
      */
-    private long userId;
+    private int userId;
     /**
      * userId.
      */
@@ -55,8 +54,8 @@ public class UserDetailResponse {
      */
     private List<UserGroupBean> groups;
     /**
-     * user group tree.
+     * group length.
      */
-    private List<UserGroupTree> group;
+    private int groupLength;
 
 }

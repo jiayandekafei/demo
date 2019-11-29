@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +24,9 @@ import hoperun.pagoda.demo.bean.UserGroupsResponse;
 import hoperun.pagoda.demo.bean.UserListResponse;
 import hoperun.pagoda.demo.bean.UserRequest;
 import hoperun.pagoda.demo.constant.Constant;
+import hoperun.pagoda.demo.entity.Message;
 import hoperun.pagoda.demo.service.UserService;
+import hoperun.pagoda.demo.utils.StringUtils;
 import io.swagger.annotations.ApiOperation;
 
 /**
@@ -54,20 +57,21 @@ public class UserController {
      * @param pageNo page No
      * @param limit the display num for each page
      * @param name user name
+     * @param groups current user's group
      * @return BaseResponse<UserListResponse> user list
      */
     @SuppressWarnings("unchecked")
     @GetMapping("/list")
     @ApiOperation(value = "retrieve user list")
     public BaseResponse<UserListResponse> retrieveUserList(@RequestParam final int userId, @RequestParam final String superuser,
-            @RequestParam final int pageNo, @RequestParam final int limit, @RequestParam final String name) {
+            @RequestParam final int pageNo, @RequestParam final int limit, @RequestParam final String name, @RequestParam final String groups) {
         final String method = "retrieveUserList";
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "get user list started");
         }
 
-        UserListResponse response = userService.findAllUser(userId, superuser, pageNo, limit, name);
+        UserListResponse response = userService.findAllUser(userId, superuser, pageNo, limit, name, StringUtils.convertStringIntList(groups));
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "get user list end");
@@ -165,20 +169,25 @@ public class UserController {
 
     /**
      * get group tree by user id.
-     * @param userId user id
+     * @param groups current user's group 
+     * @param superuser is super user
+     * @param type 1 when no need set defalut value otherwise 2.
+     * @param groupId groupId
+     * @param roleId roleId
      * @return BaseResponse<UserGroupsResponse> group tree
      */
     @SuppressWarnings("unchecked")
     @ApiOperation(value = "get group tree")
-    @GetMapping("/grouptree/{userId}")
-    public BaseResponse<UserGroupsResponse> getGroupTree(@PathVariable("userId") final Integer userId) {
+    @GetMapping("/grouptree")
+    public BaseResponse<UserGroupsResponse> getGroupTree(@RequestParam final String groups, @RequestParam final String superuser,
+            @RequestParam final int type, @RequestParam final int groupId, @RequestParam final int roleId) {
         final String method = "getGroupTree";
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "get user group tree started");
         }
 
-        return BaseResponse.ok(userService.getGroupTree(userId));
+        return BaseResponse.ok(userService.getGroupTree(StringUtils.convertStringIntList(groups), superuser, type, groupId, roleId));
     }
 
     /**
@@ -231,7 +240,7 @@ public class UserController {
     @SuppressWarnings("unchecked")
     @ApiOperation(value = "reject user")
     @PostMapping("/reject")
-    public BaseResponse<UserGroupsResponse> rejectUser(@RequestBody final UserRequest req) {
+    public BaseResponse<UserGroupsResponse> rejectUser(@RequestBody final Message req) {
         final String method = "rejectUser";
 
         if (LOGGER.isDebugEnabled()) {
@@ -274,7 +283,24 @@ public class UserController {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "check user password started");
         }
-
         return BaseResponse.ok(userService.isPasswordSame(userId, password));
+    }
+
+    /**
+     * reset password.
+     * @param userId user id.
+     * @return BaseResponse<UserGroupsResponse>
+     */
+    @SuppressWarnings("unchecked")
+    @ApiOperation(value = "check password")
+    @PostMapping("/password/{userId}")
+    public BaseResponse<UserGroupsResponse> resetPassword(@PathVariable final int userId) {
+        final String method = "resetPassword";
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug(Constant.LOG_PATTERLN, method, "reset password started");
+        }
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        return BaseResponse.ok(userService.isPasswordSame(userId, encoder.encode("00000")));
     }
 }

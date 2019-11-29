@@ -64,7 +64,7 @@ public interface GroupMapper {
     /**
      * batch delete.
      * 
-     * @param userId
+     * @param groups groups
      */
     void batchDelete(@Param("groups") List<Integer> groups);
 
@@ -75,6 +75,14 @@ public interface GroupMapper {
      * @return 1 if success otherwise 0
      */
     int findCustomersByGroupId(@Param("groupId") long groupId);
+
+    /**
+     * find customer by group ids.
+     * 
+     * @param groupIds groupIds
+     * @return customerList
+     */
+    List<Integer> findCustomersByGroupIds(@Param("groupIds") List<Integer> groupIds);
 
     /**
      * update group customer by group id.
