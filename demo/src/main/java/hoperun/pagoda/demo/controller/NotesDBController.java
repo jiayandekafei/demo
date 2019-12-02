@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import hoperun.pagoda.demo.bean.BaseResponse;
 import hoperun.pagoda.demo.bean.CustomerListResponse;
 import hoperun.pagoda.demo.constant.Constant;
-import hoperun.pagoda.demo.service.CustomerService;
-import hoperun.pagoda.demo.utils.StringUtils;
+import hoperun.pagoda.demo.service.NotesDBService;
 import io.swagger.annotations.ApiOperation;
 
 /**
@@ -34,35 +33,33 @@ public class NotesDBController {
      * Customer service.
      */
     @Autowired
-    private CustomerService customerService;
+    private NotesDBService notesDBService;
 
     /**
-     * Get Customer List.
-     * @param superuser  superuser
-     * @param pageNo pageNo
-     * @param limit  limit
-     * @param name name
-     * @param isSelect isSelect
-     * @param groups groups
-     * @return BaseResponse<CustomerListResponse> customer list
-     */
+    * export DB.
+    * @param type 1 if export single DB otherwise 2
+    * @param groupId target group id
+    * @param dbName target db name(only for single export)
+    * @return BaseResponse<String> 
+    */
     @SuppressWarnings("unchecked")
     @GetMapping("/export")
-    @ApiOperation(value = "retrieve customer list")
-    public BaseResponse<CustomerListResponse> exportDB() {
-        final String method = "retrieveCustomerList";
+    @ApiOperation(value = "export notes DB")
+    public BaseResponse<String> exportDB(@RequestParam final int type, @RequestParam final int groupId,
+            @RequestParam(required = false) final String dbName) {
+        final String method = "exportDB";
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "get Customer list started");
         }
 
-        CustomerListResponse response = customerService.findAll();
+        notesDBService.export(type, groupId, dbName);
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "get Customer list end");
         }
 
-        return BaseResponse.ok(response);
+        return BaseResponse.ok(Constant.SUCCESS_MESSAGE);
     }
 
     /**
@@ -88,12 +85,10 @@ public class NotesDBController {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "get Customer list started");
         }
 
-        CustomerListResponse response = customerService.findAll(superuser, pageNo, limit, name, isSelect, StringUtils.convertStringIntList(groups));
-
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(Constant.LOG_PATTERLN, method, "get Customer list end");
         }
 
-        return BaseResponse.ok(response);
+        return BaseResponse.ok("");
     }
 }

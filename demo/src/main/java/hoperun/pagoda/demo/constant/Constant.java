@@ -50,4 +50,9 @@ public final class Constant {
      * 1000.
      */
     public static final int NUMBER_1000 = 1000;
+
+    /**
+     * server host regex.
+     */
+    public static final String IP_REGEX = "\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}";
 }
