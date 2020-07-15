@@ -1,0 +1,1330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<appFormTemplate>
+	<!-- addAppField -->
+	<property name="field">
+      <property name="id" value="fdcreator" />
+      <property name="title" value="Creator" />
+      <property name="type" value="usergroup" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="sub-category" value="ロール" />
+      <property name="widget">
+        <property name="value" value="usergroup" />
+        <property name="args" value="suggest=true" />
+        <property name="args" value="mygroup=false" />
+        <property name="args" value="approle=true" />
+        <property name="args" value="params=hideRoleGroup=true&amp;hideWorkGroup=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="AquaUserGroupValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fddba" />
+      <property name="title" value="DBAdmin" />
+      <property name="type" value="usergroup" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="sub-category" value="ロール" />
+      <property name="widget">
+        <property name="value" value="usergroup" />
+        <property name="args" value="suggest=true" />
+        <property name="args" value="mygroup=false" />
+        <property name="args" value="approle=true" />
+        <property name="args" value="params=hideRoleGroup=true&amp;hideWorkGroup=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="AquaUserGroupValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fdauditor" />
+      <property name="title" value="Auditor" />
+      <property name="type" value="usergroup" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="sub-category" value="ロール" />
+      <property name="widget">
+        <property name="value" value="usergroup" />
+        <property name="args" value="suggest=true" />
+        <property name="args" value="mygroup=false" />
+        <property name="args" value="approle=true" />
+        <property name="args" value="params=hideRoleGroup=true&amp;hideWorkGroup=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="AquaUserGroupValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fdreader" />
+      <property name="title" value="Reader" />
+      <property name="type" value="usergroup" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="sub-category" value="ロール" />
+      <property name="widget">
+        <property name="value" value="usergroup" />
+        <property name="args" value="suggest=true" />
+        <property name="args" value="mygroup=false" />
+        <property name="args" value="approle=true" />
+        <property name="args" value="params=hideRoleGroup=true&amp;hideWorkGroup=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="AquaUserGroupValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="docwidth" />
+      <property name="title" value="文書横幅" />
+      <property name="type" value="int" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="sub-category" value="文書設定" />
+      <property name="widget">
+        <property name="value" value="numeric" />
+        <property name="args" value="help=デフォルト:&quot;1000px&quot;" />
+        <property name="args" value="postfix=px" />
+      </property>
+      <property name="validator">
+        <property name="value" value="IntValidator" />
+      </property>
+      <property name="validator">
+        <property name="value" value="IntMinValidator" />
+        <property name="args" value="1" />
+      </property>
+      <property name="validator">
+        <property name="value" value="IntMaxValidator" />
+        <property name="args" value="9999" />
+      </property>
+      <property name="default" value="1000" />
+    </property>
+    <property name="field">
+      <property name="id" value="docopenmode" />
+      <property name="title" value="文書開き方" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="sub-category" value="文書設定" />
+      <property name="widget">
+        <property name="value" value="list" />
+        <property name="args" value="help=デフォルト:&quot;オーバーラップ表示&quot;" />
+        <property name="kwds" value="option::overlap=オーバーラップ表示" />
+        <property name="kwds" value="option::newWindow=別ウィンドウ表示" />
+        <property name="kwds" value="option::replace=同じウィンドウで表示" />
+        <property name="kwds" value="option::none=表示しない" />
+      </property>
+      <property name="default" value="overlap" />
+    </property>
+    <property name="field">
+      <property name="id" value="applink1" />
+      <property name="title" value="関連アプリ１選択" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="sub-category" value="関連アプリリンク設定" />
+      <property name="widget">
+        <property name="value" value="list" />
+        <property name="args" value="force-display=true" />
+        <property name="args" value="width=50%" />
+        <property name="kwds" value="ecma:z350_KEIJIBAN.appLib().options();" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="btnnm1" />
+      <property name="title" value="選択ボタン名１" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="sub-category" value="関連アプリリンク設定" />
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="applink2" />
+      <property name="title" value="関連アプリ２選択" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="sub-category" value="関連アプリリンク設定" />
+      <property name="widget">
+        <property name="value" value="list" />
+        <property name="args" value="force-display=true" />
+        <property name="args" value="width=50%" />
+        <property name="kwds" value="ecma:z350_KEIJIBAN.appLib().options();" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="btnnm2" />
+      <property name="title" value="選択ボタン名２" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="sub-category" value="関連アプリリンク設定" />
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="applink3" />
+      <property name="title" value="関連アプリ３選択" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="sub-category" value="関連アプリリンク設定" />
+      <property name="widget">
+        <property name="value" value="list" />
+        <property name="args" value="force-display=true" />
+        <property name="args" value="width=50%" />
+        <property name="kwds" value="ecma:z350_KEIJIBAN.appLib().options();" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="btnnm3" />
+      <property name="title" value="選択ボタン名３" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="sub-category" value="関連アプリリンク設定" />
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="manyuaruid" />
+      <property name="title" value="マニュアルリンク" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="sub-category" value="関連アプリリンク設定" />
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="movetoarchres" />
+      <property name="title" value="選択文書移動先 アプリ" />
+      <property name="type" value="resid" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="widget">
+        <property name="value" value="resource" />
+        <property name="args" value="mode=application" />
+        <property name="args" value="type=J9U9203A-list" />
+      </property>
+      <property name="validator">
+        <property name="value" value="ResidValidator" />
+      </property>
+    </property>
+	<!--addViews-->
+	<property name="view">
+      <property name="id" value="J9U9203A-list-vb018ozu" />
+      <property name="title" value="連絡先情報一覧" />
+      <property name="type" value="strict" />
+      <property name="use-inheritees" value="false" />
+      <property name="view-field">
+        <property name="id" value="acl" />
+        <property name="ref-field" value="acl" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203AWC" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="id" />
+        <property name="ref-field" value="id" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203AWC" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="container" />
+        <property name="ref-field" value="container" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203AWC" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="open-type" />
+        <property name="ref-field" value="open-type" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203AWC" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="enable_batch" />
+        <property name="ref-field" value="acl" />
+        <property name="visible" value="false" />
+        <property name="width" value="26px" />
+        <property name="ref-schema" value="J9U9203AWC" />
+        <extension name="ad-invisible-label">
+          <property name="title" value="Schema.Base.View.Field.EnableBatch.Label" />
+          <property name="description" value="Schema.Base.View.Field.EnableBatch.Description" />
+        </extension>
+      </property>
+      <property name="view-field">
+        <property name="id" value="title" />
+        <property name="ref-field" value="title" />
+        <property name="title" value="タイトル" />
+        <property name="visible" value="true" />
+        <property name="width" value="30%" />
+        <property name="sortable" value="false" />
+        <property name="ref-schema" value="J9U9203AWC" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="enable_acl" />
+        <property name="ref-field" value="acl" />
+        <property name="visible" value="false" />
+        <property name="width" value="22px" />
+        <property name="ref-schema" value="J9U9203AWC" />
+        <extension name="ad-invisible-label">
+          <property name="title" value="Schema.Base.View.Field.EnableAcl.Label" />
+          <property name="description" value="Schema.Base.View.Field.EnableAcl.Description" />
+        </extension>
+      </property>
+    </property>
+    <property name="view">
+      <property name="id" value="J9U9203A-list-tr6ik4of" />
+      <property name="title" value="関連リンク一覧" />
+      <property name="type" value="strict" />
+      <property name="use-inheritees" value="false" />
+      <property name="view-field">
+        <property name="id" value="acl" />
+        <property name="ref-field" value="acl" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203AYL" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="id" />
+        <property name="ref-field" value="id" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203AYL" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="container" />
+        <property name="ref-field" value="container" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203AYL" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="open-type" />
+        <property name="ref-field" value="open-type" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203AYL" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="enable_batch" />
+        <property name="ref-field" value="acl" />
+        <property name="visible" value="false" />
+        <property name="width" value="26px" />
+        <property name="ref-schema" value="J9U9203AYL" />
+        <extension name="ad-invisible-label">
+          <property name="title" value="Schema.Base.View.Field.EnableBatch.Label" />
+          <property name="description" value="Schema.Base.View.Field.EnableBatch.Description" />
+        </extension>
+      </property>
+      <property name="view-field">
+        <property name="id" value="title" />
+        <property name="ref-field" value="title" />
+        <property name="title" value="タイトル" />
+        <property name="visible" value="true" />
+        <property name="width" value="30%" />
+        <property name="sortable" value="false" />
+        <property name="ref-schema" value="J9U9203AYL" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="enable_acl" />
+        <property name="ref-field" value="acl" />
+        <property name="visible" value="false" />
+        <property name="width" value="22px" />
+        <property name="ref-schema" value="J9U9203AYL" />
+        <extension name="ad-invisible-label">
+          <property name="title" value="Schema.Base.View.Field.EnableAcl.Label" />
+          <property name="description" value="Schema.Base.View.Field.EnableAcl.Description" />
+        </extension>
+      </property>
+    </property>
+    <property name="view">
+      <property name="id" value="J9U9203A-list-pukr1rxd" />
+      <property name="title" value="閲覧範囲マスタ" />
+      <property name="type" value="strict" />
+      <property name="use-inheritees" value="false" />
+      <property name="view-field">
+        <property name="id" value="acl" />
+        <property name="ref-field" value="acl" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203AQ0" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="id" />
+        <property name="ref-field" value="id" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203AQ0" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="container" />
+        <property name="ref-field" value="container" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203AQ0" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="open-type" />
+        <property name="ref-field" value="open-type" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203AQ0" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="enable_batch" />
+        <property name="ref-field" value="acl" />
+        <property name="visible" value="false" />
+        <property name="width" value="26px" />
+        <property name="ref-schema" value="J9U9203AQ0" />
+        <extension name="ad-invisible-label">
+          <property name="title" value="Schema.Base.View.Field.EnableBatch.Label" />
+          <property name="description" value="Schema.Base.View.Field.EnableBatch.Description" />
+        </extension>
+      </property>
+      <property name="view-field">
+        <property name="id" value="fdcode" />
+        <property name="ref-field" value="fdcode" />
+        <property name="visible" value="true" />
+        <property name="width" value="4%" />
+        <property name="sortable" value="false" />
+        <property name="title" value="コード" />
+        <property name="filter">
+          <property name="operator" value="=" />
+          <property name="value" value="${fdcode-eq}" />
+          <property name="enabled" value="ecma:z350_KEIJIBAN.appLib('set_range').isSearchable();" />
+        </property>
+        <property name="ref-schema" value="J9U9203AQ0" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="title" />
+        <property name="ref-field" value="title" />
+        <property name="title" value="閲覧範囲" />
+        <property name="visible" value="true" />
+        <property name="width" value="30%" />
+        <property name="sortable" value="false" />
+        <property name="filter">
+          <property name="operator" value="like" />
+          <property name="value" value="%${title-contain}%" />
+          <property name="enabled" value="ecma:z350_KEIJIBAN.appLib('set_range').isSearchable();" />
+        </property>
+        <property name="ref-schema" value="J9U9203AQ0" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="fdusers" />
+        <property name="ref-field" value="fdusers" />
+        <property name="visible" value="true" />
+        <property name="width" value="15%" />
+        <property name="sortable" value="false" />
+        <property name="title" value="閲覧ユーザー" />
+        <property name="filter">
+          <property name="operator" value="in" />
+          <property name="value" value="${fdusers-in}" />
+          <property name="enabled" value="ecma:z350_KEIJIBAN.appLib('set_range').isSearchable();" />
+        </property>
+        <property name="ref-schema" value="J9U9203AQ0" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="fdgroups" />
+        <property name="ref-field" value="fdgroups" />
+        <property name="visible" value="true" />
+        <property name="width" value="15%" />
+        <property name="sortable" value="false" />
+        <property name="title" value="閲覧グループ" />
+        <property name="filter">
+          <property name="operator" value="in" />
+          <property name="value" value="${fdgroups-in}" />
+          <property name="enabled" value="ecma:z350_KEIJIBAN.appLib('set_range').isSearchable();" />
+        </property>
+        <property name="ref-schema" value="J9U9203AQ0" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="enable_acl" />
+        <property name="ref-field" value="acl" />
+        <property name="visible" value="false" />
+        <property name="width" value="22px" />
+        <property name="ref-schema" value="J9U9203AQ0" />
+        <extension name="ad-invisible-label">
+          <property name="title" value="Schema.Base.View.Field.EnableAcl.Label" />
+          <property name="description" value="Schema.Base.View.Field.EnableAcl.Description" />
+        </extension>
+      </property>
+      <property name="order">
+        <property name="fdcode" value="2" />
+      </property>
+    </property>
+    <property name="view">
+      <property name="id" value="J9U9203A-list-endmap5s" />
+      <property name="title" value="アプリ設定一覧" />
+      <property name="type" value="strict" />
+      <property name="use-inheritees" value="false" />
+      <property name="view-field">
+        <property name="id" value="acl" />
+        <property name="ref-field" value="acl" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203AWC" />
+        <property name="ref-schema" value="J9U9203AYL" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="id" />
+        <property name="ref-field" value="id" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203AWC" />
+        <property name="ref-schema" value="J9U9203AYL" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="container" />
+        <property name="ref-field" value="container" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203AWC" />
+        <property name="ref-schema" value="J9U9203AYL" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="open-type" />
+        <property name="ref-field" value="open-type" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203AWC" />
+        <property name="ref-schema" value="J9U9203AYL" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="enable_batch" />
+        <property name="ref-field" value="acl" />
+        <property name="title" value="Schema.Base.View.Field.EnableBatch.Label" />
+        <property name="description" value="Schema.Base.View.Field.EnableBatch.Description" />
+        <property name="visible" value="true" />
+        <property name="width" value="26px" />
+        <property name="ref-schema" value="J9U9203AWC" />
+        <property name="ref-schema" value="J9U9203AYL" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="title" />
+        <property name="ref-field" value="title" />
+        <property name="title" value="タイトル" />
+        <property name="visible" value="true" />
+        <property name="width" value="30%" />
+        <property name="sortable" value="true" />
+        <property name="ref-schema" value="J9U9203AWC" />
+        <property name="ref-schema" value="J9U9203AYL" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="modifier" />
+        <property name="ref-field" value="modifier" />
+        <property name="visible" value="true" />
+        <property name="width" value="15%" />
+        <property name="sortable" value="true" />
+        <property name="title" value="Schema.J9U9203AList.View.J9U9203AListEndmap5s.Field.Modifier.Label" />
+        <property name="ref-schema" value="J9U9203AWC" />
+        <property name="ref-schema" value="J9U9203AYL" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="modified" />
+        <property name="ref-field" value="modified" />
+        <property name="visible" value="true" />
+        <property name="width" value="15%" />
+        <property name="sortable" value="true" />
+        <property name="title" value="Schema.J9U9203AList.View.J9U9203AListEndmap5s.Field.Modified.Label" />
+        <property name="ref-schema" value="J9U9203AWC" />
+        <property name="ref-schema" value="J9U9203AYL" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="fddba" />
+        <property name="ref-field" value="fddba" />
+        <property name="visible" value="true" />
+        <property name="width" value="15%" />
+        <property name="sortable" value="true" />
+        <property name="title" value="管理者" />
+        <property name="ref-schema" value="J9U9203AWC" />
+        <property name="ref-schema" value="J9U9203AYL" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="enable_acl" />
+        <property name="ref-field" value="acl" />
+        <property name="title" value="Schema.Base.View.Field.EnableAcl.Label" />
+        <property name="description" value="Schema.Base.View.Field.EnableAcl.Description" />
+        <property name="visible" value="true" />
+        <property name="width" value="22px" />
+        <property name="ref-schema" value="J9U9203AWC" />
+        <property name="ref-schema" value="J9U9203AYL" />
+      </property>
+    </property>
+    <property name="view">
+      <property name="id" value="J9U9203A-list-4q1lqzua" />
+      <property name="title" value="全文書一覧" />
+      <property name="type" value="strict" />
+      <property name="use-inheritees" value="false" />
+      <property name="view-field">
+        <property name="id" value="acl" />
+        <property name="ref-field" value="acl" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203A" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="id" />
+        <property name="ref-field" value="id" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203A" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="container" />
+        <property name="ref-field" value="container" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203A" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="open-type" />
+        <property name="ref-field" value="open-type" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203A" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="enable_batch" />
+        <property name="ref-field" value="acl" />
+        <property name="title" value="Schema.Base.View.Field.EnableBatch.Label" />
+        <property name="description" value="Schema.Base.View.Field.EnableBatch.Description" />
+        <property name="visible" value="true" />
+        <property name="width" value="26px" />
+        <property name="ref-schema" value="J9U9203A" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="fdtrandocid" />
+        <property name="ref-field" value="fdtrandocid" />
+        <property name="visible" value="true" />
+        <property name="width" value="15%" />
+        <property name="sortable" value="true" />
+        <property name="title" value="文書ID" />
+        <property name="filter">
+          <property name="operator" value="like" />
+          <property name="value" value="%${fdtrandocid-contain}%" />
+        </property>
+        <property name="ref-schema" value="J9U9203A" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="fdtranivdocid" />
+        <property name="ref-field" value="fdtranivdocid" />
+        <property name="visible" value="true" />
+        <property name="width" value="15%" />
+        <property name="sortable" value="true" />
+        <property name="title" value="文書ID(移行用)" />
+        <property name="filter">
+          <property name="operator" value="like" />
+          <property name="value" value="%${fdtranivdocid-contain}%" />
+        </property>
+        <property name="ref-schema" value="J9U9203A" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="title" />
+        <property name="ref-field" value="title" />
+        <property name="title" value="件名" />
+        <property name="visible" value="true" />
+        <property name="width" value="20%" />
+        <property name="sortable" value="true" />
+        <property name="filter">
+          <property name="operator" value="like" />
+          <property name="value" value="%${title-contain}%" />
+        </property>
+        <property name="ref-schema" value="J9U9203A" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="sreaders" />
+        <property name="ref-field" value="sreaders" />
+        <property name="visible" value="true" />
+        <property name="width" value="10%" />
+        <property name="sortable" value="true" />
+        <property name="title" value="$Readers" />
+        <property name="ref-schema" value="J9U9203A" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="pffilecount" />
+        <property name="ref-field" value="pffilecount" />
+        <property name="visible" value="true" />
+        <property name="width" value="5%" />
+        <property name="sortable" value="true" />
+        <property name="title" value="添付ファイル数" />
+        <property name="ref-schema" value="J9U9203A" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="pffilecount_png" />
+        <property name="ref-field" value="pffilecount_png" />
+        <property name="visible" value="true" />
+        <property name="width" value="5%" />
+        <property name="sortable" value="true" />
+        <property name="title" value="添付ファイル数(PNG)" />
+        <property name="ref-schema" value="J9U9203A" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="modified" />
+        <property name="ref-field" value="modified" />
+        <property name="visible" value="true" />
+        <property name="width" value="10%" />
+        <property name="sortable" value="true" />
+        <property name="title" value="Schema.J9U9203AList.View.J9U9203AList4q1lqzua.Field.Modified.Label" />
+        <property name="filter">
+          <property name="operator" value="=" />
+          <property name="value" value="${modified-param}" />
+        </property>
+        <property name="filter">
+          <property name="operator" value="&gt;=" />
+          <property name="value" value="${modified-ge}" />
+        </property>
+        <property name="filter">
+          <property name="operator" value="&gt;" />
+          <property name="value" value="${modified-gt}" />
+        </property>
+        <property name="filter">
+          <property name="operator" value="&lt;=" />
+          <property name="value" value="${modified-le}" />
+        </property>
+        <property name="filter">
+          <property name="operator" value="&lt;" />
+          <property name="value" value="${modified-lt}" />
+        </property>
+        <property name="ref-schema" value="J9U9203A" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="enable_acl" />
+        <property name="ref-field" value="acl" />
+        <property name="visible" value="false" />
+        <property name="width" value="22px" />
+        <property name="ref-schema" value="J9U9203A" />
+        <extension name="ad-invisible-label">
+          <property name="title" value="Schema.Base.View.Field.EnableAcl.Label" />
+          <property name="description" value="Schema.Base.View.Field.EnableAcl.Description" />
+        </extension>
+      </property>
+      <property name="order">
+        <property name="fdtrandocid" value="1" />
+        <property name="fdtranivdocid" value="1" />
+      </property>
+    </property>
+    <property name="view">
+      <property name="id" value="J9U9203A-list-wmyadpnb" />
+      <property name="title" value="閲覧範囲一覧" />
+      <property name="type" value="strict" />
+      <property name="use-inheritees" value="false" />
+      <property name="view-field">
+        <property name="id" value="acl" />
+        <property name="ref-field" value="acl" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203AQ0" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="id" />
+        <property name="ref-field" value="id" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203AQ0" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="container" />
+        <property name="ref-field" value="container" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203AQ0" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="open-type" />
+        <property name="ref-field" value="open-type" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203AQ0" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="enable_batch" />
+        <property name="ref-field" value="acl" />
+        <property name="title" value="Schema.Base.View.Field.EnableBatch.Label" />
+        <property name="description" value="Schema.Base.View.Field.EnableBatch.Description" />
+        <property name="visible" value="true" />
+        <property name="width" value="26px" />
+        <property name="ref-schema" value="J9U9203AQ0" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="fdcode" />
+        <property name="ref-field" value="fdcode" />
+        <property name="visible" value="true" />
+        <property name="width" value="4%" />
+        <property name="sortable" value="false" />
+        <property name="title" value="コード" />
+        <property name="filter">
+          <property name="operator" value="=" />
+          <property name="value" value="${fdcode-eq}" />
+          <property name="enabled" value="ecma:z350_KEIJIBAN.appLib('set_range').isSearchable();" />
+        </property>
+        <property name="ref-schema" value="J9U9203AQ0" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="title" />
+        <property name="ref-field" value="title" />
+        <property name="title" value="閲覧範囲" />
+        <property name="visible" value="true" />
+        <property name="width" value="30%" />
+        <property name="sortable" value="false" />
+        <property name="filter">
+          <property name="operator" value="like" />
+          <property name="value" value="%${title-contain}%" />
+          <property name="enabled" value="ecma:z350_KEIJIBAN.appLib('set_range').isSearchable();" />
+        </property>
+        <property name="ref-schema" value="J9U9203AQ0" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="fdusers" />
+        <property name="ref-field" value="fdusers" />
+        <property name="visible" value="true" />
+        <property name="width" value="15%" />
+        <property name="sortable" value="false" />
+        <property name="title" value="閲覧ユーザー" />
+        <property name="filter">
+          <property name="operator" value="in" />
+          <property name="value" value="${fdusers-in}" />
+          <property name="enabled" value="ecma:z350_KEIJIBAN.appLib('set_range').isSearchable();" />
+        </property>
+        <property name="ref-schema" value="J9U9203AQ0" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="fdgroups" />
+        <property name="ref-field" value="fdgroups" />
+        <property name="visible" value="true" />
+        <property name="width" value="15%" />
+        <property name="sortable" value="false" />
+        <property name="title" value="閲覧グループ" />
+        <property name="filter">
+          <property name="operator" value="in" />
+          <property name="value" value="${fdgroups-in}" />
+          <property name="enabled" value="ecma:z350_KEIJIBAN.appLib('set_range').isSearchable();" />
+        </property>
+        <property name="ref-schema" value="J9U9203AQ0" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="enable_acl" />
+        <property name="ref-field" value="acl" />
+        <property name="visible" value="false" />
+        <property name="width" value="22px" />
+        <property name="ref-schema" value="J9U9203AQ0" />
+        <extension name="ad-invisible-label">
+          <property name="title" value="Schema.Base.View.Field.EnableAcl.Label" />
+          <property name="description" value="Schema.Base.View.Field.EnableAcl.Description" />
+        </extension>
+      </property>
+      <property name="order">
+        <property name="fdcode" value="2" />
+      </property>
+    </property>
+    <property name="view">
+      <property name="id" value="J9U9203A-list-a163glak" />
+      <property name="title" value="Schema.J9U9203AList.View.J9U9203AListA163glak.Title" />
+      <property name="type" value="strict" />
+      <property name="use-inheritees" value="false" />
+      <property name="view-field">
+        <property name="id" value="acl" />
+        <property name="ref-field" value="acl" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203AIE" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="id" />
+        <property name="ref-field" value="id" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203AIE" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="container" />
+        <property name="ref-field" value="container" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203AIE" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="open-type" />
+        <property name="ref-field" value="open-type" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203AIE" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="enable_batch" />
+        <property name="ref-field" value="acl" />
+        <property name="visible" value="false" />
+        <property name="width" value="26px" />
+        <property name="ref-schema" value="J9U9203AIE" />
+        <extension name="ad-invisible-label">
+          <property name="title" value="Schema.Base.View.Field.EnableBatch.Label" />
+          <property name="description" value="Schema.Base.View.Field.EnableBatch.Description" />
+        </extension>
+      </property>
+      <property name="view-field">
+        <property name="id" value="title" />
+        <property name="ref-field" value="title" />
+        <property name="visible" value="true" />
+        <property name="width" value="15%" />
+        <property name="sortable" value="false" />
+        <property name="title" value="タイトル" />
+        <property name="ref-schema" value="J9U9203AIE" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="enable_acl" />
+        <property name="ref-field" value="acl" />
+        <property name="visible" value="false" />
+        <property name="width" value="22px" />
+        <property name="ref-schema" value="J9U9203AIE" />
+        <extension name="ad-invisible-label">
+          <property name="title" value="Schema.Base.View.Field.EnableAcl.Label" />
+          <property name="description" value="Schema.Base.View.Field.EnableAcl.Description" />
+        </extension>
+      </property>
+    </property>
+    <property name="view">
+      <property name="id" value="J9U9203A-list-ud9q99pj" />
+      <property name="title" value="Schema.J9U9203AList.View.J9U9203AListUd9q99pj.Title" />
+      <property name="type" value="strict" />
+      <property name="use-inheritees" value="false" />
+      <property name="view-field">
+        <property name="id" value="acl" />
+        <property name="ref-field" value="acl" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203AIE" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="id" />
+        <property name="ref-field" value="id" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203AIE" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="container" />
+        <property name="ref-field" value="container" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203AIE" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="open-type" />
+        <property name="ref-field" value="open-type" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203AIE" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="enable_batch" />
+        <property name="ref-field" value="acl" />
+        <property name="title" value="チェックボックス" />
+        <property name="visible" value="true" />
+        <property name="width" value="26px" />
+        <property name="ref-schema" value="J9U9203AIE" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="title" />
+        <property name="ref-field" value="title" />
+        <property name="title" value="タイトル" />
+        <property name="visible" value="true" />
+        <property name="width" value="30%" />
+        <property name="sortable" value="false" />
+        <property name="ref-schema" value="J9U9203AIE" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="enable_acl" />
+        <property name="ref-field" value="acl" />
+        <property name="visible" value="false" />
+        <property name="width" value="22px" />
+        <property name="ref-schema" value="J9U9203AIE" />
+        <extension name="ad-invisible-label">
+          <property name="title" value="Schema.Base.View.Field.EnableAcl.Label" />
+          <property name="description" value="Schema.Base.View.Field.EnableAcl.Description" />
+        </extension>
+      </property>
+    </property>
+    <property name="view">
+      <property name="id" value="J9U9203A-list-5xgxbsaw" />
+      <property name="title" value="削除済文書" />
+      <property name="type" value="strict" />
+      <property name="use-inheritees" value="false" />
+      <property name="view-field">
+        <property name="id" value="acl" />
+        <property name="ref-field" value="acl" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203A" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="id" />
+        <property name="ref-field" value="id" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203A" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="container" />
+        <property name="ref-field" value="container" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203A" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="open-type" />
+        <property name="ref-field" value="open-type" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203A" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="enable_batch" />
+        <property name="ref-field" value="acl" />
+        <property name="title" value="Schema.Base.View.Field.EnableBatch.Label" />
+        <property name="description" value="Schema.Base.View.Field.EnableBatch.Description" />
+        <property name="visible" value="true" />
+        <property name="width" value="26px" />
+        <property name="ref-schema" value="J9U9203A" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="title" />
+        <property name="ref-field" value="title" />
+        <property name="title" value="Schema.J9U9203AList.View.J9U9203AList5xgxbsaw.Field.Title.Label" />
+        <property name="visible" value="true" />
+        <property name="width" value="30%" />
+        <property name="sortable" value="true" />
+        <property name="filter">
+          <property name="operator" value="like" />
+          <property name="value" value="%${title-contain}%" />
+        </property>
+        <property name="ref-schema" value="J9U9203A" />
+      </property>
+      <property name="view-field">
+        <property name="id" value="enable_acl" />
+        <property name="ref-field" value="acl" />
+        <property name="visible" value="false" />
+        <property name="width" value="22px" />
+        <property name="ref-schema" value="J9U9203A" />
+        <extension name="ad-invisible-label">
+          <property name="title" value="Schema.Base.View.Field.EnableAcl.Label" />
+          <property name="description" value="Schema.Base.View.Field.EnableAcl.Description" />
+        </extension>
+      </property>
+      <property name="view-field">
+        <property name="id" value="fddeleted" />
+        <property name="ref-field" value="fddeleted" />
+        <property name="visible" value="false" />
+        <property name="ref-schema" value="J9U9203A" />
+        <extension name="ad-invisible-label">
+          <property name="title" value="削除済み" />
+        </extension>
+      </property>
+      <property name="condition-sqls">
+        <property name="sql">
+          <property name="name" value="sql" />
+          <property name="value" value="ecma:z350_KEIJIBAN.appLib().sql('view-5xgxbsaw');" />
+        </property>
+      </property>
+    </property>
+	<!--addAction-->
+	<property name="action">
+      <property name="action-name" value="view-vb018ozu" />
+      <property name="action-view-id" value="common-list/view-nodocument" />
+      <property name="action-view-schema" value="J9U9203A-list-vb018ozu" />
+      <property name="update-access-history" value="true" />
+      <property name="action-view-arg" value="save-tab=false" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-search-vb018ozu" />
+      <property name="action-view-id" value="search/edit-condition" />
+      <property name="action-view-schema" value="J9U9203A-list-vb018ozu" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-resource-select-vb018ozu" />
+      <property name="action-view-id" value="selector/search-viewrecords-simple" />
+      <property name="action-view-schema" value="J9U9203A-list-vb018ozu" />
+      <property name="update-access-history" value="false" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-tr6ik4of" />
+      <property name="action-view-id" value="common-list/view-nodocument" />
+      <property name="action-view-schema" value="J9U9203A-list-tr6ik4of" />
+      <property name="update-access-history" value="true" />
+      <property name="action-view-arg" value="save-tab=false" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-search-tr6ik4of" />
+      <property name="action-view-id" value="search/edit-condition" />
+      <property name="action-view-schema" value="J9U9203A-list-tr6ik4of" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-resource-select-tr6ik4of" />
+      <property name="action-view-id" value="selector/search-viewrecords-simple" />
+      <property name="action-view-schema" value="J9U9203A-list-tr6ik4of" />
+      <property name="update-access-history" value="false" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="edit-children" />
+      <property name="action-view-id" value="common/edit-children-confirm" />
+      <property name="update-access-history" value="false" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="copy-children" />
+      <property name="action-view-id" value="common/copy" />
+      <property name="update-access-history" value="false" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="copy-children-post" />
+      <property name="action-view-id" value="common/copy-post" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="move-children" />
+      <property name="action-view-id" value="common/move" />
+      <property name="update-access-history" value="false" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="move-children-post" />
+      <property name="action-view-id" value="common/empty" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="signal-children" />
+      <property name="action-view-id" value="common/empty" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="modify-children" />
+      <property name="action-view-id" value="common/confirm-modify" />
+      <property name="action-view-arg" value="confirm-message=文書を削除します。よろしいですか？" />
+      <property name="action-view-arg" value="confirm-button=実行" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-pukr1rxd" />
+      <property name="action-view-id" value="common-list/view-nodocument" />
+      <property name="action-view-schema" value="J9U9203A-list-pukr1rxd" />
+      <property name="update-access-history" value="true" />
+      <property name="action-view-arg" value="save-tab=false" />
+      <property name="action-view-arg" value="filter-action=view-search-pukr1rxd" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-search-pukr1rxd" />
+      <property name="action-view-id" value="search/edit-condition" />
+      <property name="action-view-schema" value="J9U9203A-list-pukr1rxd" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-resource-select-pukr1rxd" />
+      <property name="action-view-id" value="selector/search-viewrecords-simple" />
+      <property name="action-view-schema" value="J9U9203A-list-pukr1rxd" />
+      <property name="update-access-history" value="false" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="modify" />
+      <property name="action-view-id" value="common/confirm-modify" />
+      <property name="action-view-arg" value="confirm-message=この文書に実行します。よろしいですか？" />
+      <property name="action-view-arg" value="confirm-button=実行" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-search-default" />
+      <property name="action-view-id" value="search/edit-condition" />
+      <property name="action-view-schema" value="J9U9203A-list" />
+      <property name="update-access-history" value="false" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-endmap5s" />
+      <property name="action-view-id" value="common-list/view-plained" />
+      <property name="action-view-schema" value="J9U9203A-list-endmap5s" />
+      <property name="action-view-arg" value="save-tab=false" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-search-endmap5s" />
+      <property name="action-view-id" value="search/edit-condition" />
+      <property name="action-view-schema" value="J9U9203A-list-endmap5s" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-resource-select-endmap5s" />
+      <property name="action-view-id" value="selector/search-viewrecords-simple" />
+      <property name="action-view-schema" value="J9U9203A-list-endmap5s" />
+      <property name="update-access-history" value="false" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-4q1lqzua" />
+      <property name="action-view-id" value="common-list/view-nodocument" />
+      <property name="action-view-schema" value="J9U9203A-list-4q1lqzua" />
+      <property name="update-access-history" value="true" />
+      <property name="action-view-arg" value="save-tab=false" />
+      <property name="action-view-arg" value="filter-action=view-search-4q1lqzua" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-search-4q1lqzua" />
+      <property name="action-view-id" value="search/edit-condition" />
+      <property name="action-view-schema" value="J9U9203A-list-4q1lqzua" />
+      <property name="update-access-history" value="false" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-resource-select-4q1lqzua" />
+      <property name="action-view-id" value="selector/search-viewrecords-simple" />
+      <property name="action-view-schema" value="J9U9203A-list-4q1lqzua" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-wmyadpnb" />
+      <property name="action-view-id" value="common-list/view-nodocument" />
+      <property name="action-view-schema" value="J9U9203A-list-wmyadpnb" />
+      <property name="update-access-history" value="true" />
+      <property name="action-view-arg" value="save-tab=false" />
+      <property name="action-view-arg" value="filter-action=view-search-wmyadpnb" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-search-wmyadpnb" />
+      <property name="action-view-id" value="search/edit-condition" />
+      <property name="action-view-schema" value="J9U9203A-list-wmyadpnb" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-resource-select-wmyadpnb" />
+      <property name="action-view-id" value="selector/search-viewrecords-simple" />
+      <property name="action-view-schema" value="J9U9203A-list-wmyadpnb" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="modify-children-opt-fileset" />
+      <property name="action-view-id" value="common/confirm-modify" />
+      <property name="action-view-arg" value="confirm-message=この文書に実行します。よろしいですか？" />
+      <property name="action-view-arg" value="confirm-button=実行" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-a163glak" />
+      <property name="action-view-id" value="common-list/view-nodocument" />
+      <property name="action-view-schema" value="J9U9203A-list-a163glak" />
+      <property name="action-pane-layout" value="horizontal" />
+      <property name="action-view-arg" value="save-tab=false" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-search-a163glak" />
+      <property name="action-view-id" value="search/edit-condition" />
+      <property name="action-view-schema" value="J9U9203A-list-a163glak" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-resource-select-a163glak" />
+      <property name="action-view-id" value="selector/search-viewrecords-simple" />
+      <property name="action-view-schema" value="J9U9203A-list-a163glak" />
+      <property name="update-access-history" value="false" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-ud9q99pj" />
+      <property name="action-view-id" value="common-list/view-nodocument" />
+      <property name="action-view-schema" value="J9U9203A-list-ud9q99pj" />
+      <property name="action-view-arg" value="save-tab=false" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-search-ud9q99pj" />
+      <property name="action-view-id" value="search/edit-condition" />
+      <property name="action-view-schema" value="J9U9203A-list-ud9q99pj" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-resource-select-ud9q99pj" />
+      <property name="action-view-id" value="selector/search-viewrecords-simple" />
+      <property name="action-view-schema" value="J9U9203A-list-ud9q99pj" />
+      <property name="update-access-history" value="false" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="modify-children-opt-move" />
+      <property name="action-view-id" value="common/confirm-modify" />
+      <property name="action-view-arg" value="confirm-message=この文書に実行します。よろしいですか？" />
+      <property name="action-view-arg" value="confirm-button=実行" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-5xgxbsaw" />
+      <property name="action-view-id" value="common-list/view-nodocument" />
+      <property name="action-view-schema" value="J9U9203A-list-5xgxbsaw" />
+      <property name="action-view-arg" value="save-tab=false" />
+      <property name="action-view-arg" value="filter-action=view-search-5xgxbsaw" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-search-5xgxbsaw" />
+      <property name="action-view-id" value="search/edit-condition" />
+      <property name="action-view-schema" value="J9U9203A-list-5xgxbsaw" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-resource-select-5xgxbsaw" />
+      <property name="action-view-id" value="selector/search-viewrecords-simple" />
+      <property name="action-view-schema" value="J9U9203A-list-5xgxbsaw" />
+      <property name="update-access-history" value="false" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="modify-children-opt-alldelcel" />
+      <property name="action-view-id" value="common/confirm-modify" />
+      <property name="action-view-arg" value="confirm-message=文書を削除取消します。よろしいですか？" />
+      <property name="action-view-arg" value="confirm-button=実行" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="modify-children-opt-alldel" />
+      <property name="action-view-id" value="common/confirm-modify" />
+      <property name="action-view-arg" value="confirm-message=文書を削除します。よろしいですか？" />
+      <property name="action-view-arg" value="confirm-button=実行" />
+    </property>
+    <property name="action-list">
+      <property name="type" value="pulldown" />
+      <property name="action">
+        <property name="name" value="view-default" />
+        <property name="title" value="メインメニュー" />
+        <property name="sub-list">
+          <property name="type" value="tabs" />
+          <property name="action">
+            <property name="name" value="view-default" />
+            <property name="title" value="デフォルトビュー" />
+          </property>
+          <property name="action">
+            <property name="name" value="separator" />
+            <property name="type" value="separator" />
+          </property>
+        </property>
+      </property>
+      <property name="action">
+        <property name="name" value="view-vb018ozu" />
+        <property name="name" value="view-tr6ik4of" />
+        <property name="name" value="view-a163glak" />
+        <property name="name" value="view-pukr1rxd" />
+        <property name="name" value="view-5xgxbsaw" />
+        <property name="title" value="管理メニュー" />
+        <property name="device-type" value="pc,tablet" />
+        <property name="sub-list">
+          <property name="type" value="tabs" />
+          <property name="action">
+            <property name="name" value="view-vb018ozu" />
+            <property name="title" value="連絡先" />
+          </property>
+          <property name="action">
+            <property name="name" value="view-tr6ik4of" />
+            <property name="title" value="関連リンク" />
+          </property>
+          <property name="action">
+            <property name="name" value="view-a163glak" />
+            <property name="title" value="メールマスタ" />
+          </property>
+          <property name="action">
+            <property name="name" value="view-pukr1rxd" />
+            <property name="title" value="閲覧範囲マスタ" />
+          </property>
+          <property name="action">
+            <property name="name" value="view-5xgxbsaw" />
+            <property name="title" value="削除済文書" />
+          </property>
+        </property>
+      </property>
+      <property name="action">
+        <property name="name" value="view-4q1lqzua" />
+        <property name="name" value="view-ud9q99pj" />
+        <property name="name" value="view-endmap5s" />
+        <property name="name" value="view-wmyadpnb" />
+        <property name="title" value="システム管理者メニュー" />
+        <property name="device-type" value="pc" />
+        <property name="sub-list">
+          <property name="type" value="tabs" />
+          <property name="action">
+            <property name="name" value="view-4q1lqzua" />
+            <property name="title" value="全文書一覧" />
+          </property>
+          <property name="action">
+            <property name="name" value="view-ud9q99pj" />
+            <property name="title" value="メールマスタ" />
+          </property>
+          <property name="action">
+            <property name="name" value="view-endmap5s" />
+            <property name="title" value="アプリ設定一覧" />
+            <property name="enabled" value="false" />
+          </property>
+          <property name="action">
+            <property name="name" value="view-wmyadpnb" />
+            <property name="title" value="閲覧範囲一覧" />
+          </property>
+        </property>
+      </property>
+    </property>
+</appFormTemplate>

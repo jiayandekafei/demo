@@ -1,0 +1,3472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addforms>
+  <property name="acl-pattern">
+    <property name="pattern-name" value="/atypes-acl/J9U9203AWC/master_kanrisha" />
+    <property name="acl-element">
+      <property name="target" value="REF:fddba" />
+      <property name="right" value="READ,WRITE,ELEM_CREATE,ELEM_DELETE,CHILD_CREATE,ACL_SET" />
+    </property>
+    <property name="acl-element">
+      <property name="target" value="ALL" />
+      <property name="right" value="READ" />
+    </property>
+    <extension name="ad-additional-properties">
+      <property name="ad-title" value="アプリテンプレート・マスタ(管理者)" />
+    </extension>
+  </property>
+  <property name="acl-pattern">
+    <property name="pattern-name" value="/atypes-acl/J9U9203A/doc_main" />
+    <property name="acl-element">
+      <property name="target" value="CREATOR" />
+      <property name="right" value="READ,WRITE,ELEM_CREATE,ELEM_DELETE,ACL_SET" />
+    </property>
+    <property name="acl-element">
+      <property name="target" value="ALL" />
+      <property name="right" value="NONE" />
+    </property>
+    <property name="acl-element">
+      <property name="target" value="ADD:REF:fddba" />
+      <property name="right" value="READ,WRITE,ELEM_CREATE,ELEM_DELETE,ACL_SET" />
+    </property>
+    <property name="acl-element">
+      <property name="target" value="ADD:REF:fdauditor" />
+      <property name="right" value="READ" />
+    </property>
+    <property name="acl-element">
+      <property name="target" value="ADD:REF:fdreader" />
+      <property name="right" value="READ" />
+    </property>
+    <property name="acl-element">
+      <property name="target" value="ADD:REF:fdeditor" />
+      <property name="right" value="WRITE,ELEM_CREATE,ELEM_DELETE,ACL_SET" />
+    </property>
+    <extension name="ad-additional-properties">
+      <property name="ad-title" value="アプリテンプレート・メインドキュメント" />
+    </extension>
+  </property>
+  <property name="acl-pattern">
+    <property name="pattern-name" value="/atypes-acl/J9U9203AQ0/acl-pattern1" />
+    <property name="acl-element">
+      <property name="target" value="REF:fddba" />
+      <property name="right" value="FULL" />
+    </property>
+    <property name="acl-element">
+      <property name="target" value="ALL" />
+      <property name="right" value="READ" />
+    </property>
+    <extension name="ad-additional-properties">
+      <property name="ad-title" value="アプリテンプレート・マスタ" />
+    </extension>
+  </property>
+ <!-- addForms -->
+  <property name="schema">
+    <property name="id" value="J9U9203AWC" />
+    <property name="title" value="連絡先情報" />
+    <property name="category" value="document" />
+    <property name="ntypes-version" value="80000" />
+    <property name="denied-types" value="*" />
+    <property name="auto-acl-update" value="true" />
+    <property name="acl-pattern-auto-apply" value="false" />
+    <property name="draft-enable" value="false" />
+    <property name="container-type" value="application" />
+    <property name="levels">
+      <property name="level" value="Schema.Level.CustomApp.Label" />
+    </property>
+    <property name="notify" value="none" />
+    <property name="use-workflow" value="false" />
+    <property name="print-header" value="false" />
+    <property name="default-acl" value="/atypes-acl/J9U9203AWC/master_kanrisha" />
+    <extension name="ad-original-schema-id" value="DJOLRXEES8" />
+    <property name="allowed-types" value="/atypes-config/J9U9203AWC" />
+    <property name="use-stub" value="false" />
+    <property name="data-history" value="true" />
+    <property name="allowed-types" value="/atypes/ariel/folder/file" />
+    <property name="db-meta">
+      <property name="index">
+        <property name="name" value="ut_j9u9203awc_idx1" />
+        <property name="field" value="container" />
+        <property name="field" value="modifier" />
+        <property name="field" value="creator" />
+        <property name="field" value="acl" />
+        <property name="field" value="id" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="created" />
+      <property name="title" value="Schema.J9U9203AWC.Field.Created.Label" />
+      <property name="description" value="Schema.J9U9203AWC.Field.Created.Description" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="date" />
+      <property name="widget">
+        <property name="value" value="date" />
+        <property name="args" value="time=on" />
+        <property name="args" value="calendar=on" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="DateTimeValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="creator" />
+      <property name="title" value="Schema.J9U9203AWC.Field.Creator.Label" />
+      <property name="description" value="Schema.J9U9203AWC.Field.Creator.Description" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="user" />
+      <property name="widget">
+        <property name="value" value="user" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="AquaUserValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="modified" />
+      <property name="title" value="Schema.J9U9203AWC.Field.Modified.Label" />
+      <property name="description" value="Schema.J9U9203AWC.Field.Modified.Description" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="date" />
+      <property name="widget">
+        <property name="value" value="date" />
+        <property name="args" value="time=on" />
+        <property name="args" value="calendar=on" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="DateTimeValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="modifier" />
+      <property name="title" value="Schema.J9U9203AWC.Field.Modifier.Label" />
+      <property name="description" value="Schema.J9U9203AWC.Field.Modifier.Description" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="user" />
+      <property name="widget">
+        <property name="value" value="user" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="AquaUserValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="title" />
+      <property name="title" value="タイトル" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="default" value="ecma:z350_KEIJIBAN.appLib('set_renrakusaki').defaultValue();" />
+    </property>
+    <property name="field">
+      <property name="id" value="fdtantoudepart" />
+      <property name="title" value="部署" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+        <property name="args" value="force-display=true" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fdtantouname" />
+      <property name="title" value="担当" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+        <property name="args" value="force-display=true" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fdtantoutel" />
+      <property name="title" value="内線" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+        <property name="args" value="force-display=true" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fdurl" />
+      <property name="title" value="URL" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="widget">
+        <property name="value" value="url" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="UriValidator" />
+      </property>
+      <property name="default" value="ecma:z350_KEIJIBAN.appLib('set_renrakusaki').defaultValue();" />
+    </property>
+    <property name="field">
+      <property name="id" value="fddba" />
+      <property name="type" value="usergroup" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="usergroup" />
+        <property name="args" value="suggest=true" />
+        <property name="args" value="mygroup=false" />
+      </property>
+      <property name="validator">
+        <property name="value" value="AquaUserGroupValidator" />
+      </property>
+      <property name="default" value="ecma:z350_KEIJIBAN.appLib('set_renrakusaki').defaultValue();" />
+      <extension name="ad-invisible-label">
+        <property name="title" value="管理者" />
+        <property name="category" value="Common.Tab.Base" />
+      </extension>
+    </property>
+    <property name="field">
+      <property name="id" value="attachment" />
+      <property name="type" value="resid_list" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="printable" value="false" />
+      <property name="disable-attachment-indexing" value="true" />
+      <property name="widget">
+        <property name="value" value="attachment" />
+        <property name="args" value="noPreview=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="AttachmentValidator" />
+      </property>
+      <extension name="ad-invisible-label">
+        <property name="title" value="attachment" />
+      </extension>
+    </property>
+    <property name="field">
+      <property name="id" value="open-type" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="type" value="string" />
+      <property name="virtual" value="true" />
+      <property name="default" value="overlap" />
+    </property>
+    <property name="field">
+      <property name="id" value="dialog-width" />
+      <property name="type" value="string" />
+      <property name="virtual" value="true" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="default" value="800px" />
+    </property>
+    <property name="field">
+      <property name="id" value="no_notify" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="type" value="int" />
+      <property name="default" value="0" />
+      <extension name="ad-invisible-label">
+        <property name="category" value="Common.Tab.Base" />
+      </extension>
+    </property>
+    <property name="action">
+      <property name="action-name" value="view" />
+      <property name="action-view-id" value="common/custom" />
+      <property name="title" value="ecma:z350_KEIJIBAN.appLib('set_renrakusaki').title();" />
+      <property name="action-view-arg" value="show-bpm-status=false" />
+      <property name="action-view-arg" value="enableFooter=true" />
+      <property name="action-view-arg" value="disable-link-button=true" />
+      <property name="action-view-arg" value="prior-action-title=true" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-bpmhistory" />
+      <property name="action-view-id" value="common/view-bpmhistory" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="create" />
+      <property name="action-view-id" value="common/custom" />
+      <property name="title" value="ecma:z350_KEIJIBAN.appLib('set_renrakusaki').title();" />
+      <property name="action-view-arg" value="register-button=登録" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="edit" />
+      <property name="action-view-id" value="common/custom" />
+      <property name="title" value="ecma:z350_KEIJIBAN.appLib('set_renrakusaki').title();" />
+      <property name="action-view-arg" value="register-button=登録" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="edit-post" />
+      <property name="action-view-id" value="common/edit-post" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="delete" />
+      <property name="action-view-id" value="common/delete" />
+      <property name="title" value="ecma:z350_KEIJIBAN.appLib('set_renrakusaki').title();" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="delete-post" />
+      <property name="action-view-id" value="common/empty" />
+    </property>
+    <extension name="ad-free-layout">
+      <property name="ad-free-layout">
+        <property name="id" value="DJOLRXEES8/edit" />
+        <property name="type" value="edit" />
+        <property name="action-names" value="view" />
+        <property name="action-names" value="create" />
+        <property name="action-names" value="edit" />
+        <property name="title" value="編集レイアウト" />
+        <property name="invisible-fields" value="hide" />
+        <property name="styles" value="border-collapse=collapse" />
+        <property name="field-widget">
+          <property name="field-id" value="fdtantoudepart" />
+          <property name="x" value="120" />
+          <property name="y" value="50" />
+          <property name="width" value="520" />
+          <property name="height" value="20" />
+          <property name="styles" value="border-top=1px #C0C0C0 solid" />
+          <property name="styles" value="border-right=1px #C0C0C0 solid" />
+        </property>
+        <property name="field-widget">
+          <property name="field-id" value="fdtantouname" />
+          <property name="x" value="120" />
+          <property name="y" value="70" />
+          <property name="width" value="520" />
+          <property name="height" value="20" />
+          <property name="styles" value="border-top=1px #C0C0C0 solid" />
+          <property name="styles" value="border-right=1px #C0C0C0 solid" />
+        </property>
+        <property name="field-widget">
+          <property name="field-id" value="fdtantoutel" />
+          <property name="x" value="120" />
+          <property name="y" value="90" />
+          <property name="width" value="520" />
+          <property name="height" value="20" />
+          <property name="styles" value="border-top=1px #C0C0C0 solid" />
+          <property name="styles" value="border-right=1px #C0C0C0 solid" />
+        </property>
+        <property name="field-widget">
+          <property name="field-id" value="fdurl" />
+          <property name="x" value="120" />
+          <property name="y" value="110" />
+          <property name="width" value="520" />
+          <property name="height" value="20" />
+          <property name="styles" value="border-top=1px #C0C0C0 solid" />
+          <property name="styles" value="border-right=1px #C0C0C0 solid" />
+          <property name="styles" value="border-bottom=1px #C0C0C0 solid" />
+        </property>
+        <property name="field-widget">
+          <property name="field-id" value="title" />
+          <property name="x" value="0" />
+          <property name="y" value="10" />
+          <property name="width" value="640" />
+          <property name="height" value="30" />
+          <property name="styles" value="font-size=18px" />
+          <property name="styles" value="font-weight=bold" />
+          <property name="styles" value="text-align=center" />
+          <property name="styles" value="vertical-align=middle" />
+          <property name="styles" value="background-color=gray" />
+          <property name="styles" value="color=white" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="fdtantoudepart" />
+          <property name="x" value="0" />
+          <property name="y" value="50" />
+          <property name="width" value="120" />
+          <property name="height" value="20" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="font-weight=normal" />
+          <property name="styles" value="background-color=#e1e1e1" />
+          <property name="styles" value="border-top=1px #C0C0C0 solid" />
+          <property name="styles" value="border-right=1px #C0C0C0 solid" />
+          <property name="styles" value="border-left=1px #C0C0C0 solid" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="fdtantouname" />
+          <property name="x" value="0" />
+          <property name="y" value="70" />
+          <property name="width" value="120" />
+          <property name="height" value="20" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="font-weight=normal" />
+          <property name="styles" value="background-color=#e1e1e1" />
+          <property name="styles" value="border-top=1px #C0C0C0 solid" />
+          <property name="styles" value="border-right=1px #C0C0C0 solid" />
+          <property name="styles" value="border-left=1px #C0C0C0 solid" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="fdtantoutel" />
+          <property name="x" value="0" />
+          <property name="y" value="90" />
+          <property name="width" value="120" />
+          <property name="height" value="20" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="font-weight=normal" />
+          <property name="styles" value="background-color=#e1e1e1" />
+          <property name="styles" value="border-top=1px #C0C0C0 solid" />
+          <property name="styles" value="border-right=1px #C0C0C0 solid" />
+          <property name="styles" value="border-left=1px #C0C0C0 solid" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="fdurl" />
+          <property name="x" value="0" />
+          <property name="y" value="110" />
+          <property name="width" value="120" />
+          <property name="height" value="20" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="font-weight=normal" />
+          <property name="styles" value="background-color=#e1e1e1" />
+          <property name="styles" value="border-top=1px #C0C0C0 solid" />
+          <property name="styles" value="border-right=1px #C0C0C0 solid" />
+          <property name="styles" value="border-bottom=1px #C0C0C0 solid" />
+          <property name="styles" value="border-left=1px #C0C0C0 solid" />
+        </property>
+      </property>
+    </extension>
+  </property>
+  <property name="schema">
+    <property name="id" value="J9U9203AKL" />
+    <property name="title" value="連絡先" />
+    <property name="category" value="document" />
+    <property name="ntypes-version" value="80000" />
+    <property name="denied-types" value="*" />
+    <property name="auto-acl-update" value="false" />
+    <property name="acl-pattern-auto-apply" value="false" />
+    <property name="draft-enable" value="false" />
+    <property name="container-type" value="application" />
+    <property name="levels">
+      <property name="level" value="Schema.Level.CustomApp.Label" />
+    </property>
+    <property name="notify" value="none" />
+    <property name="use-workflow" value="false" />
+    <property name="use-stub" value="false" />
+    <property name="footer-button-enable" value="false" />
+    <extension name="ad-original-schema-id" value="DJOLRXEEID" />
+    <property name="allowed-types" value="/atypes-config/J9U9203AKL" />
+    <property name="data-history" value="true" />
+    <property name="print-header" value="false" />
+    <property name="db-meta">
+      <property name="index">
+        <property name="name" value="ut_j9u9203akl_idx1" />
+        <property name="field" value="container" />
+        <property name="field" value="modifier" />
+        <property name="field" value="creator" />
+        <property name="field" value="acl" />
+        <property name="field" value="id" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="created" />
+      <property name="title" value="Schema.J9U9203AKL.Field.Created.Label" />
+      <property name="description" value="Schema.J9U9203AKL.Field.Created.Description" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="date" />
+      <property name="widget">
+        <property name="value" value="date" />
+        <property name="args" value="time=on" />
+        <property name="args" value="calendar=on" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="DateTimeValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="creator" />
+      <property name="title" value="Schema.J9U9203AKL.Field.Creator.Label" />
+      <property name="description" value="Schema.J9U9203AKL.Field.Creator.Description" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="user" />
+      <property name="widget">
+        <property name="value" value="user" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="AquaUserValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="modified" />
+      <property name="title" value="Schema.J9U9203AKL.Field.Modified.Label" />
+      <property name="description" value="Schema.J9U9203AKL.Field.Modified.Description" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="date" />
+      <property name="widget">
+        <property name="value" value="date" />
+        <property name="args" value="time=on" />
+        <property name="args" value="calendar=on" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="DateTimeValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="modifier" />
+      <property name="title" value="Schema.J9U9203AKL.Field.Modifier.Label" />
+      <property name="description" value="Schema.J9U9203AKL.Field.Modifier.Description" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="user" />
+      <property name="widget">
+        <property name="value" value="user" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="AquaUserValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fdapptitle" />
+      <property name="title" value="タイトル" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="virtual" value="true" />
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="default" value="ecma:z350_KEIJIBAN.appLib('doc_renrakusaki').defaultValue();" />
+    </property>
+    <property name="field">
+      <property name="id" value="fdtantoudepart" />
+      <property name="title" value="部署" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="default" value="ecma:z350_KEIJIBAN.appLib('doc_renrakusaki').defaultValue();" />
+    </property>
+    <property name="field">
+      <property name="id" value="fdtantouname" />
+      <property name="title" value="担当" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="default" value="ecma:z350_KEIJIBAN.appLib('doc_renrakusaki').defaultValue();" />
+    </property>
+    <property name="field">
+      <property name="id" value="fdtantoutel" />
+      <property name="title" value="内線" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="default" value="ecma:z350_KEIJIBAN.appLib('doc_renrakusaki').defaultValue();" />
+    </property>
+    <property name="field">
+      <property name="id" value="fdurl" />
+      <property name="title" value="URL" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="url" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="UriValidator" />
+      </property>
+      <property name="default" value="ecma:z350_KEIJIBAN.appLib('doc_renrakusaki').defaultValue();" />
+    </property>
+    <property name="field">
+      <property name="id" value="open-type" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="type" value="string" />
+      <property name="virtual" value="true" />
+      <property name="default" value="overlap" />
+    </property>
+    <property name="field">
+      <property name="id" value="dialog-width" />
+      <property name="type" value="string" />
+      <property name="virtual" value="true" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="default" value="800px" />
+    </property>
+    <property name="field">
+      <property name="id" value="no_notify" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="type" value="int" />
+      <property name="default" value="0" />
+      <extension name="ad-invisible-label">
+        <property name="category" value="Common.Tab.Base" />
+      </extension>
+    </property>
+    <property name="action">
+      <property name="action-name" value="view" />
+      <property name="action-view-id" value="common/custom" />
+      <property name="title" value="ecma:z350_KEIJIBAN.appLib('doc_renrakusaki').title();" />
+      <property name="action-view-arg" value="disable-link-button=true" />
+      <property name="action-view-arg" value="prior-action-title=true" />
+      <property name="action-view-arg" value="show-bpm-status=false" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-bpmhistory" />
+      <property name="action-view-id" value="common/view-bpmhistory" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="create" />
+      <property name="action-view-id" value="common/custom" />
+      <property name="title" value="ecma:z350_KEIJIBAN.appLib('doc_renrakusaki').title();" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="edit" />
+      <property name="action-view-id" value="common/custom" />
+      <property name="title" value="ecma:z350_KEIJIBAN.appLib('doc_renrakusaki').title();" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="edit-post" />
+      <property name="action-view-id" value="common/edit-post" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="delete" />
+      <property name="action-view-id" value="common/delete" />
+      <property name="title" value="ecma:z350_KEIJIBAN.appLib('doc_renrakusaki').title();" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="delete-post" />
+      <property name="action-view-id" value="common/empty" />
+    </property>
+    <extension name="ad-free-layout">
+      <property name="ad-free-layout">
+        <property name="id" value="DJOLRXEEID/edit" />
+        <property name="type" value="edit" />
+        <property name="action-names" value="view" />
+        <property name="action-names" value="create" />
+        <property name="action-names" value="edit" />
+        <property name="title" value="編集レイアウト" />
+        <property name="styles" value="border-collapse=collapse" />
+        <property name="field-widget">
+          <property name="field-id" value="fdtantoudepart" />
+          <property name="x" value="120" />
+          <property name="y" value="50" />
+          <property name="width" value="520" />
+          <property name="height" value="20" />
+          <property name="styles" value="border-top=1px #C0C0C0 solid" />
+          <property name="styles" value="border-right=1px #C0C0C0 solid" />
+          <property name="styles" value="border-bottom=1px #C0C0C0 solid" />
+          <property name="styles" value="border-left=1px #C0C0C0 solid" />
+          <property name="styles" value="font-family='MS PGothic'" />
+        </property>
+        <property name="field-widget">
+          <property name="field-id" value="fdtantouname" />
+          <property name="x" value="120" />
+          <property name="y" value="70" />
+          <property name="width" value="520" />
+          <property name="height" value="20" />
+          <property name="styles" value="border-top=1px #C0C0C0 solid" />
+          <property name="styles" value="border-right=1px #C0C0C0 solid" />
+          <property name="styles" value="border-bottom=1px #C0C0C0 solid" />
+          <property name="styles" value="border-left=1px #C0C0C0 solid" />
+          <property name="styles" value="font-family='MS PGothic'" />
+        </property>
+        <property name="field-widget">
+          <property name="field-id" value="fdtantoutel" />
+          <property name="x" value="120" />
+          <property name="y" value="90" />
+          <property name="width" value="520" />
+          <property name="height" value="20" />
+          <property name="styles" value="border-top=1px #C0C0C0 solid" />
+          <property name="styles" value="border-right=1px #C0C0C0 solid" />
+          <property name="styles" value="border-bottom=1px #C0C0C0 solid" />
+          <property name="styles" value="border-left=1px #C0C0C0 solid" />
+          <property name="styles" value="font-family='MS PGothic'" />
+        </property>
+        <property name="field-widget">
+          <property name="field-id" value="fdurl" />
+          <property name="x" value="120" />
+          <property name="y" value="110" />
+          <property name="width" value="520" />
+          <property name="height" value="20" />
+          <property name="styles" value="border-top=1px #C0C0C0 solid" />
+          <property name="styles" value="border-right=1px #C0C0C0 solid" />
+          <property name="styles" value="border-bottom=1px #C0C0C0 solid" />
+          <property name="styles" value="border-left=1px #C0C0C0 solid" />
+          <property name="styles" value="font-family='MS PGothic'" />
+        </property>
+        <property name="field-widget">
+          <property name="field-id" value="fdapptitle" />
+          <property name="x" value="0" />
+          <property name="y" value="0" />
+          <property name="width" value="640" />
+          <property name="height" value="40" />
+          <property name="styles" value="font-size=26px" />
+          <property name="styles" value="font-weight=bold" />
+          <property name="styles" value="text-align=center" />
+          <property name="styles" value="vertical-align=middle" />
+          <property name="styles" value="font-family='MS PGothic'" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="fdtantoudepart" />
+          <property name="x" value="0" />
+          <property name="y" value="50" />
+          <property name="width" value="120" />
+          <property name="height" value="20" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="font-weight=normal" />
+          <property name="styles" value="background-color=#e1e1e1" />
+          <property name="styles" value="border-top=1px #C0C0C0 solid" />
+          <property name="styles" value="border-right=1px #C0C0C0 solid" />
+          <property name="styles" value="border-bottom=1px #C0C0C0 solid" />
+          <property name="styles" value="border-left=1px #C0C0C0 solid" />
+          <property name="styles" value="font-family='MS PGothic'" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="fdtantouname" />
+          <property name="x" value="0" />
+          <property name="y" value="70" />
+          <property name="width" value="120" />
+          <property name="height" value="20" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="font-weight=normal" />
+          <property name="styles" value="background-color=#e1e1e1" />
+          <property name="styles" value="border-top=1px #C0C0C0 solid" />
+          <property name="styles" value="border-right=1px #C0C0C0 solid" />
+          <property name="styles" value="border-bottom=1px #C0C0C0 solid" />
+          <property name="styles" value="border-left=1px #C0C0C0 solid" />
+          <property name="styles" value="font-family='MS PGothic'" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="fdtantoutel" />
+          <property name="x" value="0" />
+          <property name="y" value="90" />
+          <property name="width" value="120" />
+          <property name="height" value="20" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="font-weight=normal" />
+          <property name="styles" value="background-color=#e1e1e1" />
+          <property name="styles" value="border-top=1px #C0C0C0 solid" />
+          <property name="styles" value="border-right=1px #C0C0C0 solid" />
+          <property name="styles" value="border-bottom=1px #C0C0C0 solid" />
+          <property name="styles" value="border-left=1px #C0C0C0 solid" />
+          <property name="styles" value="font-family='MS PGothic'" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="fdurl" />
+          <property name="x" value="0" />
+          <property name="y" value="110" />
+          <property name="width" value="120" />
+          <property name="height" value="20" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="font-weight=normal" />
+          <property name="styles" value="background-color=#e1e1e1" />
+          <property name="styles" value="border-top=1px #C0C0C0 solid" />
+          <property name="styles" value="border-right=1px #C0C0C0 solid" />
+          <property name="styles" value="border-bottom=1px #C0C0C0 solid" />
+          <property name="styles" value="border-left=1px #C0C0C0 solid" />
+        </property>
+        <property name="static-text">
+          <property name="text" value=" " />
+          <property name="x" value="0" />
+          <property name="y" value="130" />
+          <property name="width" value="640" />
+          <property name="height" value="50" />
+        </property>
+      </property>
+    </extension>
+  </property>
+  <property name="schema">
+    <property name="id" value="J9U9203AYL" />
+    <property name="title" value="関連リンク" />
+    <property name="category" value="document" />
+    <property name="ntypes-version" value="80000" />
+    <property name="denied-types" value="*" />
+    <property name="auto-acl-update" value="true" />
+    <property name="acl-pattern-auto-apply" value="false" />
+    <property name="draft-enable" value="false" />
+    <property name="container-type" value="application" />
+    <property name="levels">
+      <property name="level" value="Schema.Level.CustomApp.Label" />
+    </property>
+    <property name="notify" value="none" />
+    <property name="use-workflow" value="false" />
+    <property name="data-history" value="true" />
+    <property name="default-acl" value="/atypes-acl/J9U9203AWC/master_kanrisha" />
+    <extension name="ad-original-schema-id" value="B5NM9QNDTM" />
+    <property name="allowed-types" value="/atypes-config/J9U9203AYL" />
+    <property name="use-stub" value="false" />
+    <property name="db-meta">
+      <property name="index">
+        <property name="name" value="ut_j9u9203ayl_idx1" />
+        <property name="field" value="container" />
+        <property name="field" value="modifier" />
+        <property name="field" value="creator" />
+        <property name="field" value="acl" />
+        <property name="field" value="id" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="created" />
+      <property name="title" value="Schema.J9U9203AYL.Field.Created.Label" />
+      <property name="description" value="Schema.J9U9203AYL.Field.Created.Description" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="date" />
+      <property name="widget">
+        <property name="value" value="date" />
+        <property name="args" value="time=on" />
+        <property name="args" value="calendar=on" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="DateTimeValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="creator" />
+      <property name="title" value="Schema.J9U9203AYL.Field.Creator.Label" />
+      <property name="description" value="Schema.J9U9203AYL.Field.Creator.Description" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="user" />
+      <property name="widget">
+        <property name="value" value="user" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="AquaUserValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="modified" />
+      <property name="title" value="Schema.J9U9203AYL.Field.Modified.Label" />
+      <property name="description" value="Schema.J9U9203AYL.Field.Modified.Description" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="date" />
+      <property name="widget">
+        <property name="value" value="date" />
+        <property name="args" value="time=on" />
+        <property name="args" value="calendar=on" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="DateTimeValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="modifier" />
+      <property name="title" value="Schema.J9U9203AYL.Field.Modifier.Label" />
+      <property name="description" value="Schema.J9U9203AYL.Field.Modifier.Description" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="user" />
+      <property name="widget">
+        <property name="value" value="user" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="AquaUserValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fdlink" />
+      <property name="title" value="関連リンク" />
+      <property name="type" value="large_string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="indexing" value="false" />
+      <property name="widget">
+        <property name="value" value="richtext" />
+        <property name="args" value="line=10" />
+        <property name="args" value="ime=active" />
+        <property name="args" value="force-display=true" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fdlink_format" />
+      <property name="type" value="string" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="validator">
+        <property name="value" value="TextFormatValidator" />
+      </property>
+      <property name="default" value="text/html" />
+    </property>
+    <property name="field">
+      <property name="id" value="title" />
+      <property name="type" value="string" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+      </property>
+      <property name="default" value="ecma:z350_KEIJIBAN.appLib('set_link').defaultValue();" />
+      <extension name="ad-invisible-label">
+        <property name="title" value="タイトル" />
+        <property name="description" value="タイトル" />
+      </extension>
+    </property>
+    <property name="field">
+      <property name="id" value="fddba" />
+      <property name="type" value="usergroup" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="usergroup" />
+        <property name="args" value="suggest=true" />
+        <property name="args" value="mygroup=false" />
+      </property>
+      <property name="validator">
+        <property name="value" value="AquaUserGroupValidator" />
+      </property>
+      <property name="default" value="ecma:z350_KEIJIBAN.appLib('set_link').defaultValue();" />
+      <extension name="ad-invisible-label">
+        <property name="title" value="管理者" />
+      </extension>
+    </property>
+    <property name="field">
+      <property name="id" value="open-type" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="type" value="string" />
+      <property name="virtual" value="true" />
+      <property name="default" value="overlap" />
+    </property>
+    <property name="field">
+      <property name="id" value="no_notify" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="type" value="int" />
+      <property name="default" value="0" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view" />
+      <property name="action-view-id" value="common/custom" />
+      <property name="title" value="ecma:z350_KEIJIBAN.appLib('set_link').title();" />
+      <property name="action-view-arg" value="prior-action-title=true" />
+      <property name="action-view-arg" value="show-bpm-status=false" />
+      <property name="action-view-arg" value="disable-link-button=true" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-bpmhistory" />
+      <property name="action-view-id" value="common/view-bpmhistory" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="create" />
+      <property name="action-view-id" value="common/custom" />
+      <property name="title" value="ecma:z350_KEIJIBAN.appLib('set_link').title();" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="edit" />
+      <property name="action-view-id" value="common/custom" />
+      <property name="title" value="ecma:z350_KEIJIBAN.appLib('set_link').title();" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="edit-post" />
+      <property name="action-view-id" value="common/edit-post" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="delete" />
+      <property name="action-view-id" value="common/delete" />
+      <property name="title" value="ecma:z350_KEIJIBAN.appLib('set_link').title();" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="delete-post" />
+      <property name="action-view-id" value="common/empty" />
+    </property>
+    <extension name="ad-free-layout">
+      <property name="ad-free-layout">
+        <property name="id" value="B5NM9QNDTM/edit" />
+        <property name="type" value="edit" />
+        <property name="action-names" value="view" />
+        <property name="action-names" value="create" />
+        <property name="action-names" value="edit" />
+        <property name="title" value="編集レイアウト" />
+        <property name="invisible-fields" value="hide" />
+        <property name="styles" value="border-collapse=collapse" />
+        <property name="field-widget">
+          <property name="field-id" value="fdlink" />
+          <property name="x" value="0" />
+          <property name="y" value="30" />
+          <property name="width" value="640" />
+          <property name="height" value="170" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="fdlink" />
+          <property name="x" value="0" />
+          <property name="y" value="0" />
+          <property name="width" value="640" />
+          <property name="height" value="30" />
+          <property name="styles" value="font-weight=normal" />
+          <property name="styles" value="font-size=18px" />
+          <property name="styles" value="text-align=left" />
+        </property>
+      </property>
+    </extension>
+  </property>
+  <property name="schema">
+    <property name="id" value="J9U9203AEE" />
+    <property name="title" value="メインドキュメント印刷" />
+    <property name="category" value="document" />
+    <property name="ntypes-version" value="80000" />
+    <property name="denied-types" value="*" />
+    <property name="auto-acl-update" value="false" />
+    <property name="acl-pattern-auto-apply" value="false" />
+    <property name="draft-enable" value="false" />
+    <property name="container-type" value="application" />
+    <property name="levels">
+      <property name="level" value="Schema.Level.CustomApp.Label" />
+    </property>
+    <property name="allowed-types" value="/atypes-config/J9U9203AEE" />
+    <property name="notify" value="none" />
+    <property name="use-workflow" value="false" />
+    <property name="use-stub" value="false" />
+    <property name="data-history" value="true" />
+    <property name="footer-button-enable" value="false" />
+    <property name="print-header" value="false" />
+    <property name="db-meta">
+      <property name="index">
+        <property name="name" value="ut_j9u9203aee_idx1" />
+        <property name="field" value="container" />
+        <property name="field" value="modifier" />
+        <property name="field" value="creator" />
+        <property name="field" value="acl" />
+        <property name="field" value="id" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="created" />
+      <property name="title" value="Schema.J9U9203AEE.Field.Created.Label" />
+      <property name="description" value="Schema.J9U9203AEE.Field.Created.Description" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="date" />
+      <property name="widget">
+        <property name="value" value="date" />
+        <property name="args" value="time=on" />
+        <property name="args" value="calendar=on" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="DateTimeValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="creator" />
+      <property name="title" value="Schema.J9U9203AEE.Field.Creator.Label" />
+      <property name="description" value="Schema.J9U9203AEE.Field.Creator.Description" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="user" />
+      <property name="widget">
+        <property name="value" value="user" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="AquaUserValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="modified" />
+      <property name="title" value="Schema.J9U9203AEE.Field.Modified.Label" />
+      <property name="description" value="Schema.J9U9203AEE.Field.Modified.Description" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="date" />
+      <property name="widget">
+        <property name="value" value="date" />
+        <property name="args" value="time=on" />
+        <property name="args" value="calendar=on" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="DateTimeValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="modifier" />
+      <property name="title" value="Schema.J9U9203AEE.Field.Modifier.Label" />
+      <property name="description" value="Schema.J9U9203AEE.Field.Modifier.Description" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="user" />
+      <property name="widget">
+        <property name="value" value="user" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="AquaUserValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="title" />
+      <property name="title" value="件名" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="indexing" value="true" />
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+        <property name="args" value="ime=active" />
+      </property>
+      <property name="validator">
+        <property name="value" value="NotNullValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="open-type" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="type" value="string" />
+      <property name="virtual" value="true" />
+      <property name="expression" value="ecma:z350_KEIJIBAN.appLib().getDocOpenMode();" />
+      <property name="default" value="overlap" />
+    </property>
+    <property name="field">
+      <property name="id" value="dialog-width" />
+      <property name="type" value="string" />
+      <property name="virtual" value="true" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="expression" value="ecma:z350_KEIJIBAN.appLib().getDocWidth();" />
+    </property>
+    <property name="field">
+      <property name="id" value="no_notify" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="type" value="int" />
+      <property name="default" value="0" />
+      <extension name="ad-invisible-label">
+        <property name="category" value="Common.Tab.Base" />
+      </extension>
+    </property>
+    <property name="action">
+      <property name="action-name" value="view" />
+      <property name="action-view-id" value="common/view-noacl" />
+      <property name="title" value="ecma:z350_KEIJIBAN.appLib('doc_print').title();" />
+      <property name="action-view-arg" value="show-bpm-status=false" />
+      <property name="action-view-arg" value="hide-document-tree=true" />
+      <property name="action-view-arg" value="disable-link-button=true" />
+      <property name="action-view-arg" value="prior-action-title=true" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-bpmhistory" />
+      <property name="action-view-id" value="common/view-bpmhistory" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="create" />
+      <property name="action-view-id" value="common/edit" />
+      <property name="title" value="ecma:z350_KEIJIBAN.appLib('doc_print').title();" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="edit" />
+      <property name="action-view-id" value="common/edit" />
+      <property name="title" value="ecma:z350_KEIJIBAN.appLib('doc_print').title();" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="edit-post" />
+      <property name="action-view-id" value="common/edit-post" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="delete" />
+      <property name="action-view-id" value="common/delete" />
+      <property name="title" value="ecma:z350_KEIJIBAN.appLib('doc_print').title();" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="delete-post" />
+      <property name="action-view-id" value="common/empty" />
+    </property>
+  </property>
+  <property name="schema">
+    <property name="id" value="J9U9203AQ0" />
+    <property name="title" value="閲覧範囲マスタ" />
+    <property name="category" value="document" />
+    <property name="ntypes-version" value="80000" />
+    <property name="denied-types" value="*" />
+    <property name="auto-acl-update" value="true" />
+    <property name="acl-pattern-auto-apply" value="false" />
+    <property name="draft-enable" value="false" />
+    <property name="container-type" value="application" />
+    <property name="levels">
+      <property name="level" value="Schema.Level.CustomApp.Label" />
+    </property>
+    <property name="notify" value="none" />
+    <property name="use-workflow" value="false" />
+    <extension name="ad-original-schema-id" value="JT8D2ITBO0" />
+    <property name="data-history" value="true" />
+    <property name="print-header" value="false" />
+    <extension name="dxlconfig-form">
+      <property name="form">
+        <property name="schema" value="J9U9203AQ0" />
+      </property>
+    </extension>
+    <property name="default-acl" value="/atypes-acl/J9U9203AQ0/acl-pattern1" />
+    <property name="allowed-types" value="/atypes/ariel/folder/file" />
+    <property name="allowed-types" value="/atypes-config/J9U9203AQ0" />
+    <property name="use-stub" value="false" />
+    <property name="db-meta">
+      <property name="index">
+        <property name="name" value="ut_j9u9203aq0_idx1" />
+        <property name="field" value="container" />
+        <property name="field" value="modifier" />
+        <property name="field" value="creator" />
+        <property name="field" value="acl" />
+        <property name="field" value="id" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="created" />
+      <property name="title" value="作成日時" />
+      <property name="description" value="作成日時" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="date" />
+      <property name="widget">
+        <property name="value" value="date" />
+        <property name="args" value="time=on" />
+        <property name="args" value="calendar=on" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="DateTimeValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="creator" />
+      <property name="title" value="作成者" />
+      <property name="description" value="作成者" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="user" />
+      <property name="widget">
+        <property name="value" value="user" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="AquaUserValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="modified" />
+      <property name="title" value="更新日時" />
+      <property name="description" value="更新日時" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="date" />
+      <property name="widget">
+        <property name="value" value="date" />
+        <property name="args" value="time=on" />
+        <property name="args" value="calendar=on" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="DateTimeValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="modifier" />
+      <property name="title" value="更新者" />
+      <property name="description" value="更新者" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="user" />
+      <property name="widget">
+        <property name="value" value="user" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="AquaUserValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fdtitle" />
+      <property name="title" value="タイトル" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <extension name="dxlconfig-entry">
+        <property name="entry">
+          <property name="dest">
+            <property name="type" value="string" />
+            <property name="id" value="fdtitle" />
+          </property>
+        </property>
+      </extension>
+      <property name="virtual" value="true" />
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+      </property>
+      <property name="default" value="ecma:z350_KEIJIBAN.appLib('set_range').defaultValue();" />
+    </property>
+    <property name="field">
+      <property name="id" value="title" />
+      <property name="title" value="閲覧範囲" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <extension name="dxlconfig-entry">
+        <property name="entry">
+          <property name="dest">
+            <property name="type" value="string" />
+            <property name="id" value="title" />
+          </property>
+        </property>
+      </extension>
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="NotNullValidator" />
+        <property name="enabled" value="ecma:z350_KEIJIBAN.appLib('set_range').isRequired();" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fdcode" />
+      <property name="title" value="コード" />
+      <property name="type" value="int" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <extension name="dxlconfig-entry">
+        <property name="entry">
+          <property name="dest">
+            <property name="type" value="int" />
+            <property name="id" value="fdcode" />
+          </property>
+        </property>
+      </extension>
+      <property name="widget">
+        <property name="value" value="numeric" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="NotNullValidator" />
+        <property name="enabled" value="ecma:z350_KEIJIBAN.appLib('set_range').isRequired();" />
+      </property>
+      <property name="validator">
+        <property name="value" value="IntValidator" />
+        <property name="type" value="both" />
+      </property>
+      <property name="validator">
+        <property name="value" value="IntMinValidator" />
+        <property name="args" value="0" />
+      </property>
+      <property name="validator">
+        <property name="value" value="IntMaxValidator" />
+        <property name="args" value="9999" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fdusers" />
+      <property name="title" value="閲覧ユーザー" />
+      <property name="type" value="user_list" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <extension name="dxlconfig-entry">
+        <property name="entry">
+          <property name="dest">
+            <property name="type" value="user_list" />
+            <property name="id" value="fdusers" />
+          </property>
+        </property>
+      </extension>
+      <property name="widget">
+        <property name="value" value="userlist" />
+        <property name="args" value="suggest=true" />
+        <property name="args" value="force-display=true" />
+        <property name="args" value="resourcetype=atypes/groupdir" />
+        <property name="args" value="height=150" />
+      </property>
+      <property name="validator">
+        <property name="value" value="AquaUserValidator" />
+        <property name="type" value="both" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fdgroups" />
+      <property name="title" value="閲覧グループ" />
+      <property name="type" value="group_list" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <extension name="dxlconfig-entry">
+        <property name="entry">
+          <property name="dest">
+            <property name="type" value="group_list" />
+            <property name="id" value="fdgroups" />
+          </property>
+        </property>
+      </extension>
+      <property name="widget">
+        <property name="value" value="grouplist" />
+        <property name="args" value="suggest=true" />
+        <property name="args" value="mygroup=false" />
+        <property name="args" value="force-display=true" />
+        <property name="args" value="resourcetype=atypes/workgroupdir" />
+        <property name="args" value="height=150" />
+      </property>
+      <property name="validator">
+        <property name="value" value="AquaGroupValidator" />
+        <property name="type" value="both" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fddba" />
+      <property name="type" value="usergroup" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <extension name="dxlconfig-entry">
+        <property name="entry">
+          <property name="dest">
+            <property name="type" value="usergroup" />
+            <property name="id" value="fddba" />
+          </property>
+        </property>
+      </extension>
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="usergroup" />
+        <property name="args" value="suggest=true" />
+        <property name="args" value="mygroup=false" />
+      </property>
+      <property name="validator">
+        <property name="value" value="AquaUserGroupValidator" />
+      </property>
+      <property name="default" value="ecma:z350_KEIJIBAN.appLib('set_range').defaultValue();" />
+      <extension name="ad-invisible-label">
+        <property name="title" value="管理者" />
+      </extension>
+    </property>
+    <property name="field">
+      <property name="id" value="attachment" />
+      <property name="type" value="resid_list" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="disable-attachment-indexing" value="true" />
+      <extension name="dxlconfig-entry">
+        <property name="entry">
+          <property name="dest">
+            <property name="type" value="resid_list" />
+            <property name="id" value="attachment" />
+          </property>
+        </property>
+      </extension>
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="attachment" />
+        <property name="args" value="noPreview=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="AttachmentValidator" />
+      </property>
+      <extension name="ad-invisible-label">
+        <property name="title" value="attachment" />
+      </extension>
+    </property>
+    <property name="field">
+      <property name="id" value="open-type" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="type" value="string" />
+      <property name="virtual" value="true" />
+      <property name="default" value="overlap" />
+    </property>
+    <property name="field">
+      <property name="id" value="dialog-width" />
+      <property name="type" value="string" />
+      <property name="virtual" value="true" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="default" value="800px" />
+    </property>
+    <property name="field">
+      <property name="id" value="no_notify" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="type" value="int" />
+      <property name="default" value="0" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view" />
+      <property name="action-view-id" value="common/custom" />
+      <property name="title" value="ecma:z350_KEIJIBAN.appLib('set_range').title();" />
+      <property name="action-view-arg" value="show-bpm-status=false" />
+      <property name="action-view-arg" value="prior-action-title=true" />
+      <property name="action-view-arg" value="enableFooter=true" />
+      <property name="action-view-arg" value="disable-link-button=true" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-bpmhistory" />
+      <property name="action-view-id" value="common/view-bpmhistory" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="create" />
+      <property name="action-view-id" value="common/custom" />
+      <property name="title" value="ecma:z350_KEIJIBAN.appLib('set_range').title();" />
+      <property name="action-view-arg" value="register-button=保存" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="edit" />
+      <property name="action-view-id" value="common/custom" />
+      <property name="title" value="ecma:z350_KEIJIBAN.appLib('set_range').title();" />
+      <property name="action-view-arg" value="register-button=保存" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="edit-post" />
+      <property name="action-view-id" value="common/edit-post" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="delete" />
+      <property name="action-view-id" value="common/delete" />
+      <property name="title" value="ecma:z350_KEIJIBAN.appLib('set_range').title();" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="delete-post" />
+      <property name="action-view-id" value="common/empty" />
+    </property>
+    <extension name="ad-free-layout">
+      <property name="ad-free-layout">
+        <property name="id" value="JT8D2ITBO0/edit" />
+        <property name="type" value="edit" />
+        <property name="action-names" value="view" />
+        <property name="action-names" value="create" />
+        <property name="action-names" value="edit" />
+        <property name="title" value="編集レイアウト" />
+        <property name="total-width" value="auto" />
+        <property name="invisible-fields" value="hide" />
+        <property name="styles" value="border-collapse=collapse" />
+        <property name="field-widget">
+          <property name="field-id" value="fdcode" />
+          <property name="x" value="460" />
+          <property name="y" value="60" />
+          <property name="width" value="180" />
+          <property name="height" value="20" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-widget">
+          <property name="field-id" value="fdusers" />
+          <property name="x" value="120" />
+          <property name="y" value="80" />
+          <property name="width" value="520" />
+          <property name="height" value="20" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-widget">
+          <property name="field-id" value="fdgroups" />
+          <property name="x" value="120" />
+          <property name="y" value="100" />
+          <property name="width" value="520" />
+          <property name="height" value="20" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-widget">
+          <property name="field-id" value="title" />
+          <property name="x" value="120" />
+          <property name="y" value="60" />
+          <property name="width" value="220" />
+          <property name="height" value="20" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="font-weight=normal" />
+        </property>
+        <property name="field-widget">
+          <property name="field-id" value="fdtitle" />
+          <property name="x" value="0" />
+          <property name="y" value="10" />
+          <property name="width" value="640" />
+          <property name="height" value="40" />
+          <property name="styles" value="background-color=#000080" />
+          <property name="styles" value="color=#FFFFFF" />
+          <property name="styles" value="text-align=center" />
+          <property name="styles" value="vertical-align=middle" />
+          <property name="styles" value="font-size=18px" />
+          <property name="styles" value="font-weight=bold" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="fdcode" />
+          <property name="x" value="340" />
+          <property name="y" value="60" />
+          <property name="width" value="120" />
+          <property name="height" value="20" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+          <property name="styles" value="font-weight=normal" />
+          <property name="styles" value="background-color=#B9B9FF" />
+          <property name="styles" value="color=#111114" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="fdusers" />
+          <property name="x" value="0" />
+          <property name="y" value="80" />
+          <property name="width" value="120" />
+          <property name="height" value="20" />
+          <property name="styles" value="background-color=#B9B9FF" />
+          <property name="styles" value="color=#111114" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="font-weight=normal" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="fdgroups" />
+          <property name="x" value="0" />
+          <property name="y" value="100" />
+          <property name="width" value="120" />
+          <property name="height" value="20" />
+          <property name="styles" value="background-color=#B9B9FF" />
+          <property name="styles" value="color=#111114" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="font-weight=normal" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="title" />
+          <property name="x" value="0" />
+          <property name="y" value="60" />
+          <property name="width" value="120" />
+          <property name="height" value="20" />
+          <property name="styles" value="background-color=#B9B9FF" />
+          <property name="styles" value="color=#111114" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="font-weight=normal" />
+        </property>
+      </property>
+    </extension>
+  </property>
+  <property name="schema">
+    <property name="id" value="J9U9203AIE" />
+    <property name="title" value="メールマスタ" />
+    <property name="category" value="document" />
+    <property name="ntypes-version" value="80000" />
+    <property name="denied-types" value="*" />
+    <property name="auto-acl-update" value="true" />
+    <property name="acl-pattern-auto-apply" value="false" />
+    <property name="draft-enable" value="false" />
+    <property name="container-type" value="application" />
+    <property name="levels">
+      <property name="level" value="Schema.Level.CustomApp.Label" />
+    </property>
+    <property name="notify" value="none" />
+    <property name="use-workflow" value="false" />
+    <extension name="ad-original-schema-id" value="JT8D2ITBO0" />
+    <property name="data-history" value="true" />
+    <property name="print-header" value="false" />
+    <extension name="dxlconfig-form">
+      <property name="form">
+        <property name="schema" value="J9U9203AIE" />
+      </property>
+    </extension>
+    <property name="default-acl" value="/atypes-acl/J9U9203AWC/master_kanrisha" />
+    <property name="allowed-types" value="/atypes/ariel/folder/file" />
+    <property name="allowed-types" value="/atypes-config/J9U9203AIE" />
+    <property name="db-meta">
+      <property name="index">
+        <property name="name" value="ut_j9u9203aie_idx1" />
+        <property name="field" value="container" />
+        <property name="field" value="modifier" />
+        <property name="field" value="creator" />
+        <property name="field" value="acl" />
+        <property name="field" value="id" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="created" />
+      <property name="title" value="作成日時" />
+      <property name="description" value="作成日時" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="date" />
+      <property name="widget">
+        <property name="value" value="date" />
+        <property name="args" value="time=on" />
+        <property name="args" value="calendar=on" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="DateTimeValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="creator" />
+      <property name="title" value="作成者" />
+      <property name="description" value="作成者" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="user" />
+      <property name="widget">
+        <property name="value" value="user" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="AquaUserValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="modified" />
+      <property name="title" value="更新日時" />
+      <property name="description" value="更新日時" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="date" />
+      <property name="widget">
+        <property name="value" value="date" />
+        <property name="args" value="time=on" />
+        <property name="args" value="calendar=on" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="DateTimeValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="modifier" />
+      <property name="title" value="更新者" />
+      <property name="description" value="更新者" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="user" />
+      <property name="widget">
+        <property name="value" value="user" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="AquaUserValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="snirmail" />
+      <property name="title" value="メール送信" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <extension name="dxlconfig-entry">
+        <property name="entry">
+          <property name="dest">
+            <property name="type" value="string" />
+            <property name="id" value="snirmail" />
+          </property>
+        </property>
+      </extension>
+      <property name="widget">
+        <property name="value" value="radio" />
+        <property name="args" value="force-display=true" />
+        <property name="kwds" value="option::1=送信する" />
+        <property name="kwds" value="option::0=送信しない" />
+      </property>
+      <property name="default" value="1" />
+    </property>
+    <property name="field">
+      <property name="id" value="snirtitle" />
+      <property name="title" value="件名" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <extension name="dxlconfig-entry">
+        <property name="entry">
+          <property name="dest">
+            <property name="type" value="string" />
+            <property name="id" value="snirtitle" />
+          </property>
+        </property>
+      </extension>
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+        <property name="args" value="force-display=true" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="snircontent" />
+      <property name="title" value="本文" />
+      <property name="type" value="large_string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="indexing" value="false" />
+      <extension name="dxlconfig-entry">
+        <property name="entry">
+          <property name="dest">
+            <property name="type" value="large_string" />
+            <property name="id" value="snircontent" />
+          </property>
+        </property>
+      </extension>
+      <property name="widget">
+        <property name="value" value="richtext" />
+        <property name="args" value="line=5" />
+        <property name="args" value="ime=active" />
+        <property name="args" value="force-display=true" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="snircontent_format" />
+      <property name="type" value="string" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="validator">
+        <property name="value" value="TextFormatValidator" />
+      </property>
+      <property name="default" value="text/plain" />
+    </property>
+    <property name="field">
+      <property name="id" value="snmail" />
+      <property name="title" value="メール送信" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <extension name="dxlconfig-entry">
+        <property name="entry">
+          <property name="dest">
+            <property name="type" value="string" />
+            <property name="id" value="snmail" />
+          </property>
+        </property>
+      </extension>
+      <property name="widget">
+        <property name="value" value="radio" />
+        <property name="args" value="force-display=true" />
+        <property name="kwds" value="option::1=送信する" />
+        <property name="kwds" value="option::0=送信しない" />
+      </property>
+      <property name="default" value="1" />
+    </property>
+    <property name="field">
+      <property name="id" value="sntitle" />
+      <property name="title" value="件名" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <extension name="dxlconfig-entry">
+        <property name="entry">
+          <property name="dest">
+            <property name="type" value="string" />
+            <property name="id" value="sntitle" />
+          </property>
+        </property>
+      </extension>
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+        <property name="args" value="force-display=true" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="sncontent" />
+      <property name="title" value="本文" />
+      <property name="type" value="large_string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="indexing" value="false" />
+      <extension name="dxlconfig-entry">
+        <property name="entry">
+          <property name="dest">
+            <property name="type" value="large_string" />
+            <property name="id" value="sncontent" />
+          </property>
+        </property>
+      </extension>
+      <property name="widget">
+        <property name="value" value="richtext" />
+        <property name="args" value="line=5" />
+        <property name="args" value="ime=active" />
+        <property name="args" value="force-display=true" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="sncontent_format" />
+      <property name="type" value="string" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="validator">
+        <property name="value" value="TextFormatValidator" />
+      </property>
+      <property name="default" value="text/plain" />
+    </property>
+    <property name="field">
+      <property name="id" value="smmail" />
+      <property name="title" value="メール送信" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <extension name="dxlconfig-entry">
+        <property name="entry">
+          <property name="dest">
+            <property name="type" value="string" />
+            <property name="id" value="smmail" />
+          </property>
+        </property>
+      </extension>
+      <property name="widget">
+        <property name="value" value="radio" />
+        <property name="args" value="force-display=true" />
+        <property name="kwds" value="option::1=送信する" />
+        <property name="kwds" value="option::0=送信しない" />
+      </property>
+      <property name="default" value="1" />
+    </property>
+    <property name="field">
+      <property name="id" value="smtitle" />
+      <property name="title" value="件名" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <extension name="dxlconfig-entry">
+        <property name="entry">
+          <property name="dest">
+            <property name="type" value="string" />
+            <property name="id" value="smtitle" />
+          </property>
+        </property>
+      </extension>
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+        <property name="args" value="force-display=true" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="smcontent" />
+      <property name="title" value="本文" />
+      <property name="type" value="large_string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="indexing" value="false" />
+      <extension name="dxlconfig-entry">
+        <property name="entry">
+          <property name="dest">
+            <property name="type" value="large_string" />
+            <property name="id" value="smcontent" />
+          </property>
+        </property>
+      </extension>
+      <property name="widget">
+        <property name="value" value="richtext" />
+        <property name="args" value="line=5" />
+        <property name="args" value="ime=active" />
+        <property name="args" value="force-display=true" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="smcontent_format" />
+      <property name="type" value="string" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="validator">
+        <property name="value" value="TextFormatValidator" />
+      </property>
+      <property name="default" value="text/plain" />
+    </property>
+    <property name="field">
+      <property name="id" value="title" />
+      <property name="type" value="string" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <extension name="dxlconfig-entry">
+        <property name="entry">
+          <property name="dest">
+            <property name="type" value="string" />
+            <property name="id" value="title" />
+          </property>
+        </property>
+      </extension>
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="default" value="メール情報" />
+      <extension name="ad-invisible-label">
+        <property name="title" value="メールマスタ" />
+      </extension>
+    </property>
+    <property name="field">
+      <property name="id" value="content" />
+      <property name="type" value="large_string" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="indexing" value="false" />
+      <extension name="dxlconfig-entry">
+        <property name="entry">
+          <property name="dest">
+            <property name="type" value="large_string" />
+            <property name="id" value="content" />
+          </property>
+        </property>
+      </extension>
+      <property name="widget">
+        <property name="value" value="richtext" />
+        <property name="args" value="line=10" />
+        <property name="args" value="ime=active" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <extension name="ad-invisible-label">
+        <property name="title" value="本文(送信用)" />
+      </extension>
+    </property>
+    <property name="field">
+      <property name="id" value="content_format" />
+      <property name="type" value="string" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="validator">
+        <property name="value" value="TextFormatValidator" />
+      </property>
+      <property name="default" value="text/plain" />
+    </property>
+    <property name="field">
+      <property name="id" value="attachment" />
+      <property name="type" value="resid_list" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <extension name="dxlconfig-entry">
+        <property name="entry">
+          <property name="dest">
+            <property name="type" value="resid_list" />
+            <property name="id" value="attachment" />
+          </property>
+        </property>
+      </extension>
+      <property name="printable" value="false" />
+      <property name="disable-attachment-indexing" value="true" />
+      <property name="widget">
+        <property name="value" value="attachment" />
+        <property name="args" value="noPreview=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="AttachmentValidator" />
+      </property>
+      <extension name="ad-invisible-label">
+        <property name="title" value="attachment" />
+      </extension>
+    </property>
+    <property name="field">
+      <property name="id" value="fddba" />
+      <property name="type" value="usergroup" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <extension name="dxlconfig-entry">
+        <property name="entry">
+          <property name="dest">
+            <property name="type" value="usergroup" />
+            <property name="id" value="fddba" />
+          </property>
+        </property>
+      </extension>
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="usergroup" />
+        <property name="args" value="suggest=true" />
+        <property name="args" value="mygroup=false" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="AquaUserGroupValidator" />
+      </property>
+      <property name="default" value="ecma:z350_KEIJIBAN.appLib('set_mail').defaultValue();" />
+      <extension name="ad-invisible-label">
+        <property name="title" value="管理者" />
+      </extension>
+    </property>
+    <property name="field">
+      <property name="id" value="open-type" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="type" value="string" />
+      <property name="virtual" value="true" />
+      <property name="default" value="overlap" />
+    </property>
+    <property name="field">
+      <property name="id" value="dialog-width" />
+      <property name="type" value="string" />
+      <property name="virtual" value="true" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="default" value="800px" />
+    </property>
+    <property name="field">
+      <property name="id" value="no_notify" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="type" value="int" />
+      <property name="default" value="0" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view" />
+      <property name="action-view-id" value="common/custom" />
+      <property name="title" value="メールマスタ情報" />
+      <property name="action-view-arg" value="show-bpm-status=false" />
+      <property name="action-view-arg" value="prior-action-title=true" />
+      <property name="action-view-arg" value="disable-link-button=true" />
+      <property name="action-view-arg" value="enableFooter=true" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-bpmhistory" />
+      <property name="action-view-id" value="common/view-bpmhistory" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="create" />
+      <property name="action-view-id" value="common/custom" />
+      <property name="title" value="メールマスタ設定" />
+      <property name="action-view-arg" value="register-button=保存" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="edit" />
+      <property name="action-view-id" value="common/custom" />
+      <property name="title" value="メールマスタ設定" />
+      <property name="action-view-arg" value="register-button=保存" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="edit-post" />
+      <property name="action-view-id" value="common/edit-post" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="delete" />
+      <property name="action-view-id" value="common/delete" />
+      <property name="title" value="メールマスタ情報" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="delete-post" />
+      <property name="action-view-id" value="common/empty" />
+    </property>
+    <extension name="ad-free-layout">
+      <property name="ad-free-layout">
+        <property name="id" value="JT8D2ITBO0/edit" />
+        <property name="type" value="edit" />
+        <property name="action-names" value="view" />
+        <property name="action-names" value="create" />
+        <property name="action-names" value="edit" />
+        <property name="title" value="編集レイアウト" />
+        <property name="total-width" value="auto" />
+        <property name="invisible-fields" value="hide" />
+        <property name="styles" value="border-collapse=collapse" />
+        <property name="static-text">
+          <property name="text" value="メールマスタ" />
+          <property name="x" value="0" />
+          <property name="y" value="10" />
+          <property name="width" value="640" />
+          <property name="height" value="40" />
+          <property name="styles" value="font-size=18px" />
+          <property name="styles" value="text-align=center" />
+          <property name="styles" value="vertical-align=middle" />
+          <property name="styles" value="color=#FFFFFF" />
+          <property name="styles" value="font-weight=bold" />
+          <property name="styles" value="background-color=#000080" />
+        </property>
+        <property name="fieldset">
+          <property name="x" value="0" />
+          <property name="y" value="60" />
+          <property name="width" value="640" />
+          <property name="height" value="90" />
+          <property name="title" value="確認依頼" />
+          <property name="enable-height" value="false" />
+          <property name="field-widget">
+            <property name="field-id" value="snirmail" />
+            <property name="x" value="140" />
+            <property name="y" value="0" />
+            <property name="width" value="480" />
+            <property name="height" value="20" />
+            <property name="styles" value="border-top=1px #969696 solid" />
+            <property name="styles" value="border-right=1px #969696 solid" />
+            <property name="styles" value="border-bottom=1px #969696 solid" />
+            <property name="styles" value="border-left=1px #969696 solid" />
+          </property>
+          <property name="field-widget">
+            <property name="field-id" value="snircontent" />
+            <property name="x" value="140" />
+            <property name="y" value="40" />
+            <property name="width" value="480" />
+            <property name="height" value="20" />
+            <property name="styles" value="border-top=1px #969696 solid" />
+            <property name="styles" value="border-right=1px #969696 solid" />
+            <property name="styles" value="border-bottom=1px #969696 solid" />
+            <property name="styles" value="border-left=1px #969696 solid" />
+          </property>
+          <property name="field-widget">
+            <property name="field-id" value="snirtitle" />
+            <property name="x" value="140" />
+            <property name="y" value="20" />
+            <property name="width" value="480" />
+            <property name="height" value="20" />
+            <property name="styles" value="border-top=1px #969696 solid" />
+            <property name="styles" value="border-right=1px #969696 solid" />
+            <property name="styles" value="border-bottom=1px #969696 solid" />
+            <property name="styles" value="border-left=1px #969696 solid" />
+            <property name="styles" value="font-weight=normal" />
+          </property>
+          <property name="field-label">
+            <property name="field-id" value="snirmail" />
+            <property name="x" value="0" />
+            <property name="y" value="0" />
+            <property name="width" value="140" />
+            <property name="height" value="20" />
+            <property name="styles" value="background-color=#B9B9FF" />
+            <property name="styles" value="color=#111114" />
+            <property name="styles" value="font-weight=normal" />
+            <property name="styles" value="text-align=left" />
+            <property name="styles" value="border-top=1px #969696 solid" />
+            <property name="styles" value="border-right=1px #969696 solid" />
+            <property name="styles" value="border-bottom=1px #969696 solid" />
+            <property name="styles" value="border-left=1px #969696 solid" />
+          </property>
+          <property name="field-label">
+            <property name="field-id" value="snircontent" />
+            <property name="x" value="0" />
+            <property name="y" value="40" />
+            <property name="width" value="140" />
+            <property name="height" value="20" />
+            <property name="styles" value="background-color=#B9B9FF" />
+            <property name="styles" value="color=#111114" />
+            <property name="styles" value="font-weight=normal" />
+            <property name="styles" value="text-align=left" />
+            <property name="styles" value="border-top=1px #969696 solid" />
+            <property name="styles" value="border-right=1px #969696 solid" />
+            <property name="styles" value="border-bottom=1px #969696 solid" />
+            <property name="styles" value="border-left=1px #969696 solid" />
+          </property>
+          <property name="field-label">
+            <property name="field-id" value="snirtitle" />
+            <property name="x" value="0" />
+            <property name="y" value="20" />
+            <property name="width" value="140" />
+            <property name="height" value="20" />
+            <property name="styles" value="background-color=#B9B9FF" />
+            <property name="styles" value="color=#111114" />
+            <property name="styles" value="font-weight=normal" />
+            <property name="styles" value="text-align=left" />
+            <property name="styles" value="border-top=1px #969696 solid" />
+            <property name="styles" value="border-right=1px #969696 solid" />
+            <property name="styles" value="border-bottom=1px #969696 solid" />
+            <property name="styles" value="border-left=1px #969696 solid" />
+          </property>
+        </property>
+        <property name="fieldset">
+          <property name="x" value="0" />
+          <property name="y" value="160" />
+          <property name="width" value="640" />
+          <property name="height" value="90" />
+          <property name="title" value="確認" />
+          <property name="enable-height" value="false" />
+          <property name="field-widget">
+            <property name="field-id" value="snmail" />
+            <property name="x" value="140" />
+            <property name="y" value="0" />
+            <property name="width" value="480" />
+            <property name="height" value="20" />
+            <property name="styles" value="border-top=1px #969696 solid" />
+            <property name="styles" value="border-right=1px #969696 solid" />
+            <property name="styles" value="border-bottom=1px #969696 solid" />
+            <property name="styles" value="border-left=1px #969696 solid" />
+          </property>
+          <property name="field-widget">
+            <property name="field-id" value="sncontent" />
+            <property name="x" value="140" />
+            <property name="y" value="40" />
+            <property name="width" value="480" />
+            <property name="height" value="20" />
+            <property name="styles" value="border-top=1px #969696 solid" />
+            <property name="styles" value="border-right=1px #969696 solid" />
+            <property name="styles" value="border-bottom=1px #969696 solid" />
+            <property name="styles" value="border-left=1px #969696 solid" />
+          </property>
+          <property name="field-widget">
+            <property name="field-id" value="sntitle" />
+            <property name="x" value="140" />
+            <property name="y" value="20" />
+            <property name="width" value="480" />
+            <property name="height" value="20" />
+            <property name="styles" value="border-top=1px #969696 solid" />
+            <property name="styles" value="border-right=1px #969696 solid" />
+            <property name="styles" value="border-bottom=1px #969696 solid" />
+            <property name="styles" value="border-left=1px #969696 solid" />
+            <property name="styles" value="font-weight=normal" />
+          </property>
+          <property name="field-label">
+            <property name="field-id" value="snmail" />
+            <property name="x" value="0" />
+            <property name="y" value="0" />
+            <property name="width" value="140" />
+            <property name="height" value="20" />
+            <property name="styles" value="background-color=#B9B9FF" />
+            <property name="styles" value="color=#111114" />
+            <property name="styles" value="font-weight=normal" />
+            <property name="styles" value="text-align=left" />
+            <property name="styles" value="border-top=1px #969696 solid" />
+            <property name="styles" value="border-right=1px #969696 solid" />
+            <property name="styles" value="border-bottom=1px #969696 solid" />
+            <property name="styles" value="border-left=1px #969696 solid" />
+          </property>
+          <property name="field-label">
+            <property name="field-id" value="sncontent" />
+            <property name="x" value="0" />
+            <property name="y" value="40" />
+            <property name="width" value="140" />
+            <property name="height" value="20" />
+            <property name="styles" value="background-color=#B9B9FF" />
+            <property name="styles" value="color=#111114" />
+            <property name="styles" value="font-weight=normal" />
+            <property name="styles" value="text-align=left" />
+            <property name="styles" value="border-top=1px #969696 solid" />
+            <property name="styles" value="border-right=1px #969696 solid" />
+            <property name="styles" value="border-bottom=1px #969696 solid" />
+            <property name="styles" value="border-left=1px #969696 solid" />
+          </property>
+          <property name="field-label">
+            <property name="field-id" value="sntitle" />
+            <property name="x" value="0" />
+            <property name="y" value="20" />
+            <property name="width" value="140" />
+            <property name="height" value="20" />
+            <property name="styles" value="background-color=#B9B9FF" />
+            <property name="styles" value="color=#111114" />
+            <property name="styles" value="font-weight=normal" />
+            <property name="styles" value="text-align=left" />
+            <property name="styles" value="border-top=1px #969696 solid" />
+            <property name="styles" value="border-right=1px #969696 solid" />
+            <property name="styles" value="border-bottom=1px #969696 solid" />
+            <property name="styles" value="border-left=1px #969696 solid" />
+          </property>
+        </property>
+        <property name="fieldset">
+          <property name="x" value="0" />
+          <property name="y" value="260" />
+          <property name="width" value="640" />
+          <property name="height" value="90" />
+          <property name="title" value="差戻し" />
+          <property name="enable-height" value="false" />
+          <property name="field-widget">
+            <property name="field-id" value="smmail" />
+            <property name="x" value="140" />
+            <property name="y" value="0" />
+            <property name="width" value="480" />
+            <property name="height" value="20" />
+            <property name="styles" value="border-top=1px #969696 solid" />
+            <property name="styles" value="border-right=1px #969696 solid" />
+            <property name="styles" value="border-bottom=1px #969696 solid" />
+            <property name="styles" value="border-left=1px #969696 solid" />
+          </property>
+          <property name="field-widget">
+            <property name="field-id" value="smcontent" />
+            <property name="x" value="140" />
+            <property name="y" value="40" />
+            <property name="width" value="480" />
+            <property name="height" value="20" />
+            <property name="styles" value="border-top=1px #969696 solid" />
+            <property name="styles" value="border-right=1px #969696 solid" />
+            <property name="styles" value="border-bottom=1px #969696 solid" />
+            <property name="styles" value="border-left=1px #969696 solid" />
+          </property>
+          <property name="field-widget">
+            <property name="field-id" value="smtitle" />
+            <property name="x" value="140" />
+            <property name="y" value="20" />
+            <property name="width" value="480" />
+            <property name="height" value="20" />
+            <property name="styles" value="border-top=1px #969696 solid" />
+            <property name="styles" value="border-right=1px #969696 solid" />
+            <property name="styles" value="border-bottom=1px #969696 solid" />
+            <property name="styles" value="border-left=1px #969696 solid" />
+            <property name="styles" value="font-weight=normal" />
+          </property>
+          <property name="field-label">
+            <property name="field-id" value="smmail" />
+            <property name="x" value="0" />
+            <property name="y" value="0" />
+            <property name="width" value="140" />
+            <property name="height" value="20" />
+            <property name="styles" value="background-color=#B9B9FF" />
+            <property name="styles" value="color=#111114" />
+            <property name="styles" value="font-weight=normal" />
+            <property name="styles" value="text-align=left" />
+            <property name="styles" value="border-top=1px #969696 solid" />
+            <property name="styles" value="border-right=1px #969696 solid" />
+            <property name="styles" value="border-bottom=1px #969696 solid" />
+            <property name="styles" value="border-left=1px #969696 solid" />
+          </property>
+          <property name="field-label">
+            <property name="field-id" value="smcontent" />
+            <property name="x" value="0" />
+            <property name="y" value="40" />
+            <property name="width" value="140" />
+            <property name="height" value="20" />
+            <property name="styles" value="background-color=#B9B9FF" />
+            <property name="styles" value="color=#111114" />
+            <property name="styles" value="font-weight=normal" />
+            <property name="styles" value="text-align=left" />
+            <property name="styles" value="border-top=1px #969696 solid" />
+            <property name="styles" value="border-right=1px #969696 solid" />
+            <property name="styles" value="border-bottom=1px #969696 solid" />
+            <property name="styles" value="border-left=1px #969696 solid" />
+          </property>
+          <property name="field-label">
+            <property name="field-id" value="smtitle" />
+            <property name="x" value="0" />
+            <property name="y" value="20" />
+            <property name="width" value="140" />
+            <property name="height" value="20" />
+            <property name="styles" value="background-color=#B9B9FF" />
+            <property name="styles" value="color=#111114" />
+            <property name="styles" value="font-weight=normal" />
+            <property name="styles" value="text-align=left" />
+            <property name="styles" value="border-top=1px #969696 solid" />
+            <property name="styles" value="border-right=1px #969696 solid" />
+            <property name="styles" value="border-bottom=1px #969696 solid" />
+            <property name="styles" value="border-left=1px #969696 solid" />
+          </property>
+        </property>
+      </property>
+    </extension>
+  </property>
+  <property name="schema">
+    <property name="id" value="J9U9203AKO" />
+    <property name="title" value="メインドキュメント非表示領域" />
+    <property name="category" value="document" />
+    <property name="ntypes-version" value="80000" />
+    <property name="denied-types" value="*" />
+    <property name="auto-acl-update" value="false" />
+    <property name="acl-pattern-auto-apply" value="false" />
+    <property name="draft-enable" value="false" />
+    <property name="container-type" value="application" />
+    <property name="levels">
+      <property name="level" value="Schema.Level.CustomApp.Label" />
+    </property>
+    <property name="notify" value="none" />
+    <property name="use-stub" value="false" />
+    <property name="data-history" value="true" />
+    <property name="print-header" value="false" />
+    <property name="allowed-types" value="/atypes/ariel/folder/file" />
+    <property name="allowed-types" value="/atypes-config/J9U9203AKO" />
+    <property name="default-acl" value="1" />
+    <extension name="ad-original-schema-id" value="J9U9203A" />
+    <property name="use-workflow" value="false" />
+    <property name="db-meta">
+      <property name="index">
+        <property name="name" value="ut_j9u9203ako_idx1" />
+        <property name="field" value="container" />
+        <property name="field" value="modifier" />
+        <property name="field" value="creator" />
+        <property name="field" value="acl" />
+        <property name="field" value="id" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="created" />
+      <property name="title" value="Schema.J9U9203AKO.Field.Created.Label" />
+      <property name="description" value="Schema.J9U9203AKO.Field.Created.Description" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="date" />
+      <property name="widget">
+        <property name="value" value="date" />
+        <property name="args" value="time=on" />
+        <property name="args" value="calendar=on" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="DateTimeValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="creator" />
+      <property name="title" value="Schema.J9U9203AKO.Field.Creator.Label" />
+      <property name="description" value="Schema.J9U9203AKO.Field.Creator.Description" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="user" />
+      <property name="widget">
+        <property name="value" value="user" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="AquaUserValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="modified" />
+      <property name="title" value="Schema.J9U9203AKO.Field.Modified.Label" />
+      <property name="description" value="Schema.J9U9203AKO.Field.Modified.Description" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="date" />
+      <property name="widget">
+        <property name="value" value="date" />
+        <property name="args" value="time=on" />
+        <property name="args" value="calendar=on" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="DateTimeValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="modifier" />
+      <property name="title" value="Schema.J9U9203AKO.Field.Modifier.Label" />
+      <property name="description" value="Schema.J9U9203AKO.Field.Modifier.Description" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="user" />
+      <property name="widget">
+        <property name="value" value="user" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="AquaUserValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="open-type" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="type" value="string" />
+      <property name="virtual" value="true" />
+      <property name="default" value="overlap" />
+    </property>
+    <property name="field">
+      <property name="id" value="fdstatus" />
+      <property name="title" value="状態" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="radio" />
+        <property name="args" value="force-display=true" />
+        <property name="kwds" value="option::0=作成中" />
+        <property name="kwds" value="option::1=公開待ち" />
+        <property name="kwds" value="option::2=公開中" />
+        <property name="kwds" value="option::3=非公開" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fddeleted" />
+      <property name="title" value="削除済み" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="radio" />
+        <property name="args" value="force-display=true" />
+        <property name="kwds" value="option::0=いいえ" />
+        <property name="kwds" value="option::1=はい" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fdarchived" />
+      <property name="title" value="過去データ" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="radio" />
+        <property name="args" value="force-display=true" />
+        <property name="kwds" value="option::0=いいえ" />
+        <property name="kwds" value="option::1=はい" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fddba" />
+      <property name="title" value="管理者(ACL) " />
+      <property name="type" value="usergroup_list" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="usergrouplist" />
+        <property name="args" value="suggest=true" />
+        <property name="args" value="mygroup=false" />
+        <property name="args" value="approle=true" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="AquaUserGroupValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fdauditor" />
+      <property name="title" value="監査者(ACL) " />
+      <property name="type" value="usergroup_list" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="usergrouplist" />
+        <property name="args" value="suggest=true" />
+        <property name="args" value="mygroup=false" />
+        <property name="args" value="approle=true" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="AquaUserGroupValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fdreader" />
+      <property name="title" value="読者(ACL) " />
+      <property name="type" value="usergroup_list" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="usergrouplist" />
+        <property name="args" value="suggest=true" />
+        <property name="args" value="mygroup=false" />
+        <property name="args" value="approle=true" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="AquaUserGroupValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="sreaders" />
+      <property name="title" value="$Readers" />
+      <property name="type" value="usergroup_list" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="printable" value="false" />
+      <extension name="dxlconfig-entry">
+        <property name="entry">
+          <property name="dest">
+            <property name="type" value="usergroup_list" />
+            <property name="id" value="sreaders" />
+          </property>
+          <property name="src">
+            <property name="id" value="$Readers" />
+            <property name="assert" value="textlist" />
+          </property>
+          <property name="allowbreak" value="true" />
+        </property>
+      </extension>
+      <property name="widget">
+        <property name="value" value="usergrouplist" />
+        <property name="args" value="suggest=true" />
+        <property name="args" value="mygroup=false" />
+        <property name="args" value="approle=true" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="AquaUserGroupValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fdeditor" />
+      <property name="title" value="編集者(ACL)" />
+      <property name="type" value="usergroup_list" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="usergrouplist" />
+        <property name="args" value="suggest=true" />
+        <property name="args" value="mygroup=false" />
+        <property name="args" value="approle=true" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="AquaUserGroupValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="pffilecount" />
+      <property name="type" value="int" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="virtual" value="false" />
+      <property name="printable" value="false" />
+      <property name="title" value="添付ファイル数" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="widget">
+        <property name="value" value="numeric" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="IntValidator" />
+      </property>
+      <property name="validator">
+        <property name="value" value="IntMinValidator" />
+        <property name="args" value="0" />
+      </property>
+      <property name="validator">
+        <property name="value" value="IntMaxValidator" />
+        <property name="args" value="999999" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="pffilecount_png" />
+      <property name="type" value="int" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="virtual" value="false" />
+      <property name="printable" value="false" />
+      <property name="title" value="添付ファイル数(PNG)" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="widget">
+        <property name="value" value="numeric" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="IntValidator" />
+      </property>
+      <property name="validator">
+        <property name="value" value="IntMinValidator" />
+        <property name="args" value="0" />
+      </property>
+      <property name="validator">
+        <property name="value" value="IntMaxValidator" />
+        <property name="args" value="999999" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fdtrandocid" />
+      <property name="title" value="文書ID" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+        <property name="args" value="force-display=true" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fdtranivdocid" />
+      <property name="title" value="文書ID(移行用)" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+        <property name="args" value="force-display=true" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="attachment" />
+      <property name="title" value="attachment" />
+      <property name="type" value="resid_list" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="printable" value="false" />
+      <property name="disable-attachment-indexing" value="true" />
+      <property name="widget">
+        <property name="value" value="attachment" />
+        <property name="args" value="force-display=true" />
+        <property name="args" value="noPreview=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="AttachmentValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fdpardocid" />
+      <property name="title" value="元文書ID" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+        <property name="args" value="force-display=true" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fdmailtitle" />
+      <property name="title" value="件名(メール用)" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+        <property name="args" value="force-display=true" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fdmailbody" />
+      <property name="title" value="内容(メール用)" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=10" />
+        <property name="args" value="force-display=true" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="dialog-width" />
+      <property name="type" value="string" />
+      <property name="virtual" value="true" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="default" value="1000px" />
+    </property>
+    <property name="field">
+      <property name="id" value="no_notify" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="type" value="int" />
+      <property name="default" value="0" />
+      <extension name="ad-invisible-label">
+        <property name="category" value="Common.Tab.Base" />
+      </extension>
+    </property>
+    <property name="action">
+      <property name="action-name" value="view" />
+      <property name="action-view-id" value="common/custom" />
+      <property name="title" value="ecma:z350_KEIJIBAN.appLib('doc_main_hide').title();" />
+      <property name="action-view-arg" value="show-bpm-status=false" />
+      <property name="action-view-arg" value="hide-document-tree=true" />
+      <property name="action-view-arg" value="prior-action-title=true" />
+      <property name="action-view-arg" value="disable-link-button=true" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-bpmhistory" />
+      <property name="action-view-id" value="common/view-bpmhistory" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="create" />
+      <property name="action-view-id" value="common/custom" />
+      <property name="title" value="ecma:z350_KEIJIBAN.appLib('doc_main_hide').title();" />
+      <property name="action-view-arg" value="register-private-button=一時保存" />
+      <property name="action-view-arg" value="register-button=作成完了" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="edit" />
+      <property name="action-view-id" value="common/custom" />
+      <property name="title" value="ecma:z350_KEIJIBAN.appLib('doc_main_hide').title();" />
+      <property name="action-view-arg" value="register-private-button=一時保存" />
+      <property name="action-view-arg" value="register-button=作成完了" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="edit-post" />
+      <property name="action-view-id" value="common/edit-post" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="delete" />
+      <property name="action-view-id" value="common/delete" />
+      <property name="title" value="ecma:z350_KEIJIBAN.appLib('doc_main_hide').title();" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="delete-post" />
+      <property name="action-view-id" value="common/empty" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="modify" />
+      <property name="action-view-id" value="common/confirm-modify" />
+      <property name="action-view-arg" value="confirm-button=実行" />
+      <property name="action-view-arg" value="ecma:[['confirm-message', !this.resource ? '' : z350_KEIJIBAN.appLib('doc_main').confirmMessage()]];" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="copy" />
+      <property name="action-view-id" value="common/copy" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="copy-post" />
+      <property name="action-view-id" value="common/copy-post" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-revision" />
+      <property name="action-view-id" value="common/view-revision" />
+    </property>
+    <extension name="ad-free-layout">
+      <property name="ad-free-layout">
+        <property name="id" value="J9U9203A/edit" />
+        <property name="type" value="edit" />
+        <property name="action-names" value="view" />
+        <property name="action-names" value="create" />
+        <property name="action-names" value="edit" />
+        <property name="title" value="編集レイアウト" />
+        <property name="invisible-fields" value="hide" />
+        <property name="styles" value="background-color=#F0F0FF" />
+        <property name="styles" value="border-collapse=collapse" />
+        <property name="field-widget">
+          <property name="field-id" value="fdreader" />
+          <property name="x" value="120" />
+          <property name="y" value="0" />
+          <property name="width" value="560" />
+          <property name="height" value="20" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-widget">
+          <property name="field-id" value="fdeditor" />
+          <property name="x" value="120" />
+          <property name="y" value="20" />
+          <property name="width" value="560" />
+          <property name="height" value="20" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-widget">
+          <property name="field-id" value="fddba" />
+          <property name="x" value="120" />
+          <property name="y" value="40" />
+          <property name="width" value="560" />
+          <property name="height" value="20" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-widget">
+          <property name="field-id" value="fdauditor" />
+          <property name="x" value="120" />
+          <property name="y" value="60" />
+          <property name="width" value="560" />
+          <property name="height" value="20" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-widget">
+          <property name="field-id" value="fdstatus" />
+          <property name="x" value="120" />
+          <property name="y" value="80" />
+          <property name="width" value="560" />
+          <property name="height" value="20" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-widget">
+          <property name="field-id" value="fddeleted" />
+          <property name="x" value="120" />
+          <property name="y" value="100" />
+          <property name="width" value="560" />
+          <property name="height" value="20" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-widget">
+          <property name="field-id" value="fdarchived" />
+          <property name="x" value="120" />
+          <property name="y" value="120" />
+          <property name="width" value="560" />
+          <property name="height" value="20" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-widget">
+          <property name="field-id" value="pffilecount" />
+          <property name="x" value="120" />
+          <property name="y" value="140" />
+          <property name="width" value="560" />
+          <property name="height" value="20" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-widget">
+          <property name="field-id" value="pffilecount_png" />
+          <property name="x" value="120" />
+          <property name="y" value="160" />
+          <property name="width" value="560" />
+          <property name="height" value="20" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-widget">
+          <property name="field-id" value="sreaders" />
+          <property name="x" value="120" />
+          <property name="y" value="180" />
+          <property name="width" value="560" />
+          <property name="height" value="20" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-widget">
+          <property name="field-id" value="fdtrandocid" />
+          <property name="x" value="120" />
+          <property name="y" value="240" />
+          <property name="width" value="560" />
+          <property name="height" value="20" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-widget">
+          <property name="field-id" value="fdtranivdocid" />
+          <property name="x" value="120" />
+          <property name="y" value="260" />
+          <property name="width" value="560" />
+          <property name="height" value="20" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-widget">
+          <property name="field-id" value="attachment" />
+          <property name="x" value="120" />
+          <property name="y" value="280" />
+          <property name="width" value="560" />
+          <property name="height" value="20" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-widget">
+          <property name="field-id" value="fdpardocid" />
+          <property name="x" value="120" />
+          <property name="y" value="300" />
+          <property name="width" value="560" />
+          <property name="height" value="20" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-widget">
+          <property name="field-id" value="fdmailtitle" />
+          <property name="x" value="120" />
+          <property name="y" value="200" />
+          <property name="width" value="560" />
+          <property name="height" value="20" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-widget">
+          <property name="field-id" value="fdmailbody" />
+          <property name="x" value="120" />
+          <property name="y" value="220" />
+          <property name="width" value="560" />
+          <property name="height" value="20" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="fdreader" />
+          <property name="x" value="0" />
+          <property name="y" value="0" />
+          <property name="width" value="120" />
+          <property name="height" value="20" />
+          <property name="styles" value="font-weight=normal" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="fdeditor" />
+          <property name="x" value="0" />
+          <property name="y" value="20" />
+          <property name="width" value="120" />
+          <property name="height" value="20" />
+          <property name="styles" value="font-weight=normal" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="fddba" />
+          <property name="x" value="0" />
+          <property name="y" value="40" />
+          <property name="width" value="120" />
+          <property name="height" value="20" />
+          <property name="styles" value="font-weight=normal" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="fdauditor" />
+          <property name="x" value="0" />
+          <property name="y" value="60" />
+          <property name="width" value="120" />
+          <property name="height" value="20" />
+          <property name="styles" value="font-weight=normal" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="fdstatus" />
+          <property name="x" value="0" />
+          <property name="y" value="80" />
+          <property name="width" value="120" />
+          <property name="height" value="20" />
+          <property name="styles" value="font-weight=normal" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="fddeleted" />
+          <property name="x" value="0" />
+          <property name="y" value="100" />
+          <property name="width" value="120" />
+          <property name="height" value="20" />
+          <property name="styles" value="font-weight=normal" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="fdarchived" />
+          <property name="x" value="0" />
+          <property name="y" value="120" />
+          <property name="width" value="120" />
+          <property name="height" value="20" />
+          <property name="styles" value="font-weight=normal" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="pffilecount" />
+          <property name="x" value="0" />
+          <property name="y" value="140" />
+          <property name="width" value="120" />
+          <property name="height" value="20" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="font-weight=normal" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="pffilecount_png" />
+          <property name="x" value="0" />
+          <property name="y" value="160" />
+          <property name="width" value="120" />
+          <property name="height" value="20" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="font-weight=normal" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="sreaders" />
+          <property name="x" value="0" />
+          <property name="y" value="180" />
+          <property name="width" value="120" />
+          <property name="height" value="20" />
+          <property name="styles" value="font-weight=normal" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="fdtrandocid" />
+          <property name="x" value="0" />
+          <property name="y" value="240" />
+          <property name="width" value="120" />
+          <property name="height" value="20" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="font-weight=normal" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="fdtranivdocid" />
+          <property name="x" value="0" />
+          <property name="y" value="260" />
+          <property name="width" value="120" />
+          <property name="height" value="20" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="font-weight=normal" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="attachment" />
+          <property name="x" value="0" />
+          <property name="y" value="280" />
+          <property name="width" value="120" />
+          <property name="height" value="20" />
+          <property name="styles" value="font-weight=normal" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="fdpardocid" />
+          <property name="x" value="0" />
+          <property name="y" value="300" />
+          <property name="width" value="120" />
+          <property name="height" value="20" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="font-weight=normal" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="fdmailtitle" />
+          <property name="x" value="0" />
+          <property name="y" value="200" />
+          <property name="width" value="120" />
+          <property name="height" value="20" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="font-weight=normal" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+        <property name="field-label">
+          <property name="field-id" value="fdmailbody" />
+          <property name="x" value="0" />
+          <property name="y" value="220" />
+          <property name="width" value="120" />
+          <property name="height" value="20" />
+          <property name="styles" value="text-align=left" />
+          <property name="styles" value="font-weight=normal" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+        </property>
+      </property>
+    </extension>
+  </property>
+  <property name="schema">
+    <property name="id" value="/atypes-config/J9U9203AWC" />
+    <property name="title" value="連絡先設定" />
+    <property name="category" value="config/document" />
+    <property name="ntypes-version" value="80000" />
+    <property name="default-acl" value="22" />
+    <property name="inherit" value="/atypes-config/ariel/base-document" />
+    <property name="container-type" value="root" />
+    <property name="levels">
+      <property name="level" value="Schema.Level.CustomApp.Label" />
+    </property>
+  </property>
+  <property name="schema">
+    <property name="id" value="/atypes-config/J9U9203AKL" />
+    <property name="title" value="連絡先設定" />
+    <property name="category" value="config/document" />
+    <property name="ntypes-version" value="80000" />
+    <property name="default-acl" value="22" />
+    <property name="inherit" value="/atypes-config/ariel/base-document" />
+    <property name="container-type" value="root" />
+    <property name="levels">
+      <property name="level" value="Schema.Level.CustomApp.Label" />
+    </property>
+  </property>
+  <property name="schema">
+    <property name="id" value="/atypes-config/J9U9203AYL" />
+    <property name="title" value="関連リンク設定" />
+    <property name="category" value="config/document" />
+    <property name="ntypes-version" value="80000" />
+    <property name="default-acl" value="22" />
+    <property name="inherit" value="/atypes-config/ariel/base-document" />
+    <property name="container-type" value="root" />
+    <property name="levels">
+      <property name="level" value="Schema.Level.CustomApp.Label" />
+    </property>
+  </property>
+  <property name="schema">
+    <property name="id" value="/atypes-config/J9U9203AEE" />
+    <property name="title" value="メインドキュメント印刷設定" />
+    <property name="category" value="config/document" />
+    <property name="ntypes-version" value="80000" />
+    <property name="default-acl" value="22" />
+    <property name="inherit" value="/atypes-config/ariel/base-document" />
+    <property name="container-type" value="root" />
+    <property name="levels">
+      <property name="level" value="Schema.Level.CustomApp.Label" />
+    </property>
+  </property>
+  <property name="schema">
+    <property name="id" value="/atypes-config/J9U9203AQ0" />
+    <property name="title" value="閲覧範囲設定" />
+    <property name="category" value="config/document" />
+    <property name="ntypes-version" value="80000" />
+    <property name="default-acl" value="22" />
+    <property name="inherit" value="/atypes-config/ariel/base-document" />
+    <property name="container-type" value="root" />
+    <property name="levels">
+      <property name="level" value="Schema.Level.CustomApp.Label" />
+    </property>
+  </property>
+  <property name="schema">
+    <property name="id" value="/atypes-config/J9U9203AIE" />
+    <property name="title" value="メールマスタ設定" />
+    <property name="category" value="config/document" />
+    <property name="ntypes-version" value="80000" />
+    <property name="default-acl" value="22" />
+    <property name="inherit" value="/atypes-config/ariel/base-document" />
+    <property name="container-type" value="root" />
+    <property name="levels">
+      <property name="level" value="Schema.Level.CustomApp.Label" />
+    </property>
+  </property>
+  <property name="schema">
+    <property name="id" value="/atypes-config/J9U9203AKO" />
+    <property name="title" value="メインドキュメント非表示領域設定" />
+    <property name="category" value="config/document" />
+    <property name="ntypes-version" value="80000" />
+    <property name="default-acl" value="22" />
+    <property name="inherit" value="/atypes-config/ariel/base-document" />
+    <property name="container-type" value="root" />
+    <property name="levels">
+      <property name="level" value="Schema.Level.CustomApp.Label" />
+    </property>
+  </property>
+</addforms>

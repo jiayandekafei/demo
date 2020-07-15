@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hoperun.pagoda.demo.mapper.CustomerMapper">
+	<select id="findAll"
+		resultType="hoperun.pagoda.demo.entity.Customer">
+		select * from tb_customer;
+	</select>
+	
+	<select id="findCustomerCount" resultType="java.lang.Integer">
+		select count(*) from tb_customer;
+	</select>
+	
+	<select id="findByName"
+		resultType="hoperun.pagoda.demo.entity.Customer">
+		SELECT * from tb_customer where customername = #{name};
+	</select>
+	<select id="findById"
+		resultType="hoperun.pagoda.demo.entity.Customer">
+		SELECT * from tb_customer where customerId = #{id};
+	</select>
+	<insert id="insert"
+		parameterType="hoperun.pagoda.demo.entity.Customer"
+		useGeneratedKeys="true" keyProperty="customerId">
+		insert into tb_customer (customername,description) VALUES
+		(#{customername}, #{description});
+	</insert>
+
+	<update id="update"
+		parameterType="hoperun.pagoda.demo.entity.Customer">
+		update tb_customer set description=#{description} where
+		customername=#{customername};
+	</update>
+
+	<delete id="delete">
+		delete from tb_customer where customerId =#{id}
+	</delete>
+
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from tb_customer where 1=2
+		<if test="customers!=null and customers.size()>0">
+			or customerId in
+			<foreach collection="customers" item="customerId" index="index"
+				open="(" close=")" separator=",">
+				 #{customerId}
+			</foreach>
+		</if>
+	</delete>
+</mapper>

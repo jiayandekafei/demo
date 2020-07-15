@@ -1,0 +1,6 @@
+﻿1.serverNsfPath.txt文件名不可变
+2.serverNsfPath.txt一行填写一个路径
+3.serverNsfPath.txt每行可以填写某个nsf的路径 例如：XXX\XXX.nsf
+每行也可以填写nsf所在文件夹路径 例如：XXX\
+为了区分nsf路径和nsf文件夹路径建议路径后跟"\"
+4.form的文书数统计功能对.ntf的notesDB无法统计，因为IBM notesAPI 无法获取到 .ntf DB

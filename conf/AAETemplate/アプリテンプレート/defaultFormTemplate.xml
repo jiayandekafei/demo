@@ -1,0 +1,663 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<property name="schema">
+    <property name="id" value="J9U9203A" />
+    <property name="title" value="メインドキュメント" />
+    <property name="category" value="document" />
+    <property name="ntypes-version" value="80000" />
+    <property name="denied-types" value="*" />
+    <property name="auto-acl-update" value="false" />
+    <property name="acl-pattern-auto-apply" value="false" />
+    <property name="draft-enable" value="unpublished" />
+    <property name="container-type" value="application" />
+    <property name="allowed-types" value="/atypes-config/J9U9203A" />
+    <property name="levels">
+      <property name="level" value="Schema.Level.CustomApp.Label" />
+    </property>
+    <property name="notify" value="none" />
+    <property name="use-stub" value="false" />
+    <property name="data-history" value="true" />
+    <property name="print-header" value="false" />
+    <property name="allowed-types" value="/atypes/ariel/folder/file" />
+    <property name="default-acl" value="1" />
+    <property name="db-meta">
+      <property name="index">
+        <property name="name" value="ut_j9u9203a_idx1" />
+        <property name="field" value="container" />
+        <property name="field" value="modifier" />
+        <property name="field" value="creator" />
+        <property name="field" value="acl" />
+        <property name="field" value="id" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="created" />
+      <property name="title" value="Schema.J9U9203A.Field.Created.Label" />
+      <property name="description" value="Schema.J9U9203A.Field.Created.Description" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="date" />
+      <property name="widget">
+        <property name="value" value="date" />
+        <property name="args" value="time=on" />
+        <property name="args" value="calendar=on" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="DateTimeValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="creator" />
+      <property name="title" value="Schema.J9U9203A.Field.Creator.Label" />
+      <property name="description" value="Schema.J9U9203A.Field.Creator.Description" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="user" />
+      <property name="widget">
+        <property name="value" value="user" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="AquaUserValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="modified" />
+      <property name="title" value="Schema.J9U9203A.Field.Modified.Label" />
+      <property name="description" value="Schema.J9U9203A.Field.Modified.Description" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="date" />
+      <property name="widget">
+        <property name="value" value="date" />
+        <property name="args" value="time=on" />
+        <property name="args" value="calendar=on" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="DateTimeValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="modifier" />
+      <property name="title" value="Schema.J9U9203A.Field.Modifier.Label" />
+      <property name="description" value="Schema.J9U9203A.Field.Modifier.Description" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="type" value="user" />
+      <property name="widget">
+        <property name="value" value="user" />
+      </property>
+      <property name="validator">
+        <property name="value" value="CompositValidator" />
+        <property name="args" value="NullValidator" />
+        <property name="args" value="AquaUserValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fdapptitle" />
+      <property name="title" value="タイトル" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="false" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="default" value="アプリテンプレート" />
+    </property>
+    <property name="field">
+      <property name="id" value="title" />
+      <property name="title" value="件名" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="indexing" value="true" />
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+        <property name="args" value="ime=active" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="NotNullValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="open-type" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="type" value="string" />
+      <property name="virtual" value="true" />
+      <property name="expression" value="ecma:z350_KEIJIBAN.appLib().getDocOpenMode();" />
+      <property name="default" value="overlap" />
+    </property>
+    <property name="field">
+      <property name="id" value="fdattachment" />
+      <property name="title" value="添付ファイル" />
+      <property name="type" value="resid_list" />
+      <property name="visible" value="ecma:z350_KEIJIBAN.appLib('doc_main').isVisible();" />
+      <property name="editable" value="ecma:z350_KEIJIBAN.appLib('doc_main').isEditable();" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="cache-target" value="visible,editable" />
+      <property name="widget">
+        <property name="value" value="attachment" />
+        <property name="args" value="force-display=true" />
+        <property name="args" value="noPreview=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="AttachmentValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fdrestricted" />
+      <property name="title" value="閲覧制限有無" />
+      <property name="type" value="string" />
+      <property name="visible" value="ecma:z350_KEIJIBAN.appLib('doc_main').isVisible();" />
+      <property name="editable" value="ecma:z350_KEIJIBAN.appLib('doc_main').isEditable();" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="printable" value="false" />
+      <property name="cache-target" value="visible,editable" />
+      <property name="widget">
+        <property name="value" value="radio" />
+        <property name="args" value="force-display=true" />
+        <property name="args" value="help=&quot;制限あり&quot;の場合、閲覧可能なユーザー・グループを指定できます。" />
+        <property name="kwds" value="option::0=制限なし" />
+        <property name="kwds" value="option::1=制限あり" />
+      </property>
+      <property name="default" value="0" />
+    </property>
+    <property name="field">
+      <property name="id" value="fdrange_rids" />
+      <property name="title" value="閲覧範囲マスタから指定" />
+      <property name="type" value="resid_list" />
+      <property name="visible" value="ecma:z350_KEIJIBAN.appLib('doc_main').isVisible();" />
+      <property name="editable" value="ecma:z350_KEIJIBAN.appLib('doc_main').isEditable();" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="description" value="閲覧範囲リソース" />
+      <property name="cache-target" value="visible,editable" />
+      <property name="widget">
+        <property name="value" value="resource" />
+        <property name="args" value="type=J9U9203A-list" />
+        <property name="args" value="multiple=true" />
+        <property name="args" value="action=view-resource-select-pukr1rxd" />
+        <property name="args" value="rootType=container" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="ResidValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fdrange_names" />
+      <property name="title" value="閲覧範囲マスタから指定" />
+      <property name="type" value="string_list" />
+      <property name="visible" value="ecma:z350_KEIJIBAN.appLib('doc_main').isVisible();" />
+      <property name="editable" value="false" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="description" value="閲覧範囲名" />
+      <property name="cache-target" value="visible" />
+      <property name="widget">
+        <property name="value" value="textlist" />
+        <property name="args" value="line=1" />
+        <property name="args" value="force-display=true" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fdreader_selected_u" />
+      <property name="title" value="閲覧者選択で指定(ユーザー)" />
+      <property name="type" value="user_list" />
+      <property name="visible" value="ecma:z350_KEIJIBAN.appLib('doc_main').isVisible();" />
+      <property name="editable" value="ecma:z350_KEIJIBAN.appLib('doc_main').isEditable();" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="description" value="指定閲覧ユーザ" />
+      <property name="cache-target" value="visible,editable" />
+      <property name="widget">
+        <property name="value" value="userlist" />
+        <property name="args" value="suggest=true" />
+        <property name="args" value="force-display=true" />
+        <property name="args" value="resourcetype=atypes/groupdir" />
+        <property name="args" value="height=150" />
+      </property>
+      <property name="validator">
+        <property name="value" value="AquaUserValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fdreader_selected_g" />
+      <property name="title" value="閲覧者選択で指定(グループ)" />
+      <property name="type" value="group_list" />
+      <property name="visible" value="ecma:z350_KEIJIBAN.appLib('doc_main').isVisible();" />
+      <property name="editable" value="ecma:z350_KEIJIBAN.appLib('doc_main').isEditable();" />
+      <property name="category" value="Common.Tab.Base" />
+      <property name="description" value="指定閲覧グループ" />
+      <property name="cache-target" value="visible,editable" />
+      <property name="widget">
+        <property name="value" value="grouplist" />
+        <property name="args" value="suggest=true" />
+        <property name="args" value="mygroup=false" />
+        <property name="args" value="force-display=true" />
+        <property name="args" value="resourcetype=atypes/workgroupdir" />
+        <property name="args" value="height=150" />
+      </property>
+      <property name="validator">
+        <property name="value" value="AquaGroupValidator" />
+      </property>
+    </property>
+    <property name="field">
+      <property name="id" value="fdstatus" />
+      <property name="type" value="string" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="radio" />
+        <property name="args" value="force-display=true" />
+        <property name="kwds" value="option::0=作成中" />
+        <property name="kwds" value="option::1=公開待ち" />
+        <property name="kwds" value="option::2=公開中" />
+        <property name="kwds" value="option::3=非公開" />
+      </property>
+      <property name="default" value="0" />
+      <extension name="ad-invisible-label">
+        <property name="title" value="状態" />
+        <property name="category" value="Common.Tab.Base" />
+      </extension>
+    </property>
+    <property name="field">
+      <property name="id" value="fddeleted" />
+      <property name="type" value="string" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="radio" />
+        <property name="args" value="force-display=true" />
+        <property name="kwds" value="option::0=いいえ" />
+        <property name="kwds" value="option::1=はい" />
+      </property>
+      <property name="default" value="0" />
+      <extension name="ad-invisible-label">
+        <property name="title" value="削除済み" />
+        <property name="category" value="Common.Tab.Base" />
+      </extension>
+    </property>
+    <property name="field">
+      <property name="id" value="fdarchived" />
+      <property name="type" value="string" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="radio" />
+        <property name="args" value="force-display=true" />
+        <property name="kwds" value="option::0=いいえ" />
+        <property name="kwds" value="option::1=はい" />
+      </property>
+      <property name="default" value="0" />
+      <extension name="ad-invisible-label">
+        <property name="title" value="過去データ" />
+        <property name="category" value="Common.Tab.Base" />
+      </extension>
+    </property>
+    <property name="field">
+      <property name="id" value="fddba" />
+      <property name="type" value="usergroup_list" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="usergrouplist" />
+        <property name="args" value="suggest=true" />
+        <property name="args" value="mygroup=false" />
+        <property name="args" value="approle=true" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="AquaUserGroupValidator" />
+      </property>
+      <property name="default" value="ecma:z350_KEIJIBAN.appLib('doc_main').defaultValue();" />
+      <extension name="ad-invisible-label">
+        <property name="title" value="管理者(ACL) " />
+        <property name="category" value="Common.Tab.Base" />
+      </extension>
+    </property>
+    <property name="field">
+      <property name="id" value="fdauditor" />
+      <property name="type" value="usergroup_list" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="usergrouplist" />
+        <property name="args" value="suggest=true" />
+        <property name="args" value="mygroup=false" />
+        <property name="args" value="approle=true" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="AquaUserGroupValidator" />
+      </property>
+      <property name="default" value="ecma:z350_KEIJIBAN.appLib('doc_main').defaultValue();" />
+      <extension name="ad-invisible-label">
+        <property name="title" value="監査者(ACL) " />
+        <property name="category" value="Common.Tab.Base" />
+      </extension>
+    </property>
+    <property name="field">
+      <property name="id" value="fdreader" />
+      <property name="type" value="usergroup_list" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="usergrouplist" />
+        <property name="args" value="suggest=true" />
+        <property name="args" value="mygroup=false" />
+        <property name="args" value="approle=true" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="AquaUserGroupValidator" />
+      </property>
+      <extension name="ad-invisible-label">
+        <property name="title" value="読者(ACL) " />
+        <property name="category" value="Common.Tab.Base" />
+      </extension>
+    </property>
+    <property name="field">
+      <property name="id" value="sreaders" />
+      <property name="type" value="usergroup_list" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="printable" value="false" />
+      <extension name="dxlconfig-entry">
+        <property name="entry">
+          <property name="dest">
+            <property name="type" value="usergroup_list" />
+            <property name="id" value="sreaders" />
+          </property>
+          <property name="src">
+            <property name="id" value="$Readers" />
+            <property name="assert" value="textlist" />
+          </property>
+          <property name="allowbreak" value="true" />
+        </property>
+      </extension>
+      <property name="widget">
+        <property name="value" value="usergrouplist" />
+        <property name="args" value="suggest=true" />
+        <property name="args" value="mygroup=false" />
+        <property name="args" value="approle=true" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="AquaUserGroupValidator" />
+      </property>
+      <extension name="ad-invisible-label">
+        <property name="title" value="$Readers" />
+        <property name="category" value="Common.Tab.Base" />
+      </extension>
+    </property>
+    <property name="field">
+      <property name="id" value="fdeditor" />
+      <property name="type" value="usergroup_list" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="usergrouplist" />
+        <property name="args" value="suggest=true" />
+        <property name="args" value="mygroup=false" />
+        <property name="args" value="approle=true" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="AquaUserGroupValidator" />
+      </property>
+      <extension name="ad-invisible-label">
+        <property name="title" value="編集者(ACL)" />
+        <property name="category" value="Common.Tab.Base" />
+      </extension>
+    </property>
+    <property name="field">
+      <property name="id" value="pffilecount" />
+      <property name="type" value="int" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="virtual" value="false" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="numeric" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="IntValidator" />
+      </property>
+      <property name="validator">
+        <property name="value" value="IntMinValidator" />
+        <property name="args" value="0" />
+      </property>
+      <property name="validator">
+        <property name="value" value="IntMaxValidator" />
+        <property name="args" value="999999" />
+      </property>
+      <extension name="ad-invisible-label">
+        <property name="title" value="添付ファイル数" />
+        <property name="category" value="Common.Tab.Base" />
+      </extension>
+    </property>
+    <property name="field">
+      <property name="id" value="pffilecount_png" />
+      <property name="type" value="int" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="virtual" value="false" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="numeric" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="IntValidator" />
+      </property>
+      <property name="validator">
+        <property name="value" value="IntMinValidator" />
+        <property name="args" value="0" />
+      </property>
+      <property name="validator">
+        <property name="value" value="IntMaxValidator" />
+        <property name="args" value="999999" />
+      </property>
+      <extension name="ad-invisible-label">
+        <property name="title" value="添付ファイル数(PNG)" />
+        <property name="category" value="Common.Tab.Base" />
+      </extension>
+    </property>
+    <property name="field">
+      <property name="id" value="fdtrandocid" />
+      <property name="type" value="string" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="default" value="ecma:z350_KEIJIBAN.appLib('doc_main').defaultValue();" />
+      <extension name="ad-invisible-label">
+        <property name="title" value="文書ID" />
+        <property name="category" value="Common.Tab.Base" />
+      </extension>
+    </property>
+    <property name="field">
+      <property name="id" value="fdtranivdocid" />
+      <property name="type" value="string" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="printable" value="false" />
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+        <property name="args" value="force-display=true" />
+      </property>
+      <property name="default" value="ecma:z350_KEIJIBAN.appLib('doc_main').defaultValue();" />
+      <extension name="ad-invisible-label">
+        <property name="title" value="文書ID(移行用)" />
+        <property name="category" value="Common.Tab.Base" />
+      </extension>
+    </property>
+    <property name="field">
+      <property name="id" value="attachment" />
+      <property name="type" value="resid_list" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="printable" value="false" />
+      <property name="disable-attachment-indexing" value="true" />
+      <property name="widget">
+        <property name="value" value="attachment" />
+        <property name="args" value="force-display=true" />
+        <property name="args" value="noPreview=true" />
+      </property>
+      <property name="validator">
+        <property name="value" value="AttachmentValidator" />
+      </property>
+      <extension name="ad-invisible-label">
+        <property name="title" value="attachment" />
+        <property name="category" value="Common.Tab.Base" />
+      </extension>
+    </property>
+    <property name="field">
+      <property name="id" value="fdmailtitle" />
+      <property name="type" value="string" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=1" />
+      </property>
+      <extension name="ad-invisible-label">
+        <property name="title" value="件名(メール用)" />
+        <property name="category" value="Common.Tab.Base" />
+      </extension>
+    </property>
+    <property name="field">
+      <property name="id" value="fdmailbody" />
+      <property name="type" value="large_string" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="widget">
+        <property name="value" value="text" />
+        <property name="args" value="line=10" />
+      </property>
+      <extension name="ad-invisible-label">
+        <property name="title" value="内容(メール用)" />
+        <property name="category" value="Common.Tab.Base" />
+      </extension>
+    </property>
+    <property name="field">
+      <property name="id" value="dialog-width" />
+      <property name="type" value="string" />
+      <property name="virtual" value="true" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="expression" value="ecma:z350_KEIJIBAN.appLib().getDocWidth();" />
+    </property>
+    <property name="field">
+      <property name="id" value="no_notify" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="type" value="int" />
+      <property name="default" value="0" />
+      <extension name="ad-invisible-label">
+        <property name="category" value="Common.Tab.Base" />
+      </extension>
+    </property>
+    <property name="action">
+      <property name="action-name" value="view" />
+      <property name="action-view-id" value="common/custom" />
+      <property name="title" value="ecma:z350_KEIJIBAN.appLib('doc_main').title();" />
+      <property name="action-view-arg" value="show-bpm-status=false" />
+      <property name="action-view-arg" value="hide-document-tree=true" />
+      <property name="action-view-arg" value="prior-action-title=true" />
+      <property name="action-view-arg" value="enableFooter=true" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-bpmhistory" />
+      <property name="action-view-id" value="common/view-bpmhistory" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="create" />
+      <property name="action-view-id" value="common/custom" />
+      <property name="title" value="ecma:z350_KEIJIBAN.appLib('doc_main').title();" />
+      <property name="action-view-arg" value="register-private-button=一時保存" />
+      <property name="action-view-arg" value="register-button=作成完了" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="edit" />
+      <property name="action-view-id" value="common/custom" />
+      <property name="title" value="ecma:z350_KEIJIBAN.appLib('doc_main').title();" />
+      <property name="action-view-arg" value="register-private-button=一時保存" />
+      <property name="action-view-arg" value="register-button=作成完了" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="edit-post" />
+      <property name="action-view-id" value="common/edit-post" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="delete" />
+      <property name="action-view-id" value="common/delete" />
+      <property name="title" value="ecma:z350_KEIJIBAN.appLib('doc_main').title();" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="delete-post" />
+      <property name="action-view-id" value="common/empty" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="modify" />
+      <property name="action-view-id" value="common/confirm-modify" />
+      <property name="action-view-arg" value="confirm-button=実行" />
+      <property name="action-view-arg" value="ecma:[['confirm-message', !this.resource ? '' : z350_KEIJIBAN.appLib('doc_main').confirmMessage()]];" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="copy" />
+      <property name="action-view-id" value="common/copy" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="copy-post" />
+      <property name="action-view-id" value="common/copy-post" />
+    </property>
+    <property name="action">
+      <property name="action-name" value="view-revision" />
+      <property name="action-view-id" value="common/view-revision" />
+    </property>
+    <property name="field-dependency">
+      <property name="dependee" value="fdrestricted" />
+      <property name="depender">
+        <property name="field" value="fdrange_rids" />
+        <property name="type" value="visible" />
+        <property name="type" value="editable" />
+      </property>
+      <property name="depender">
+        <property name="field" value="fdrange_names" />
+        <property name="type" value="visible" />
+      </property>
+      <property name="depender">
+        <property name="field" value="fdreader_selected_u" />
+        <property name="type" value="visible" />
+        <property name="type" value="editable" />
+      </property>
+      <property name="depender">
+        <property name="field" value="fdreader_selected_g" />
+        <property name="type" value="visible" />
+        <property name="type" value="editable" />
+      </property>
+    </property>
+</property>

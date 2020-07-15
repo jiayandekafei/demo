@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hoperun.pagoda.demo.mapper.FormSimilarityMapper">
+    <select id="findFormSimiDataByDbName" resultType="hoperun.pagoda.demo.entity.FormSimilarity">
+        SELECT * from tb_form_similarity where dbName=#{dbName};
+    </select>
+    
+    <insert id="insert"
+        parameterType="hoperun.pagoda.demo.entity.FormSimilarity"
+        useGeneratedKeys="true" keyProperty="id">
+        insert into tb_form_similarity (dbName,allCategory,categoryNo,categorySize,formName,fieldNum,codeNum) VALUES
+        (#{dbName}, #{allCategory},#{categoryNo},#{categorySize},#{formName},#{fieldNum}, #{codeNum});
+    </insert>
+    
+    <delete id="deleteByDBName">
+        delete from  tb_form_similarity where dbName=#{dbName} ; 
+    </delete>
+</mapper>

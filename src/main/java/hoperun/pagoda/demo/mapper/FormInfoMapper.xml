@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hoperun.pagoda.demo.mapper.FormInfoMapper">
+    <select id="findAllFormByDB" resultType="hoperun.pagoda.dxlAnalyse.quantity.entity.FormInfo">
+        SELECT * from tb_form_info where dbName=#{dbName} order by no;
+    </select>
+    
+    <insert id="insert"
+        parameterType="hoperun.pagoda.dxlAnalyse.quantity.entity.FormInfo"
+        useGeneratedKeys="true" keyProperty="id">
+        insert into tb_form_info (no,dbName,name,alias,totalField,displayField,conditionalField,hideField,allCodeNum,commentCodeNum,blankCodeNum,usefulCodeNum,callTimes) VALUES
+        (#{no}, #{dbName}, #{name}, #{alias}, #{totalField}, #{displayField}, #{conditionalField}, #{hideField}, #{allCodeNum}, #{commentCodeNum}, #{blankCodeNum}, #{usefulCodeNum}, #{callTimes});
+    </insert>
+    
+    <delete id="deleteByDBName">
+        delete from tb_form_info where dbName=#{dbName} ; 
+    </delete>
+</mapper>

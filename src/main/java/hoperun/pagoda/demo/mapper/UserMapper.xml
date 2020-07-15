@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hoperun.pagoda.demo.mapper.UserMapper">
+	<!-- *******************user table start********************************** -->
+	<select id="findAllUser"
+		resultType="hoperun.pagoda.demo.entity.UserDetail">
+		select * from tb_user 
+		<if test='superuser == "N"'>
+		     where superuser='N';
+       </if>
+	</select>
+	<select id="findApproveUser"
+        resultType="hoperun.pagoda.demo.entity.UserDetail">
+        select * from tb_user where status='W';
+    </select>
+	<select id="findUserCount" resultType="java.lang.Integer">
+		select count(*) from tb_user 
+		<if test='status == "W"'>
+             where status='W';
+       </if>
+	</select>
+	<select id="findByUsername"
+		resultType="hoperun.pagoda.demo.entity.UserDetail">
+		SELECT * from tb_user where username = #{username};
+	</select>
+	<select id="findByUserId"
+		resultType="hoperun.pagoda.demo.entity.UserDetail">
+		SELECT * from tb_user where userId = #{userId};
+	</select>
+	<insert id="insert"
+		 parameterType="hoperun.pagoda.demo.entity.UserDetail"
+		 useGeneratedKeys="true" keyProperty="userId">
+		insert into tb_user (username,
+		password,email,jobTitle,status,photo,superuser) VALUES
+		(#{username}, #{password}, #{email}, #{jobTitle},#{status},#{photo},#{superuser});
+	</insert>
+
+	<update id="update"
+		parameterType="hoperun.pagoda.demo.bean.UserRequest">
+		update tb_user set email=#{email}, jobTitle=#{jobTitle}, 
+		<if test="superuser">  
+		  superuser='Y'
+        </if> 
+        <if test="!superuser">  
+          superuser='N'
+        </if>
+		where username=#{username};
+	</update>
+
+	<delete id="delete">
+		delete from tb_user where userId =#{userId}
+	</delete>
+
+	<delete id="deleteUsers" parameterType="java.util.List">
+		delete from tb_user where 1=2
+		<if test="users!=null and users.size()>0">
+			or userId in
+			<foreach collection="users" item="userId" index="index"
+				open="(" close=")" separator=",">
+				 #{userId}
+			</foreach>
+		</if>
+	</delete>
+
+	<update id="updateUserStatus">
+		update tb_user set status =#{status} where userId= #{userId};
+	</update>
+	
+	<update id="updateUserPassword">
+		update tb_user set password =#{password} where userId= #{userId};
+	</update>
+	
+   <select id="findSuperuser" resultType="java.lang.String">
+       select username from tb_user where superuser='Y';
+   </select>
+   
+   <select id="findPMByGroup" resultType="java.lang.String">
+        SELECT username FROM tb_user WHERE userId in ( SELECT userId  FROM tb_user_role WHERE  groupId=#{groupId} AND roleId=2);
+    </select>
+	<!-- *******************user table end********************************** -->
+	
+	<!-- *******************user_role table start*************************** -->
+	<insert id="insertUserGroup">
+		insert into tb_user_role (userId, groupId,roleId,status) VALUES (#{userId},
+		#{groupId}, #{roleId}, #{status});
+	</insert>
+	<update id="updateUserGroupStatus">
+        update tb_user_role set status =#{status} where userId= #{userId} and groupId = #{groupId};
+    </update>
+	<update id="updateUserGroup">
+		update tb_user_role set roleId =#{roleId},status =#{status} where userId= #{userId} and
+		groupId = #{groupId};
+	</update>
+	<delete id="deleteUserGroupByUserIdAndGroups">
+		delete from tb_user_role where userId= #{userId} and groupId in
+			<foreach collection="deleteGroup" item="groupId" index="index"
+				open="(" close=")" separator=",">
+				#{groupId}
+			</foreach>
+	</delete>
+	<delete id="deleteUserGroupByUserIds" parameterType="java.util.List">
+		delete from tb_user_role where 1=2
+		<if test="users!=null and users.size()>0">
+            or userId in
+            <foreach collection="users" item="userId" index="index"
+                open="(" close=")" separator=",">
+                 #{userId}
+            </foreach>
+        </if>
+	</delete>
+	<select id="findUserGroups"
+		resultType="hoperun.pagoda.demo.entity.UserGroup">
+		select * from tb_user_role where userId = #{userId} ;
+	</select>
+	<select id="findUsersByGroupId" resultType="Integer">
+		select userId from tb_user_role where groupId = #{groupId} ;
+	</select>
+	<select id="findUserGroupByUserIdAndGroupId"
+		resultType="hoperun.pagoda.demo.entity.UserGroup">
+		select * from tb_user_role where userId=#{userId} and groupId =
+		#{groupId} ;
+	</select>
+	<select id="findUserGroupByGroupIds" resultType="Integer">
+		select groupId from tb_user_role where userId=#{userId}
+		<if test="groupIds!=null and groupIds.size()>0">
+			 and groupId not in
+			<foreach collection="groupIds" item="groupId" index="index"
+				open="(" close=")" separator=",">
+				#{groupId}
+			</foreach>
+	   </if>
+	</select>
+	
+	   <delete id="deleteUserGroupByGroupIds" parameterType="java.util.List">
+        delete from tb_user_role where 1=2
+        <if test="groups!=null and groups.size()>0">
+            or groupId in
+            <foreach collection="groups" item="groupId" index="index"
+                open="(" close=")" separator=",">
+                 #{groupId}
+            </foreach>
+        </if>
+    </delete>
+    
+	<select id="retrieveUserNumber" resultType="hoperun.pagoda.demo.entity.GroupUserNum">
+		SELECT groupId,count(*) value FROM tb_user_role group by groupId ;
+	</select>
+	
+	
+	<!-- *******************user_role table end*************************** -->
+	
+</mapper>

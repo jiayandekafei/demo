@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<defaultFormLayoutTemplate>
+	<!-- defaultFormLayoutTemplate -->
+	<property name="field-widget">
+          <property name="field-id" value="fdattachment" />
+          <property name="x" value="130" />
+          <property name="y" value="70" />
+          <property name="width" value="570" />
+          <property name="height" value="20" />
+          <property name="styles" value="border-top=1px #969696 solid" />
+          <property name="styles" value="border-right=1px #969696 solid" />
+          <property name="styles" value="border-bottom=1px #969696 solid" />
+          <property name="styles" value="border-left=1px #969696 solid" />
+          <property name="styles" value="background-color=#FFFFFF" />
+        </property>
+	<property name="field-widget">
+	  <property name="field-id" value="title" />
+	  <property name="x" value="130" />
+	  <property name="y" value="50" />
+	  <property name="width" value="570" />
+	  <property name="height" value="20" />
+	  <property name="styles" value="border-top=1px #969696 solid" />
+	  <property name="styles" value="border-right=1px #969696 solid" />
+	  <property name="styles" value="border-bottom=1px #969696 solid" />
+	  <property name="styles" value="border-left=1px #969696 solid" />
+	  <property name="styles" value="font-weight=normal" />
+	  <property name="styles" value="background-color=#FFFFFF" />
+	</property>
+	<property name="field-widget">
+	  <property name="field-id" value="fdapptitle" />
+	  <property name="x" value="0" />
+	  <property name="y" value="0" />
+	  <property name="width" value="700" />
+	  <property name="height" value="40" />
+	  <property name="styles" value="background-color=#000080" />
+	  <property name="styles" value="color=#FFFFFF" />
+	  <property name="styles" value="text-align=center" />
+	  <property name="styles" value="vertical-align=middle" />
+	  <property name="styles" value="font-size=18px" />
+	  <property name="styles" value="font-weight=bold" />
+	</property>
+	<property name="field-label">
+	  <property name="field-id" value="fdattachment" />
+	  <property name="x" value="0" />
+	  <property name="y" value="70" />
+	  <property name="width" value="130" />
+	  <property name="height" value="20" />
+	  <property name="styles" value="font-weight=normal" />
+	  <property name="styles" value="text-align=left" />
+	  <property name="styles" value="border-top=1px #969696 solid" />
+	  <property name="styles" value="border-right=1px #969696 solid" />
+	  <property name="styles" value="border-bottom=1px #969696 solid" />
+	  <property name="styles" value="border-left=1px #969696 solid" />
+	  <property name="styles" value="background-color=#B9B9FF" />
+	  <property name="styles" value="color=#111114" />
+	</property>
+	<property name="field-label">
+	  <property name="field-id" value="title" />
+	  <property name="x" value="0" />
+	  <property name="y" value="50" />
+	  <property name="width" value="130" />
+	  <property name="height" value="20" />
+	  <property name="styles" value="font-weight=normal" />
+	  <property name="styles" value="text-align=left" />
+	  <property name="styles" value="border-top=1px #969696 solid" />
+	  <property name="styles" value="border-right=1px #969696 solid" />
+	  <property name="styles" value="border-bottom=1px #969696 solid" />
+	  <property name="styles" value="border-left=1px #969696 solid" />
+	  <property name="styles" value="background-color=#B9B9FF" />
+	  <property name="styles" value="color=#111114" />
+	</property>
+	<property name="fieldset">
+          <property name="x" value="0" />
+          <property name="y" value="100" />
+          <property name="width" value="700" />
+          <property name="height" value="130" />
+          <property name="title" value="閲覧者制限" />
+          <property name="enable-height" value="false" />
+          <property name="viewtype" value="open" />
+          <property name="field-widget">
+            <property name="field-id" value="fdrestricted" />
+            <property name="x" value="0" />
+            <property name="y" value="0" />
+            <property name="width" value="680" />
+            <property name="height" value="20" />
+          </property>
+          <property name="field-widget">
+            <property name="field-id" value="fdrange_rids" />
+            <property name="x" value="120" />
+            <property name="y" value="20" />
+            <property name="width" value="560" />
+            <property name="height" value="20" />
+            <property name="styles" value="border-top=1px #969696 solid" />
+            <property name="styles" value="border-right=1px #969696 solid" />
+            <property name="styles" value="border-bottom=1px #969696 solid" />
+            <property name="styles" value="border-left=1px #969696 solid" />
+            <property name="styles" value="background-color=#FFFFFF" />
+          </property>
+          <property name="field-widget">
+            <property name="field-id" value="fdrange_names" />
+            <property name="x" value="120" />
+            <property name="y" value="40" />
+            <property name="width" value="560" />
+            <property name="height" value="20" />
+            <property name="styles" value="border-top=1px #969696 solid" />
+            <property name="styles" value="border-right=1px #969696 solid" />
+            <property name="styles" value="border-bottom=1px #969696 solid" />
+            <property name="styles" value="border-left=1px #969696 solid" />
+            <property name="styles" value="background-color=#FFFFFF" />
+          </property>
+          <property name="field-widget">
+            <property name="field-id" value="fdreader_selected_u" />
+            <property name="x" value="120" />
+            <property name="y" value="60" />
+            <property name="width" value="560" />
+            <property name="height" value="20" />
+            <property name="styles" value="border-top=1px #969696 solid" />
+            <property name="styles" value="border-right=1px #969696 solid" />
+            <property name="styles" value="border-bottom=1px #969696 solid" />
+            <property name="styles" value="border-left=1px #969696 solid" />
+            <property name="styles" value="background-color=#FFFFFF" />
+          </property>
+          <property name="field-widget">
+            <property name="field-id" value="fdreader_selected_g" />
+            <property name="x" value="120" />
+            <property name="y" value="80" />
+            <property name="width" value="560" />
+            <property name="height" value="20" />
+            <property name="styles" value="border-top=1px #969696 solid" />
+            <property name="styles" value="border-right=1px #969696 solid" />
+            <property name="styles" value="border-bottom=1px #969696 solid" />
+            <property name="styles" value="border-left=1px #969696 solid" />
+            <property name="styles" value="background-color=#FFFFFF" />
+          </property>
+          <property name="field-label">
+            <property name="field-id" value="fdrange_rids" />
+            <property name="x" value="0" />
+            <property name="y" value="20" />
+            <property name="width" value="120" />
+            <property name="height" value="20" />
+            <property name="styles" value="border-top=1px #969696 solid" />
+            <property name="styles" value="border-right=1px #969696 solid" />
+            <property name="styles" value="border-bottom=1px #969696 solid" />
+            <property name="styles" value="border-left=1px #969696 solid" />
+            <property name="styles" value="background-color=#B9B9FF" />
+            <property name="styles" value="color=#111114" />
+            <property name="styles" value="text-align=left" />
+            <property name="styles" value="font-weight=normal" />
+          </property>
+          <property name="field-label">
+            <property name="field-id" value="fdrange_names" />
+            <property name="x" value="0" />
+            <property name="y" value="40" />
+            <property name="width" value="120" />
+            <property name="height" value="20" />
+            <property name="styles" value="border-top=1px #969696 solid" />
+            <property name="styles" value="border-right=1px #969696 solid" />
+            <property name="styles" value="border-bottom=1px #969696 solid" />
+            <property name="styles" value="border-left=1px #969696 solid" />
+            <property name="styles" value="background-color=#B9B9FF" />
+            <property name="styles" value="color=#111114" />
+            <property name="styles" value="text-align=left" />
+            <property name="styles" value="font-weight=normal" />
+          </property>
+          <property name="field-label">
+            <property name="field-id" value="fdreader_selected_u" />
+            <property name="x" value="0" />
+            <property name="y" value="60" />
+            <property name="width" value="120" />
+            <property name="height" value="20" />
+            <property name="styles" value="text-align=left" />
+            <property name="styles" value="border-top=1px #969696 solid" />
+            <property name="styles" value="border-right=1px #969696 solid" />
+            <property name="styles" value="border-bottom=1px #969696 solid" />
+            <property name="styles" value="border-left=1px #969696 solid" />
+            <property name="styles" value="font-weight=normal" />
+            <property name="styles" value="background-color=#B9B9FF" />
+            <property name="styles" value="color=#111114" />
+          </property>
+          <property name="field-label">
+            <property name="field-id" value="fdreader_selected_g" />
+            <property name="x" value="0" />
+            <property name="y" value="80" />
+            <property name="width" value="120" />
+            <property name="height" value="20" />
+            <property name="styles" value="border-top=1px #969696 solid" />
+            <property name="styles" value="border-right=1px #969696 solid" />
+            <property name="styles" value="border-bottom=1px #969696 solid" />
+            <property name="styles" value="border-left=1px #969696 solid" />
+            <property name="styles" value="background-color=#B9B9FF" />
+            <property name="styles" value="color=#111114" />
+            <property name="styles" value="text-align=left" />
+            <property name="styles" value="font-weight=normal" />
+          </property>
+        </property>
+</defaultFormLayoutTemplate>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hoperun.pagoda.demo.mapper.ExeStatusMapper">
+    <select id="findByTypeAndGroup" resultType="hoperun.pagoda.demo.entity.ExeStatus">
+        SELECT * from tb_exe_status where groupId=#{groupId}  and type=#{type};
+    </select>
+    
+    <insert id="insert" parameterType="hoperun.pagoda.demo.entity.ExeStatus"
+        useGeneratedKeys="true" keyProperty="id">
+       insert into tb_exe_status (groupId,type,status) VALUES (#{groupId}, #{type},#{status});
+   </insert>
+   
+    <update id="update"
+        parameterType="hoperun.pagoda.demo.entity.ExeStatus">
+        update tb_exe_status set status=#{status} where groupId=#{groupId}  and type=#{type};
+    </update>
+</mapper>

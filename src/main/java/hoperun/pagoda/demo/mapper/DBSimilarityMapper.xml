@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hoperun.pagoda.demo.mapper.DBSimilarityMapper">
+    <select id="findCateGoryDataByGroupId" resultType="hoperun.pagoda.demo.entity.DBSimilarity">
+        SELECT * from tb_db_similarity where groupId=#{groupId} order by categoryNo,categorySize desc;
+    </select>
+    
+    <insert id="insert"
+        parameterType="hoperun.pagoda.demo.entity.DBSimilarity"
+        useGeneratedKeys="true" keyProperty="id">
+        insert into tb_db_similarity (groupId,categoryNo,enName,jpName,categorySize,mainForm,dbSize) VALUES
+        (#{groupId}, #{categoryNo},#{enName}, #{jpName}, #{categorySize} ,#{mainForm}, #{dbSize});
+    </insert>
+    
+    <delete id="deleteByGroupId">
+        delete from tb_db_similarity where groupId=#{groupId} ; 
+    </delete>
+</mapper>

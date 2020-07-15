@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<appFormConfTemplate>
+	<property name="field">
+      <property name="id" value="default_view" />
+      <property name="title" value="初期表示" />
+      <property name="description" value="このアプリを開いたときに表示する画面を指定します" />
+      <property name="type" value="string" />
+      <property name="visible" value="true" />
+      <property name="editable" value="true" />
+      <property name="category" value="一覧表示" />
+      <property name="widget">
+        <property name="value" value="list" />
+        <property name="kwds" value="option::default=デフォルトビュー" />
+        <property name="kwds" value="option::a163glak=メールマスタ" />
+        <property name="kwds" value="option::5xgxbsaw=削除済文書" />
+        <property name="kwds" value="option::4q1lqzua=全文書一覧" />
+        <property name="kwds" value="option::ud9q99pj=メールマスタ" />
+        <property name="kwds" value="option::wmyadpnb=閲覧範囲一覧" />
+      </property>
+      <property name="validator">
+        <property name="value" value="NotNullValidator" />
+        <property name="visible" value="false" />
+      </property>
+      <property name="default" value="default" />
+    </property>
+    <property name="field">
+      <property name="id" value="default_view/tenant-overridable" />
+      <property name="title" value=" " />
+      <property name="description" value="Schema.ConfigCommon.TenantOverridable.Description" />
+      <property name="category" value="一覧表示" />
+      <property name="type" value="int" />
+      <property name="visible" value="false" />
+      <property name="editable" value="true" />
+      <property name="widget">
+        <property name="value" value="checkbox" />
+        <property name="kwds" value="option::1=Schema.ConfigCommon.TenantOverridable.Description" />
+      </property>
+      <property name="default" value="1" />
+    </property>
+    <property name="field">
+      <property name="id" value="default_view/manager-overridable" />
+      <property name="title" value=" " />
+      <property name="description" value="Schema.ConfigCommon.ManagerOverridable.Description" />
+      <property name="category" value="一覧表示" />
+      <property name="type" value="int" />
+      <property name="visible" value="false" />
+      <property name="editable" value="true" />
+      <property name="widget">
+        <property name="value" value="checkbox" />
+        <property name="kwds" value="option::1=Schema.ConfigCommon.ManagerOverridable.Description" />
+      </property>
+      <property name="default" value="1" />
+    </property>
+    <property name="field">
+      <property name="id" value="default_view/user-overridable" />
+      <property name="type" value="int" />
+      <property name="visible" value="false" />
+      <property name="editable" value="false" />
+      <property name="widget">
+        <property name="value" value="checkbox" />
+        <property name="kwds" value="option::1=Schema.ConfigCommon.UserOverridable.Description" />
+      </property>
+      <property name="default" value="0" />
+      <extension name="ad-invisible-label">
+        <property name="title" value=" " />
+        <property name="description" value="Schema.ConfigCommon.UserOverridable.Description" />
+        <property name="category" value="一覧表示" />
+      </extension>
+    </property>
+</appFormConfTemplate>

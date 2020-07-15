@@ -1,0 +1,1918 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+  <bean class="com.arielnetworks.agn.application.core.SchemaMappingDefinition">
+    <constructor-arg value="J9U9203A" />
+    <constructor-arg>
+      <map>
+        <entry key="modify:write">
+          <list>
+            <bean class="com.arielnetworks.agn.application.core.ScriptingInterceptor">
+              <constructor-arg ref="scriptingHostContainer" />
+              <property name="before" value="ecma:z350_KEIJIBAN.appLib('doc_main').beforeModifyWrite();" />
+            </bean>
+          </list>
+        </entry>
+        <entry key="edit:write">
+          <list>
+            <bean class="com.arielnetworks.agn.application.core.ScriptingInterceptor">
+              <constructor-arg ref="scriptingHostContainer" />
+              <property name="before" value="ecma:z350_KEIJIBAN.appLib('doc_main').beforeEditWrite();" />
+              <property name="after" value="ecma:z350_KEIJIBAN.appLib('doc_main').afterEditWrite();" />
+            </bean>
+          </list>
+        </entry>
+        <entry key="create">
+          <list>
+            <bean class="com.arielnetworks.agn.application.core.ScriptingInterceptor">
+              <constructor-arg ref="scriptingHostContainer" />
+              <property name="before" value="ecma:z350_KEIJIBAN.appLib('doc_main').beforeCreate();" />
+            </bean>
+          </list>
+        </entry>
+        <entry key="copy:read">
+          <list>
+            <ref bean="elemCreatableApplicationsInterceptor" />
+          </list>
+        </entry>
+        <entry key="signal:write">
+          <list>
+            <bean class="com.arielnetworks.agn.application.core.ScriptingInterceptor">
+              <constructor-arg ref="scriptingHostContainer" />
+              <property name="after" value="ecma:z350_KEIJIBAN.appLib('doc_main').afterSignalWrite();" />
+            </bean>
+          </list>
+        </entry>
+        <entry key="view:read">
+          <list>
+            <bean class="com.arielnetworks.agn.application.core.ScriptingInterceptor">
+              <constructor-arg ref="exceptionHandlingScriptingHostContainer" />
+              <property name="before" value="ecma:z350_KEIJIBAN.appLib('doc_main').beforeView();" />
+            </bean>
+          </list>
+        </entry>
+        <entry key="edit:inspect">
+          <list>
+            <bean class="com.arielnetworks.agn.application.core.ScriptingInterceptor">
+              <constructor-arg ref="scriptingHostContainer" />
+              <property name="inspect" value="ecma:z350_KEIJIBAN.appLib('doc_main').editInspect();" />
+            </bean>
+          </list>
+        </entry>
+      </map>
+    </constructor-arg>
+  </bean>
+  <bean class="com.arielnetworks.agn.application.core.SchemaMappingDefinition">
+    <constructor-arg value="J9U9203AQ0" />
+    <constructor-arg>
+      <map>
+        <entry key="edit:inspect">
+          <list>
+            <bean class="com.arielnetworks.agn.application.core.ScriptingInterceptor">
+              <constructor-arg ref="scriptingHostContainer" />
+              <property name="inspect" value="ecma:z350_KEIJIBAN.appLib('set_range').editInspect();" />
+            </bean>
+          </list>
+        </entry>
+        <entry key="import:write">
+          <list>
+            <bean class="com.arielnetworks.agn.application.core.ScriptingInterceptor">
+              <constructor-arg ref="scriptingHostContainer" />
+              <property name="before" value="ecma:z350_KEIJIBAN.appLib('set_range').beforeImportWrite();" />
+              <property name="after" value="ecma:z350_KEIJIBAN.appLib('set_range').afterImportWrite();" />
+            </bean>
+          </list>
+        </entry>
+      </map>
+    </constructor-arg>
+  </bean>
+  <bean class="com.arielnetworks.agn.application.core.SchemaMappingDefinition">
+    <constructor-arg value="J9U9203AKO" />
+    <constructor-arg>
+      <map>
+        <entry key="edit:write">
+          <list>
+            <bean class="com.arielnetworks.agn.application.core.ScriptingInterceptor">
+              <constructor-arg ref="scriptingHostContainer" />
+              <property name="before" value="ecma:z350_KEIJIBAN.appLib('doc_main_hide').beforeEditWrite();" />
+            </bean>
+          </list>
+        </entry>
+        <entry key="create">
+          <list>
+            <bean class="com.arielnetworks.agn.application.core.ScriptingInterceptor">
+              <constructor-arg ref="scriptingHostContainer" />
+              <property name="before" value="ecma:z350_KEIJIBAN.appLib('doc_main_hide').beforeCreate();" />
+            </bean>
+          </list>
+        </entry>
+        <entry key="copy:read">
+          <list>
+            <ref bean="elemCreatableApplicationsInterceptor" />
+          </list>
+        </entry>
+      </map>
+    </constructor-arg>
+  </bean>
+  <bean class="com.arielnetworks.agn.application.core.SchemaMappingDefinition">
+    <constructor-arg value="J9U9203A-list" />
+    <constructor-arg>
+      <map>
+        <entry key="view">
+          <list>
+            <ref bean="pagedListInterceptor" />
+            <ref bean="orderedInterceptor" />
+            <ref bean="csvExportDispatchInterceptor" />
+          </list>
+        </entry>
+        <entry key="move:read">
+          <list>
+            <ref bean="moveToGroupInterceptor" />
+          </list>
+        </entry>
+        <entry key="import:write">
+          <list>
+            <ref bean="saveFileInterceptor" />
+          </list>
+        </entry>
+        <entry key="edit-children:write">
+          <list>
+            <ref bean="saveFileInterceptor" />
+          </list>
+        </entry>
+        <entry key="copy-children:read">
+          <list>
+            <ref bean="elemCreatableInterceptor" />
+          </list>
+        </entry>
+        <entry key="move-children:read">
+          <list>
+            <ref bean="elemDeletableInterceptor" />
+          </list>
+        </entry>
+        <entry key="modify-children:write">
+          <list>
+            <bean class="com.arielnetworks.agn.application.core.ScriptingInterceptor">
+              <constructor-arg ref="scriptingHostContainer" />
+              <property name="prepare" value="ecma:z350_KEIJIBAN.appLib('doc_main').prepareChildrenModifyWrite();" />
+            </bean>
+          </list>
+        </entry>
+      </map>
+    </constructor-arg>
+  </bean>
+  <bean class="com.arielnetworks.agn.application.core.ToolBarMappingDefinition">
+    <constructor-arg>
+      <map>
+        <entry key="J9U9203A">
+          <bean class="com.arielnetworks.agn.application.toolbar.CollaborationToolBar">
+            <constructor-arg ref="collaborationManager" />
+            <property name="toolButtonList">
+              <list>
+                <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                  <property name="label" value="ToolBar.Edit.Label" />
+                  <property name="description" value="ToolBar.Edit.Description" />
+                  <property name="parameters">
+                    <value><![CDATA[ecma:
+var parameters = "";
+if ("cgiParam" in this && cgiParam.get("exa") != null && cgiParam.get("exa").length > 0) {
+  parameters = "viewExa=" + util.urlEncode(cgiParam.get("exa")[0]);
+}
+parameters;]]></value>
+                  </property>
+                  <property name="name" value="edit" />
+                  <property name="action" value="edit" />
+                  <property name="targetResource">
+                    <map>
+                      <entry key="this">
+                        <list>
+                          <ref bean="controlRead" />
+                          <ref bean="controlWrite" />
+                        </list>
+                      </entry>
+                    </map>
+                  </property>
+                  <property name="iconStyle" value="ico-edit" />
+                  <property name="invisilityType" value="invisible" />
+                  <property name="type" value="overlap" />
+                  <property name="enabledScript" value="ecma: z350_KEIJIBAN.appLib('doc_main').button('編集');" />
+                  <property name="scriptingHost" ref="scriptingHostContainer" />
+                </bean>
+                <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                  <property name="action" value="modify" />
+                  <property name="label" value="ecma: z350_KEIJIBAN.appLib('doc_main').buttonName('削除');" />
+                  <property name="type" value="overlap" />
+                  <property name="name" value="modify" />
+                  <property name="style" value="popup-messagebox" />
+                  <property name="targetResource">
+                    <map>
+                      <entry key="this">
+                        <list>
+                          <ref bean="controlRead" />
+                          <ref bean="controlWrite" />
+                        </list>
+                      </entry>
+                    </map>
+                  </property>
+                  <property name="description" value="削除" />
+                  <property name="invisilityType" value="invisible" />
+                  <property name="parameters" value="loadPanes=list" />
+                  <property name="scriptingHost" ref="scriptingHostContainer" />
+                  <property name="enabledScript" value="ecma: z350_KEIJIBAN.appLib('doc_main').button('削除');" />
+                  <property name="iconStyle" value="ecma: z350_KEIJIBAN.appLib('doc_main').buttonIcon('削除');" />
+                </bean>
+                <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                  <property name="action" value="modify" />
+                  <property name="label" value="ecma: z350_KEIJIBAN.appLib('doc_main').buttonName('公開');" />
+                  <property name="type" value="overlap" />
+                  <property name="name" value="modify2" />
+                  <property name="style" value="popup-messagebox" />
+                  <property name="targetResource">
+                    <map>
+                      <entry key="this">
+                        <list>
+                          <ref bean="controlRead" />
+                          <ref bean="controlWrite" />
+                        </list>
+                      </entry>
+                    </map>
+                  </property>
+                  <property name="description" value="公開" />
+                  <property name="scriptingHost" ref="scriptingHostContainer" />
+                  <property name="invisilityType" value="invisible" />
+                  <property name="enabledScript" value="ecma: z350_KEIJIBAN.appLib('doc_main').button('公開');" />
+                  <property name="parameters" value="loadPanes=list" />
+                  <property name="iconStyle" value="ecma: z350_KEIJIBAN.appLib('doc_main').buttonIcon('公開');" />
+                </bean>
+                <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                  <property name="parameters" value="ad_createWithTemplate=true&amp;type=J9U9203A&amp;sourceResourceId=$(current)&amp;loadPanes=list" />
+                  <property name="name" value="copy" />
+                  <property name="action" value="create" />
+                  <property name="description" value="ToolBar.CopyThis.Description" />
+                  <property name="label" value="コピー作成" />
+                  <property name="iconStyle" value="ico-copy" />
+                  <property name="device" value="pc,tablet,cell-phone" />
+                  <property name="invisilityType" value="invisible" />
+                  <property name="type" value="overlap" />
+                  <property name="scriptingHost" ref="scriptingHostContainer" />
+                  <property name="targetResourceScript">
+                    <value><![CDATA[ecma:
+var result = new java.util.HashMap();
+result.put("fixed:" + resource.getFieldValue("container"), "32");
+result;]]></value>
+                  </property>
+                  <property name="enabledScript" value="ecma: z350_KEIJIBAN.appLib('doc_main').button('コピー');" />
+                </bean>
+                <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                  <property name="action" value="modify" />
+                  <property name="label" value="ecma: z350_KEIJIBAN.appLib('doc_main').buttonName('過去データ');" />
+                  <property name="type" value="overlap" />
+                  <property name="name" value="modify3" />
+                  <property name="style" value="popup-messagebox" />
+                  <property name="targetResource">
+                    <map>
+                      <entry key="this">
+                        <list>
+                          <ref bean="controlRead" />
+                          <ref bean="controlWrite" />
+                        </list>
+                      </entry>
+                    </map>
+                  </property>
+                  <property name="description" value="過去データ" />
+                  <property name="scriptingHost" ref="scriptingHostContainer" />
+                  <property name="invisilityType" value="invisible" />
+                  <property name="parameters" value="loadPanes=list" />
+                  <property name="enabledScript" value="ecma: z350_KEIJIBAN.appLib('doc_main').button('過去データ');" />
+                  <property name="iconStyle" value="ecma: z350_KEIJIBAN.appLib('doc_main').buttonIcon('過去データ');" />
+                </bean>
+                <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                  <property name="action" value="view" />
+                  <property name="label" value="印刷レイアウト表示" />
+                  <property name="type" value="newWindow" />
+                  <property name="name" value="view-other" />
+                  <property name="invisilityType" value="invisible" />
+                  <property name="iconStyle" value="ico-other-window" />
+                  <property name="scriptingHost" ref="scriptingHostContainer" />
+                  <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib('doc_print').targetRes();" />
+                  <property name="parameters" value="ecma: z350_KEIJIBAN.appLib().paramDocResId();" />
+                  <property name="device" value="pc" />
+                </bean>
+                <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                  <property name="name" value="documentbookmark2" />
+                  <property name="label" value="ToolBar.DocumentBookmark.Label" />
+                  <property name="description" value="ToolBar.DocumentBookmark.Description" />
+                  <property name="targetResource">
+                    <map>
+                      <entry key="formatted:%/documentbookmark">
+                        <list>
+                          <ref bean="controlNone" />
+                        </list>
+                      </entry>
+                    </map>
+                  </property>
+                  <property name="restrictedBy" value="/atypes/ariel/documentbookmark-list" />
+                  <property name="iconStyle" value="ico-bookmark-doc-create" />
+                  <property name="scriptingHost" ref="defaultScriptingHostContainer" />
+                  <property name="action" value="create" />
+                  <property name="device" value="full-function" />
+                  <property name="enabledScript">
+                    <value><![CDATA[ecma:
+       var isSpoofing = 'param' in this && param.auth.isSpoofing() && param.useSpoofing(resourceLoader);
+       !isSpoofing;
+      ]]></value>
+                  </property>
+                  <property name="parameters">
+                    <value><![CDATA[ecma:
+        var params = [];
+        var saveParams = "isBlogView" in this && isBlogView ? ["mode", "exaex"] : ["mode", "exaex", "exa"];
+        var bookmarkUri = Packages.com.arielnetworks.agn.application.core.AquaUtil.trimParameters(currentUri, saveParams, false)
+        if (("currentExa" in this)
+          && (currentUri.indexOf("?exa=") < 0)
+          && (currentUri.indexOf("&exa=") < 0)) {
+            var sep = (currentUri.indexOf("?") < 0)? "?" : "&";
+            bookmarkUri = currentUri + sep + "exa=" + currentExa;
+        }
+        params[params.length] = 'bookmarkUri=' + util.urlEncode(bookmarkUri);
+        var bookmarkType;
+        if ('currentResource' in this) {
+          bookmarkType = currentResource.getType();
+        } else {
+          bookmarkType = ru.stringValue('type');
+        }
+        params[params.length] = 'bookmarkType=' + util.urlEncode(bookmarkType);
+        params.join('&');
+      ]]></value>
+                  </property>
+                  <property name="invisilityType" value="disable" />
+                  <property name="type" value="overlap" />
+                </bean>
+                <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                  <property name="label" value="開発者用" />
+                  <property name="name" value="menulist" />
+                  <property name="invisilityType" value="invisible" />
+                  <property name="device" value="pc,tablet" />
+                  <property name="targetResource">
+                    <map>
+                      <entry key="this">
+                        <list>
+                          <ref bean="controlRead" />
+                        </list>
+                      </entry>
+                    </map>
+                  </property>
+                  <property name="iconStyle" value="ico-setting" />
+                  <property name="enabledScript" value="ecma: z350_KEIJIBAN.appLib().isSys();" />
+                  <property name="scriptingHost" ref="scriptingHostContainer" />
+                  <property name="menuList">
+                    <list>
+                      <ref bean="separatorToolButton" />
+                      <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                        <property name="action" value="view" />
+                        <property name="label" value="非表示領域項目閲覧用" />
+                        <property name="type" value="overlap" />
+                        <property name="name" value="view-other2" />
+                        <property name="invisilityType" value="invisible" />
+                        <property name="iconStyle" value="ico-reading-status" />
+                        <property name="device" value="pc,tablet" />
+                        <property name="parameters" value="ecma: z350_KEIJIBAN.appLib().paramDocResId();" />
+                        <property name="scriptingHost" ref="scriptingHostContainer" />
+                        <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib('doc_main_hide').targetRes();" />
+                      </bean>
+                      <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                        <property name="action" value="create" />
+                        <property name="label" value="非表示領域項目編集用" />
+                        <property name="parameters" value="sourceResourceId=$(current)&amp;type=J9U9203AKO" />
+                        <property name="type" value="overlap" />
+                        <property name="name" value="create-other" />
+                        <property name="invisilityType" value="invisible" />
+                        <property name="iconStyle" value="ico-edit" />
+                        <property name="device" value="pc,tablet" />
+                        <property name="enabledScript" value="" />
+                        <property name="scriptingHost" ref="scriptingHostContainer" />
+                        <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib().targetRes();" />
+                      </bean>
+                    </list>
+                  </property>
+                </bean>
+                <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                  <property name="allowRevision" value="true" />
+                  <property name="name" value="other-menulist" />
+                  <property name="label" value="ToolBar.OtherMenuList.Label" />
+                  <property name="description" value="ToolBar.ConfigMenuList.Description" />
+                  <property name="device" value="pc" />
+                  <property name="targetResource">
+                    <map>
+                      <entry key="this">
+                        <list>
+                          <ref bean="controlRead" />
+                        </list>
+                      </entry>
+                    </map>
+                  </property>
+                  <property name="type" value="" />
+                  <property name="iconStyle" value="ico-non" />
+                  <property name="invisilityType" value="invisible" />
+                  <property name="enabledScript" value="ecma: z350_KEIJIBAN.appLib().isSys();" />
+                  <property name="scriptingHost" ref="scriptingHostContainer" />
+                  <property name="menuList">
+                    <list>
+                      <ref bean="documentBookmarkToolButton" />
+                      <ref bean="timelineFollowToolButton" />
+                      <ref bean="printToolButton" />
+                      <ref bean="separatorToolButton" />
+                      <ref bean="unreadToolButton" />
+                      <ref bean="revisionToolButton" />
+                      <ref bean="bpmHistoryToolButton" />
+                      <ref bean="viewAclToolButton" />
+                      <ref bean="editAclToolButton" />
+                    </list>
+                  </property>
+                </bean>
+              </list>
+            </property>
+          </bean>
+        </entry>
+        <entry key="J9U9203AWC">
+          <bean class="com.arielnetworks.agn.application.toolbar.CollaborationToolBar">
+            <constructor-arg ref="collaborationManager" />
+            <property name="toolButtonList">
+              <list>
+                <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                  <property name="scriptingHost" ref="defaultScriptingHostContainer" />
+                  <property name="label" value="ToolBar.Edit.Label" />
+                  <property name="description" value="ToolBar.Edit.Description" />
+                  <property name="parameters">
+                    <value><![CDATA[ecma:
+var parameters = "";
+if ("cgiParam" in this && cgiParam.get("exa") != null && cgiParam.get("exa").length > 0) {
+  parameters = "viewExa=" + util.urlEncode(cgiParam.get("exa")[0]);
+}
+parameters;]]></value>
+                  </property>
+                  <property name="name" value="edit" />
+                  <property name="action" value="edit" />
+                  <property name="targetResource">
+                    <map>
+                      <entry key="this">
+                        <list>
+                          <ref bean="controlRead" />
+                          <ref bean="controlWrite" />
+                        </list>
+                      </entry>
+                    </map>
+                  </property>
+                  <property name="iconStyle" value="ico-edit" />
+                  <property name="invisilityType" value="invisible" />
+                  <property name="type" value="overlap" />
+                  <property name="device" value="pc,tablet" />
+                </bean>
+                <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                  <property name="targetResource">
+                    <map>
+                      <entry key="this">
+                        <list>
+                          <ref bean="controlDelete" />
+                        </list>
+                      </entry>
+                    </map>
+                  </property>
+                  <property name="enabledScript" value="" />
+                  <property name="invisilityType" value="invisible" />
+                  <property name="name" value="delete" />
+                  <property name="action" value="delete" />
+                  <property name="description" value="ToolBar.DeleteThis.Description" />
+                  <property name="label" value="ToolBar.Delete.Label" />
+                  <property name="style" value="popup-messagebox" />
+                  <property name="iconStyle" value="ico-delete" />
+                  <property name="type" value="overlap" />
+                  <property name="scriptingHost" ref="scriptingHostContainer" />
+                  <property name="device" value="pc,tablet" />
+                  <property name="parameters" value="loadPanes=browser" />
+                </bean>
+                <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                  <property name="allowRevision" value="true" />
+                  <property name="name" value="other-menulist" />
+                  <property name="label" value="ToolBar.OtherMenuList.Label" />
+                  <property name="description" value="ToolBar.ConfigMenuList.Description" />
+                  <property name="device" value="pc" />
+                  <property name="targetResource">
+                    <map>
+                      <entry key="this">
+                        <list>
+                          <ref bean="controlRead" />
+                        </list>
+                      </entry>
+                    </map>
+                  </property>
+                  <property name="type" value="" />
+                  <property name="iconStyle" value="ico-non" />
+                  <property name="invisilityType" value="invisible" />
+                  <property name="enabledScript" value="ecma: z350_KEIJIBAN.appLib().isSys();" />
+                  <property name="scriptingHost" ref="scriptingHostContainer" />
+                  <property name="menuList">
+                    <list>
+                      <ref bean="documentBookmarkToolButton" />
+                      <ref bean="timelineFollowToolButton" />
+                      <ref bean="printToolButton" />
+                      <ref bean="separatorToolButton" />
+                      <ref bean="unreadToolButton" />
+                      <ref bean="revisionToolButton" />
+                      <ref bean="bpmHistoryToolButton" />
+                      <ref bean="viewAclToolButton" />
+                      <ref bean="editAclToolButton" />
+                    </list>
+                  </property>
+                </bean>
+              </list>
+            </property>
+          </bean>
+        </entry>
+        <entry key="J9U9203AKL">
+          <bean class="com.arielnetworks.agn.application.toolbar.CollaborationToolBar">
+            <constructor-arg ref="collaborationManager" />
+            <property name="toolButtonList">
+              <list />
+            </property>
+          </bean>
+        </entry>
+        <entry key="J9U9203AYL">
+          <bean class="com.arielnetworks.agn.application.toolbar.CollaborationToolBar">
+            <constructor-arg ref="collaborationManager" />
+            <property name="toolButtonList">
+              <list>
+                <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                  <property name="scriptingHost" ref="defaultScriptingHostContainer" />
+                  <property name="label" value="ToolBar.Edit.Label" />
+                  <property name="description" value="ToolBar.Edit.Description" />
+                  <property name="parameters">
+                    <value><![CDATA[ecma:
+var parameters = "";
+if ("cgiParam" in this && cgiParam.get("exa") != null && cgiParam.get("exa").length > 0) {
+  parameters = "viewExa=" + util.urlEncode(cgiParam.get("exa")[0]);
+}
+parameters;]]></value>
+                  </property>
+                  <property name="name" value="edit" />
+                  <property name="action" value="edit" />
+                  <property name="targetResource">
+                    <map>
+                      <entry key="this">
+                        <list>
+                          <ref bean="controlRead" />
+                          <ref bean="controlWrite" />
+                        </list>
+                      </entry>
+                    </map>
+                  </property>
+                  <property name="iconStyle" value="ico-edit" />
+                  <property name="invisilityType" value="invisible" />
+                  <property name="type" value="overlap" />
+                  <property name="device" value="pc,tablet" />
+                </bean>
+                <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                  <property name="targetResource">
+                    <map>
+                      <entry key="this">
+                        <list>
+                          <ref bean="controlDelete" />
+                        </list>
+                      </entry>
+                    </map>
+                  </property>
+                  <property name="enabledScript" value="" />
+                  <property name="invisilityType" value="invisible" />
+                  <property name="name" value="delete" />
+                  <property name="action" value="delete" />
+                  <property name="description" value="ToolBar.DeleteThis.Description" />
+                  <property name="label" value="ToolBar.Delete.Label" />
+                  <property name="style" value="popup-messagebox" />
+                  <property name="iconStyle" value="ico-delete" />
+                  <property name="type" value="overlap" />
+                  <property name="scriptingHost" ref="scriptingHostContainer" />
+                  <property name="parameters" value="loadPanes=browser" />
+                  <property name="device" value="pc,tablet" />
+                </bean>
+                <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                  <property name="allowRevision" value="true" />
+                  <property name="name" value="other-menulist" />
+                  <property name="label" value="ToolBar.OtherMenuList.Label" />
+                  <property name="description" value="ToolBar.ConfigMenuList.Description" />
+                  <property name="device" value="pc" />
+                  <property name="targetResource">
+                    <map>
+                      <entry key="this">
+                        <list>
+                          <ref bean="controlRead" />
+                        </list>
+                      </entry>
+                    </map>
+                  </property>
+                  <property name="type" value="" />
+                  <property name="iconStyle" value="ico-non" />
+                  <property name="invisilityType" value="invisible" />
+                  <property name="enabledScript" value="ecma: z350_KEIJIBAN.appLib().isSys();" />
+                  <property name="scriptingHost" ref="scriptingHostContainer" />
+                  <property name="menuList">
+                    <list>
+                      <ref bean="documentBookmarkToolButton" />
+                      <ref bean="timelineFollowToolButton" />
+                      <ref bean="printToolButton" />
+                      <ref bean="separatorToolButton" />
+                      <ref bean="unreadToolButton" />
+                      <ref bean="revisionToolButton" />
+                      <ref bean="bpmHistoryToolButton" />
+                      <ref bean="viewAclToolButton" />
+                      <ref bean="editAclToolButton" />
+                    </list>
+                  </property>
+                </bean>
+              </list>
+            </property>
+          </bean>
+        </entry>
+        <entry key="J9U9203AEE">
+          <bean class="com.arielnetworks.agn.application.toolbar.CollaborationToolBar">
+            <constructor-arg ref="collaborationManager" />
+            <property name="toolButtonList">
+              <list>
+                <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                  <property name="type" value="script" />
+                  <property name="action">
+                    <value><![CDATA[ecma:
+      var resid = resource.getFieldValue('id')
+      'aqua.ui.print.documentScreen(\'' + util.escapeStringOfScript(currentUri) + '\', \'' + resid + '\');';
+    ]]></value>
+                  </property>
+                  <property name="name" value="print" />
+                  <property name="label" value="ToolBar.Print.Label" />
+                  <property name="description" value="ToolBar.Print.Description" />
+                  <property name="iconStyle" value="ico-print" />
+                  <property name="targetResource">
+                    <map>
+                      <entry key="this">
+                        <list>
+                          <ref bean="controlRead" />
+                        </list>
+                      </entry>
+                    </map>
+                  </property>
+                  <property name="allowRevision" value="true" />
+                  <property name="restrictedBy" value="printing" />
+                  <property name="device" value="pc" />
+                  <property name="enabledScript" value="ecma: !param.context.containsKey('aqua_listLayout');" />
+                  <property name="invisilityType" value="invisible" />
+                  <property name="scriptingHost" ref="scriptingHostContainer" />
+                </bean>
+              </list>
+            </property>
+          </bean>
+        </entry>
+        <entry key="J9U9203AQ0">
+          <bean class="com.arielnetworks.agn.application.toolbar.CollaborationToolBar">
+            <constructor-arg ref="collaborationManager" />
+            <property name="toolButtonList">
+              <list>
+                <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                  <property name="scriptingHost" ref="defaultScriptingHostContainer" />
+                  <property name="label" value="ToolBar.Edit.Label" />
+                  <property name="description" value="ToolBar.Edit.Description" />
+                  <property name="parameters">
+                    <value><![CDATA[ecma:
+var parameters = "";
+if ("cgiParam" in this && cgiParam.get("exa") != null && cgiParam.get("exa").length > 0) {
+  parameters = "viewExa=" + util.urlEncode(cgiParam.get("exa")[0]);
+}
+parameters;]]></value>
+                  </property>
+                  <property name="name" value="edit" />
+                  <property name="action" value="edit" />
+                  <property name="targetResource">
+                    <map>
+                      <entry key="this">
+                        <list>
+                          <ref bean="controlRead" />
+                          <ref bean="controlWrite" />
+                        </list>
+                      </entry>
+                    </map>
+                  </property>
+                  <property name="iconStyle" value="ico-edit" />
+                  <property name="invisilityType" value="invisible" />
+                  <property name="type" value="overlap" />
+                  <property name="device" value="pc,tablet" />
+                </bean>
+                <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                  <property name="targetResource">
+                    <map>
+                      <entry key="this">
+                        <list>
+                          <ref bean="controlDelete" />
+                        </list>
+                      </entry>
+                    </map>
+                  </property>
+                  <property name="enabledScript">
+                    <value><![CDATA[ecma:
+        if (util.isInSysRootGroup(currentUserId) || util.isInTenantSystemGroup(currentUserId) || util.isBpmEnableDelete(this)) {
+          true;
+        } else {
+          false;
+        }
+      ]]></value>
+                  </property>
+                  <property name="invisilityType" value="invisible" />
+                  <property name="name" value="delete" />
+                  <property name="action" value="delete" />
+                  <property name="description" value="ToolBar.DeleteThis.Description" />
+                  <property name="label" value="ToolBar.Delete.Label" />
+                  <property name="style" value="popup-messagebox" />
+                  <property name="iconStyle" value="ico-delete" />
+                  <property name="type" value="overlap" />
+                  <property name="scriptingHost" ref="scriptingHostContainer" />
+                  <property name="device" value="pc,tablet" />
+                  <property name="parameters" value="loadPanes=list" />
+                </bean>
+                <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                  <property name="allowRevision" value="true" />
+                  <property name="name" value="other-menulist" />
+                  <property name="label" value="ToolBar.OtherMenuList.Label" />
+                  <property name="description" value="ToolBar.ConfigMenuList.Description" />
+                  <property name="device" value="pc" />
+                  <property name="targetResource">
+                    <map>
+                      <entry key="this">
+                        <list>
+                          <ref bean="controlRead" />
+                        </list>
+                      </entry>
+                    </map>
+                  </property>
+                  <property name="type" value="" />
+                  <property name="iconStyle" value="ico-non" />
+                  <property name="invisilityType" value="invisible" />
+                  <property name="enabledScript" value="ecma: z350_KEIJIBAN.appLib().isSys();" />
+                  <property name="scriptingHost" ref="scriptingHostContainer" />
+                  <property name="menuList">
+                    <list>
+                      <ref bean="documentBookmarkToolButton" />
+                      <ref bean="timelineFollowToolButton" />
+                      <ref bean="printToolButton" />
+                      <ref bean="separatorToolButton" />
+                      <ref bean="unreadToolButton" />
+                      <ref bean="revisionToolButton" />
+                      <ref bean="bpmHistoryToolButton" />
+                      <ref bean="viewAclToolButton" />
+                      <ref bean="editAclToolButton" />
+                    </list>
+                  </property>
+                </bean>
+              </list>
+            </property>
+          </bean>
+        </entry>
+        <entry key="J9U9203AIE">
+          <bean class="com.arielnetworks.agn.application.toolbar.CollaborationToolBar">
+            <constructor-arg ref="collaborationManager" />
+            <property name="toolButtonList">
+              <list>
+                <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                  <property name="scriptingHost" ref="defaultScriptingHostContainer" />
+                  <property name="label" value="ToolBar.Edit.Label" />
+                  <property name="description" value="ToolBar.Edit.Description" />
+                  <property name="parameters">
+                    <value><![CDATA[ecma:
+var parameters = "";
+if ("cgiParam" in this && cgiParam.get("exa") != null && cgiParam.get("exa").length > 0) {
+  parameters = "viewExa=" + util.urlEncode(cgiParam.get("exa")[0]);
+}
+parameters;]]></value>
+                  </property>
+                  <property name="name" value="edit" />
+                  <property name="action" value="edit" />
+                  <property name="targetResource">
+                    <map>
+                      <entry key="this">
+                        <list>
+                          <ref bean="controlRead" />
+                          <ref bean="controlWrite" />
+                        </list>
+                      </entry>
+                    </map>
+                  </property>
+                  <property name="iconStyle" value="ico-edit" />
+                  <property name="invisilityType" value="invisible" />
+                  <property name="type" value="overlap" />
+                  <property name="device" value="pc,tablet" />
+                </bean>
+                <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                  <property name="targetResource">
+                    <map>
+                      <entry key="this">
+                        <list>
+                          <ref bean="controlDelete" />
+                        </list>
+                      </entry>
+                    </map>
+                  </property>
+                  <property name="enabledScript">
+                    <value><![CDATA[ecma:
+        if (util.isInSysRootGroup(currentUserId) || util.isInTenantSystemGroup(currentUserId) || util.isBpmEnableDelete(this)) {
+          true;
+        } else {
+          false;
+        }
+      ]]></value>
+                  </property>
+                  <property name="invisilityType" value="invisible" />
+                  <property name="name" value="delete" />
+                  <property name="action" value="delete" />
+                  <property name="description" value="ToolBar.DeleteThis.Description" />
+                  <property name="label" value="ToolBar.Delete.Label" />
+                  <property name="style" value="popup-messagebox" />
+                  <property name="iconStyle" value="ico-delete" />
+                  <property name="type" value="overlap" />
+                  <property name="scriptingHost" ref="scriptingHostContainer" />
+                  <property name="parameters" value="loadPanes=browser" />
+                  <property name="device" value="pc,tablet" />
+                </bean>
+                <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                  <property name="allowRevision" value="true" />
+                  <property name="name" value="other-menulist" />
+                  <property name="label" value="ToolBar.OtherMenuList.Label" />
+                  <property name="description" value="ToolBar.ConfigMenuList.Description" />
+                  <property name="device" value="pc" />
+                  <property name="targetResource">
+                    <map>
+                      <entry key="this">
+                        <list>
+                          <ref bean="controlRead" />
+                        </list>
+                      </entry>
+                    </map>
+                  </property>
+                  <property name="type" value="" />
+                  <property name="iconStyle" value="ico-non" />
+                  <property name="invisilityType" value="invisible" />
+                  <property name="enabledScript" value="ecma: z350_KEIJIBAN.appLib().isSys();" />
+                  <property name="scriptingHost" ref="scriptingHostContainer" />
+                  <property name="menuList">
+                    <list>
+                      <ref bean="documentBookmarkToolButton" />
+                      <ref bean="timelineFollowToolButton" />
+                      <ref bean="printToolButton" />
+                      <ref bean="separatorToolButton" />
+                      <ref bean="unreadToolButton" />
+                      <ref bean="revisionToolButton" />
+                      <ref bean="bpmHistoryToolButton" />
+                      <ref bean="viewAclToolButton" />
+                      <ref bean="editAclToolButton" />
+                    </list>
+                  </property>
+                </bean>
+              </list>
+            </property>
+          </bean>
+        </entry>
+        <entry key="J9U9203AKO">
+          <bean class="com.arielnetworks.agn.application.toolbar.CollaborationToolBar">
+            <constructor-arg ref="collaborationManager" />
+            <property name="toolButtonList">
+              <list />
+            </property>
+          </bean>
+        </entry>
+        <entry key="J9U9203A-list">
+          <bean class="com.arielnetworks.agn.application.toolbar.DispatchToolBar">
+            <constructor-arg value="exa" />
+            <constructor-arg>
+              <map>
+                <entry key="">
+                  <bean class="com.arielnetworks.agn.application.toolbar.CollaborationToolBar">
+                    <constructor-arg ref="collaborationManager" />
+                    <property name="toolButtonList">
+                      <list>
+                        <ref bean="upToContainerGroupToolButton" />
+                        <ref bean="separatorToolButtonWithUpToContainer" />
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="ecma: z350_KEIJIBAN.appLib().buttonLinkName('viewother3');" />
+                          <property name="type" value="replace" />
+                          <property name="name" value="view-other3" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-gotoappli" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="enabledScript" value="ecma: z350_KEIJIBAN.appLib().viewLinkButton('viewother3');" />
+                          <property name="parameters" value="" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib().targetRes('viewother3');" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="ecma: z350_KEIJIBAN.appLib().buttonLinkName('viewother4');" />
+                          <property name="type" value="replace" />
+                          <property name="name" value="view-other4" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-gotoappli" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="enabledScript" value="ecma: z350_KEIJIBAN.appLib().viewLinkButton('viewother4');" />
+                          <property name="parameters" value="" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib().targetRes('viewother4');" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="ecma: z350_KEIJIBAN.appLib().buttonLinkName('viewother5');" />
+                          <property name="type" value="replace" />
+                          <property name="name" value="view-other5" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-gotoappli" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="enabledScript" value="ecma: z350_KEIJIBAN.appLib().viewLinkButton('viewother5');" />
+                          <property name="parameters" value="" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib().targetRes('viewother5');" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="連絡先" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="view-other" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-othermenu" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib('doc_renrakusaki').targetRes();" />
+                          <property name="parameters" value="ecma: z350_KEIJIBAN.appLib().paramAppResId();" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="関連リンク" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="view-other2" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-othermenu" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib('set_link').targetRes();" />
+                          <property name="parameters" value="ecma: z350_KEIJIBAN.appLib().paramAppResId();" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="modify-children" />
+                          <property name="label" value="削除" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="modify-children" />
+                          <property name="style" value="popup-messagebox" />
+                          <property name="targetResource">
+                            <map>
+                              <entry key="this">
+                                <list>
+                                  <ref bean="controlRead" />
+                                </list>
+                              </entry>
+                              <entry key="child">
+                                <list>
+                                  <ref bean="controlRead" />
+                                  <ref bean="controlWrite" />
+                                </list>
+                              </entry>
+                            </map>
+                          </property>
+                          <property name="description" value="削除" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-delete" />
+                          <property name="parameters" value="exa=opt-alldel" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="create" />
+                          <property name="label" value="メインドキュメント作成" />
+                          <property name="parameters" value="type=J9U9203A" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="create-j9u9203a" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-edit" />
+                          <property name="targetResource">
+                            <map>
+                              <entry key="this">
+                                <list>
+                                  <ref bean="controlElemCreate" />
+                                </list>
+                              </entry>
+                            </map>
+                          </property>
+                          <property name="enabledScript" value="" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="device" value="pc,tablet" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="使い方" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="view-other6" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-WakabaIcon-J9U9203A" />
+                          <property name="enabledScript" value="ecma: z350_KEIJIBAN.appLib().viewLinkButton('viewother6');" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib().targetRes('viewother6');" />
+                        </bean>
+                        <ref bean="bookmarkToolButton" />
+                      </list>
+                    </property>
+                  </bean>
+                </entry>
+                <entry key="ud9q99pj">
+                  <bean class="com.arielnetworks.agn.application.toolbar.CollaborationToolBar">
+                    <constructor-arg ref="collaborationManager" />
+                    <property name="toolButtonList">
+                      <list>
+                        <ref bean="upToContainerGroupToolButton" />
+                        <ref bean="separatorToolButtonWithUpToContainer" />
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="連絡先" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="view-other" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-othermenu" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib('doc_renrakusaki').targetRes();" />
+                          <property name="parameters" value="ecma: z350_KEIJIBAN.appLib().paramAppResId();" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="関連リンク" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="view-other2" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-othermenu" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib('set_link').targetRes();" />
+                          <property name="parameters" value="ecma: z350_KEIJIBAN.appLib().paramAppResId();" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="scriptingHost" ref="defaultScriptingHostContainer" />
+                          <property name="targetResource">
+                            <map>
+                              <entry key="child">
+                                <list>
+                                  <ref bean="controlDelete" />
+                                </list>
+                              </entry>
+                            </map>
+                          </property>
+                          <property name="enabledScript">
+                            <value><![CDATA[ecma:
+        if (util.isInSysRootGroup(currentUserId) || util.isInTenantSystemGroup(currentUserId) || util.isBpmEnableDelete(this)) {
+          true;
+        } else {
+          false;
+        }
+      ]]></value>
+                          </property>
+                          <property name="invisilityType">
+                            <value><![CDATA[ecma:
+      if (util.isInSysRootGroup(currentUserId) || util.isInTenantSystemGroup(currentUserId) || util.isBpmEnableDelete(this)) {
+        "disable";
+      } else {
+        "invisible";
+      }
+    ]]></value>
+                          </property>
+                          <property name="name" value="delete-children" />
+                          <property name="action" value="delete-children" />
+                          <property name="description" value="ToolBar.Delete.Description" />
+                          <property name="device" value="pc,tablet,cell-phone" />
+                          <property name="label" value="物理削除" />
+                          <property name="style" value="popup-messagebox" />
+                          <property name="iconStyle" value="ico-delete" />
+                          <property name="type" value="overlap" />
+                          <property name="parameters" value="loadPanes=browser" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="メール設定" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="view-other3" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-setting" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib().targetSettingRes('set_mail');" />
+                          <property name="parameters" value="toolbar=enabled" />
+                          <property name="device" value="pc,tablet" />
+                        </bean>
+                      </list>
+                    </property>
+                  </bean>
+                </entry>
+                <entry key="default">
+                  <bean class="com.arielnetworks.agn.application.toolbar.CollaborationToolBar">
+                    <constructor-arg ref="collaborationManager" />
+                    <property name="toolButtonList">
+                      <list>
+                        <ref bean="upToContainerGroupToolButton" />
+                        <ref bean="separatorToolButtonWithUpToContainer" />
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="ecma: z350_KEIJIBAN.appLib().buttonLinkName('viewother3');" />
+                          <property name="type" value="replace" />
+                          <property name="name" value="view-other3" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-gotoappli" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="enabledScript" value="ecma: z350_KEIJIBAN.appLib().viewLinkButton('viewother3');" />
+                          <property name="parameters" value="" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib().targetRes('viewother3');" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="ecma: z350_KEIJIBAN.appLib().buttonLinkName('viewother4');" />
+                          <property name="type" value="replace" />
+                          <property name="name" value="view-other4" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-gotoappli" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="enabledScript" value="ecma: z350_KEIJIBAN.appLib().viewLinkButton('viewother4');" />
+                          <property name="parameters" value="" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib().targetRes('viewother4');" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="ecma: z350_KEIJIBAN.appLib().buttonLinkName('viewother5');" />
+                          <property name="type" value="replace" />
+                          <property name="name" value="view-other5" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-gotoappli" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="enabledScript" value="ecma: z350_KEIJIBAN.appLib().viewLinkButton('viewother5');" />
+                          <property name="parameters" value="" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib().targetRes('viewother5');" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="連絡先" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="view-other" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-othermenu" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib('doc_renrakusaki').targetRes();" />
+                          <property name="parameters" value="ecma: z350_KEIJIBAN.appLib().paramAppResId();" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="関連リンク" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="view-other2" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-othermenu" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib('set_link').targetRes();" />
+                          <property name="parameters" value="ecma: z350_KEIJIBAN.appLib().paramAppResId();" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="modify-children" />
+                          <property name="label" value="削除" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="modify-children" />
+                          <property name="style" value="popup-messagebox" />
+                          <property name="targetResource">
+                            <map>
+                              <entry key="this">
+                                <list>
+                                  <ref bean="controlRead" />
+                                </list>
+                              </entry>
+                              <entry key="child">
+                                <list>
+                                  <ref bean="controlRead" />
+                                  <ref bean="controlWrite" />
+                                </list>
+                              </entry>
+                            </map>
+                          </property>
+                          <property name="description" value="削除" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-delete" />
+                          <property name="parameters" value="exa=opt-alldel" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="create" />
+                          <property name="label" value="メインドキュメント作成" />
+                          <property name="parameters" value="type=J9U9203A" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="create-j9u9203a" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-edit" />
+                          <property name="targetResource">
+                            <map>
+                              <entry key="this">
+                                <list>
+                                  <ref bean="controlElemCreate" />
+                                </list>
+                              </entry>
+                            </map>
+                          </property>
+                          <property name="enabledScript" value="" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="device" value="pc,tablet" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="使い方" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="view-other6" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-WakabaIcon-J9U9203A" />
+                          <property name="enabledScript" value="ecma: z350_KEIJIBAN.appLib().viewLinkButton('viewother6');" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib().targetRes('viewother6');" />
+                        </bean>
+                        <ref bean="bookmarkToolButton" />
+                      </list>
+                    </property>
+                  </bean>
+                </entry>
+                <entry key="a163glak">
+                  <bean class="com.arielnetworks.agn.application.toolbar.CollaborationToolBar">
+                    <constructor-arg ref="collaborationManager" />
+                    <property name="toolButtonList">
+                      <list>
+                        <ref bean="upToContainerGroupToolButton" />
+                        <ref bean="separatorToolButtonWithUpToContainer" />
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="連絡先" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="view-other" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-othermenu" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib('doc_renrakusaki').targetRes();" />
+                          <property name="parameters" value="ecma: z350_KEIJIBAN.appLib().paramAppResId();" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="関連リンク" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="view-other2" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-othermenu" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib('set_link').targetRes();" />
+                          <property name="parameters" value="ecma: z350_KEIJIBAN.appLib().paramAppResId();" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="create" />
+                          <property name="label" value="メール登録" />
+                          <property name="parameters" value="type=J9U9203AIE&amp;loadPanes=browser" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="create-j9u9203aie" />
+                          <property name="invisilityType" value="ecma: z350_KEIJIBAN.appLib('set_mail').buttonFuka();" />
+                          <property name="iconStyle" value="ico-create" />
+                          <property name="targetResource">
+                            <map>
+                              <entry key="this">
+                                <list>
+                                  <ref bean="controlElemCreate" />
+                                </list>
+                              </entry>
+                            </map>
+                          </property>
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="device" value="pc,tablet" />
+                          <property name="enabledScript" value="ecma: z350_KEIJIBAN.appLib('set_mail').button('メールマスタ');" />
+                        </bean>
+                      </list>
+                    </property>
+                  </bean>
+                </entry>
+                <entry key="pukr1rxd">
+                  <bean class="com.arielnetworks.agn.application.toolbar.CollaborationToolBar">
+                    <constructor-arg ref="collaborationManager" />
+                    <property name="toolButtonList">
+                      <list>
+                        <ref bean="upToContainerGroupToolButton" />
+                        <ref bean="separatorToolButtonWithUpToContainer" />
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="連絡先" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="view-other" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-othermenu" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib('doc_renrakusaki').targetRes();" />
+                          <property name="parameters" value="ecma: z350_KEIJIBAN.appLib().paramAppResId();" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="関連リンク" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="view-other2" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-othermenu" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib('set_link').targetRes();" />
+                          <property name="parameters" value="ecma: z350_KEIJIBAN.appLib().paramAppResId();" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="create" />
+                          <property name="label" value="閲覧範囲登録" />
+                          <property name="parameters" value="type=J9U9203AQ0" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="create-j9u9203aq0" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-create" />
+                          <property name="targetResource">
+                            <map>
+                              <entry key="this">
+                                <list>
+                                  <ref bean="controlElemCreate" />
+                                </list>
+                              </entry>
+                            </map>
+                          </property>
+                          <property name="enabledScript" value="" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                        </bean>
+                      </list>
+                    </property>
+                  </bean>
+                </entry>
+                <entry key="endmap5s">
+                  <bean class="com.arielnetworks.agn.application.toolbar.CollaborationToolBar">
+                    <constructor-arg ref="collaborationManager" />
+                    <property name="toolButtonList">
+                      <list>
+                        <ref bean="upToContainerGroupToolButton" />
+                        <ref bean="separatorToolButtonWithUpToContainer" />
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="連絡先" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="view-other" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-othermenu" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib('doc_renrakusaki').targetRes();" />
+                          <property name="parameters" value="ecma: z350_KEIJIBAN.appLib().paramAppResId();" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="関連リンク" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="view-other2" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-othermenu" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib('set_link').targetRes();" />
+                          <property name="parameters" value="ecma: z350_KEIJIBAN.appLib().paramAppResId();" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="targetResource">
+                            <map>
+                              <entry key="child">
+                                <list>
+                                  <ref bean="controlDelete" />
+                                </list>
+                              </entry>
+                            </map>
+                          </property>
+                          <property name="enabledScript" value="" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="name" value="delete-children" />
+                          <property name="action" value="delete-children" />
+                          <property name="description" value="ToolBar.Delete.Description" />
+                          <property name="device" value="pc,tablet,cell-phone" />
+                          <property name="label" value="ToolBar.Delete.Label" />
+                          <property name="style" value="popup-messagebox" />
+                          <property name="iconStyle" value="ico-delete" />
+                          <property name="type" value="overlap" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                        </bean>
+                        <ref bean="managerConfigToolButton" />
+                      </list>
+                    </property>
+                  </bean>
+                </entry>
+                <entry key="vb018ozu">
+                  <bean class="com.arielnetworks.agn.application.toolbar.CollaborationToolBar">
+                    <constructor-arg ref="collaborationManager" />
+                    <property name="toolButtonList">
+                      <list>
+                        <ref bean="upToContainerGroupToolButton" />
+                        <ref bean="separatorToolButtonWithUpToContainer" />
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="連絡先" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="view-other" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-othermenu" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib('doc_renrakusaki').targetRes();" />
+                          <property name="parameters" value="ecma: z350_KEIJIBAN.appLib().paramAppResId();" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="関連リンク" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="view-other2" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-othermenu" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib('set_link').targetRes();" />
+                          <property name="parameters" value="ecma: z350_KEIJIBAN.appLib().paramAppResId();" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="create" />
+                          <property name="label" value="設定" />
+                          <property name="parameters" value="type=J9U9203AWC&amp;loadPanes=browser" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="create-j9u9203awc" />
+                          <property name="invisilityType" value="ecma: z350_KEIJIBAN.appLib('set_renrakusaki').buttonFuka();" />
+                          <property name="iconStyle" value="ico-create" />
+                          <property name="targetResource">
+                            <map>
+                              <entry key="this">
+                                <list>
+                                  <ref bean="controlElemCreate" />
+                                </list>
+                              </entry>
+                            </map>
+                          </property>
+                          <property name="enabledScript" value="ecma: z350_KEIJIBAN.appLib('set_renrakusaki').button('設定');" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                        </bean>
+                      </list>
+                    </property>
+                  </bean>
+                </entry>
+                <entry key="tr6ik4of">
+                  <bean class="com.arielnetworks.agn.application.toolbar.CollaborationToolBar">
+                    <constructor-arg ref="collaborationManager" />
+                    <property name="toolButtonList">
+                      <list>
+                        <ref bean="upToContainerGroupToolButton" />
+                        <ref bean="separatorToolButtonWithUpToContainer" />
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="連絡先" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="view-other" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-othermenu" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib('doc_renrakusaki').targetRes();" />
+                          <property name="parameters" value="ecma: z350_KEIJIBAN.appLib().paramAppResId();" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="関連リンク" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="view-other2" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-othermenu" />
+                          <property name="parameters" value="ecma: z350_KEIJIBAN.appLib().paramAppResId();" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib('set_link').targetRes();" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="create" />
+                          <property name="label" value="設定" />
+                          <property name="parameters" value="type=J9U9203AYL&amp;loadPanes=browser" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="create-j9u9203ayl" />
+                          <property name="invisilityType" value="ecma: z350_KEIJIBAN.appLib('set_link').buttonFuka();" />
+                          <property name="iconStyle" value="ico-create" />
+                          <property name="targetResource">
+                            <map>
+                              <entry key="this">
+                                <list>
+                                  <ref bean="controlElemCreate" />
+                                </list>
+                              </entry>
+                            </map>
+                          </property>
+                          <property name="enabledScript" value="ecma: z350_KEIJIBAN.appLib('set_link').button('設定');" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                        </bean>
+                      </list>
+                    </property>
+                  </bean>
+                </entry>
+                <entry key="4q1lqzua">
+                  <bean class="com.arielnetworks.agn.application.toolbar.CollaborationToolBar">
+                    <constructor-arg ref="collaborationManager" />
+                    <property name="toolButtonList">
+                      <list>
+                        <ref bean="upToContainerGroupToolButton" />
+                        <ref bean="separatorToolButtonWithUpToContainer" />
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="連絡先" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="view-other" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-othermenu" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib('doc_renrakusaki').targetRes();" />
+                          <property name="parameters" value="ecma: z350_KEIJIBAN.appLib().paramAppResId();" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="関連リンク" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="view-other2" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-othermenu" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib('set_link').targetRes();" />
+                          <property name="parameters" value="ecma: z350_KEIJIBAN.appLib().paramAppResId();" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="targetResource">
+                            <map>
+                              <entry key="child">
+                                <list>
+                                  <ref bean="controlDelete" />
+                                </list>
+                              </entry>
+                            </map>
+                          </property>
+                          <property name="enabledScript" value="ecma: z350_KEIJIBAN.appLib().isSys();" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="name" value="delete-children" />
+                          <property name="action" value="delete-children" />
+                          <property name="description" value="" />
+                          <property name="device" value="pc,tablet,cell-phone" />
+                          <property name="label" value="物理削除" />
+                          <property name="style" value="popup-messagebox" />
+                          <property name="iconStyle" value="ico-delete" />
+                          <property name="type" value="overlap" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="create" />
+                          <property name="label" value="メインドキュメント作成" />
+                          <property name="parameters" value="type=J9U9203A" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="create-j9u9203a" />
+                          <property name="invisilityType" value="disable" />
+                          <property name="iconStyle" value="ico-edit" />
+                          <property name="targetResource">
+                            <map>
+                              <entry key="this">
+                                <list>
+                                  <ref bean="controlElemCreate" />
+                                </list>
+                              </entry>
+                            </map>
+                          </property>
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="modify-children" />
+                          <property name="label" value="添付ファイル数設定" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="modify-children" />
+                          <property name="style" value="popup-messagebox" />
+                          <property name="targetResource">
+                            <map>
+                              <entry key="this">
+                                <list>
+                                  <ref bean="controlRead" />
+                                </list>
+                              </entry>
+                              <entry key="child">
+                                <list>
+                                  <ref bean="controlRead" />
+                                  <ref bean="controlWrite" />
+                                </list>
+                              </entry>
+                            </map>
+                          </property>
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-edit" />
+                          <property name="parameters" value="exa=opt-fileset" />
+                        </bean>
+                        <ref bean="exportToolButton" />
+                        <ref bean="exportViewCsvToolButton" />
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="modify-children" />
+                          <property name="label" value="移動" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="modify-children2" />
+                          <property name="style" value="popup-messagebox" />
+                          <property name="targetResource">
+                            <map>
+                              <entry key="this">
+                                <list>
+                                  <ref bean="controlRead" />
+                                </list>
+                              </entry>
+                              <entry key="child">
+                                <list>
+                                  <ref bean="controlRead" />
+                                  <ref bean="controlWrite" />
+                                </list>
+                              </entry>
+                            </map>
+                          </property>
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-move" />
+                          <property name="parameters" value="exa=opt-move" />
+                        </bean>
+                      </list>
+                    </property>
+                  </bean>
+                </entry>
+                <entry key="wmyadpnb">
+                  <bean class="com.arielnetworks.agn.application.toolbar.CollaborationToolBar">
+                    <constructor-arg ref="collaborationManager" />
+                    <property name="toolButtonList">
+                      <list>
+                        <ref bean="upToContainerGroupToolButton" />
+                        <ref bean="separatorToolButtonWithUpToContainer" />
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="連絡先" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="view-other" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-othermenu" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib('doc_renrakusaki').targetRes();" />
+                          <property name="parameters" value="ecma: z350_KEIJIBAN.appLib().paramAppResId();" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="関連リンク" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="view-other2" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-othermenu" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib('set_link').targetRes();" />
+                          <property name="parameters" value="ecma: z350_KEIJIBAN.appLib().paramAppResId();" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="targetResource">
+                            <map>
+                              <entry key="child">
+                                <list>
+                                  <ref bean="controlDelete" />
+                                </list>
+                              </entry>
+                            </map>
+                          </property>
+                          <property name="enabledScript" value="ecma: z350_KEIJIBAN.appLib().isSys();" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="name" value="delete-children" />
+                          <property name="action" value="delete-children" />
+                          <property name="description" value="" />
+                          <property name="device" value="pc,tablet,cell-phone" />
+                          <property name="label" value="物理削除" />
+                          <property name="style" value="popup-messagebox" />
+                          <property name="iconStyle" value="ico-delete" />
+                          <property name="type" value="overlap" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="create" />
+                          <property name="label" value="閲覧範囲登録" />
+                          <property name="parameters" value="type=J9U9203AQ0" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="create-j9u9203aq0" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-create" />
+                          <property name="targetResource">
+                            <map>
+                              <entry key="this">
+                                <list>
+                                  <ref bean="controlElemCreate" />
+                                </list>
+                              </entry>
+                            </map>
+                          </property>
+                        </bean>
+                      </list>
+                    </property>
+                  </bean>
+                </entry>
+                <entry key="5xgxbsaw">
+                  <bean class="com.arielnetworks.agn.application.toolbar.CollaborationToolBar">
+                    <constructor-arg ref="collaborationManager" />
+                    <property name="toolButtonList">
+                      <list>
+                        <ref bean="upToContainerGroupToolButton" />
+                        <ref bean="separatorToolButtonWithUpToContainer" />
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="連絡先" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="view-other" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-othermenu" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib('doc_renrakusaki').targetRes();" />
+                          <property name="parameters" value="ecma: z350_KEIJIBAN.appLib().paramAppResId();" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="view" />
+                          <property name="label" value="関連リンク" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="view-other2" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-othermenu" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="targetResourceScript" value="ecma: z350_KEIJIBAN.appLib('set_link').targetRes();" />
+                          <property name="parameters" value="ecma: z350_KEIJIBAN.appLib().paramAppResId();" />
+                        </bean>
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="action" value="modify-children" />
+                          <property name="label" value="削除取消" />
+                          <property name="type" value="overlap" />
+                          <property name="name" value="modify-children" />
+                          <property name="style" value="popup-messagebox" />
+                          <property name="targetResource">
+                            <map>
+                              <entry key="this">
+                                <list>
+                                  <ref bean="controlRead" />
+                                </list>
+                              </entry>
+                              <entry key="child">
+                                <list>
+                                  <ref bean="controlRead" />
+                                  <ref bean="controlWrite" />
+                                </list>
+                              </entry>
+                            </map>
+                          </property>
+                          <property name="description" value="削除取消" />
+                          <property name="invisilityType" value="invisible" />
+                          <property name="iconStyle" value="ico-revision" />
+                          <property name="enabledScript" value="" />
+                          <property name="scriptingHost" ref="scriptingHostContainer" />
+                          <property name="parameters" value="exa=opt-alldelcel" />
+                        </bean>
+                      </list>
+                    </property>
+                  </bean>
+                </entry>
+              </map>
+            </constructor-arg>
+          </bean>
+        </entry>
+        <entry key="document:J9U9203A-list">
+          <bean class="com.arielnetworks.agn.application.toolbar.DispatchToolBar">
+            <constructor-arg value="exa" />
+            <constructor-arg>
+              <map>
+                <entry key="">
+                  <ref bean="propertyDocToolBar" />
+                </entry>
+                <entry key="property">
+                  <bean class="com.arielnetworks.agn.application.toolbar.CollaborationToolBar">
+                    <constructor-arg ref="collaborationManager" />
+                    <property name="toolButtonList">
+                      <list>
+                        <ref bean="editPropertyToolButton" />
+                        <ref bean="editBpmVariableMapToolButton" />
+                        <bean class="com.arielnetworks.agn.application.toolbar.BasicToolButton">
+                          <property name="name" value="operation-menulist" />
+                          <property name="label" value="List.Button.ModifyResource" />
+                          <property name="description" value="Button.ModifyResource.Description" />
+                          <property name="targetResource">
+                            <map>
+                              <entry key="this">
+                                <list>
+                                  <ref bean="controlRead" />
+                                </list>
+                              </entry>
+                            </map>
+                          </property>
+                          <property name="type" value="" />
+                          <property name="iconStyle" value="ico-batch-process" />
+                          <property name="invisilityType" value="disable" />
+                          <property name="menuList">
+                            <list>
+                              <ref bean="moveToolButton" />
+                              <ref bean="deleteWithActionToolButton" />
+                            </list>
+                          </property>
+                        </bean>
+                        <ref bean="otherDocMenuListWithPrintPropertyWithOutDocBookmark" />
+                      </list>
+                    </property>
+                  </bean>
+                </entry>
+              </map>
+            </constructor-arg>
+          </bean>
+        </entry>
+      </map>
+    </constructor-arg>
+  </bean>
+  <bean class="com.arielnetworks.agn.application.core.PropertyAdder">
+    <constructor-arg ref="fixedIdHandlerCollection" />
+    <constructor-arg value="handlers" />
+    <constructor-arg>
+      <list>
+        <bean class="com.arielnetworks.agn.application.core.ScriptingInterceptor">
+          <constructor-arg ref="exceptionHandlingScriptingHostContainer" />
+          <property name="pattern" value="J9U9203AKL" />
+          <property name="create" value="ecma:z350_J9U9203A_list.sub('doc_renrakusaki').createTempRes();" />
+          <!--<ad-title>連絡先</ad-title>-->
+          <property name="beans">
+            <map>
+              <entry key="valueBag">
+                <ref bean="aquaValueBag" />
+              </entry>
+            </map>
+          </property>
+        </bean>
+        <bean class="com.arielnetworks.agn.application.core.ScriptingInterceptor">
+          <constructor-arg ref="exceptionHandlingScriptingHostContainer" />
+          <property name="pattern" value="J9U9203AYL" />
+          <property name="create" value="ecma:z350_J9U9203A_list.sub('set_link').createTempRes();" />
+          <!--<ad-title>関連リンク</ad-title>-->
+          <property name="beans">
+            <map>
+              <entry key="valueBag">
+                <ref bean="aquaValueBag" />
+              </entry>
+            </map>
+          </property>
+        </bean>
+        <bean class="com.arielnetworks.agn.application.core.ScriptingInterceptor">
+          <constructor-arg ref="exceptionHandlingScriptingHostContainer" />
+          <property name="pattern" value="J9U9203AEE" />
+          <property name="create" value="ecma:z350_J9U9203A_list.sub('doc_print').createTempRes();" />
+          <!--<ad-title>メインドキュメント印刷</ad-title>-->
+          <property name="beans">
+            <map>
+              <entry key="valueBag">
+                <ref bean="aquaValueBag" />
+              </entry>
+            </map>
+          </property>
+        </bean>
+        <bean class="com.arielnetworks.agn.application.core.ScriptingInterceptor">
+          <constructor-arg ref="exceptionHandlingScriptingHostContainer" />
+          <property name="pattern" value="J9U9203AKO" />
+          <property name="create" value="ecma:z350_J9U9203A_list.sub('doc_main_hide').createTempRes();" />
+          <!--<ad-title>非表示領域項目用</ad-title>-->
+          <property name="beans">
+            <map>
+              <entry key="valueBag">
+                <ref bean="aquaValueBag" />
+              </entry>
+            </map>
+          </property>
+        </bean>
+      </list>
+    </constructor-arg>
+  </bean>
+  <bean class="com.arielnetworks.agn.application.core.PropertyAdder">
+    <constructor-arg ref="scheduleDaemonManager" />
+    <constructor-arg value="triggers" />
+    <constructor-arg>
+      <list>
+        <bean class="org.springframework.scheduling.quartz.CronTriggerBean">
+          <property name="cronExpression" value="0 0 0 1 * ?" />
+          <property name="jobDetail">
+            <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+              <property name="name" value="J9U9203A_MONTH" />
+              <property name="targetObject">
+                <bean class="com.arielnetworks.agn.application.daemon.SingleServerDaemon">
+                  <constructor-arg ref="scriptingHostContainer" />
+                  <constructor-arg>
+                    <value><![CDATA[ecma: util.debug("【STR】 アプリテンプレート 月一回バッチ 削除対象文書の物理削除処理 開始");
+z350_J9U9203A_list.sub('scr_bgproc').bgProc('month');
+util.debug("【END】 アプリテンプレート 月一回バッチ 削除対象文書の物理削除処理 終了");]]></value>
+                  </constructor-arg>
+                  <constructor-arg ref="aquaBaseServices" />
+                  <constructor-arg ref="aquaPropertiesDataSet" />
+                  <property name="beans">
+                    <map>
+                      <entry key="resourceLoader">
+                        <ref bean="resourceLoader" />
+                      </entry>
+                      <entry key="groupDir">
+                        <ref bean="groupDir" />
+                      </entry>
+                      <entry key="userDir">
+                        <ref bean="userDir" />
+                      </entry>
+                      <entry key="props">
+                        <ref bean="aquaPropertiesDataSet" />
+                      </entry>
+                    </map>
+                  </property>
+                </bean>
+                <!--<ad-title>月一回バッチ</ad-title>-->
+              </property>
+              <property name="targetMethod" value="run" />
+            </bean>
+          </property>
+        </bean>
+      </list>
+    </constructor-arg>
+  </bean>
+</beans>

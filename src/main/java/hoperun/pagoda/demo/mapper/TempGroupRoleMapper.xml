@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hoperun.pagoda.demo.mapper.TempGroupRoleMapper">
+
+    <select id="findUserGroups"
+        resultType="hoperun.pagoda.demo.entity.UserGroup">
+        select groupId,roleId from tb_user_role_temp where userId = #{userId} ;
+    </select>
+    <insert id="insert">
+        insert into tb_user_role_temp (userId, groupId,roleId) VALUES (#{userId},
+        #{groupId}, #{roleId});
+    </insert>
+    
+    <update id="update">
+        update tb_user_role_temp set roleId =#{roleId} where userId= #{userId} and
+        groupId = #{groupId};
+    </update>
+    
+    <delete id="delete">
+        delete from tb_user_role_temp where userId= #{userId}
+    </delete>
+    <delete id="deleteByUserIdAndGroupId">
+        delete from tb_user_role_temp where userId= #{userId} and groupId= #{groupId}
+    </delete>
+    
+</mapper>
